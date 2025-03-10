@@ -1,0 +1,61 @@
+# Python バイトコードやキャッシュファイル
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Python パッケージ作成や配布時のビルド成果物
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# 仮想環境関連のディレクトリ
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# PyInstaller の成果物（exe 化など）
+*.spec
+
+# テストやカバレッジのレポート
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+
+# IDE/エディタ設定ファイル
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# OS 固有の不要ファイル
+.DS_Store
+Thumbs.db
+
+# QT 関連の一時ファイル／設定ファイル
+# Qt Creator のユーザ設定ファイル
+*.pro.user*
+# qmake の一時ファイル
+*.qmake.stash
+
+# Qt Designer で作成した .ui ファイルから自動生成される Python モジュール
+# （自動生成ファイルを追跡しない場合は、コメントアウトを外して有効にしてください）
+# ui_*.py
+
+# テストデータ
+data/
+修正計画.md
+修正計画.pdf
+*.zip

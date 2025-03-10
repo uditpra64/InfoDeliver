@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Chatbot Web Interface</title>
+</head>
+<body>
+  <h1>Chat with the Bot</h1>
+  <textarea id="userInput" rows="4" cols="50" placeholder="Type your message here..."></textarea>
+  <br>
+  <button onclick="sendMessage()">Send</button>
+  <h2>Response:</h2>
+  <pre id="response"></pre>
+
+  <script>
+    async function sendMessage() {
+      const userInput = document.getElementById('userInput').value;
+      const responseField = document.getElementById('response');
+      
+      const response = await fetch('http://127.0.0.1:8000/chat', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ message: userInput })
+      });
+      
+      const data = await response.json();
+      responseField.textContent = data.response;
+    }
+  </script>
+</body>
+</html>
