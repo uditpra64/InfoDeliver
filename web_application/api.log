@@ -1,0 +1,193 @@
+2025-03-12 05:47:45,059 - payroll_api - INFO - Service modules imported successfully
+2025-03-12 05:47:45,096 - application.services.security.auth - INFO - API security configured
+2025-03-12 05:47:45,096 - application.modules.file_agent - INFO - FileAgent を初期化します。
+2025-03-12 05:47:45,133 - application.modules.file_agent - INFO - FileAgent 初期化完了: sqlite:///C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\data\app.db
+2025-03-12 05:47:45,134 - application.services.file_service - INFO - FileService initialized with temp_dir: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\temp
+2025-03-12 05:47:45,134 - payroll_api - INFO - FileService initialized successfully
+2025-03-12 05:47:45,134 - application.services.payroll_service - INFO - Initializing PayrollService with config: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\application\json\config.json
+2025-03-12 05:47:45,135 - application.modules.agent_collection - INFO - エージェントコレクションを初期化しています...
+2025-03-12 05:47:45,135 - application.modules.file_agent - INFO - FileAgent を初期化します。
+2025-03-12 05:47:45,137 - application.modules.file_agent - WARNING - Could not remove existing database file: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\data\app.db
+2025-03-12 05:47:45,137 - application.modules.file_agent - WARNING - Will try to reuse existing database.
+2025-03-12 05:47:45,140 - application.modules.file_agent - INFO - FileAgent 初期化完了: sqlite:///C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\data\app.db
+2025-03-12 05:47:45,140 - application.modules.agent_collection - INFO - ファイルエージェントを初期化しました。
+2025-03-12 05:47:47,176 - application.modules.agent_collection - INFO - 設定ファイルを正常に読み込みました: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\application\json\config.json
+2025-03-12 05:47:47,185 - application.modules.agent_collection - INFO - タスクを正常に作成。タスク数: 4
+2025-03-12 05:47:47,185 - application.modules.agent_collection - INFO - IntentAnalyzer を初期化
+2025-03-12 05:47:47,185 - application.modules.agent_collection - INFO - RAG_AGENT: 初期化開始
+2025-03-12 05:47:47,185 - application.modules.rag_agent - INFO - RAG_Agentを初期化します。
+2025-03-12 05:47:56,502 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-03-12 05:47:56,502 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-03-12 05:47:59,792 - application.modules.rag_agent - INFO - RAG用に複数ファイルからRetrieverを作成します。
+2025-03-12 05:47:59,815 - faiss.loader - INFO - Loading faiss with AVX2 support.
+2025-03-12 05:47:59,841 - faiss.loader - INFO - Successfully loaded faiss with AVX2 support.
+2025-03-12 05:47:59,844 - faiss - INFO - Failed to load GPU Faiss: name 'GpuIndexIVFFlat' is not defined. Will not load constructor refs for GPU indexes.
+2025-03-12 05:48:00,083 - application.modules.rag_agent - INFO - RAG_Agent初期化完了
+2025-03-12 05:48:00,083 - application.modules.agent_collection - INFO - RAG_AGENT: 初期化完了
+2025-03-12 05:48:00,083 - application.modules.agent_collection - INFO - workflow 作成
+2025-03-12 05:48:00,083 - application.services.payroll_service - INFO - AgentCollection initialized successfully
+2025-03-12 05:48:00,083 - payroll_api - INFO - PayrollService initialized successfully
+2025-03-12 05:48:00,085 - application.services.session_service - INFO - Session persistence enabled, using directory: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\sessions
+2025-03-12 05:48:00,085 - application.services.session_service - INFO - Loaded 0 sessions from disk
+2025-03-12 05:48:00,085 - application.services.session_service - INFO - SessionService initialized with 0 sessions
+2025-03-12 05:48:00,085 - payroll_api - INFO - SessionService initialized successfully
+2025-03-12 05:48:00,103 - application.services.session_service - INFO - Cleaned up 0 old sessions
+2025-03-12 05:48:00,103 - payroll_api - INFO - Startup: cleaned up sessions older than 24 hours
+2025-03-12 05:48:00,104 - payroll_api - INFO - Startup: cleaned up temporary files
+2025-03-12 05:49:26,743 - application.services.security.auth - INFO - Request: GET http://localhost:8000/docs from 127.0.0.1 - Status: 200 - Duration: 0.002s
+2025-03-12 05:49:55,951 - application.services.security.auth - INFO - Request: GET http://localhost:8000/health from 127.0.0.1 - Status: 200 - Duration: 0.001s
+2025-03-12 05:49:56,503 - application.services.security.auth - INFO - Request: GET http://localhost:8000/favicon.ico from 127.0.0.1 - Status: 404 - Duration: 0.002s
+2025-03-12 05:50:20,539 - application.services.security.auth - INFO - Request: GET http://localhost:8000/docs from 127.0.0.1 - Status: 200 - Duration: 0.000s
+2025-03-12 05:53:01,452 - application.services.security.auth - INFO - Request: GET http://localhost:8000/openapi.json from 127.0.0.1 - Status: 200 - Duration: 0.277s
+2025-03-12 05:53:22,273 - application.services.security.auth - INFO - Request: GET http://localhost:8000/redoc from 127.0.0.1 - Status: 200 - Duration: 0.001s
+2025-03-12 05:55:09,492 - payroll_api - INFO - API shutting down
+2025-03-12 05:55:15,338 - payroll_api - INFO - Service modules imported successfully
+2025-03-12 05:55:15,357 - application.modules.file_agent - INFO - FileAgent を初期化します。
+2025-03-12 05:55:15,413 - application.modules.file_agent - INFO - FileAgent 初期化完了: sqlite:///C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\data\app.db
+2025-03-12 05:55:15,423 - application.services.file_service - INFO - FileService initialized with temp_dir: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\temp
+2025-03-12 05:55:15,425 - payroll_api - INFO - FileService initialized successfully
+2025-03-12 05:55:15,425 - application.services.payroll_service - INFO - Initializing PayrollService with config: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\application\json\config.json
+2025-03-12 05:55:15,425 - application.modules.agent_collection - INFO - エージェントコレクションを初期化しています...
+2025-03-12 05:55:15,425 - application.modules.file_agent - INFO - FileAgent を初期化します。
+2025-03-12 05:55:15,426 - application.modules.file_agent - WARNING - Could not remove existing database file: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\data\app.db
+2025-03-12 05:55:15,426 - application.modules.file_agent - WARNING - Will try to reuse existing database.
+2025-03-12 05:55:15,426 - application.modules.file_agent - INFO - FileAgent 初期化完了: sqlite:///C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\data\app.db
+2025-03-12 05:55:15,426 - application.modules.agent_collection - INFO - ファイルエージェントを初期化しました。
+2025-03-12 05:55:17,192 - application.modules.agent_collection - INFO - 設定ファイルを正常に読み込みました: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\application\json\config.json
+2025-03-12 05:55:17,192 - application.modules.agent_collection - INFO - タスクを正常に作成。タスク数: 4
+2025-03-12 05:55:17,192 - application.modules.agent_collection - INFO - IntentAnalyzer を初期化
+2025-03-12 05:55:17,206 - application.modules.agent_collection - INFO - RAG_AGENT: 初期化開始
+2025-03-12 05:55:17,206 - application.modules.rag_agent - INFO - RAG_Agentを初期化します。
+2025-03-12 05:55:24,306 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-03-12 05:55:24,306 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-03-12 05:55:27,628 - application.modules.rag_agent - INFO - RAG用に複数ファイルからRetrieverを作成します。
+2025-03-12 05:55:27,657 - faiss.loader - INFO - Loading faiss with AVX2 support.
+2025-03-12 05:55:27,682 - faiss.loader - INFO - Successfully loaded faiss with AVX2 support.
+2025-03-12 05:55:27,693 - faiss - INFO - Failed to load GPU Faiss: name 'GpuIndexIVFFlat' is not defined. Will not load constructor refs for GPU indexes.
+2025-03-12 05:55:27,928 - application.modules.rag_agent - INFO - RAG_Agent初期化完了
+2025-03-12 05:55:27,929 - application.modules.agent_collection - INFO - RAG_AGENT: 初期化完了
+2025-03-12 05:55:27,929 - application.modules.agent_collection - INFO - workflow 作成
+2025-03-12 05:55:27,931 - application.services.payroll_service - INFO - AgentCollection initialized successfully
+2025-03-12 05:55:27,931 - payroll_api - INFO - PayrollService initialized successfully
+2025-03-12 05:55:27,931 - application.services.session_service - INFO - Session persistence enabled, using directory: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\sessions
+2025-03-12 05:55:27,931 - application.services.session_service - INFO - Loaded 0 sessions from disk
+2025-03-12 05:55:27,931 - application.services.session_service - INFO - SessionService initialized with 0 sessions
+2025-03-12 05:55:27,931 - payroll_api - INFO - SessionService initialized successfully
+2025-03-12 05:55:27,947 - application.services.session_service - INFO - Cleaned up 0 old sessions
+2025-03-12 05:55:27,948 - payroll_api - INFO - Startup: cleaned up sessions older than 24 hours
+2025-03-12 05:55:27,948 - payroll_api - INFO - Startup: cleaned up temporary files
+2025-03-12 06:01:06,125 - payroll_api - INFO - API shutting down
+2025-03-12 06:05:21,304 - payroll_api - INFO - Service modules imported successfully
+2025-03-12 06:05:21,323 - application.services.security.auth - INFO - API security configured
+2025-03-12 06:05:21,324 - application.modules.file_agent - INFO - FileAgent を初期化します。
+2025-03-12 06:05:21,354 - application.modules.file_agent - INFO - FileAgent 初期化完了: sqlite:///C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\data\app.db
+2025-03-12 06:05:21,354 - application.services.file_service - INFO - FileService initialized with temp_dir: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\temp
+2025-03-12 06:05:21,354 - payroll_api - INFO - FileService initialized successfully
+2025-03-12 06:05:21,354 - application.services.payroll_service - INFO - Initializing PayrollService with config: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\application\json\config.json
+2025-03-12 06:05:21,354 - application.modules.agent_collection - INFO - エージェントコレクションを初期化しています...
+2025-03-12 06:05:21,354 - application.modules.file_agent - INFO - FileAgent を初期化します。
+2025-03-12 06:05:21,354 - application.modules.file_agent - WARNING - Could not remove existing database file: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\data\app.db
+2025-03-12 06:05:21,354 - application.modules.file_agent - WARNING - Will try to reuse existing database.
+2025-03-12 06:05:21,360 - application.modules.file_agent - INFO - FileAgent 初期化完了: sqlite:///C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\data\app.db
+2025-03-12 06:05:21,360 - application.modules.agent_collection - INFO - ファイルエージェントを初期化しました。
+2025-03-12 06:05:23,248 - application.modules.agent_collection - INFO - 設定ファイルを正常に読み込みました: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\application\json\config.json
+2025-03-12 06:05:23,252 - application.modules.agent_collection - INFO - タスクを正常に作成。タスク数: 4
+2025-03-12 06:05:23,252 - application.modules.agent_collection - INFO - IntentAnalyzer を初期化
+2025-03-12 06:05:23,252 - application.modules.agent_collection - INFO - RAG_AGENT: 初期化開始
+2025-03-12 06:05:23,252 - application.modules.rag_agent - INFO - RAG_Agentを初期化します。
+2025-03-12 06:05:30,133 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-03-12 06:05:30,135 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-03-12 06:05:32,497 - application.modules.rag_agent - INFO - RAG用に複数ファイルからRetrieverを作成します。
+2025-03-12 06:05:32,515 - faiss.loader - INFO - Loading faiss with AVX2 support.
+2025-03-12 06:05:32,537 - faiss.loader - INFO - Successfully loaded faiss with AVX2 support.
+2025-03-12 06:05:32,552 - faiss - INFO - Failed to load GPU Faiss: name 'GpuIndexIVFFlat' is not defined. Will not load constructor refs for GPU indexes.
+2025-03-12 06:05:32,778 - application.modules.rag_agent - INFO - RAG_Agent初期化完了
+2025-03-12 06:05:32,778 - application.modules.agent_collection - INFO - RAG_AGENT: 初期化完了
+2025-03-12 06:05:32,778 - application.modules.agent_collection - INFO - workflow 作成
+2025-03-12 06:05:32,778 - application.services.payroll_service - INFO - AgentCollection initialized successfully
+2025-03-12 06:05:32,778 - payroll_api - INFO - PayrollService initialized successfully
+2025-03-12 06:05:32,778 - application.services.session_service - INFO - Session persistence enabled, using directory: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\sessions
+2025-03-12 06:05:32,780 - application.services.session_service - INFO - Loaded 0 sessions from disk
+2025-03-12 06:05:32,780 - application.services.session_service - INFO - SessionService initialized with 0 sessions
+2025-03-12 06:05:32,780 - payroll_api - INFO - SessionService initialized successfully
+2025-03-12 06:05:32,792 - application.services.session_service - INFO - Cleaned up 0 old sessions
+2025-03-12 06:05:32,792 - payroll_api - INFO - Startup: cleaned up sessions older than 24 hours
+2025-03-12 06:05:32,792 - payroll_api - INFO - Startup: cleaned up temporary files
+2025-03-12 06:05:32,794 - payroll_api - INFO - API shutting down
+2025-03-12 06:05:38,452 - payroll_api - INFO - Service modules imported successfully
+2025-03-12 06:05:38,469 - application.services.security.auth - INFO - API security configured
+2025-03-12 06:05:38,469 - application.modules.file_agent - INFO - FileAgent を初期化します。
+2025-03-12 06:05:38,506 - application.modules.file_agent - INFO - FileAgent 初期化完了: sqlite:///C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\data\app.db
+2025-03-12 06:05:38,506 - application.services.file_service - INFO - FileService initialized with temp_dir: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\temp
+2025-03-12 06:05:38,506 - payroll_api - INFO - FileService initialized successfully
+2025-03-12 06:05:38,506 - application.services.payroll_service - INFO - Initializing PayrollService with config: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\application\json\config.json
+2025-03-12 06:05:38,506 - application.modules.agent_collection - INFO - エージェントコレクションを初期化しています...
+2025-03-12 06:05:38,506 - application.modules.file_agent - INFO - FileAgent を初期化します。
+2025-03-12 06:05:38,506 - application.modules.file_agent - WARNING - Could not remove existing database file: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\data\app.db
+2025-03-12 06:05:38,506 - application.modules.file_agent - WARNING - Will try to reuse existing database.
+2025-03-12 06:05:38,512 - application.modules.file_agent - INFO - FileAgent 初期化完了: sqlite:///C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\data\app.db
+2025-03-12 06:05:38,513 - application.modules.agent_collection - INFO - ファイルエージェントを初期化しました。
+2025-03-12 06:05:40,347 - application.modules.agent_collection - INFO - 設定ファイルを正常に読み込みました: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\application\json\config.json
+2025-03-12 06:05:40,353 - application.modules.agent_collection - INFO - タスクを正常に作成。タスク数: 4
+2025-03-12 06:05:40,353 - application.modules.agent_collection - INFO - IntentAnalyzer を初期化
+2025-03-12 06:05:40,353 - application.modules.agent_collection - INFO - RAG_AGENT: 初期化開始
+2025-03-12 06:05:40,353 - application.modules.rag_agent - INFO - RAG_Agentを初期化します。
+2025-03-12 06:05:47,231 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-03-12 06:05:47,231 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-03-12 06:05:49,893 - application.modules.rag_agent - INFO - RAG用に複数ファイルからRetrieverを作成します。
+2025-03-12 06:05:49,914 - faiss.loader - INFO - Loading faiss with AVX2 support.
+2025-03-12 06:05:49,940 - faiss.loader - INFO - Successfully loaded faiss with AVX2 support.
+2025-03-12 06:05:49,948 - faiss - INFO - Failed to load GPU Faiss: name 'GpuIndexIVFFlat' is not defined. Will not load constructor refs for GPU indexes.
+2025-03-12 06:05:50,181 - application.modules.rag_agent - INFO - RAG_Agent初期化完了
+2025-03-12 06:05:50,181 - application.modules.agent_collection - INFO - RAG_AGENT: 初期化完了
+2025-03-12 06:05:50,181 - application.modules.agent_collection - INFO - workflow 作成
+2025-03-12 06:05:50,181 - application.services.payroll_service - INFO - AgentCollection initialized successfully
+2025-03-12 06:05:50,181 - payroll_api - INFO - PayrollService initialized successfully
+2025-03-12 06:05:50,181 - application.services.session_service - INFO - Session persistence enabled, using directory: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\sessions
+2025-03-12 06:05:50,181 - application.services.session_service - INFO - Loaded 0 sessions from disk
+2025-03-12 06:05:50,181 - application.services.session_service - INFO - SessionService initialized with 0 sessions
+2025-03-12 06:05:50,181 - payroll_api - INFO - SessionService initialized successfully
+2025-03-12 06:05:50,197 - application.services.session_service - INFO - Cleaned up 0 old sessions
+2025-03-12 06:05:50,197 - payroll_api - INFO - Startup: cleaned up sessions older than 24 hours
+2025-03-12 06:05:50,206 - payroll_api - INFO - Startup: cleaned up temporary files
+2025-03-12 06:09:09,117 - payroll_api - INFO - Task list requested
+2025-03-12 06:12:08,315 - payroll_api - INFO - Conversation history requested for session SOME_SESSION_ID
+2025-03-12 06:12:08,315 - payroll_api - ERROR - Error getting conversation history: Session SOME_SESSION_ID not found or has no history
+2025-03-12 06:20:47,896 - payroll_api - INFO - API shutting down
+2025-03-12 06:20:53,358 - payroll_api - INFO - Service modules imported successfully
+2025-03-12 06:20:53,378 - application.services.security.auth - INFO - API security configured
+2025-03-12 06:20:53,378 - application.modules.file_agent - INFO - FileAgent を初期化します。
+2025-03-12 06:20:53,408 - application.modules.file_agent - INFO - FileAgent 初期化完了: sqlite:///C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\data\app.db
+2025-03-12 06:20:53,409 - application.services.file_service - INFO - FileService initialized with temp_dir: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\temp
+2025-03-12 06:20:53,409 - payroll_api - INFO - FileService initialized successfully
+2025-03-12 06:20:53,409 - application.services.payroll_service - INFO - Initializing PayrollService with config: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\application\json\config.json
+2025-03-12 06:20:53,409 - application.modules.agent_collection - INFO - エージェントコレクションを初期化しています...
+2025-03-12 06:20:53,409 - application.modules.file_agent - INFO - FileAgent を初期化します。
+2025-03-12 06:20:53,409 - application.modules.file_agent - WARNING - Could not remove existing database file: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\data\app.db
+2025-03-12 06:20:53,411 - application.modules.file_agent - WARNING - Will try to reuse existing database.
+2025-03-12 06:20:53,413 - application.modules.file_agent - INFO - FileAgent 初期化完了: sqlite:///C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\data\app.db
+2025-03-12 06:20:53,413 - application.modules.agent_collection - INFO - ファイルエージェントを初期化しました。
+2025-03-12 06:20:55,118 - application.modules.agent_collection - INFO - 設定ファイルを正常に読み込みました: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\application\json\config.json
+2025-03-12 06:20:55,126 - application.modules.agent_collection - INFO - タスクを正常に作成。タスク数: 4
+2025-03-12 06:20:55,126 - application.modules.agent_collection - INFO - IntentAnalyzer を初期化
+2025-03-12 06:20:55,126 - application.modules.agent_collection - INFO - RAG_AGENT: 初期化開始
+2025-03-12 06:20:55,126 - application.modules.rag_agent - INFO - RAG_Agentを初期化します。
+2025-03-12 06:21:02,228 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-03-12 06:21:02,228 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-03-12 06:21:04,344 - application.modules.rag_agent - INFO - RAG用に複数ファイルからRetrieverを作成します。
+2025-03-12 06:21:04,366 - faiss.loader - INFO - Loading faiss with AVX2 support.
+2025-03-12 06:21:04,388 - faiss.loader - INFO - Successfully loaded faiss with AVX2 support.
+2025-03-12 06:21:04,392 - faiss - INFO - Failed to load GPU Faiss: name 'GpuIndexIVFFlat' is not defined. Will not load constructor refs for GPU indexes.
+2025-03-12 06:21:04,637 - application.modules.rag_agent - INFO - RAG_Agent初期化完了
+2025-03-12 06:21:04,639 - application.modules.agent_collection - INFO - RAG_AGENT: 初期化完了
+2025-03-12 06:21:04,640 - application.modules.agent_collection - INFO - workflow 作成
+2025-03-12 06:21:04,643 - application.services.payroll_service - INFO - AgentCollection initialized successfully
+2025-03-12 06:21:04,643 - payroll_api - INFO - PayrollService initialized successfully
+2025-03-12 06:21:04,646 - application.services.session_service - INFO - Session persistence enabled, using directory: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\sessions
+2025-03-12 06:21:04,650 - application.services.session_service - INFO - Loaded 0 sessions from disk
+2025-03-12 06:21:04,651 - application.services.session_service - INFO - SessionService initialized with 0 sessions
+2025-03-12 06:21:04,652 - payroll_api - INFO - SessionService initialized successfully
+2025-03-12 06:21:04,685 - application.services.session_service - INFO - Cleaned up 0 old sessions
+2025-03-12 06:21:04,686 - payroll_api - INFO - Startup: cleaned up sessions older than 24 hours
+2025-03-12 06:21:04,686 - payroll_api - INFO - Startup: cleaned up temporary files
+2025-03-12 06:21:42,543 - payroll_api - INFO - API shutting down
