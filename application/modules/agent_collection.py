@@ -10,12 +10,12 @@ from typing import Dict, List, Optional, Tuple
 from transitions import Machine
 
 # Azure Open AI 用のラッパーをインポート
-from modules.azure_openai_wrapper import AzureOpenAIWrapper
-from modules.file_agent import FileAgent
-from modules.intent_analyzer import IntentAnalyzer
-from modules.rag_agent import RAG_Agent
-from modules.task_agent import TaskAgent
-from modules.utils import return_most_similiar_word
+from application.modules.azure_openai_wrapper import AzureOpenAIWrapper
+from application.modules.file_agent import FileAgent
+from application.modules.intent_analyzer import IntentAnalyzer
+from application.modules.rag_agent import RAG_Agent
+from application.modules.task_agent import TaskAgent
+from application.modules.utils import return_most_similiar_word
 
 
 class IntentType(Enum):

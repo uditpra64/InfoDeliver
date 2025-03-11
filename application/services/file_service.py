@@ -1,17 +1,21 @@
 import os
+import sys
 import logging
 from typing import List, Dict, Optional, Tuple, Any
 import pandas as pd
-
-import sys
 from pathlib import Path
 
-parent_dir = Path(__file__).resolve().parent.parent
-if str(parent_dir) not in sys.path:
-    sys.path.append(str(parent_dir))
+# Add project root to path
+parent_dir = Path(__file__).resolve().parent.parent.parent  # One level up from application/services
+sys.path.insert(0, str(parent_dir))
 
-from modules.file_agent import FileAgent
+# Import setup_paths to configure everything consistently
+import setup_paths
 
+# Now import with absolute paths
+from application.modules.file_agent import FileAgent
+
+logger = logging.getLogger(__name__)
 
 
 logger = logging.getLogger(__name__)

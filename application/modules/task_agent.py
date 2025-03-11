@@ -10,9 +10,9 @@ import numpy as np
 import pandas as pd
 from transitions import Machine, State
 
-from modules.chat_agent import ChatAgent
-from modules.code_agent import CodeAgent
-from modules.file_agent import FileAgent
+from application.modules.chat_agent import ChatAgent
+from application.modules.code_agent import CodeAgent
+from application.modules.file_agent import FileAgent
 
 
 class FileState(State):

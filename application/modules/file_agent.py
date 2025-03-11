@@ -73,7 +73,11 @@ class FileAgent:
             os.makedirs(os.path.dirname(db_path), exist_ok=True)
             # 毎回削除→作り直し する仕様ならここでremove
             if os.path.isfile(db_path):
-                os.remove(db_path)
+                try:
+                    os.remove(db_path)
+                except PermissionError:
+                    logger.warning(f"Could not remove existing database file: {db_path}")
+                    logger.warning("Will try to reuse existing database.")
             connection_string = f"sqlite:///{db_path}"
 
         self.engine = create_engine(connection_string)

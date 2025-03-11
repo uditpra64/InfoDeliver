@@ -6,7 +6,7 @@ from typing import List
 from langchain import hub
 
 # Embedding を Hugging Face のモデルに変更
-from langchain.embeddings import HuggingFaceEmbeddings
+from langchain_huggingface import HuggingFaceEmbeddings
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_community.document_loaders import TextLoader
 from langchain_community.vectorstores import FAISS
@@ -58,9 +58,26 @@ class RAG_Agent:
         base_path = os.getenv("LLM_EXCEL_BASE_PATH")
         rule_folder = os.path.join(base_path,"rule")
         if len(file_paths) == 0:
-            msg = f"フォルダ『{rule_folder}』の下にルールが見つからないです"
-            logger.error(msg)
-            raise ValueError(msg)
+            msg = f"No rules found in {rule_folder}, using application rules"
+            logger.warning(msg)
+    
+            # Try to use rules from application directory as fallback
+            app_rule_folder = os.path.join(os.path.dirname(os.path.dirname(__file__)), "rule")
+            for root, _, files in os.walk(app_rule_folder):
+                for file in files:
+                    suffix = os.path.splitext(file)[1]
+                    if suffix != ".md":
+                        continue
+                    if "説明用" in file or "sample" in file:
+                        continue
+                    file_paths.append(os.path.join(root, file))
+            
+            # If still no files, create a default
+            if len(file_paths) == 0:
+                default_rule_path = os.path.join(rule_folder, "payroll_rule.md")
+                with open(default_rule_path, "w", encoding="utf-8") as f:
+                    f.write("# Payroll Rule\n\nStandard calculation rules apply.\n")
+                file_paths = [default_rule_path]
 
         splits = []
         for file_path in file_paths:

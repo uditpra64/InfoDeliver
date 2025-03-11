@@ -5,11 +5,20 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel
 from typing import Optional, List, Dict, Any
+from pathlib import Path
 
-# Add application directory to Python path
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+# Get the parent directory to import setup_paths
+current_dir = Path(__file__).resolve().parent
+parent_dir = current_dir.parent
+sys.path.insert(0, str(parent_dir))
 
-# Import service classes
+# Import setup_paths to configure everything
+import setup_paths
+
+# Define app_dir AFTER importing setup_paths
+app_dir = os.path.join(parent_dir, "application")
+
+# Now import service classes
 from application.services.payroll_service import PayrollService
 from application.services.file_service import FileService
 from application.services.session_service import SessionService
@@ -17,20 +26,33 @@ from application.services.session_service import SessionService
 # Initialize FastAPI app
 app = FastAPI(title="Payroll Assistant API")
 
-# Configure CORS
+# Add CORS middleware
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # For production, specify allowed domains
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
 # Initialize services
-config_path = os.path.join(os.getcwd(), "application", "json", "config.json")
-payroll_service = PayrollService(config_path=config_path)
-file_service = FileService()
-session_service = SessionService()
+config_path = os.path.join(app_dir, "json", "config.json")
+print(f"Using config path: {config_path}")
+
+try:
+    file_service = FileService()
+    print("FileService initialized successfully")
+    
+    payroll_service = PayrollService(config_path=config_path)
+    print("PayrollService initialized successfully")
+    
+    session_service = SessionService()
+    print("SessionService initialized successfully")
+except Exception as e:
+    print(f"Error initializing services: {e}")
+    import traceback
+    traceback.print_exc()
+
 
 # Request and response models
 class ChatRequest(BaseModel):
@@ -41,15 +63,6 @@ class ChatResponse(BaseModel):
     response: str
     session_id: str
     state: str
-
-class TaskResponse(BaseModel):
-    name: str
-    description: str
-
-class SessionResponse(BaseModel):
-    session_id: str
-    created_at: float
-    last_activity: float
 
 # Helper function to get session ID
 async def get_session(x_session_id: Optional[str] = Header(None)):
@@ -90,117 +103,6 @@ async def chat_endpoint(request: ChatRequest, session_id: str = Depends(get_sess
             session_id=session_id,
             state=current_state
         )
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
-
-@app.get("/tasks", response_model=List[TaskResponse])
-async def get_tasks():
-    try:
-        tasks = []
-        for task_name in payroll_service.get_task_list():
-            tasks.append(TaskResponse(
-                name=task_name,
-                description=payroll_service.get_task_description(task_name)
-            ))
-        return tasks
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
-
-@app.post("/tasks/{task_name}/select")
-async def select_task(task_name: str, session_id: str = Depends(get_session)):
-    try:
-        success = payroll_service.select_task(task_name)
-        if not success:
-            raise HTTPException(status_code=404, detail=f"Task '{task_name}' not found")
-        
-        # Update session with selected task
-        session_service.update_session(session_id, {"current_task": task_name})
-        
-        # Get required files for this task
-        result, _ = payroll_service.process_files()
-        response_text = result if isinstance(result, str) else "\n".join(result)
-        
-        return {"success": True, "message": response_text}
-    except HTTPException:
-        raise
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
-
-@app.post("/files/upload")
-async def upload_file(
-    file: UploadFile = File(...),
-    session_id: str = Depends(get_session)
-):
-    try:
-        # Create temporary file
-        temp_file_path = f"temp/{file.filename}"
-        os.makedirs(os.path.dirname(temp_file_path), exist_ok=True)
-        
-        # Save uploaded file
-        with open(temp_file_path, "wb") as f:
-            f.write(await file.read())
-        
-        # Process the file
-        result = file_service.upload_file(temp_file_path)
-        
-        if not result["success"]:
-            raise HTTPException(status_code=400, detail=result["message"])
-        
-        # Create a chat message with the file upload information
-        file_message = f"選択されたファイル: {temp_file_path}"
-        
-        # Process the file message
-        chat_response, extra_info = payroll_service.process_message(file_message)
-        response_text = chat_response if isinstance(chat_response, str) else "\n".join(chat_response)
-        
-        # Update session
-        session_service.add_to_conversation(session_id, "user", file_message)
-        session_service.add_to_conversation(session_id, "assistant", response_text)
-        
-        return {
-            "success": True, 
-            "filename": file.filename,
-            "response": response_text
-        }
-    except HTTPException:
-        raise
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
-
-@app.post("/date/set")
-async def set_date(
-    date: str = Form(...),
-    session_id: str = Depends(get_session)
-):
-    try:
-        result, extra_info = payroll_service.set_date(date)
-        
-        # Update session
-        session_service.add_to_conversation(session_id, "user", date)
-        session_service.add_to_conversation(session_id, "assistant", result)
-        
-        return {"success": True, "response": result, "state": payroll_service.get_current_state()}
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
-
-@app.post("/session/reset")
-async def reset_session(session_id: str = Depends(get_session)):
-    try:
-        # Create a new session
-        new_session_id = session_service.create_session()
-        
-        # Reset the payroll service
-        payroll_service.reset()
-        
-        return {"success": True, "session_id": new_session_id}
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
-
-@app.get("/conversation", response_model=List[Dict[str, Any]])
-async def get_conversation(session_id: str = Depends(get_session)):
-    try:
-        conversation = session_service.get_conversation_history(session_id)
-        return conversation
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 

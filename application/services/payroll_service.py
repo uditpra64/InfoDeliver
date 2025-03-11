@@ -1,16 +1,20 @@
-import os
-import logging
-from typing import Tuple, Optional, List, Dict, Any, Union
-
 import sys
+import os
+from typing import Tuple, Optional, List, Dict, Any, Union
+import logging
 from pathlib import Path
 
-parent_dir = Path(__file__).resolve().parent.parent
-if str(parent_dir) not in sys.path:
-    sys.path.append(str(parent_dir))
+# Add project root (InfoDeliver) to path
+parent_dir = Path(__file__).resolve().parent.parent.parent  # One level up from application/services
+sys.path.insert(0, str(parent_dir))
 
-from modules.agent_collection import AgentCollection
-from modules.file_agent import FileAgent
+# Import setup_paths to configure everything consistently
+import setup_paths
+
+# Now import with absolute paths
+from application.modules.agent_collection import AgentCollection
+from application.modules.file_agent import FileAgent
+
 logger = logging.getLogger(__name__)
 
 class PayrollService:
