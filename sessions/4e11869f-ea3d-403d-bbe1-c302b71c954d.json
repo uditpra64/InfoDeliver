@@ -1,0 +1,25 @@
+{
+  "id": "4e11869f-ea3d-403d-bbe1-c302b71c954d",
+  "created_at": 1741873097.7299016,
+  "last_activity": 1741873099.4017107,
+  "conversation_history": [
+    {
+      "role": "user",
+      "message": "Hello",
+      "timestamp": 1741873097.7405536,
+      "formatted_time": "2025-03-13 22:38:17"
+    },
+    {
+      "role": "assistant",
+      "message": "Error processing your request: 'tuple' object has no attribute 'get'",
+      "timestamp": 1741873099.4007134,
+      "formatted_time": "2025-03-13 22:38:19"
+    }
+  ],
+  "metadata": {},
+  "current_task": null,
+  "current_state": "chat",
+  "expiry_seconds": 86400.0,
+  "created_time": "2025-03-13 22:38:17",
+  "last_activity_time": "2025-03-13 22:38:19"
+}

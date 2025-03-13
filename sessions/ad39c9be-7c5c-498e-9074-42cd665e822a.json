@@ -1,0 +1,25 @@
+{
+  "id": "ad39c9be-7c5c-498e-9074-42cd665e822a",
+  "created_at": 1741874159.3230057,
+  "last_activity": 1741874160.4763072,
+  "conversation_history": [
+    {
+      "role": "user",
+      "message": "Hello from admin",
+      "timestamp": 1741874159.3267887,
+      "formatted_time": "2025-03-13 22:55:59"
+    },
+    {
+      "role": "assistant",
+      "message": "\u3042\u306a\u305f\u306e\u610f\u56f3\u304c\u308f\u304b\u3089\u306a\u3044\u3093\u3067\u3059\u3002\u3082\u3046\u4e00\u56de\u805e\u3044\u3066\u304f\u3060\u3055\u3044\u3002",
+      "timestamp": 1741874160.475297,
+      "formatted_time": "2025-03-13 22:56:00"
+    }
+  ],
+  "metadata": {},
+  "current_task": null,
+  "current_state": "chat",
+  "expiry_seconds": 86399.9990029335,
+  "created_time": "2025-03-13 22:55:59",
+  "last_activity_time": "2025-03-13 22:56:00"
+}

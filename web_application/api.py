@@ -7,13 +7,14 @@ import time
 import uuid
 from datetime import datetime, timedelta
 from enum import Enum
-from typing import Optional, List, Dict, Any
+from typing import Optional, List, Dict, Any, Generic, TypeVar
 from pathlib import Path
 
 from fastapi import FastAPI, HTTPException, UploadFile, File, Form, Depends, Header, Request, BackgroundTasks, status
 from fastapi.responses import JSONResponse
 from fastapi.exception_handlers import http_exception_handler
 from pydantic import BaseModel, validator, Field
+from pydantic.generics import GenericModel
 from starlette.exceptions import HTTPException as StarletteHTTPException
 from starlette.status import HTTP_429_TOO_MANY_REQUESTS
 from slowapi import Limiter
@@ -59,6 +60,16 @@ try:
 except ImportError as e:
     logger.critical(f"Failed to import service modules: {e}")
     raise
+
+# Define a type variable for generic response data
+T = TypeVar('T')
+
+# Create a standard response model that can wrap any data type
+class StandardResponse(GenericModel, Generic[T]):
+    code: int = 200
+    success: bool = True
+    message: str
+    data: Optional[T] = None
 
 # Custom exceptions for more specific error handling
 class PayrollAPIException(Exception):
@@ -153,7 +164,12 @@ app.add_middleware(SlowAPIMiddleware)
 async def rate_limit_handler(request: Request, exc: RateLimitExceeded):
     return JSONResponse(
         status_code=HTTP_429_TOO_MANY_REQUESTS,
-        content={"error": "Rate limit exceeded", "detail": "Too many requests"},
+        content=StandardResponse(
+            code=HTTP_429_TOO_MANY_REQUESTS,
+            success=False,
+            message="Rate limit exceeded",
+            data={"detail": "Too many requests"}
+        ).dict(),
     )
 
 # Custom exception handler for PayrollAPIException
@@ -161,16 +177,26 @@ async def rate_limit_handler(request: Request, exc: RateLimitExceeded):
 async def payroll_exception_handler(request: Request, exc: PayrollAPIException):
     return JSONResponse(
         status_code=exc.status_code,
-        content=ErrorResponse(
-            error=exc.__class__.__name__,
-            detail=exc.message
+        content=StandardResponse(
+            code=exc.status_code,
+            success=False,
+            message=exc.message,
+            data=None
         ).dict(),
     )
 
 # Handle other HTTP exceptions
 @app.exception_handler(StarletteHTTPException)
 async def custom_http_exception_handler(request: Request, exc: StarletteHTTPException):
-    return await http_exception_handler(request, exc)
+    return JSONResponse(
+        status_code=exc.status_code,
+        content=StandardResponse(
+            code=exc.status_code,
+            success=False,
+            message=str(exc.detail),
+            data=None
+        ).dict(),
+    )
 
 # Setup security (replaces CORS middleware setup)
 allowed_origins = os.getenv("ALLOWED_ORIGINS", "http://localhost:3000").split(",")
@@ -305,9 +331,14 @@ async def save_upload_file(
 @app.get("/health")
 async def health_check():
     """Health check endpoint"""
-    return {"status": "ok", "timestamp": datetime.now().isoformat()}
+    return StandardResponse(
+        code=200,
+        success=True,
+        message="API is operational",
+        data={"status": "ok", "timestamp": datetime.now().isoformat()}
+    )
 
-@app.post("/chat", response_model=ChatResponse)
+@app.post("/chat")
 @limiter.limit("30/minute")
 async def chat_endpoint(
     request: Request,
@@ -322,6 +353,11 @@ async def chat_endpoint(
         
         # Process the message
         result, extra_info = payroll_service.process_message(chat_request.message)
+
+        if isinstance(result, tuple) and len(result) == 2:
+            response_text, extra_info = result
+        else:
+            response_text = result if isinstance(result, str) else "\n".join(result)
         
         # Convert result to string if it's a list
         response_text = result if isinstance(result, str) else "\n".join(result)
@@ -340,10 +376,18 @@ async def chat_endpoint(
             state_enum = SessionState.CHAT  # Default to CHAT if unknown state
         
         logger.info(f"Chat processed successfully for session {session_id}, state: {current_state}")
-        return ChatResponse(
+        
+        chat_response = ChatResponse(
             response=response_text,
             session_id=session_id,
             state=state_enum
+        )
+        
+        return StandardResponse(
+            code=200,
+            success=True,
+            message="Successfully processed chat message",
+            data=chat_response.dict()
         )
     except Exception as e:
         logger.error(f"Error in chat endpoint: {str(e)}")
@@ -351,7 +395,7 @@ async def chat_endpoint(
             raise
         raise PayrollAPIException(f"Chat processing error: {str(e)}")
 
-@app.post("/upload", response_model=FileUploadResponse)
+@app.post("/upload")
 @limiter.limit("10/minute")
 async def upload_file_endpoint(
     request: Request,
@@ -394,7 +438,8 @@ async def upload_file_endpoint(
         session_service.add_to_conversation(session_id, "assistant", response_text)
         
         logger.info(f"File uploaded successfully: {file.filename}")
-        return FileUploadResponse(
+        
+        upload_response = FileUploadResponse(
             success=True,
             file_id=upload_result.get("file_id"),
             message="File uploaded successfully",
@@ -406,13 +451,20 @@ async def upload_file_endpoint(
             session_id=session_id,
             state=state_enum
         )
+        
+        return StandardResponse(
+            code=200,
+            success=True,
+            message="File uploaded successfully",
+            data=upload_response.dict()
+        )
     except Exception as e:
         logger.error(f"Error in file upload: {str(e)}")
         if isinstance(e, PayrollAPIException):
             raise
         raise PayrollAPIException(f"File upload error: {str(e)}")
 
-@app.get("/tasks", response_model=List[TaskResponse])
+@app.get("/tasks")
 @limiter.limit("60/minute")
 async def get_tasks(
     request: Request,
@@ -436,8 +488,13 @@ async def get_tasks(
                 required_files=required_files,
                 status="available"
             ))
-            
-        return result
+        
+        return StandardResponse(
+            code=200,
+            success=True,
+            message="Tasks retrieved successfully",
+            data=result
+        )
     except Exception as e:
         logger.error(f"Error getting tasks: {str(e)}")
         if isinstance(e, PayrollAPIException):
@@ -457,8 +514,13 @@ async def get_conversation_history(
         history = session_service.get_conversation_history(session_id)
         if not history:
             raise ResourceNotFoundError(f"Session {session_id} not found or has no history")
-            
-        return {"session_id": session_id, "history": history}
+        
+        return StandardResponse(
+            code=200,
+            success=True,
+            message="Conversation history retrieved successfully",
+            data={"session_id": session_id, "history": history}
+        )
     except Exception as e:
         logger.error(f"Error getting conversation history: {str(e)}")
         if isinstance(e, PayrollAPIException):
@@ -482,7 +544,12 @@ async def reset_session(
         # Reset payroll service state
         payroll_service.reset()
         
-        return {"success": True, "message": "Session reset successfully"}
+        return StandardResponse(
+            code=200,
+            success=True,
+            message="Session reset successfully",
+            data={"session_id": session_id}
+        )
     except Exception as e:
         logger.error(f"Error resetting session: {str(e)}")
         if isinstance(e, PayrollAPIException):
@@ -497,10 +564,15 @@ async def get_all_sessions(
     """Get all active sessions (admin only)"""
     try:
         session_ids = session_service.get_all_session_ids()
-        return {
-            "session_count": len(session_ids),
-            "session_ids": session_ids
-        }
+        return StandardResponse(
+            code=200,
+            success=True,
+            message="Sessions retrieved successfully",
+            data={
+                "session_count": len(session_ids),
+                "session_ids": session_ids
+            }
+        )
     except Exception as e:
         logger.error(f"Error getting all sessions: {str(e)}")
         raise PayrollAPIException(f"Error retrieving sessions: {str(e)}")
