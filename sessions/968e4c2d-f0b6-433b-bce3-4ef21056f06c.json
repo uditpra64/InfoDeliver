@@ -1,0 +1,37 @@
+{
+  "id": "968e4c2d-f0b6-433b-bce3-4ef21056f06c",
+  "created_at": 1741940800.0425856,
+  "last_activity": 1741940816.080415,
+  "conversation_history": [
+    {
+      "role": "user",
+      "message": "Hello",
+      "timestamp": 1741940800.0502808,
+      "formatted_time": "2025-03-14 17:26:40"
+    },
+    {
+      "role": "assistant",
+      "message": "\u3042\u306a\u305f\u306e\u610f\u56f3\u304c\u308f\u304b\u3089\u306a\u3044\u3093\u3067\u3059\u3002\u3082\u3046\u4e00\u56de\u805e\u3044\u3066\u304f\u3060\u3055\u3044\u3002",
+      "timestamp": 1741940801.2784326,
+      "formatted_time": "2025-03-14 17:26:41"
+    },
+    {
+      "role": "user",
+      "message": "heello",
+      "timestamp": 1741940814.8911948,
+      "formatted_time": "2025-03-14 17:26:54"
+    },
+    {
+      "role": "assistant",
+      "message": "\u3042\u306a\u305f\u306e\u610f\u56f3\u304c\u308f\u304b\u3089\u306a\u3044\u3093\u3067\u3059\u3002\u3082\u3046\u4e00\u56de\u805e\u3044\u3066\u304f\u3060\u3055\u3044\u3002",
+      "timestamp": 1741940816.0798798,
+      "formatted_time": "2025-03-14 17:26:56"
+    }
+  ],
+  "metadata": {},
+  "current_task": null,
+  "current_state": "chat",
+  "expiry_seconds": 86399.99737787247,
+  "created_time": "2025-03-14 17:26:40",
+  "last_activity_time": "2025-03-14 17:26:56"
+}

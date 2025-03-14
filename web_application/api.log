@@ -539,3 +539,157 @@ AttributeError: 'NoneType' object has no attribute 'values'
 2025-03-13 23:01:03,946 - application.services.payroll_service - INFO - Processing message: hello
 2025-03-13 23:01:05,666 - httpx - INFO - HTTP Request: POST https://formaigpt.openai.azure.com/openai/deployments/gptest/chat/completions?api-version=2024-02-15-preview "HTTP/1.1 200 OK"
 2025-03-13 23:01:05,677 - payroll_api - INFO - Chat processed successfully for session 406e4e53-653b-4e7f-9c71-3963a38acd43, state: chat
+2025-03-14 14:15:39,571 - payroll_api - INFO - Service modules imported successfully
+2025-03-14 14:15:39,635 - application.services.security.auth - INFO - API security configured
+2025-03-14 14:15:39,638 - application.modules.file_agent - INFO - FileAgent を初期化します。
+2025-03-14 14:15:39,770 - application.modules.file_agent - INFO - FileAgent 初期化完了: sqlite:///C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\data\app.db
+2025-03-14 14:15:39,770 - application.services.file_service - INFO - FileService initialized with temp_dir: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\temp
+2025-03-14 14:15:39,774 - payroll_api - INFO - FileService initialized successfully
+2025-03-14 14:15:39,776 - application.services.payroll_service - INFO - Initializing PayrollService with config: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\application\json\config.json
+2025-03-14 14:15:39,776 - application.modules.agent_collection - INFO - エージェントコレクションを初期化しています...
+2025-03-14 14:15:39,776 - application.modules.file_agent - INFO - FileAgent を初期化します。
+2025-03-14 14:15:39,780 - application.modules.file_agent - WARNING - Could not remove existing database file: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\data\app.db
+2025-03-14 14:15:39,782 - application.modules.file_agent - WARNING - Will try to reuse existing database.
+2025-03-14 14:15:39,787 - application.modules.file_agent - INFO - FileAgent 初期化完了: sqlite:///C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\data\app.db
+2025-03-14 14:15:39,790 - application.modules.agent_collection - INFO - ファイルエージェントを初期化しました。
+2025-03-14 14:15:44,264 - application.modules.agent_collection - INFO - 設定ファイルを正常に読み込みました: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\application\json\config.json
+2025-03-14 14:15:44,266 - application.modules.agent_collection - INFO - タスクを正常に作成。タスク数: 4
+2025-03-14 14:15:44,266 - application.modules.agent_collection - INFO - IntentAnalyzer を初期化
+2025-03-14 14:15:44,266 - application.modules.agent_collection - INFO - RAG_AGENT: 初期化開始
+2025-03-14 14:15:44,272 - application.modules.rag_agent - INFO - RAG_Agentを初期化します。
+2025-03-14 14:16:58,642 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-03-14 14:16:58,642 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-03-14 14:17:03,353 - application.modules.rag_agent - INFO - RAG用に複数ファイルからRetrieverを作成します。
+2025-03-14 14:17:03,393 - faiss.loader - INFO - Loading faiss with AVX2 support.
+2025-03-14 14:17:03,737 - faiss.loader - INFO - Successfully loaded faiss with AVX2 support.
+2025-03-14 14:17:03,749 - faiss - INFO - Failed to load GPU Faiss: name 'GpuIndexIVFFlat' is not defined. Will not load constructor refs for GPU indexes.
+2025-03-14 14:17:04,058 - application.modules.rag_agent - INFO - RAG_Agent初期化完了
+2025-03-14 14:17:04,065 - application.modules.agent_collection - INFO - RAG_AGENT: 初期化完了
+2025-03-14 14:17:04,067 - application.modules.agent_collection - INFO - workflow 作成
+2025-03-14 14:17:04,069 - application.services.payroll_service - INFO - AgentCollection initialized successfully
+2025-03-14 14:17:04,070 - payroll_api - INFO - PayrollService initialized successfully
+2025-03-14 14:17:04,073 - application.services.session_service - INFO - Session persistence enabled, using directory: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\sessions
+2025-03-14 14:17:04,100 - application.services.session_service - INFO - Skipping expired session 057b59ff-3d7d-4459-a8cc-307e2fe1711a
+2025-03-14 14:17:04,107 - application.services.session_service - ERROR - Error loading session 057b59ff-3d7d-4459-a8cc-307e2fe1711a: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\Udit Pradhan\\formai_excelllm\\InfoDeliver\\sessions\\057b59ff-3d7d-4459-a8cc-307e2fe1711a.json'
+2025-03-14 14:17:04,132 - application.services.session_service - INFO - Skipping expired session 06099bb8-004f-416c-9616-54cbe4dcb901
+2025-03-14 14:17:04,140 - application.services.session_service - ERROR - Error loading session 06099bb8-004f-416c-9616-54cbe4dcb901: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\Udit Pradhan\\formai_excelllm\\InfoDeliver\\sessions\\06099bb8-004f-416c-9616-54cbe4dcb901.json'
+2025-03-14 14:17:04,253 - application.services.session_service - INFO - Skipping expired session 7c8ba81c-1329-46ac-b5fe-eb498a052cf1
+2025-03-14 14:17:04,258 - application.services.session_service - ERROR - Error loading session 7c8ba81c-1329-46ac-b5fe-eb498a052cf1: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\Udit Pradhan\\formai_excelllm\\InfoDeliver\\sessions\\7c8ba81c-1329-46ac-b5fe-eb498a052cf1.json'
+2025-03-14 14:17:04,350 - application.services.session_service - INFO - Skipping expired session c0edf2ac-da7a-4d7a-90cd-6e136696f28d
+2025-03-14 14:17:04,352 - application.services.session_service - ERROR - Error loading session c0edf2ac-da7a-4d7a-90cd-6e136696f28d: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\Udit Pradhan\\formai_excelllm\\InfoDeliver\\sessions\\c0edf2ac-da7a-4d7a-90cd-6e136696f28d.json'
+2025-03-14 14:17:04,413 - application.services.session_service - INFO - Skipping expired session d5198628-1bd3-4b0a-b5c9-45827d28032c
+2025-03-14 14:17:04,416 - application.services.session_service - ERROR - Error loading session d5198628-1bd3-4b0a-b5c9-45827d28032c: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\Udit Pradhan\\formai_excelllm\\InfoDeliver\\sessions\\d5198628-1bd3-4b0a-b5c9-45827d28032c.json'
+2025-03-14 14:17:04,449 - application.services.session_service - INFO - Loaded 7 sessions from disk
+2025-03-14 14:17:04,453 - application.services.session_service - INFO - SessionService initialized with 7 sessions
+2025-03-14 14:17:04,453 - payroll_api - INFO - SessionService initialized successfully
+2025-03-14 14:17:04,501 - application.services.session_service - INFO - Cleaned up 0 old sessions
+2025-03-14 14:17:04,504 - payroll_api - INFO - Startup: cleaned up sessions older than 24 hours
+2025-03-14 14:17:04,506 - payroll_api - INFO - Startup: cleaned up temporary files
+2025-03-14 14:18:20,410 - application.services.session_service - INFO - Created new session: a31aa61a-592b-47bb-af35-924ec8274000
+2025-03-14 14:18:20,412 - payroll_api - INFO - Created new session: a31aa61a-592b-47bb-af35-924ec8274000
+2025-03-14 14:18:20,808 - payroll_api - INFO - Processing chat message for session a31aa61a-592b-47bb-af35-924ec8274000
+2025-03-14 14:18:20,821 - application.services.payroll_service - INFO - Processing message: Hello
+2025-03-14 14:18:22,725 - httpx - INFO - HTTP Request: POST https://formaigpt.openai.azure.com/openai/deployments/gptest/chat/completions?api-version=2024-02-15-preview "HTTP/1.1 200 OK"
+2025-03-14 14:18:22,749 - payroll_api - INFO - Chat processed successfully for session a31aa61a-592b-47bb-af35-924ec8274000, state: chat
+2025-03-14 14:18:30,989 - payroll_api - INFO - Task list requested
+2025-03-14 14:18:35,142 - payroll_api - INFO - Conversation history requested for session a31aa61a-592b-47bb-af35-924ec8274000
+2025-03-14 14:18:37,207 - payroll_api - INFO - Session reset requested for a31aa61a-592b-47bb-af35-924ec8274000
+2025-03-14 14:18:37,209 - application.modules.agent_collection - INFO - タスク 支給控除等一覧(データ更新) をリセットします。
+2025-03-14 14:18:37,217 - application.modules.agent_collection - INFO - タスク 支給控除等一覧(後処理) をリセットします。
+2025-03-14 14:18:37,219 - application.modules.agent_collection - INFO - タスク Yonosukeデータ作成(加算処理) をリセットします。
+2025-03-14 14:18:37,222 - application.modules.agent_collection - INFO - タスク Yonosukeデータ作成(データ除去) をリセットします。
+2025-03-14 14:18:37,224 - application.modules.agent_collection - INFO - 状態を変更: chat -> chat
+2025-03-14 14:18:41,342 - application.services.session_service - INFO - Created new session: 21ce5472-d4f3-4b33-8991-ec932a1b3a18
+2025-03-14 14:18:41,342 - payroll_api - INFO - Created new session: 21ce5472-d4f3-4b33-8991-ec932a1b3a18
+2025-03-14 14:18:41,344 - payroll_api - INFO - Processing chat message for session 21ce5472-d4f3-4b33-8991-ec932a1b3a18
+2025-03-14 14:18:41,344 - application.services.payroll_service - INFO - Processing message: Hello from admin
+2025-03-14 14:18:42,688 - httpx - INFO - HTTP Request: POST https://formaigpt.openai.azure.com/openai/deployments/gptest/chat/completions?api-version=2024-02-15-preview "HTTP/1.1 200 OK"
+2025-03-14 14:18:42,702 - payroll_api - INFO - Chat processed successfully for session 21ce5472-d4f3-4b33-8991-ec932a1b3a18, state: chat
+2025-03-14 14:18:44,784 - application.services.session_service - INFO - Created new session: 1b712ea2-c445-4803-bcc7-a4168375ea4f
+2025-03-14 14:18:44,787 - payroll_api - INFO - Created new session: 1b712ea2-c445-4803-bcc7-a4168375ea4f
+2025-03-14 14:18:44,794 - payroll_api - INFO - Processing chat message for session 1b712ea2-c445-4803-bcc7-a4168375ea4f
+2025-03-14 14:18:44,799 - application.services.payroll_service - INFO - Processing message: Hello from user
+2025-03-14 14:18:45,354 - httpx - INFO - HTTP Request: POST https://formaigpt.openai.azure.com/openai/deployments/gptest/chat/completions?api-version=2024-02-15-preview "HTTP/1.1 200 OK"
+2025-03-14 14:18:45,368 - payroll_api - INFO - Chat processed successfully for session 1b712ea2-c445-4803-bcc7-a4168375ea4f, state: chat
+2025-03-14 14:18:47,454 - application.services.session_service - INFO - Created new session: 4c354c12-95d3-4b09-9a06-769df90cf892
+2025-03-14 14:18:47,455 - payroll_api - INFO - Created new session: 4c354c12-95d3-4b09-9a06-769df90cf892
+2025-03-14 14:18:47,455 - payroll_api - INFO - Processing chat message for session 4c354c12-95d3-4b09-9a06-769df90cf892
+2025-03-14 14:18:47,464 - application.services.payroll_service - INFO - Processing message: Hello with no auth
+2025-03-14 14:18:48,322 - httpx - INFO - HTTP Request: POST https://formaigpt.openai.azure.com/openai/deployments/gptest/chat/completions?api-version=2024-02-15-preview "HTTP/1.1 200 OK"
+2025-03-14 14:18:48,345 - payroll_api - INFO - Chat processed successfully for session 4c354c12-95d3-4b09-9a06-769df90cf892, state: chat
+2025-03-14 17:26:40,030 - payroll_api - INFO - Task list requested
+2025-03-14 17:26:40,047 - application.services.session_service - INFO - Created new session: 968e4c2d-f0b6-433b-bce3-4ef21056f06c
+2025-03-14 17:26:40,047 - payroll_api - INFO - Created new session: 968e4c2d-f0b6-433b-bce3-4ef21056f06c
+2025-03-14 17:26:40,050 - payroll_api - INFO - Processing chat message for session 968e4c2d-f0b6-433b-bce3-4ef21056f06c
+2025-03-14 17:26:40,053 - application.services.payroll_service - INFO - Processing message: Hello
+2025-03-14 17:26:41,266 - httpx - INFO - HTTP Request: POST https://formaigpt.openai.azure.com/openai/deployments/gptest/chat/completions?api-version=2024-02-15-preview "HTTP/1.1 200 OK"
+2025-03-14 17:26:41,280 - payroll_api - INFO - Chat processed successfully for session 968e4c2d-f0b6-433b-bce3-4ef21056f06c, state: chat
+2025-03-14 17:26:41,307 - payroll_api - INFO - Task list requested
+2025-03-14 17:26:54,890 - payroll_api - INFO - Processing chat message for session 968e4c2d-f0b6-433b-bce3-4ef21056f06c
+2025-03-14 17:26:54,893 - application.services.payroll_service - INFO - Processing message: heello
+2025-03-14 17:26:56,077 - httpx - INFO - HTTP Request: POST https://formaigpt.openai.azure.com/openai/deployments/gptest/chat/completions?api-version=2024-02-15-preview "HTTP/1.1 200 OK"
+2025-03-14 17:26:56,083 - payroll_api - INFO - Chat processed successfully for session 968e4c2d-f0b6-433b-bce3-4ef21056f06c, state: chat
+2025-03-14 17:27:00,735 - payroll_api - INFO - Task list requested
+2025-03-14 17:27:03,343 - payroll_api - INFO - Task list requested
+2025-03-14 17:27:05,388 - payroll_api - INFO - Task list requested
+2025-03-14 17:27:07,264 - payroll_api - INFO - Task list requested
+2025-03-14 17:41:36,626 - payroll_api - INFO - API shutting down
+2025-03-14 17:42:23,860 - payroll_api - INFO - Service modules imported successfully
+2025-03-14 17:42:23,884 - application.services.security.auth - INFO - API security configured
+2025-03-14 17:42:23,884 - application.modules.file_agent - INFO - FileAgent を初期化します。
+2025-03-14 17:42:23,932 - application.modules.file_agent - INFO - FileAgent 初期化完了: sqlite:///C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\data\app.db
+2025-03-14 17:42:23,934 - application.services.file_service - INFO - FileService initialized with temp_dir: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\temp
+2025-03-14 17:42:23,935 - payroll_api - INFO - FileService initialized successfully
+2025-03-14 17:42:23,935 - application.services.payroll_service - INFO - Initializing PayrollService with config: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\application\json\config.json
+2025-03-14 17:42:23,936 - application.modules.agent_collection - INFO - エージェントコレクションを初期化しています...
+2025-03-14 17:42:23,936 - application.modules.file_agent - INFO - FileAgent を初期化します。
+2025-03-14 17:42:23,939 - application.modules.file_agent - WARNING - Could not remove existing database file: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\data\app.db
+2025-03-14 17:42:23,939 - application.modules.file_agent - WARNING - Will try to reuse existing database.
+2025-03-14 17:42:23,945 - application.modules.file_agent - INFO - FileAgent 初期化完了: sqlite:///C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\data\app.db
+2025-03-14 17:42:23,946 - application.modules.agent_collection - INFO - ファイルエージェントを初期化しました。
+2025-03-14 17:42:26,944 - application.modules.agent_collection - INFO - 設定ファイルを正常に読み込みました: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\application\json\config.json
+2025-03-14 17:42:26,953 - application.modules.agent_collection - INFO - タスクを正常に作成。タスク数: 4
+2025-03-14 17:42:26,953 - application.modules.agent_collection - INFO - IntentAnalyzer を初期化
+2025-03-14 17:42:26,953 - application.modules.agent_collection - INFO - RAG_AGENT: 初期化開始
+2025-03-14 17:42:26,957 - application.modules.rag_agent - INFO - RAG_Agentを初期化します。
+2025-03-14 17:42:40,164 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-03-14 17:42:40,164 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-03-14 17:42:43,709 - application.modules.rag_agent - INFO - RAG用に複数ファイルからRetrieverを作成します。
+2025-03-14 17:42:43,760 - faiss.loader - INFO - Loading faiss with AVX2 support.
+2025-03-14 17:42:43,818 - faiss.loader - INFO - Successfully loaded faiss with AVX2 support.
+2025-03-14 17:42:43,825 - faiss - INFO - Failed to load GPU Faiss: name 'GpuIndexIVFFlat' is not defined. Will not load constructor refs for GPU indexes.
+2025-03-14 17:42:44,890 - application.modules.rag_agent - INFO - RAG_Agent初期化完了
+2025-03-14 17:42:44,890 - application.modules.agent_collection - INFO - RAG_AGENT: 初期化完了
+2025-03-14 17:42:44,897 - application.modules.agent_collection - INFO - workflow 作成
+2025-03-14 17:42:44,900 - application.services.payroll_service - INFO - AgentCollection initialized successfully
+2025-03-14 17:42:44,900 - payroll_api - INFO - PayrollService initialized successfully
+2025-03-14 17:42:44,901 - application.services.session_service - INFO - Session persistence enabled, using directory: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\sessions
+2025-03-14 17:42:44,905 - application.services.session_service - INFO - Skipping expired session 057b59ff-3d7d-4459-a8cc-307e2fe1711a
+2025-03-14 17:42:44,908 - application.services.session_service - ERROR - Error loading session 057b59ff-3d7d-4459-a8cc-307e2fe1711a: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\Udit Pradhan\\formai_excelllm\\InfoDeliver\\sessions\\057b59ff-3d7d-4459-a8cc-307e2fe1711a.json'
+2025-03-14 17:42:44,911 - application.services.session_service - INFO - Skipping expired session 06099bb8-004f-416c-9616-54cbe4dcb901
+2025-03-14 17:42:44,913 - application.services.session_service - ERROR - Error loading session 06099bb8-004f-416c-9616-54cbe4dcb901: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\Udit Pradhan\\formai_excelllm\\InfoDeliver\\sessions\\06099bb8-004f-416c-9616-54cbe4dcb901.json'
+2025-03-14 17:42:44,915 - application.services.session_service - INFO - Skipping expired session 7c8ba81c-1329-46ac-b5fe-eb498a052cf1
+2025-03-14 17:42:44,922 - application.services.session_service - ERROR - Error loading session 7c8ba81c-1329-46ac-b5fe-eb498a052cf1: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\Udit Pradhan\\formai_excelllm\\InfoDeliver\\sessions\\7c8ba81c-1329-46ac-b5fe-eb498a052cf1.json'
+2025-03-14 17:42:44,950 - application.services.session_service - INFO - Skipping expired session c0edf2ac-da7a-4d7a-90cd-6e136696f28d
+2025-03-14 17:42:44,955 - application.services.session_service - ERROR - Error loading session c0edf2ac-da7a-4d7a-90cd-6e136696f28d: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\Udit Pradhan\\formai_excelllm\\InfoDeliver\\sessions\\c0edf2ac-da7a-4d7a-90cd-6e136696f28d.json'
+2025-03-14 17:42:44,957 - application.services.session_service - INFO - Skipping expired session d5198628-1bd3-4b0a-b5c9-45827d28032c
+2025-03-14 17:42:44,957 - application.services.session_service - ERROR - Error loading session d5198628-1bd3-4b0a-b5c9-45827d28032c: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\Udit Pradhan\\formai_excelllm\\InfoDeliver\\sessions\\d5198628-1bd3-4b0a-b5c9-45827d28032c.json'
+2025-03-14 17:42:44,965 - application.services.session_service - INFO - Loaded 12 sessions from disk
+2025-03-14 17:42:44,965 - application.services.session_service - INFO - SessionService initialized with 12 sessions
+2025-03-14 17:42:44,966 - payroll_api - INFO - SessionService initialized successfully
+2025-03-14 17:42:44,999 - application.services.session_service - INFO - Cleaned up 0 old sessions
+2025-03-14 17:42:44,999 - payroll_api - INFO - Startup: cleaned up sessions older than 24 hours
+2025-03-14 17:42:44,999 - payroll_api - INFO - Startup: cleaned up temporary files
+2025-03-14 17:43:02,606 - payroll_api - INFO - Task list requested
+2025-03-14 17:43:02,643 - application.services.session_service - INFO - Created new session: 3a5589e4-9a1a-45cb-93d3-39938cae4c5c
+2025-03-14 17:43:02,652 - payroll_api - INFO - Created new session: 3a5589e4-9a1a-45cb-93d3-39938cae4c5c
+2025-03-14 17:43:02,660 - payroll_api - INFO - Processing chat message for session 3a5589e4-9a1a-45cb-93d3-39938cae4c5c
+2025-03-14 17:43:02,663 - application.services.payroll_service - INFO - Processing message: Hello
+2025-03-14 17:43:04,134 - httpx - INFO - HTTP Request: POST https://formaigpt.openai.azure.com/openai/deployments/gptest/chat/completions?api-version=2024-02-15-preview "HTTP/1.1 200 OK"
+2025-03-14 17:43:04,140 - payroll_api - INFO - Chat processed successfully for session 3a5589e4-9a1a-45cb-93d3-39938cae4c5c, state: chat
+2025-03-14 17:43:04,176 - payroll_api - INFO - Task list requested
+2025-03-14 17:43:14,310 - payroll_api - INFO - Task list requested
+2025-03-14 17:43:20,445 - payroll_api - INFO - Processing chat message for session 3a5589e4-9a1a-45cb-93d3-39938cae4c5c
+2025-03-14 17:43:20,448 - application.services.payroll_service - INFO - Processing message: bbb
+2025-03-14 17:43:21,744 - httpx - INFO - HTTP Request: POST https://formaigpt.openai.azure.com/openai/deployments/gptest/chat/completions?api-version=2024-02-15-preview "HTTP/1.1 200 OK"
+2025-03-14 17:43:21,755 - payroll_api - INFO - Chat processed successfully for session 3a5589e4-9a1a-45cb-93d3-39938cae4c5c, state: chat
