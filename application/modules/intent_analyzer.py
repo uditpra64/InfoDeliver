@@ -1,7 +1,7 @@
 import json
 import logging
 import re
-from typing import Dict
+from typing import Dict, Union, Any
 
 from langchain_core.messages import AIMessage
 
@@ -72,15 +72,31 @@ class IntentAnalyzer:
         )
         return response_dict
 
-    def _handle_response(self, response: AIMessage):
+    def _handle_response(self, response: Union[str, Any]):
         """LLMからのレスポンスをJSONとしてパースしintentを取り出す"""
         try:
-            content = re.search(r"\{.*\}", response.content).group(0)
-            response_dict = json.loads(content)
+            # Handle both string responses and objects with content attribute
+            content_str = ""
+            if isinstance(response, str):
+                content_str = response
+            elif hasattr(response, 'content'):
+                content_str = response.content
+            else:
+                content_str = str(response)
+            
+            # Find JSON pattern in content
+            match = re.search(r"\{.*\}", content_str)
+            if not match:
+                raise ValueError("No JSON pattern found in response")
+            
+            json_str = match.group(0)
+            response_dict = json.loads(json_str)
             _ = response_dict["intent"]  # intentキーがあるかチェック
+            
         except Exception:
             logger.exception(
                 "IntentAnalyzer解析中にエラーが発生。レスポンスをunknownにフォールバック"
             )
             response_dict = {"intent": "unknown"}
+            
         return response_dict

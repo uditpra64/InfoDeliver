@@ -5,7 +5,7 @@ import traceback
 from collections import deque
 from datetime import datetime
 from enum import Enum
-from typing import Dict, List, Optional, Tuple
+from typing import Dict, List, Optional, Tuple, Union, Any
 
 from transitions import Machine
 
@@ -130,19 +130,38 @@ class AgentCollection:
             for task_name in list(self.workflow):
                 self.task_agents[task_name].set_normal_mode()
 
-    def process_message(
-        self, message: str
-    ) -> Tuple[Optional[str | List[str]], Optional[str]]:
+    def process_message(self, message: str) -> Tuple[Union[str, List[str]], str]:
+        """Process a user message and return a response"""
         current_state = self.get_current_state()
-        if current_state == "date":
-            return self._process_date_message(message)
-        if current_state == "task":
-            if self.current_task is not None:
-                return self.current_task.process_message(message)
-            else:
-                return "エラー: タスクの選択に失敗しました。", ""
-        intent_response = self.analyze_intent(message)
-        return self.route_intent(intent_response, message)
+        
+        try:
+            if current_state == "date":
+                return self._process_date_message(message)
+            
+            if current_state == "task":
+                if self.current_task is not None:
+                    result = self.current_task.process_message(message)
+                    # Ensure we're returning a tuple
+                    if isinstance(result, tuple) and len(result) == 2:
+                        return result
+                    else:
+                        # Convert to expected format if not already a tuple
+                        return result, ""
+                else:
+                    return "エラー: タスクの選択に失敗しました。", ""
+            
+            # For all other states, analyze intent and route
+            try:
+                intent_response = self.intent_analyzer(message, task_info=self.task_info_dict)
+                return self.route_intent(intent_response, message)
+            except Exception as e:
+                self.logger.error(f"Error analyzing intent: {str(e)}")
+                return f"メッセージの処理中にエラーが発生しました: {str(e)}", "error"
+                
+        except Exception as e:
+            self.logger.error(f"Error in process_message: {str(e)}")
+            self.logger.exception("Detailed traceback:")
+            return f"処理中にエラーが発生しました: {str(e)}", "error"
 
     def analyze_intent(self, message: str) -> Dict:
         response = self.intent_analyzer(message, task_info=self.task_info_dict)
@@ -156,50 +175,68 @@ class AgentCollection:
             intent = IntentType(intent_str)
         except ValueError:
             intent = IntentType.UNKNOWN
-        if intent == IntentType.RETURN_TO_MENU:
-            self.set_state("chat")
-            return (
-                "メニューにかえりました。給与計算に関して何か手伝い欲しいことがありますか",
-                "",
-            )
-        elif intent == IntentType.CONFIRMATION:
-            if self.get_current_state() == "task" and self.current_task is not None:
-                return self.current_task.process_message(message)
+        
+        # Prepare default response format
+        response_text = None
+        extra_info = ""
+        
+        try:
+            if intent == IntentType.RETURN_TO_MENU:
+                self.set_state("chat")
+                response_text = "メニューにかえりました。給与計算に関して何か手伝い欲しいことがありますか"
+            
+            elif intent == IntentType.CONFIRMATION:
+                if self.get_current_state() == "task" and self.current_task is not None:
+                    result = self.current_task.process_message(message)
+                    # Extract response_text and extra_info if result is a tuple
+                    if isinstance(result, tuple) and len(result) == 2:
+                        response_text, extra_info = result
+                    else:
+                        response_text = result
+                        extra_info = ""
+                else:
+                    response_text = "現在、確認を必要とするタスクはありません。新しいチャットを開始してください。"
+            
+            elif intent == IntentType.TASK_START:
+                info = self.parse_task_names(intent_response)
+                response_text = info
+                extra_info = "selection"
+            
+            elif intent == IntentType.FILE_UPLOAD:
+                if self.get_current_state() == "file":
+                    result = self._process_file_message(message)
+                    if isinstance(result, tuple) and len(result) == 2:
+                        response_text, extra_info = result
+                    else:
+                        response_text = result
+                        extra_info = ""
+                elif self.get_current_state() == "chat":
+                    file_path = message.replace("選択されたファイル: ", "").strip()
+                    response_text = self.file_agent.check_file_identity(file_path)
+                    extra_info = ""
+            
+            elif intent == IntentType.QUESTION:
+                result = self._process_question(message)
+                if isinstance(result, tuple) and len(result) == 2:
+                    response_text, extra_info = result
+                else:
+                    response_text = result
+                    extra_info = ""
+            
             else:
-                return (
-                    "現在、確認を必要とするタスクはありません。新しいチャットを開始してください。",
-                    "",
-                )
-
-        elif intent == IntentType.TASK_START:
-            info = self.parse_task_names(intent_response)
-            return info, "selection"
-        elif intent == IntentType.FILE_UPLOAD:
-            if self.get_current_state() == "file":
-                return self._process_file_message(message)
-            elif self.get_current_state() == "chat":
-                file_path = message.replace("選択されたファイル: ", "").strip()
-                return self.file_agent.check_file_identity(file_path), ""
-        elif intent == IntentType.QUESTION:
-            return self._process_question(message)
-        else:
-            return "あなたの意図がわからないんです。もう一回聞いてください。", ""
-
-    def parse_task_names(self, intent_response: Dict) -> str:
-        task_name_list = intent_response.get("task_name", "").split("|")
-        waiting_task = []
-        available_task_names = list(self.task_info_dict.keys())
-        for task_name in task_name_list:
-            chosen_task_name = return_most_similiar_word(
-                task_name, available_task_names
-            )
-            if chosen_task_name is not None:
-                waiting_task.append(chosen_task_name)
-        waiting_task = sorted(waiting_task)
-        for task_name in waiting_task:
-            self.workflow.append(task_name)
-        info = "選んだタスクが以下の順番で処理する:\n" + "->".join(waiting_task)
-        return info
+                response_text = "あなたの意図がわからないんです。もう一回聞いてください。"
+        
+        except Exception as e:
+            self.logger.error(f"Error in route_intent: {str(e)}")
+            self.logger.exception("Detailed traceback:")
+            response_text = f"処理中にエラーが発生しました: {str(e)}"
+            extra_info = "error"
+        
+        # Ensure we're returning a tuple with the correct types
+        if response_text is None:
+            response_text = "応答が生成されませんでした。"
+        
+        return response_text, extra_info
 
     def _process_question(self, msg: str) -> Tuple[str, Optional[str]]:
         resp = self.rag_agent.execute(msg)

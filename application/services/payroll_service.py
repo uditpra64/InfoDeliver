@@ -58,9 +58,42 @@ class PayrollService:
         """
         try:
             self.logger.info(f"Processing message: {message}")
-            return self.agent_collection.process_message(message)
+            
+            # Call the agent_collection's process_message method
+            result = self.agent_collection.process_message(message)
+            self.logger.debug(f"Result from agent_collection.process_message: {result}, type: {type(result)}")
+            
+            # Standardize the return format
+            if isinstance(result, tuple):
+                # If it's already a tuple, use it directly
+                if len(result) == 2:
+                    response_text, extra_info = result
+                elif len(result) == 1:
+                    response_text = result[0]
+                    extra_info = ""
+                else:
+                    # Empty tuple case
+                    response_text = "No response received"
+                    extra_info = ""
+            else:
+                # If it's not a tuple, treat the entire result as the response text
+                response_text = result
+                extra_info = ""
+            
+            # Handle list responses
+            if isinstance(response_text, list):
+                response_text = "\n".join(map(str, response_text))
+            
+            # Ensure both parts are strings
+            response_text = str(response_text) if response_text is not None else ""
+            extra_info = str(extra_info) if extra_info is not None else ""
+            
+            self.logger.debug(f"Standardized response: ({response_text}, {extra_info})")
+            return response_text, extra_info
+        
         except Exception as e:
             self.logger.error(f"Error processing message: {str(e)}")
+            self.logger.exception("Detailed traceback:")
             return f"Error processing your request: {str(e)}", "error"
 
     def get_current_state(self) -> str:

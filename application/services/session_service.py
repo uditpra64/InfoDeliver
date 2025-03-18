@@ -348,9 +348,15 @@ class SessionService:
         """
         session = self.get_session_object(session_id)
         if not session:
+            # Log this as information, not error, since it's an expected case
+            self.logger.info(f"Session {session_id} not found or expired")
             return []
         
-        return [msg.to_dict() for msg in session.conversation_history]
+        try:
+            return [msg.to_dict() for msg in session.conversation_history]
+        except Exception as e:
+            self.logger.error(f"Error retrieving conversation history for session {session_id}: {e}")
+            return []
     
     def clear_conversation(self, session_id: str) -> bool:
         """

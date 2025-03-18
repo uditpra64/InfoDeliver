@@ -20,35 +20,51 @@ class AzureOpenAIWrapper:
     def invoke(self, messages):
         """
         messages は、各要素が {"role": "...", "content": "..."} の dict であると想定します。
-        もし messages が文字列ならば、ユーザーメッセージとしてラップします。
+        もし messages が文字列ならば、ユーザーSメッセージとしてラップします。
         この実装では、送信するコンテンツに image_url は含まず、text タイプのみを送信します。
         """
+        # Handle different message formats
         if isinstance(messages, str):
-            messages = [{"role": "user", "content": messages}]
-        prompt = ""
-        for msg in messages:
-            if msg.get("role") == "user":
-                prompt += msg.get("content") + "\n"
-        response = self.__client.chat.completions.create(
-            model=self.model,
-            messages=[
-                {
-                    "role": "user",
-                    "content": [{"type": "text", "text": prompt}],
-                }
-            ],
-            temperature=self.temperature,
-            max_tokens=3000,
-        )
-        # 辞書アクセスではなく属性アクセスを使用する
-        content = response.choices[0].message.content
-
-        class Result:
-            pass
-
-        result = Result()
-        result.content = content
-        return result
+            prompt = messages
+        elif isinstance(messages, list):
+            prompt = ""
+            for msg in messages:
+                # Handle both dictionary and tuple formats
+                if isinstance(msg, dict) and msg.get("role") == "user":
+                    prompt += msg.get("content", "") + "\n"
+                elif isinstance(msg, tuple) and len(msg) == 2:
+                    role, content = msg
+                    if role == "user" or role == "human":
+                        prompt += content + "\n"
+                elif hasattr(msg, 'type') and hasattr(msg, 'content'):
+                    # Handle langchain message objects
+                    if msg.type == 'human':
+                        prompt += msg.content + "\n"
+        else:
+            # Fallback for other types
+            prompt = str(messages)
+        
+        try:
+            response = self.__client.chat.completions.create(
+                model=self.model,
+                messages=[
+                    {
+                        "role": "user",
+                        "content": [{"type": "text", "text": prompt}],
+                    }
+                ],
+                temperature=self.temperature,
+                max_tokens=3000,
+            )
+            
+            # 辞書アクセスではなく属性アクセスを使用する
+            content = response.choices[0].message.content
+            
+            # For LangChain compatibility, return a string directly
+            return content
+        except Exception as e:
+            print(f"Error in AzureOpenAIWrapper.invoke: {str(e)}")
+            return "Error: " + str(e)
 
     def __call__(self, messages):
         return self.invoke(messages)

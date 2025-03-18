@@ -22,6 +22,8 @@ from slowapi import Limiter
 from slowapi.util import get_remote_address
 from slowapi.errors import RateLimitExceeded
 from slowapi.middleware import SlowAPIMiddleware
+import logging
+logger = logging.getLogger(__name__)
 
 # Import security components
 from application.services.security.auth import (
@@ -174,6 +176,39 @@ class ErrorResponse(BaseModel):
 
 # Initialize rate limiter
 limiter = Limiter(key_func=get_remote_address)
+
+def log_object_details(obj, depth=0, max_depth=3):
+    """Recursively log the type and details of an object to aid debugging"""
+    indent = "  " * depth
+    if depth > max_depth:
+        return f"{indent}... (max depth reached)"
+    
+    if obj is None:
+        return f"{indent}None"
+    
+    obj_type = type(obj).__name__
+    
+    if isinstance(obj, (str, int, float, bool)):
+        return f"{indent}{obj_type}: {obj}"
+    
+    if isinstance(obj, (list, tuple)):
+        result = f"{indent}{obj_type} with {len(obj)} items:"
+        for i, item in enumerate(obj[:5]):  # Limit to first 5 items
+            result += f"\n{indent}- [{i}] {log_object_details(item, depth+1, max_depth)}"
+        if len(obj) > 5:
+            result += f"\n{indent}... ({len(obj)-5} more items)"
+        return result
+    
+    if isinstance(obj, dict):
+        result = f"{indent}{obj_type} with {len(obj)} keys:"
+        for k, v in list(obj.items())[:5]:  # Limit to first 5 items
+            result += f"\n{indent}- {k}: {log_object_details(v, depth+1, max_depth)}"
+        if len(obj) > 5:
+            result += f"\n{indent}... ({len(obj)-5} more keys)"
+        return result
+    
+    return f"{indent}{obj_type}"
+
 
 # Initialize FastAPI app
 app = FastAPI(
@@ -409,43 +444,71 @@ async def chat_endpoint(
     session_id: str = Depends(get_session)
 ):
     """Process a chat message and return a response"""
-    logger.info(f"Processing chat message for session {session_id}")
+    logger.info(f"Processing chat message for session {session_id}: {chat_request.message}")
+    
     try:
         # Add message to conversation history
         session_service.add_to_conversation(session_id, "user", chat_request.message)
+        logger.debug(f"Added user message to conversation history for session {session_id}")
         
-        # Process the message
-        result, extra_info = payroll_service.process_message(chat_request.message)
-
-        if isinstance(result, tuple) and len(result) == 2:
-            response_text, extra_info = result
+        # Process the message - logging the raw result for debugging
+        logger.debug(f"Calling payroll_service.process_message with: {chat_request.message}")
+        result = payroll_service.process_message(chat_request.message)
+        logger.debug(f"Raw result from process_message: {result}, type: {type(result)}")
+        
+        # If you implemented the log_object_details function, use it here
+        logger.debug(f"Detailed result structure: {log_object_details(result)}")
+        
+        # Handle different return types from process_message
+        response_text = ""
+        extra_info = ""
+        
+        if isinstance(result, tuple):
+            logger.debug(f"Result is tuple with length {len(result)}")
+            if len(result) >= 1:
+                response_text = result[0]
+                logger.debug(f"Extracted response_text: {type(response_text)}")
+            if len(result) >= 2:
+                extra_info = result[1]
+                logger.debug(f"Extracted extra_info: {extra_info}")
         else:
-            response_text = result if isinstance(result, str) else "\n".join(result)
+            logger.debug(f"Result is not a tuple, treating entire result as response_text")
+            response_text = result
         
         # Convert result to string if it's a list
-        response_text = result if isinstance(result, str) else "\n".join(result)
+        if isinstance(response_text, list):
+            logger.debug(f"response_text is a list with {len(response_text)} items, joining to string")
+            response_text = "\n".join(map(str, response_text))
+        
+        logger.debug(f"Final response_text: {response_text[:100]}...")  # Log first 100 chars to avoid huge logs
         
         # Add assistant response to conversation
         session_service.add_to_conversation(session_id, "assistant", response_text)
         
         # Update session state
         current_state = payroll_service.get_current_state()
+        logger.debug(f"Current state from payroll_service: {current_state}")
         session_service.update_session(session_id, {"current_state": current_state})
         
         # Map state to enum
         try:
             state_enum = SessionState(current_state)
+            logger.debug(f"Mapped state to enum: {state_enum}")
         except ValueError:
+            logger.debug(f"Could not map state {current_state} to enum, defaulting to CHAT")
             state_enum = SessionState.CHAT  # Default to CHAT if unknown state
         
         logger.info(f"Chat processed successfully for session {session_id}, state: {current_state}")
         
+        # Create response object
         chat_response = ChatResponse(
             response=response_text,
             session_id=session_id,
             state=state_enum,
             timestamp=datetime.now().isoformat()
         )
+        
+        logger.debug(f"Created ChatResponse object, returning StandardResponse")
         
         return StandardResponse(
             code=200,
@@ -455,6 +518,7 @@ async def chat_endpoint(
         )
     except Exception as e:
         logger.error(f"Error in chat endpoint: {str(e)}")
+        logger.exception("Detailed traceback:")  # This logs the full traceback
         if isinstance(e, PayrollAPIException):
             raise
         raise PayrollAPIException(f"Chat processing error: {str(e)}")
