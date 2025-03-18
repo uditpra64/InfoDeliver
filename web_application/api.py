@@ -13,6 +13,7 @@ from pathlib import Path
 from fastapi import FastAPI, HTTPException, UploadFile, File, Form, Depends, Header, Request, BackgroundTasks, status
 from fastapi.responses import JSONResponse
 from fastapi.exception_handlers import http_exception_handler
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, validator, Field
 from pydantic.generics import GenericModel
 from starlette.exceptions import HTTPException as StarletteHTTPException
@@ -94,7 +95,7 @@ class AuthenticationError(PayrollAPIException):
     def __init__(self, message: str = "Authentication failed"):
         super().__init__(message, status_code=401)
 
-# Enums for more structured state management
+# Models for requests and responses
 class SessionState(str, Enum):
     INIT = "init"
     CHAT = "chat"
@@ -106,15 +107,24 @@ class FileType(str, Enum):
     CSV = "csv"
     EXCEL = "excel"
 
-# Enhanced request and response models
+# Request and response models
 class ChatRequest(BaseModel):
     message: str
     session_id: Optional[str] = None
 
-class FileUploadRequest(BaseModel):
-    file_type: FileType
-    task_name: Optional[str] = None
-    session_id: Optional[str] = None
+class TokenRequest(BaseModel):
+    username: str
+    password: str
+    scope: Optional[str] = None
+
+class TokenResponse(BaseModel):
+    access_token: str
+    token_type: str
+    expires_at: datetime
+
+class UserResponse(BaseModel):
+    username: str
+    scopes: List[str]
 
 class ChatResponse(BaseModel):
     response: str
@@ -133,12 +143,29 @@ class FileUploadResponse(BaseModel):
     session_id: str
     state: SessionState
 
+class FileInfo(BaseModel):
+    id: int
+    name: str
+    task_name: str
+    upload_date: str
+    row_count: int
+    output: bool
+
 class TaskResponse(BaseModel):
     task_id: str
     name: str
     description: str
     required_files: List[Dict[str, Any]]
     status: str
+
+class SessionHistoryItem(BaseModel):
+    role: str
+    content: str
+    timestamp: str
+
+class SessionHistoryResponse(BaseModel):
+    session_id: str
+    history: List[SessionHistoryItem]
 
 class ErrorResponse(BaseModel):
     error: str
@@ -148,12 +175,15 @@ class ErrorResponse(BaseModel):
 # Initialize rate limiter
 limiter = Limiter(key_func=get_remote_address)
 
-# Initialize FastAPI app with rate limiting
+# Initialize FastAPI app
 app = FastAPI(
     title="Payroll Assistant API",
     description="API for payroll processing with natural language capabilities",
     version="1.0.0",
 )
+
+allowed_origins = ["http://localhost:3000"]  # Make sure React app origin is included
+setup_api_security(app, allowed_origins=allowed_origins)
 
 # Add rate limiting middleware
 app.state.limiter = limiter
@@ -197,10 +227,6 @@ async def custom_http_exception_handler(request: Request, exc: StarletteHTTPExce
             data=None
         ).dict(),
     )
-
-# Setup security (replaces CORS middleware setup)
-allowed_origins = os.getenv("ALLOWED_ORIGINS", "http://localhost:3000").split(",")
-setup_api_security(app, allowed_origins=allowed_origins)
 
 # Load configuration from environment variables with fallbacks
 config_path = os.getenv("CONFIG_PATH", os.path.join(app_dir, "json", "config.json"))
@@ -258,7 +284,7 @@ def cleanup_temp_files():
     except Exception as e:
         logger.error(f"Error cleaning up temp files: {e}")
 
-# Helper function to get session ID
+# Helper function to get or create session
 async def get_session(x_session_id: Optional[str] = Header(None)):
     """Get or create a session"""
     if not x_session_id:
@@ -307,9 +333,9 @@ async def save_upload_file(
     
     file_ext = os.path.splitext(filename)[1].lower()
     
-    if file_type == FileType.CSV and file_ext != '.csv':
+    if file_type == FileType.CSV.value and file_ext != '.csv':
         raise ValidationError("Expected CSV file but got a different format")
-    elif file_type == FileType.EXCEL and file_ext not in ['.xlsx', '.xls']:
+    elif file_type == FileType.EXCEL.value and file_ext not in ['.xlsx', '.xls']:
         raise ValidationError("Expected Excel file but got a different format")
     elif file_ext not in ['.csv', '.xlsx', '.xls']:
         raise ValidationError("Only CSV and Excel files are supported")
@@ -327,6 +353,43 @@ async def save_upload_file(
     
     return file_path
 
+# Authentication endpoints
+@app.post("/token", response_model=TokenResponse)
+@limiter.limit("5/minute")
+async def login_for_access_token(request: Request, form_data: TokenRequest):
+    """Get authentication token"""
+    # For development/demo purposes, implement simple auth:
+    valid_users = {
+        "admin": {"password": "password", "scopes": ["admin", "read", "write"]},
+        "user": {"password": "password", "scopes": ["read"]}
+    }
+    
+    if form_data.username not in valid_users or form_data.password != valid_users[form_data.username]["password"]:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Incorrect username or password",
+            headers={"WWW-Authenticate": "Bearer"},
+        )
+    
+    scopes = valid_users[form_data.username]["scopes"]
+    if form_data.scope and form_data.scope not in scopes:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=f"The scope {form_data.scope} is not available for this user"
+        )
+    
+    # Create a token valid for 30 minutes
+    expires_at = datetime.utcnow() + timedelta(minutes=30)
+    
+    # In a real app, you'd use JWT or similar
+    access_token = str(uuid.uuid4())
+    
+    return TokenResponse(
+        access_token=access_token,
+        token_type="bearer",
+        expires_at=expires_at
+    )
+
 # Routes
 @app.get("/health")
 async def health_check():
@@ -338,7 +401,7 @@ async def health_check():
         data={"status": "ok", "timestamp": datetime.now().isoformat()}
     )
 
-@app.post("/chat")
+@app.post("/chat", response_model=StandardResponse[ChatResponse])
 @limiter.limit("30/minute")
 async def chat_endpoint(
     request: Request,
@@ -380,14 +443,15 @@ async def chat_endpoint(
         chat_response = ChatResponse(
             response=response_text,
             session_id=session_id,
-            state=state_enum
+            state=state_enum,
+            timestamp=datetime.now().isoformat()
         )
         
         return StandardResponse(
             code=200,
             success=True,
             message="Successfully processed chat message",
-            data=chat_response.dict()
+            data=chat_response
         )
     except Exception as e:
         logger.error(f"Error in chat endpoint: {str(e)}")
@@ -395,7 +459,7 @@ async def chat_endpoint(
             raise
         raise PayrollAPIException(f"Chat processing error: {str(e)}")
 
-@app.post("/upload")
+@app.post("/upload", response_model=StandardResponse[FileUploadResponse])
 @limiter.limit("10/minute")
 async def upload_file_endpoint(
     request: Request,
@@ -403,14 +467,13 @@ async def upload_file_endpoint(
     file: UploadFile = File(...),
     file_type: FileType = Form(...),
     task_name: Optional[str] = Form(None),
-    session_id: str = Depends(get_session),
-    current_user = Depends(check_scopes(["write"]))  # Added authentication with write scope
+    session_id: str = Depends(get_session)
 ):
     """Upload a file for processing"""
     logger.info(f"File upload request for session {session_id}: {file.filename}")
     try:
         # Validate and save file
-        file_path = await save_upload_file(file, background_tasks, file_type)
+        file_path = await save_upload_file(file, background_tasks, file_type.value)
         
         # Process the file
         upload_result = file_service.upload_file(file_path)
@@ -445,7 +508,7 @@ async def upload_file_endpoint(
             message="File uploaded successfully",
             file_details={
                 "original_name": file.filename,
-                "file_type": file_type,
+                "file_type": file_type.value,
                 "identity_result": upload_result.get("identity_result", "")
             },
             session_id=session_id,
@@ -456,7 +519,7 @@ async def upload_file_endpoint(
             code=200,
             success=True,
             message="File uploaded successfully",
-            data=upload_response.dict()
+            data=upload_response
         )
     except Exception as e:
         logger.error(f"Error in file upload: {str(e)}")
@@ -464,14 +527,37 @@ async def upload_file_endpoint(
             raise
         raise PayrollAPIException(f"File upload error: {str(e)}")
 
-@app.get("/tasks")
+@app.get("/files", response_model=StandardResponse[List[FileInfo]])
+@limiter.limit("60/minute")
+async def get_files(
+    request: Request,
+    session_id: str = Depends(get_session)
+):
+    """Get list of uploaded files"""
+    logger.info(f"Files list requested for session {session_id}")
+    try:
+        files = file_service.get_file_list()
+        
+        return StandardResponse(
+            code=200,
+            success=True,
+            message="Files retrieved successfully",
+            data=files
+        )
+    except Exception as e:
+        logger.error(f"Error getting files: {str(e)}")
+        if isinstance(e, PayrollAPIException):
+            raise
+        raise PayrollAPIException(f"Error retrieving files: {str(e)}")
+
+@app.get("/tasks", response_model=StandardResponse[List[TaskResponse]])
 @limiter.limit("60/minute")
 async def get_tasks(
     request: Request,
-    current_user = Depends(get_current_active_user)  # Changed from verify_credentials
+    session_id: str = Depends(get_session)
 ):
     """Get a list of available tasks"""
-    logger.info("Task list requested")
+    logger.info(f"Task list requested for session {session_id}")
     try:
         tasks = payroll_service.get_task_list()
         result = []
@@ -501,25 +587,123 @@ async def get_tasks(
             raise
         raise PayrollAPIException(f"Error retrieving tasks: {str(e)}")
 
-@app.get("/session/{session_id}/history")
+@app.post("/tasks/{task_id}/select", response_model=StandardResponse[Dict[str, Any]])
+@limiter.limit("20/minute")
+async def select_task(
+    request: Request,
+    task_id: str,
+    session_id: str = Depends(get_session)
+):
+    """Select a task for processing"""
+    logger.info(f"Task selection request for session {session_id}: {task_id}")
+    try:
+        # Select the task
+        success = payroll_service.select_task(task_id)
+        
+        if not success:
+            raise ResourceNotFoundError(f"Task {task_id} not found")
+        
+        # Update session state
+        session_service.update_session(session_id, {"current_state": "file"})
+        
+        # Add message to conversation
+        session_service.add_to_conversation(
+            session_id, 
+            "system", 
+            f"Task selected: {task_id}"
+        )
+        
+        return StandardResponse(
+            code=200,
+            success=True,
+            message=f"Task {task_id} selected successfully",
+            data={"task_id": task_id, "session_id": session_id}
+        )
+    except Exception as e:
+        logger.error(f"Error selecting task: {str(e)}")
+        if isinstance(e, PayrollAPIException):
+            raise
+        raise PayrollAPIException(f"Error selecting task: {str(e)}")
+
+@app.get("/session/history", response_model=StandardResponse[List[Dict[str, Any]]])
+@limiter.limit("20/minute")
+async def get_session_history(
+    request: Request,
+    session_id: str = Depends(get_session)
+):
+    """Get list of session history"""
+    logger.info(f"Session history list requested for session {session_id}")
+    try:
+        # In a real app, you'd fetch this from database
+        # For demo purposes, return sample data
+        history = [
+            {
+                "id": "session1",
+                "title": "Previous Chat 1",
+                "lastUpdate": datetime.now().isoformat()
+            },
+            {
+                "id": session_id,
+                "title": "Current Chat",
+                "lastUpdate": datetime.now().isoformat()
+            }
+        ]
+        
+        return StandardResponse(
+            code=200,
+            success=True,
+            message="Session history retrieved successfully",
+            data=history
+        )
+    except Exception as e:
+        logger.error(f"Error getting session history: {str(e)}")
+        if isinstance(e, PayrollAPIException):
+            raise
+        raise PayrollAPIException(f"Error retrieving session history: {str(e)}")
+
+@app.get("/session/{session_id}/history", response_model=StandardResponse[SessionHistoryResponse])
 @limiter.limit("20/minute")
 async def get_conversation_history(
     request: Request,
-    session_id: str,
-    current_user = Depends(check_scopes(["read"]))  # Changed to use scopes
+    session_id: str
 ):
     """Get conversation history for a session"""
     logger.info(f"Conversation history requested for session {session_id}")
     try:
+        # Get conversation history
         history = session_service.get_conversation_history(session_id)
+        
         if not history:
             raise ResourceNotFoundError(f"Session {session_id} not found or has no history")
+        
+        # Convert Unix timestamps to ISO string format if needed
+        history_items = []
+        for msg in history:
+            # Check if timestamp is a float and convert it
+            timestamp = msg.get("timestamp", "")
+            if isinstance(timestamp, float):
+                timestamp = datetime.fromtimestamp(timestamp).isoformat()
+            elif isinstance(timestamp, int):
+                timestamp = datetime.fromtimestamp(timestamp).isoformat()
+            
+            history_items.append(
+                SessionHistoryItem(
+                    role=msg["role"],
+                    content=msg["message"],
+                    timestamp=timestamp
+                )
+            )
+        
+        response = SessionHistoryResponse(
+            session_id=session_id,
+            history=history_items
+        )
         
         return StandardResponse(
             code=200,
             success=True,
             message="Conversation history retrieved successfully",
-            data={"session_id": session_id, "history": history}
+            data=response
         )
     except Exception as e:
         logger.error(f"Error getting conversation history: {str(e)}")
@@ -527,18 +711,19 @@ async def get_conversation_history(
             raise
         raise PayrollAPIException(f"Error retrieving conversation history: {str(e)}")
 
-@app.post("/session/{session_id}/reset")
+@app.post("/session/reset", response_model=StandardResponse[Dict[str, Any]])
 @limiter.limit("10/minute")
 async def reset_session(
     request: Request,
-    session_id: str,
-    current_user = Depends(check_scopes(["write"]))  # Changed to use scopes
+    session_id: str = Depends(get_session)
 ):
     """Reset a session"""
     logger.info(f"Session reset requested for {session_id}")
     try:
         # Clear conversation history
-        if not session_service.clear_conversation(session_id):
+        success = session_service.clear_conversation(session_id)
+        
+        if not success:
             raise ResourceNotFoundError(f"Session {session_id} not found")
             
         # Reset payroll service state
@@ -556,11 +741,10 @@ async def reset_session(
             raise
         raise PayrollAPIException(f"Error resetting session: {str(e)}")
 
-# Add a protected admin route as an example
+# Admin routes
 @app.get("/admin/sessions")
-async def get_all_sessions(
-    current_user = Depends(check_scopes(["admin"]))  # Require admin scope
-):
+@limiter.limit("10/minute")
+async def get_all_sessions(request: Request):  # Added request parameter
     """Get all active sessions (admin only)"""
     try:
         session_ids = session_service.get_all_session_ids()
@@ -576,10 +760,3 @@ async def get_all_sessions(
     except Exception as e:
         logger.error(f"Error getting all sessions: {str(e)}")
         raise PayrollAPIException(f"Error retrieving sessions: {str(e)}")
-
-if __name__ == "__main__":
-    import uvicorn
-    port = int(os.getenv("PORT", "8000"))
-    host = os.getenv("HOST", "127.0.0.1")
-    logger.info(f"Starting API server on {host}:{port}")
-    uvicorn.run(app, host=host, port=port)

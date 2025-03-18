@@ -693,3 +693,501 @@ AttributeError: 'NoneType' object has no attribute 'values'
 2025-03-14 17:43:20,448 - application.services.payroll_service - INFO - Processing message: bbb
 2025-03-14 17:43:21,744 - httpx - INFO - HTTP Request: POST https://formaigpt.openai.azure.com/openai/deployments/gptest/chat/completions?api-version=2024-02-15-preview "HTTP/1.1 200 OK"
 2025-03-14 17:43:21,755 - payroll_api - INFO - Chat processed successfully for session 3a5589e4-9a1a-45cb-93d3-39938cae4c5c, state: chat
+2025-03-14 19:17:58,681 - payroll_api - INFO - API shutting down
+2025-03-14 19:18:11,377 - payroll_api - INFO - Service modules imported successfully
+2025-03-14 19:18:11,397 - application.modules.file_agent - INFO - FileAgent を初期化します。
+2025-03-14 19:18:11,444 - application.modules.file_agent - INFO - FileAgent 初期化完了: sqlite:///C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\data\app.db
+2025-03-14 19:18:11,446 - application.services.file_service - INFO - FileService initialized with temp_dir: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\temp
+2025-03-14 19:18:11,446 - payroll_api - INFO - FileService initialized successfully
+2025-03-14 19:18:11,447 - application.services.payroll_service - INFO - Initializing PayrollService with config: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\application\json\config.json
+2025-03-14 19:18:11,447 - application.modules.agent_collection - INFO - エージェントコレクションを初期化しています...
+2025-03-14 19:18:11,447 - application.modules.file_agent - INFO - FileAgent を初期化します。
+2025-03-14 19:18:11,449 - application.modules.file_agent - WARNING - Could not remove existing database file: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\data\app.db
+2025-03-14 19:18:11,451 - application.modules.file_agent - WARNING - Will try to reuse existing database.
+2025-03-14 19:18:11,453 - application.modules.file_agent - INFO - FileAgent 初期化完了: sqlite:///C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\data\app.db
+2025-03-14 19:18:11,453 - application.modules.agent_collection - INFO - ファイルエージェントを初期化しました。
+2025-03-14 19:18:15,360 - application.modules.agent_collection - INFO - 設定ファイルを正常に読み込みました: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\application\json\config.json
+2025-03-14 19:18:15,366 - application.modules.agent_collection - INFO - タスクを正常に作成。タスク数: 4
+2025-03-14 19:18:15,367 - application.modules.agent_collection - INFO - IntentAnalyzer を初期化
+2025-03-14 19:18:15,367 - application.modules.agent_collection - INFO - RAG_AGENT: 初期化開始
+2025-03-14 19:18:15,367 - application.modules.rag_agent - INFO - RAG_Agentを初期化します。
+2025-03-14 19:18:27,400 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-03-14 19:18:27,401 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-03-14 19:18:32,552 - application.modules.rag_agent - INFO - RAG用に複数ファイルからRetrieverを作成します。
+2025-03-14 19:18:32,623 - faiss.loader - INFO - Loading faiss with AVX2 support.
+2025-03-14 19:18:32,673 - faiss.loader - INFO - Successfully loaded faiss with AVX2 support.
+2025-03-14 19:18:32,693 - faiss - INFO - Failed to load GPU Faiss: name 'GpuIndexIVFFlat' is not defined. Will not load constructor refs for GPU indexes.
+2025-03-14 19:18:33,082 - application.modules.rag_agent - INFO - RAG_Agent初期化完了
+2025-03-14 19:18:33,082 - application.modules.agent_collection - INFO - RAG_AGENT: 初期化完了
+2025-03-14 19:18:33,084 - application.modules.agent_collection - INFO - workflow 作成
+2025-03-14 19:18:33,084 - application.services.payroll_service - INFO - AgentCollection initialized successfully
+2025-03-14 19:18:33,086 - payroll_api - INFO - PayrollService initialized successfully
+2025-03-14 19:18:33,086 - application.services.session_service - INFO - Session persistence enabled, using directory: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\sessions
+2025-03-14 19:18:33,088 - application.services.session_service - INFO - Skipping expired session 057b59ff-3d7d-4459-a8cc-307e2fe1711a
+2025-03-14 19:18:33,090 - application.services.session_service - ERROR - Error loading session 057b59ff-3d7d-4459-a8cc-307e2fe1711a: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\Udit Pradhan\\formai_excelllm\\InfoDeliver\\sessions\\057b59ff-3d7d-4459-a8cc-307e2fe1711a.json'
+2025-03-14 19:18:33,091 - application.services.session_service - INFO - Skipping expired session 06099bb8-004f-416c-9616-54cbe4dcb901
+2025-03-14 19:18:33,091 - application.services.session_service - ERROR - Error loading session 06099bb8-004f-416c-9616-54cbe4dcb901: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\Udit Pradhan\\formai_excelllm\\InfoDeliver\\sessions\\06099bb8-004f-416c-9616-54cbe4dcb901.json'
+2025-03-14 19:18:33,096 - application.services.session_service - INFO - Skipping expired session 7c8ba81c-1329-46ac-b5fe-eb498a052cf1
+2025-03-14 19:18:33,098 - application.services.session_service - ERROR - Error loading session 7c8ba81c-1329-46ac-b5fe-eb498a052cf1: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\Udit Pradhan\\formai_excelllm\\InfoDeliver\\sessions\\7c8ba81c-1329-46ac-b5fe-eb498a052cf1.json'
+2025-03-14 19:18:33,098 - application.services.session_service - INFO - Skipping expired session c0edf2ac-da7a-4d7a-90cd-6e136696f28d
+2025-03-14 19:18:33,098 - application.services.session_service - ERROR - Error loading session c0edf2ac-da7a-4d7a-90cd-6e136696f28d: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\Udit Pradhan\\formai_excelllm\\InfoDeliver\\sessions\\c0edf2ac-da7a-4d7a-90cd-6e136696f28d.json'
+2025-03-14 19:18:33,103 - application.services.session_service - INFO - Skipping expired session d5198628-1bd3-4b0a-b5c9-45827d28032c
+2025-03-14 19:18:33,105 - application.services.session_service - ERROR - Error loading session d5198628-1bd3-4b0a-b5c9-45827d28032c: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\Udit Pradhan\\formai_excelllm\\InfoDeliver\\sessions\\d5198628-1bd3-4b0a-b5c9-45827d28032c.json'
+2025-03-14 19:18:33,106 - application.services.session_service - INFO - Loaded 13 sessions from disk
+2025-03-14 19:18:33,107 - application.services.session_service - INFO - SessionService initialized with 13 sessions
+2025-03-14 19:18:33,108 - payroll_api - INFO - SessionService initialized successfully
+2025-03-14 19:20:52,425 - payroll_api - INFO - Service modules imported successfully
+2025-03-14 19:20:52,436 - application.modules.file_agent - INFO - FileAgent を初期化します。
+2025-03-14 19:20:52,468 - application.modules.file_agent - INFO - FileAgent 初期化完了: sqlite:///C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\data\app.db
+2025-03-14 19:20:52,470 - application.services.file_service - INFO - FileService initialized with temp_dir: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\temp
+2025-03-14 19:20:52,471 - payroll_api - INFO - FileService initialized successfully
+2025-03-14 19:20:52,471 - application.services.payroll_service - INFO - Initializing PayrollService with config: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\application\json\config.json
+2025-03-14 19:20:52,472 - application.modules.agent_collection - INFO - エージェントコレクションを初期化しています...
+2025-03-14 19:20:52,472 - application.modules.file_agent - INFO - FileAgent を初期化します。
+2025-03-14 19:20:52,474 - application.modules.file_agent - WARNING - Could not remove existing database file: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\data\app.db
+2025-03-14 19:20:52,475 - application.modules.file_agent - WARNING - Will try to reuse existing database.
+2025-03-14 19:20:52,478 - application.modules.file_agent - INFO - FileAgent 初期化完了: sqlite:///C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\data\app.db
+2025-03-14 19:20:52,478 - application.modules.agent_collection - INFO - ファイルエージェントを初期化しました。
+2025-03-14 19:20:54,425 - application.modules.agent_collection - INFO - 設定ファイルを正常に読み込みました: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\application\json\config.json
+2025-03-14 19:20:54,428 - application.modules.agent_collection - INFO - タスクを正常に作成。タスク数: 4
+2025-03-14 19:20:54,428 - application.modules.agent_collection - INFO - IntentAnalyzer を初期化
+2025-03-14 19:20:54,428 - application.modules.agent_collection - INFO - RAG_AGENT: 初期化開始
+2025-03-14 19:20:54,430 - application.modules.rag_agent - INFO - RAG_Agentを初期化します。
+2025-03-14 19:21:01,901 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-03-14 19:21:01,903 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-03-14 19:21:05,199 - application.modules.rag_agent - INFO - RAG用に複数ファイルからRetrieverを作成します。
+2025-03-14 19:21:05,224 - faiss.loader - INFO - Loading faiss with AVX2 support.
+2025-03-14 19:21:05,249 - faiss.loader - INFO - Successfully loaded faiss with AVX2 support.
+2025-03-14 19:21:05,255 - faiss - INFO - Failed to load GPU Faiss: name 'GpuIndexIVFFlat' is not defined. Will not load constructor refs for GPU indexes.
+2025-03-14 19:21:05,487 - application.modules.rag_agent - INFO - RAG_Agent初期化完了
+2025-03-14 19:21:05,487 - application.modules.agent_collection - INFO - RAG_AGENT: 初期化完了
+2025-03-14 19:21:05,487 - application.modules.agent_collection - INFO - workflow 作成
+2025-03-14 19:21:05,489 - application.services.payroll_service - INFO - AgentCollection initialized successfully
+2025-03-14 19:21:05,489 - payroll_api - INFO - PayrollService initialized successfully
+2025-03-14 19:21:05,490 - application.services.session_service - INFO - Session persistence enabled, using directory: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\sessions
+2025-03-14 19:21:05,491 - application.services.session_service - INFO - Skipping expired session 057b59ff-3d7d-4459-a8cc-307e2fe1711a
+2025-03-14 19:21:05,492 - application.services.session_service - ERROR - Error loading session 057b59ff-3d7d-4459-a8cc-307e2fe1711a: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\Udit Pradhan\\formai_excelllm\\InfoDeliver\\sessions\\057b59ff-3d7d-4459-a8cc-307e2fe1711a.json'
+2025-03-14 19:21:05,493 - application.services.session_service - INFO - Skipping expired session 06099bb8-004f-416c-9616-54cbe4dcb901
+2025-03-14 19:21:05,494 - application.services.session_service - ERROR - Error loading session 06099bb8-004f-416c-9616-54cbe4dcb901: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\Udit Pradhan\\formai_excelllm\\InfoDeliver\\sessions\\06099bb8-004f-416c-9616-54cbe4dcb901.json'
+2025-03-14 19:21:05,497 - application.services.session_service - INFO - Skipping expired session 7c8ba81c-1329-46ac-b5fe-eb498a052cf1
+2025-03-14 19:21:05,498 - application.services.session_service - ERROR - Error loading session 7c8ba81c-1329-46ac-b5fe-eb498a052cf1: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\Udit Pradhan\\formai_excelllm\\InfoDeliver\\sessions\\7c8ba81c-1329-46ac-b5fe-eb498a052cf1.json'
+2025-03-14 19:21:05,501 - application.services.session_service - INFO - Skipping expired session c0edf2ac-da7a-4d7a-90cd-6e136696f28d
+2025-03-14 19:21:05,501 - application.services.session_service - ERROR - Error loading session c0edf2ac-da7a-4d7a-90cd-6e136696f28d: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\Udit Pradhan\\formai_excelllm\\InfoDeliver\\sessions\\c0edf2ac-da7a-4d7a-90cd-6e136696f28d.json'
+2025-03-14 19:21:05,503 - application.services.session_service - INFO - Skipping expired session d5198628-1bd3-4b0a-b5c9-45827d28032c
+2025-03-14 19:21:05,503 - application.services.session_service - ERROR - Error loading session d5198628-1bd3-4b0a-b5c9-45827d28032c: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\Udit Pradhan\\formai_excelllm\\InfoDeliver\\sessions\\d5198628-1bd3-4b0a-b5c9-45827d28032c.json'
+2025-03-14 19:21:05,505 - application.services.session_service - INFO - Loaded 13 sessions from disk
+2025-03-14 19:21:05,505 - application.services.session_service - INFO - SessionService initialized with 13 sessions
+2025-03-14 19:21:05,505 - payroll_api - INFO - SessionService initialized successfully
+2025-03-14 19:32:39,868 - payroll_api - INFO - Service modules imported successfully
+2025-03-14 19:32:39,885 - application.modules.file_agent - INFO - FileAgent を初期化します。
+2025-03-14 19:32:39,927 - application.modules.file_agent - INFO - FileAgent 初期化完了: sqlite:///C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\data\app.db
+2025-03-14 19:32:39,928 - application.services.file_service - INFO - FileService initialized with temp_dir: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\temp
+2025-03-14 19:32:39,928 - payroll_api - INFO - FileService initialized successfully
+2025-03-14 19:32:39,929 - application.services.payroll_service - INFO - Initializing PayrollService with config: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\application\json\config.json
+2025-03-14 19:32:39,929 - application.modules.agent_collection - INFO - エージェントコレクションを初期化しています...
+2025-03-14 19:32:39,930 - application.modules.file_agent - INFO - FileAgent を初期化します。
+2025-03-14 19:32:39,932 - application.modules.file_agent - WARNING - Could not remove existing database file: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\data\app.db
+2025-03-14 19:32:39,933 - application.modules.file_agent - WARNING - Will try to reuse existing database.
+2025-03-14 19:32:39,937 - application.modules.file_agent - INFO - FileAgent 初期化完了: sqlite:///C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\data\app.db
+2025-03-14 19:32:39,937 - application.modules.agent_collection - INFO - ファイルエージェントを初期化しました。
+2025-03-14 19:32:43,033 - application.modules.agent_collection - INFO - 設定ファイルを正常に読み込みました: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\application\json\config.json
+2025-03-14 19:32:43,037 - application.modules.agent_collection - INFO - タスクを正常に作成。タスク数: 4
+2025-03-14 19:32:43,037 - application.modules.agent_collection - INFO - IntentAnalyzer を初期化
+2025-03-14 19:32:43,038 - application.modules.agent_collection - INFO - RAG_AGENT: 初期化開始
+2025-03-14 19:32:43,038 - application.modules.rag_agent - INFO - RAG_Agentを初期化します。
+2025-03-14 19:32:51,790 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-03-14 19:32:51,791 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-03-14 19:32:58,501 - application.modules.rag_agent - INFO - RAG用に複数ファイルからRetrieverを作成します。
+2025-03-14 19:32:58,526 - faiss.loader - INFO - Loading faiss with AVX2 support.
+2025-03-14 19:32:58,557 - faiss.loader - INFO - Successfully loaded faiss with AVX2 support.
+2025-03-14 19:32:58,566 - faiss - INFO - Failed to load GPU Faiss: name 'GpuIndexIVFFlat' is not defined. Will not load constructor refs for GPU indexes.
+2025-03-14 19:32:58,797 - application.modules.rag_agent - INFO - RAG_Agent初期化完了
+2025-03-14 19:32:58,798 - application.modules.agent_collection - INFO - RAG_AGENT: 初期化完了
+2025-03-14 19:32:58,798 - application.modules.agent_collection - INFO - workflow 作成
+2025-03-14 19:32:58,800 - application.services.payroll_service - INFO - AgentCollection initialized successfully
+2025-03-14 19:32:58,800 - payroll_api - INFO - PayrollService initialized successfully
+2025-03-14 19:32:58,801 - application.services.session_service - INFO - Session persistence enabled, using directory: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\sessions
+2025-03-14 19:32:58,802 - application.services.session_service - INFO - Skipping expired session 057b59ff-3d7d-4459-a8cc-307e2fe1711a
+2025-03-14 19:32:58,803 - application.services.session_service - ERROR - Error loading session 057b59ff-3d7d-4459-a8cc-307e2fe1711a: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\Udit Pradhan\\formai_excelllm\\InfoDeliver\\sessions\\057b59ff-3d7d-4459-a8cc-307e2fe1711a.json'
+2025-03-14 19:32:58,804 - application.services.session_service - INFO - Skipping expired session 06099bb8-004f-416c-9616-54cbe4dcb901
+2025-03-14 19:32:58,804 - application.services.session_service - ERROR - Error loading session 06099bb8-004f-416c-9616-54cbe4dcb901: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\Udit Pradhan\\formai_excelllm\\InfoDeliver\\sessions\\06099bb8-004f-416c-9616-54cbe4dcb901.json'
+2025-03-14 19:32:58,807 - application.services.session_service - INFO - Skipping expired session 7c8ba81c-1329-46ac-b5fe-eb498a052cf1
+2025-03-14 19:32:58,809 - application.services.session_service - ERROR - Error loading session 7c8ba81c-1329-46ac-b5fe-eb498a052cf1: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\Udit Pradhan\\formai_excelllm\\InfoDeliver\\sessions\\7c8ba81c-1329-46ac-b5fe-eb498a052cf1.json'
+2025-03-14 19:32:58,811 - application.services.session_service - INFO - Skipping expired session c0edf2ac-da7a-4d7a-90cd-6e136696f28d
+2025-03-14 19:32:58,812 - application.services.session_service - ERROR - Error loading session c0edf2ac-da7a-4d7a-90cd-6e136696f28d: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\Udit Pradhan\\formai_excelllm\\InfoDeliver\\sessions\\c0edf2ac-da7a-4d7a-90cd-6e136696f28d.json'
+2025-03-14 19:32:58,813 - application.services.session_service - INFO - Skipping expired session d5198628-1bd3-4b0a-b5c9-45827d28032c
+2025-03-14 19:32:58,814 - application.services.session_service - ERROR - Error loading session d5198628-1bd3-4b0a-b5c9-45827d28032c: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\Udit Pradhan\\formai_excelllm\\InfoDeliver\\sessions\\d5198628-1bd3-4b0a-b5c9-45827d28032c.json'
+2025-03-14 19:32:58,816 - application.services.session_service - INFO - Loaded 13 sessions from disk
+2025-03-14 19:32:58,816 - application.services.session_service - INFO - SessionService initialized with 13 sessions
+2025-03-14 19:32:58,817 - payroll_api - INFO - SessionService initialized successfully
+2025-03-14 19:37:03,113 - payroll_api - INFO - Service modules imported successfully
+2025-03-14 19:37:03,135 - application.services.security.auth - INFO - API security configured
+2025-03-14 19:37:03,135 - application.modules.file_agent - INFO - FileAgent を初期化します。
+2025-03-14 19:37:03,167 - application.modules.file_agent - INFO - FileAgent 初期化完了: sqlite:///C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\data\app.db
+2025-03-14 19:37:03,168 - application.services.file_service - INFO - FileService initialized with temp_dir: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\temp
+2025-03-14 19:37:03,168 - payroll_api - INFO - FileService initialized successfully
+2025-03-14 19:37:03,168 - application.services.payroll_service - INFO - Initializing PayrollService with config: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\application\json\config.json
+2025-03-14 19:37:03,168 - application.modules.agent_collection - INFO - エージェントコレクションを初期化しています...
+2025-03-14 19:37:03,169 - application.modules.file_agent - INFO - FileAgent を初期化します。
+2025-03-14 19:37:03,170 - application.modules.file_agent - WARNING - Could not remove existing database file: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\data\app.db
+2025-03-14 19:37:03,170 - application.modules.file_agent - WARNING - Will try to reuse existing database.
+2025-03-14 19:37:03,174 - application.modules.file_agent - INFO - FileAgent 初期化完了: sqlite:///C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\data\app.db
+2025-03-14 19:37:03,174 - application.modules.agent_collection - INFO - ファイルエージェントを初期化しました。
+2025-03-14 19:37:05,636 - application.modules.agent_collection - INFO - 設定ファイルを正常に読み込みました: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\application\json\config.json
+2025-03-14 19:37:05,641 - application.modules.agent_collection - INFO - タスクを正常に作成。タスク数: 4
+2025-03-14 19:37:05,641 - application.modules.agent_collection - INFO - IntentAnalyzer を初期化
+2025-03-14 19:37:05,641 - application.modules.agent_collection - INFO - RAG_AGENT: 初期化開始
+2025-03-14 19:37:05,642 - application.modules.rag_agent - INFO - RAG_Agentを初期化します。
+2025-03-14 19:37:13,742 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-03-14 19:37:13,743 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-03-14 19:37:15,901 - application.modules.rag_agent - INFO - RAG用に複数ファイルからRetrieverを作成します。
+2025-03-14 19:37:15,922 - faiss.loader - INFO - Loading faiss with AVX2 support.
+2025-03-14 19:37:15,947 - faiss.loader - INFO - Successfully loaded faiss with AVX2 support.
+2025-03-14 19:37:15,956 - faiss - INFO - Failed to load GPU Faiss: name 'GpuIndexIVFFlat' is not defined. Will not load constructor refs for GPU indexes.
+2025-03-14 19:37:16,180 - application.modules.rag_agent - INFO - RAG_Agent初期化完了
+2025-03-14 19:37:16,180 - application.modules.agent_collection - INFO - RAG_AGENT: 初期化完了
+2025-03-14 19:37:16,181 - application.modules.agent_collection - INFO - workflow 作成
+2025-03-14 19:37:16,181 - application.services.payroll_service - INFO - AgentCollection initialized successfully
+2025-03-14 19:37:16,182 - payroll_api - INFO - PayrollService initialized successfully
+2025-03-14 19:37:16,182 - application.services.session_service - INFO - Session persistence enabled, using directory: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\sessions
+2025-03-14 19:37:16,184 - application.services.session_service - INFO - Skipping expired session 057b59ff-3d7d-4459-a8cc-307e2fe1711a
+2025-03-14 19:37:16,185 - application.services.session_service - ERROR - Error loading session 057b59ff-3d7d-4459-a8cc-307e2fe1711a: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\Udit Pradhan\\formai_excelllm\\InfoDeliver\\sessions\\057b59ff-3d7d-4459-a8cc-307e2fe1711a.json'
+2025-03-14 19:37:16,186 - application.services.session_service - INFO - Skipping expired session 06099bb8-004f-416c-9616-54cbe4dcb901
+2025-03-14 19:37:16,186 - application.services.session_service - ERROR - Error loading session 06099bb8-004f-416c-9616-54cbe4dcb901: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\Udit Pradhan\\formai_excelllm\\InfoDeliver\\sessions\\06099bb8-004f-416c-9616-54cbe4dcb901.json'
+2025-03-14 19:37:16,189 - application.services.session_service - INFO - Skipping expired session 7c8ba81c-1329-46ac-b5fe-eb498a052cf1
+2025-03-14 19:37:16,190 - application.services.session_service - ERROR - Error loading session 7c8ba81c-1329-46ac-b5fe-eb498a052cf1: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\Udit Pradhan\\formai_excelllm\\InfoDeliver\\sessions\\7c8ba81c-1329-46ac-b5fe-eb498a052cf1.json'
+2025-03-14 19:37:16,192 - application.services.session_service - INFO - Skipping expired session c0edf2ac-da7a-4d7a-90cd-6e136696f28d
+2025-03-14 19:37:16,194 - application.services.session_service - ERROR - Error loading session c0edf2ac-da7a-4d7a-90cd-6e136696f28d: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\Udit Pradhan\\formai_excelllm\\InfoDeliver\\sessions\\c0edf2ac-da7a-4d7a-90cd-6e136696f28d.json'
+2025-03-14 19:37:16,194 - application.services.session_service - INFO - Skipping expired session d5198628-1bd3-4b0a-b5c9-45827d28032c
+2025-03-14 19:37:16,195 - application.services.session_service - ERROR - Error loading session d5198628-1bd3-4b0a-b5c9-45827d28032c: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\Udit Pradhan\\formai_excelllm\\InfoDeliver\\sessions\\d5198628-1bd3-4b0a-b5c9-45827d28032c.json'
+2025-03-14 19:37:16,196 - application.services.session_service - INFO - Loaded 13 sessions from disk
+2025-03-14 19:37:16,196 - application.services.session_service - INFO - SessionService initialized with 13 sessions
+2025-03-14 19:37:16,197 - payroll_api - INFO - SessionService initialized successfully
+2025-03-14 19:39:57,576 - payroll_api - INFO - Service modules imported successfully
+2025-03-14 19:39:57,608 - application.services.security.auth - INFO - API security configured
+2025-03-14 19:39:57,609 - application.modules.file_agent - INFO - FileAgent を初期化します。
+2025-03-14 19:39:57,649 - application.modules.file_agent - INFO - FileAgent 初期化完了: sqlite:///C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\data\app.db
+2025-03-14 19:39:57,651 - application.services.file_service - INFO - FileService initialized with temp_dir: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\temp
+2025-03-14 19:39:57,651 - payroll_api - INFO - FileService initialized successfully
+2025-03-14 19:39:57,653 - application.services.payroll_service - INFO - Initializing PayrollService with config: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\application\json\config.json
+2025-03-14 19:39:57,653 - application.modules.agent_collection - INFO - エージェントコレクションを初期化しています...
+2025-03-14 19:39:57,653 - application.modules.file_agent - INFO - FileAgent を初期化します。
+2025-03-14 19:39:57,654 - application.modules.file_agent - WARNING - Could not remove existing database file: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\data\app.db
+2025-03-14 19:39:57,655 - application.modules.file_agent - WARNING - Will try to reuse existing database.
+2025-03-14 19:39:57,660 - application.modules.file_agent - INFO - FileAgent 初期化完了: sqlite:///C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\data\app.db
+2025-03-14 19:39:57,660 - application.modules.agent_collection - INFO - ファイルエージェントを初期化しました。
+2025-03-14 19:40:00,232 - application.modules.agent_collection - INFO - 設定ファイルを正常に読み込みました: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\application\json\config.json
+2025-03-14 19:40:00,237 - application.modules.agent_collection - INFO - タスクを正常に作成。タスク数: 4
+2025-03-14 19:40:00,237 - application.modules.agent_collection - INFO - IntentAnalyzer を初期化
+2025-03-14 19:40:00,237 - application.modules.agent_collection - INFO - RAG_AGENT: 初期化開始
+2025-03-14 19:40:00,237 - application.modules.rag_agent - INFO - RAG_Agentを初期化します。
+2025-03-14 19:40:08,307 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-03-14 19:40:08,308 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-03-14 19:40:14,551 - application.modules.rag_agent - INFO - RAG用に複数ファイルからRetrieverを作成します。
+2025-03-14 19:40:14,574 - faiss.loader - INFO - Loading faiss with AVX2 support.
+2025-03-14 19:40:14,600 - faiss.loader - INFO - Successfully loaded faiss with AVX2 support.
+2025-03-14 19:40:14,607 - faiss - INFO - Failed to load GPU Faiss: name 'GpuIndexIVFFlat' is not defined. Will not load constructor refs for GPU indexes.
+2025-03-14 19:40:14,830 - application.modules.rag_agent - INFO - RAG_Agent初期化完了
+2025-03-14 19:40:14,830 - application.modules.agent_collection - INFO - RAG_AGENT: 初期化完了
+2025-03-14 19:40:14,830 - application.modules.agent_collection - INFO - workflow 作成
+2025-03-14 19:40:14,831 - application.services.payroll_service - INFO - AgentCollection initialized successfully
+2025-03-14 19:40:14,831 - payroll_api - INFO - PayrollService initialized successfully
+2025-03-14 19:40:14,832 - application.services.session_service - INFO - Session persistence enabled, using directory: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\sessions
+2025-03-14 19:40:14,833 - application.services.session_service - INFO - Skipping expired session 057b59ff-3d7d-4459-a8cc-307e2fe1711a
+2025-03-14 19:40:14,833 - application.services.session_service - ERROR - Error loading session 057b59ff-3d7d-4459-a8cc-307e2fe1711a: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\Udit Pradhan\\formai_excelllm\\InfoDeliver\\sessions\\057b59ff-3d7d-4459-a8cc-307e2fe1711a.json'
+2025-03-14 19:40:14,834 - application.services.session_service - INFO - Skipping expired session 06099bb8-004f-416c-9616-54cbe4dcb901
+2025-03-14 19:40:14,835 - application.services.session_service - ERROR - Error loading session 06099bb8-004f-416c-9616-54cbe4dcb901: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\Udit Pradhan\\formai_excelllm\\InfoDeliver\\sessions\\06099bb8-004f-416c-9616-54cbe4dcb901.json'
+2025-03-14 19:40:14,837 - application.services.session_service - INFO - Skipping expired session 7c8ba81c-1329-46ac-b5fe-eb498a052cf1
+2025-03-14 19:40:14,838 - application.services.session_service - ERROR - Error loading session 7c8ba81c-1329-46ac-b5fe-eb498a052cf1: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\Udit Pradhan\\formai_excelllm\\InfoDeliver\\sessions\\7c8ba81c-1329-46ac-b5fe-eb498a052cf1.json'
+2025-03-14 19:40:14,840 - application.services.session_service - INFO - Skipping expired session c0edf2ac-da7a-4d7a-90cd-6e136696f28d
+2025-03-14 19:40:14,840 - application.services.session_service - ERROR - Error loading session c0edf2ac-da7a-4d7a-90cd-6e136696f28d: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\Udit Pradhan\\formai_excelllm\\InfoDeliver\\sessions\\c0edf2ac-da7a-4d7a-90cd-6e136696f28d.json'
+2025-03-14 19:40:14,841 - application.services.session_service - INFO - Skipping expired session d5198628-1bd3-4b0a-b5c9-45827d28032c
+2025-03-14 19:40:14,842 - application.services.session_service - ERROR - Error loading session d5198628-1bd3-4b0a-b5c9-45827d28032c: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\Udit Pradhan\\formai_excelllm\\InfoDeliver\\sessions\\d5198628-1bd3-4b0a-b5c9-45827d28032c.json'
+2025-03-14 19:40:14,842 - application.services.session_service - INFO - Loaded 13 sessions from disk
+2025-03-14 19:40:14,842 - application.services.session_service - INFO - SessionService initialized with 13 sessions
+2025-03-14 19:40:14,843 - payroll_api - INFO - SessionService initialized successfully
+2025-03-14 19:40:15,033 - application.services.session_service - INFO - Cleaned up 0 old sessions
+2025-03-14 19:40:15,033 - payroll_api - INFO - Startup: cleaned up sessions older than 24 hours
+2025-03-14 19:40:15,034 - payroll_api - INFO - Startup: cleaned up temporary files
+2025-03-14 19:40:34,096 - payroll_api - INFO - Task list requested for session 3a5589e4-9a1a-45cb-93d3-39938cae4c5c
+2025-03-14 19:40:34,109 - payroll_api - INFO - Files list requested for session 3a5589e4-9a1a-45cb-93d3-39938cae4c5c
+2025-03-14 19:40:34,136 - payroll_api - INFO - Session history list requested for session 3a5589e4-9a1a-45cb-93d3-39938cae4c5c
+2025-03-14 19:40:34,149 - payroll_api - INFO - Task list requested for session 3a5589e4-9a1a-45cb-93d3-39938cae4c5c
+2025-03-14 19:40:34,161 - payroll_api - INFO - Files list requested for session 3a5589e4-9a1a-45cb-93d3-39938cae4c5c
+2025-03-14 19:40:34,170 - payroll_api - INFO - Session history list requested for session 3a5589e4-9a1a-45cb-93d3-39938cae4c5c
+2025-03-14 19:40:42,941 - payroll_api - INFO - Task selection request for session 3a5589e4-9a1a-45cb-93d3-39938cae4c5c: 支給控除等一覧(データ更新)
+2025-03-14 19:40:42,941 - application.modules.agent_collection - INFO - 現在タスクを変更: 支給控除等一覧(データ更新)
+2025-03-14 19:40:42,943 - application.modules.agent_collection - INFO - 状態を変更: chat -> chat
+2025-03-14 19:40:43,455 - payroll_api - INFO - Task selection request for session 3a5589e4-9a1a-45cb-93d3-39938cae4c5c: 支給控除等一覧(データ更新)
+2025-03-14 19:40:43,456 - application.modules.agent_collection - INFO - 現在タスクを変更: 支給控除等一覧(データ更新)
+2025-03-14 19:40:43,457 - application.modules.agent_collection - INFO - 状態を変更: chat -> chat
+2025-03-14 19:40:44,342 - payroll_api - INFO - Task selection request for session 3a5589e4-9a1a-45cb-93d3-39938cae4c5c: 支給控除等一覧(後処理)
+2025-03-14 19:40:44,343 - application.modules.agent_collection - INFO - 現在タスクを変更: 支給控除等一覧(後処理)
+2025-03-14 19:40:44,343 - application.modules.agent_collection - INFO - 状態を変更: chat -> chat
+2025-03-14 19:40:44,814 - payroll_api - INFO - Task selection request for session 3a5589e4-9a1a-45cb-93d3-39938cae4c5c: Yonosukeデータ作成(加算処理)
+2025-03-14 19:40:44,814 - application.modules.agent_collection - INFO - 現在タスクを変更: Yonosukeデータ作成(加算処理)
+2025-03-14 19:40:44,814 - application.modules.agent_collection - INFO - 状態を変更: chat -> chat
+2025-03-14 19:40:45,222 - payroll_api - INFO - Task selection request for session 3a5589e4-9a1a-45cb-93d3-39938cae4c5c: Yonosukeデータ作成(データ除去)
+2025-03-14 19:40:45,223 - application.modules.agent_collection - INFO - 現在タスクを変更: Yonosukeデータ作成(データ除去)
+2025-03-14 19:40:45,223 - application.modules.agent_collection - INFO - 状態を変更: chat -> chat
+2025-03-14 19:40:45,738 - payroll_api - INFO - Task selection request for session 3a5589e4-9a1a-45cb-93d3-39938cae4c5c: 支給控除等一覧(後処理)
+2025-03-14 19:40:45,738 - application.modules.agent_collection - INFO - 現在タスクを変更: 支給控除等一覧(後処理)
+2025-03-14 19:40:45,739 - application.modules.agent_collection - INFO - 状態を変更: chat -> chat
+2025-03-14 19:40:46,143 - payroll_api - INFO - Task selection request for session 3a5589e4-9a1a-45cb-93d3-39938cae4c5c: 支給控除等一覧(データ更新)
+2025-03-14 19:40:46,143 - application.modules.agent_collection - INFO - 現在タスクを変更: 支給控除等一覧(データ更新)
+2025-03-14 19:40:46,144 - application.modules.agent_collection - INFO - 状態を変更: chat -> chat
+2025-03-14 19:40:51,361 - payroll_api - INFO - File upload request for session 3a5589e4-9a1a-45cb-93d3-39938cae4c5c: sikyu_csv_sample.csv
+2025-03-14 19:40:51,498 - application.services.file_service - INFO - Created secure copy of C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\web_application\uploads\7e4695ac-d342-447f-9db8-49e27b13a5be.csv at C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\temp\55487834-a17c-4ec5-9d72-27d0ecf2f14f.csv
+2025-03-14 19:40:51,499 - application.modules.file_agent - INFO - check_file_identity開始: file_path=C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\temp\55487834-a17c-4ec5-9d72-27d0ecf2f14f.csv
+2025-03-14 19:40:51,499 - application.modules.file_agent - ERROR - check_file_identity中にエラーが発生
+Traceback (most recent call last):
+  File "C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\application\modules\file_agent.py", line 253, in check_file_identity
+    for task_dict in self.task_configs.values():
+                     ^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'values'
+2025-03-14 19:40:51,503 - application.services.file_service - INFO - Successfully processed file: 7e4695ac-d342-447f-9db8-49e27b13a5be.csv
+2025-03-14 19:40:51,503 - application.services.payroll_service - INFO - Processing message: 選択されたファイル: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\web_application\uploads\7e4695ac-d342-447f-9db8-49e27b13a5be.csv
+2025-03-14 19:40:52,819 - httpx - INFO - HTTP Request: POST https://formaigpt.openai.azure.com/openai/deployments/gptest/chat/completions?api-version=2024-02-15-preview "HTTP/1.1 200 OK"
+2025-03-14 19:40:52,823 - application.modules.file_agent - INFO - check_file_identity開始: file_path=C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\web_application\uploads\7e4695ac-d342-447f-9db8-49e27b13a5be.csv
+2025-03-14 19:40:52,969 - payroll_api - INFO - File uploaded successfully: sikyu_csv_sample.csv
+2025-03-14 19:40:52,978 - payroll_api - INFO - Files list requested for session 3a5589e4-9a1a-45cb-93d3-39938cae4c5c
+2025-03-14 19:40:58,627 - payroll_api - INFO - Session reset requested for 3a5589e4-9a1a-45cb-93d3-39938cae4c5c
+2025-03-14 19:40:58,629 - application.modules.agent_collection - INFO - タスク 支給控除等一覧(データ更新) をリセットします。
+2025-03-14 19:40:58,629 - application.modules.agent_collection - INFO - タスク 支給控除等一覧(後処理) をリセットします。
+2025-03-14 19:40:58,629 - application.modules.agent_collection - INFO - タスク Yonosukeデータ作成(加算処理) をリセットします。
+2025-03-14 19:40:58,630 - application.modules.agent_collection - INFO - タスク Yonosukeデータ作成(データ除去) をリセットします。
+2025-03-14 19:40:58,630 - application.modules.agent_collection - INFO - 状態を変更: chat -> chat
+2025-03-14 19:41:01,762 - payroll_api - INFO - Processing chat message for session 3a5589e4-9a1a-45cb-93d3-39938cae4c5c
+2025-03-14 19:41:01,765 - application.services.payroll_service - INFO - Processing message: hello
+2025-03-14 19:41:03,028 - httpx - INFO - HTTP Request: POST https://formaigpt.openai.azure.com/openai/deployments/gptest/chat/completions?api-version=2024-02-15-preview "HTTP/1.1 200 OK"
+2025-03-14 19:41:03,029 - application.modules.rag_agent - INFO - RAG_Agentに問い合わせ実行: hello
+2025-03-14 19:41:03,090 - application.services.payroll_service - ERROR - Error processing message: 'tuple' object has no attribute 'get'
+2025-03-14 19:41:03,093 - payroll_api - INFO - Chat processed successfully for session 3a5589e4-9a1a-45cb-93d3-39938cae4c5c, state: chat
+2025-03-14 19:41:41,748 - payroll_api - INFO - Task selection request for session 3a5589e4-9a1a-45cb-93d3-39938cae4c5c: 支給控除等一覧(データ更新)
+2025-03-14 19:41:41,748 - application.modules.agent_collection - INFO - 現在タスクを変更: 支給控除等一覧(データ更新)
+2025-03-14 19:41:41,749 - application.modules.agent_collection - INFO - 状態を変更: chat -> chat
+2025-03-14 19:41:42,547 - payroll_api - INFO - Task selection request for session 3a5589e4-9a1a-45cb-93d3-39938cae4c5c: 支給控除等一覧(後処理)
+2025-03-14 19:41:42,548 - application.modules.agent_collection - INFO - 現在タスクを変更: 支給控除等一覧(後処理)
+2025-03-14 19:41:42,548 - application.modules.agent_collection - INFO - 状態を変更: chat -> chat
+2025-03-14 19:41:43,257 - payroll_api - INFO - Task selection request for session 3a5589e4-9a1a-45cb-93d3-39938cae4c5c: Yonosukeデータ作成(加算処理)
+2025-03-14 19:41:43,258 - application.modules.agent_collection - INFO - 現在タスクを変更: Yonosukeデータ作成(加算処理)
+2025-03-14 19:41:43,258 - application.modules.agent_collection - INFO - 状態を変更: chat -> chat
+2025-03-14 19:41:43,723 - payroll_api - INFO - Task selection request for session 3a5589e4-9a1a-45cb-93d3-39938cae4c5c: Yonosukeデータ作成(データ除去)
+2025-03-14 19:41:43,724 - application.modules.agent_collection - INFO - 現在タスクを変更: Yonosukeデータ作成(データ除去)
+2025-03-14 19:41:43,725 - application.modules.agent_collection - INFO - 状態を変更: chat -> chat
+2025-03-14 19:44:22,274 - payroll_api - INFO - Task selection request for session 3a5589e4-9a1a-45cb-93d3-39938cae4c5c: 支給控除等一覧(後処理)
+2025-03-14 19:44:22,275 - application.modules.agent_collection - INFO - 現在タスクを変更: 支給控除等一覧(後処理)
+2025-03-14 19:44:22,275 - application.modules.agent_collection - INFO - 状態を変更: chat -> chat
+2025-03-14 19:44:25,615 - payroll_api - INFO - Conversation history requested for session session1
+2025-03-14 19:44:25,616 - payroll_api - ERROR - Error getting conversation history: Session session1 not found or has no history
+2025-03-14 19:44:30,311 - payroll_api - INFO - Task list requested for session 3a5589e4-9a1a-45cb-93d3-39938cae4c5c
+2025-03-14 19:44:30,316 - payroll_api - INFO - Files list requested for session 3a5589e4-9a1a-45cb-93d3-39938cae4c5c
+2025-03-14 19:44:30,329 - payroll_api - INFO - Session history list requested for session 3a5589e4-9a1a-45cb-93d3-39938cae4c5c
+2025-03-14 19:44:30,359 - payroll_api - INFO - Task list requested for session 3a5589e4-9a1a-45cb-93d3-39938cae4c5c
+2025-03-14 19:44:30,367 - payroll_api - INFO - Files list requested for session 3a5589e4-9a1a-45cb-93d3-39938cae4c5c
+2025-03-14 19:44:30,391 - payroll_api - INFO - Session history list requested for session 3a5589e4-9a1a-45cb-93d3-39938cae4c5c
+2025-03-14 19:44:31,433 - payroll_api - INFO - Conversation history requested for session 3a5589e4-9a1a-45cb-93d3-39938cae4c5c
+2025-03-14 19:44:31,435 - payroll_api - ERROR - Error getting conversation history: 1 validation error for SessionHistoryItem
+timestamp
+  Input should be a valid string [type=string_type, input_value=1741948861.7637527, input_type=float]
+    For further information visit https://errors.pydantic.dev/2.10/v/string_type
+2025-03-14 19:44:36,617 - payroll_api - INFO - Task list requested for session 3a5589e4-9a1a-45cb-93d3-39938cae4c5c
+2025-03-14 19:44:36,626 - payroll_api - INFO - Files list requested for session 3a5589e4-9a1a-45cb-93d3-39938cae4c5c
+2025-03-14 19:44:36,633 - payroll_api - INFO - Session history list requested for session 3a5589e4-9a1a-45cb-93d3-39938cae4c5c
+2025-03-14 19:44:36,643 - payroll_api - INFO - Task list requested for session 3a5589e4-9a1a-45cb-93d3-39938cae4c5c
+2025-03-14 19:44:36,648 - payroll_api - INFO - Files list requested for session 3a5589e4-9a1a-45cb-93d3-39938cae4c5c
+2025-03-14 19:44:36,657 - payroll_api - INFO - Session history list requested for session 3a5589e4-9a1a-45cb-93d3-39938cae4c5c
+2025-03-14 19:44:48,827 - payroll_api - INFO - File upload request for session 3a5589e4-9a1a-45cb-93d3-39938cae4c5c: sikyu_csv_sample.csv
+2025-03-14 19:44:48,849 - application.services.file_service - INFO - Created secure copy of C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\web_application\uploads\20ada831-386a-4cb3-a07b-e1395d35272d.csv at C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\temp\3288e0ec-7cb6-4bf4-920b-1cdcba3c064c.csv
+2025-03-14 19:44:48,850 - application.modules.file_agent - INFO - check_file_identity開始: file_path=C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\temp\3288e0ec-7cb6-4bf4-920b-1cdcba3c064c.csv
+2025-03-14 19:44:48,850 - application.modules.file_agent - ERROR - check_file_identity中にエラーが発生
+Traceback (most recent call last):
+  File "C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\application\modules\file_agent.py", line 253, in check_file_identity
+    for task_dict in self.task_configs.values():
+                     ^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'values'
+2025-03-14 19:44:48,852 - application.services.file_service - INFO - Successfully processed file: 20ada831-386a-4cb3-a07b-e1395d35272d.csv
+2025-03-14 19:44:48,852 - application.services.payroll_service - INFO - Processing message: 選択されたファイル: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\web_application\uploads\20ada831-386a-4cb3-a07b-e1395d35272d.csv
+2025-03-14 19:44:50,149 - httpx - INFO - HTTP Request: POST https://formaigpt.openai.azure.com/openai/deployments/gptest/chat/completions?api-version=2024-02-15-preview "HTTP/1.1 200 OK"
+2025-03-14 19:44:50,150 - application.modules.file_agent - INFO - check_file_identity開始: file_path=C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\web_application\uploads\20ada831-386a-4cb3-a07b-e1395d35272d.csv
+2025-03-14 19:44:50,276 - payroll_api - INFO - File uploaded successfully: sikyu_csv_sample.csv
+2025-03-14 19:44:50,286 - payroll_api - INFO - Files list requested for session 3a5589e4-9a1a-45cb-93d3-39938cae4c5c
+2025-03-14 19:55:49,230 - payroll_api - INFO - Conversation history requested for session 3a5589e4-9a1a-45cb-93d3-39938cae4c5c
+2025-03-14 19:55:49,230 - payroll_api - ERROR - Error getting conversation history: 1 validation error for SessionHistoryItem
+timestamp
+  Input should be a valid string [type=string_type, input_value=1741948861.7637527, input_type=float]
+    For further information visit https://errors.pydantic.dev/2.10/v/string_type
+2025-03-14 19:56:02,808 - payroll_api - INFO - Processing chat message for session 3a5589e4-9a1a-45cb-93d3-39938cae4c5c
+2025-03-14 19:56:02,809 - application.services.payroll_service - INFO - Processing message: sdsd
+2025-03-14 19:56:03,949 - httpx - INFO - HTTP Request: POST https://formaigpt.openai.azure.com/openai/deployments/gptest/chat/completions?api-version=2024-02-15-preview "HTTP/1.1 200 OK"
+2025-03-14 19:56:03,955 - payroll_api - INFO - Chat processed successfully for session 3a5589e4-9a1a-45cb-93d3-39938cae4c5c, state: chat
+2025-03-14 19:56:19,857 - payroll_api - INFO - Task selection request for session 3a5589e4-9a1a-45cb-93d3-39938cae4c5c: Yonosukeデータ作成(データ除去)
+2025-03-14 19:56:19,857 - application.modules.agent_collection - INFO - 現在タスクを変更: Yonosukeデータ作成(データ除去)
+2025-03-14 19:56:19,857 - application.modules.agent_collection - INFO - 状態を変更: chat -> chat
+2025-03-14 19:56:21,421 - payroll_api - INFO - Task selection request for session 3a5589e4-9a1a-45cb-93d3-39938cae4c5c: Yonosukeデータ作成(データ除去)
+2025-03-14 19:56:21,422 - application.modules.agent_collection - INFO - 現在タスクを変更: Yonosukeデータ作成(データ除去)
+2025-03-14 19:56:21,423 - application.modules.agent_collection - INFO - 状態を変更: chat -> chat
+2025-03-14 19:56:22,832 - payroll_api - INFO - Task selection request for session 3a5589e4-9a1a-45cb-93d3-39938cae4c5c: Yonosukeデータ作成(加算処理)
+2025-03-14 19:56:22,834 - application.modules.agent_collection - INFO - 現在タスクを変更: Yonosukeデータ作成(加算処理)
+2025-03-14 19:56:22,834 - application.modules.agent_collection - INFO - 状態を変更: chat -> chat
+2025-03-14 19:56:23,418 - payroll_api - INFO - Task selection request for session 3a5589e4-9a1a-45cb-93d3-39938cae4c5c: 支給控除等一覧(後処理)
+2025-03-14 19:56:23,419 - application.modules.agent_collection - INFO - 現在タスクを変更: 支給控除等一覧(後処理)
+2025-03-14 19:56:23,419 - application.modules.agent_collection - INFO - 状態を変更: chat -> chat
+2025-03-14 19:56:24,077 - payroll_api - INFO - Task selection request for session 3a5589e4-9a1a-45cb-93d3-39938cae4c5c: Yonosukeデータ作成(加算処理)
+2025-03-14 19:56:24,077 - application.modules.agent_collection - INFO - 現在タスクを変更: Yonosukeデータ作成(加算処理)
+2025-03-14 19:56:24,078 - application.modules.agent_collection - INFO - 状態を変更: chat -> chat
+2025-03-14 22:45:22,465 - payroll_api - INFO - API shutting down
+2025-03-14 22:45:30,028 - payroll_api - INFO - Service modules imported successfully
+2025-03-14 22:45:30,049 - application.services.security.auth - INFO - API security configured
+2025-03-14 22:45:30,050 - application.modules.file_agent - INFO - FileAgent を初期化します。
+2025-03-14 22:45:30,085 - application.modules.file_agent - INFO - FileAgent 初期化完了: sqlite:///C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\data\app.db
+2025-03-14 22:45:30,087 - application.services.file_service - INFO - FileService initialized with temp_dir: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\temp
+2025-03-14 22:45:30,087 - payroll_api - INFO - FileService initialized successfully
+2025-03-14 22:45:30,088 - application.services.payroll_service - INFO - Initializing PayrollService with config: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\application\json\config.json
+2025-03-14 22:45:30,088 - application.modules.agent_collection - INFO - エージェントコレクションを初期化しています...
+2025-03-14 22:45:30,089 - application.modules.file_agent - INFO - FileAgent を初期化します。
+2025-03-14 22:45:30,091 - application.modules.file_agent - WARNING - Could not remove existing database file: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\data\app.db
+2025-03-14 22:45:30,091 - application.modules.file_agent - WARNING - Will try to reuse existing database.
+2025-03-14 22:45:30,094 - application.modules.file_agent - INFO - FileAgent 初期化完了: sqlite:///C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\data\app.db
+2025-03-14 22:45:30,095 - application.modules.agent_collection - INFO - ファイルエージェントを初期化しました。
+2025-03-14 22:45:32,105 - application.modules.agent_collection - INFO - 設定ファイルを正常に読み込みました: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\application\json\config.json
+2025-03-14 22:45:32,109 - application.modules.agent_collection - INFO - タスクを正常に作成。タスク数: 4
+2025-03-14 22:45:32,110 - application.modules.agent_collection - INFO - IntentAnalyzer を初期化
+2025-03-14 22:45:32,110 - application.modules.agent_collection - INFO - RAG_AGENT: 初期化開始
+2025-03-14 22:45:32,110 - application.modules.rag_agent - INFO - RAG_Agentを初期化します。
+2025-03-14 22:45:40,628 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-03-14 22:45:40,629 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-03-14 22:45:42,952 - application.modules.rag_agent - INFO - RAG用に複数ファイルからRetrieverを作成します。
+2025-03-14 22:45:42,972 - faiss.loader - INFO - Loading faiss with AVX2 support.
+2025-03-14 22:45:42,997 - faiss.loader - INFO - Successfully loaded faiss with AVX2 support.
+2025-03-14 22:45:43,008 - faiss - INFO - Failed to load GPU Faiss: name 'GpuIndexIVFFlat' is not defined. Will not load constructor refs for GPU indexes.
+2025-03-14 22:45:43,376 - application.modules.rag_agent - INFO - RAG_Agent初期化完了
+2025-03-14 22:45:43,377 - application.modules.agent_collection - INFO - RAG_AGENT: 初期化完了
+2025-03-14 22:45:43,377 - application.modules.agent_collection - INFO - workflow 作成
+2025-03-14 22:45:43,378 - application.services.payroll_service - INFO - AgentCollection initialized successfully
+2025-03-14 22:45:43,378 - payroll_api - INFO - PayrollService initialized successfully
+2025-03-14 22:45:43,378 - application.services.session_service - INFO - Session persistence enabled, using directory: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\sessions
+2025-03-14 22:45:43,379 - application.services.session_service - INFO - Skipping expired session 057b59ff-3d7d-4459-a8cc-307e2fe1711a
+2025-03-14 22:45:43,380 - application.services.session_service - ERROR - Error loading session 057b59ff-3d7d-4459-a8cc-307e2fe1711a: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\Udit Pradhan\\formai_excelllm\\InfoDeliver\\sessions\\057b59ff-3d7d-4459-a8cc-307e2fe1711a.json'
+2025-03-14 22:45:43,380 - application.services.session_service - INFO - Skipping expired session 06099bb8-004f-416c-9616-54cbe4dcb901
+2025-03-14 22:45:43,382 - application.services.session_service - ERROR - Error loading session 06099bb8-004f-416c-9616-54cbe4dcb901: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\Udit Pradhan\\formai_excelllm\\InfoDeliver\\sessions\\06099bb8-004f-416c-9616-54cbe4dcb901.json'
+2025-03-14 22:45:43,396 - application.services.session_service - INFO - Skipping expired session 4e11869f-ea3d-403d-bbe1-c302b71c954d
+2025-03-14 22:45:43,396 - application.services.session_service - ERROR - Error loading session 4e11869f-ea3d-403d-bbe1-c302b71c954d: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\Udit Pradhan\\formai_excelllm\\InfoDeliver\\sessions\\4e11869f-ea3d-403d-bbe1-c302b71c954d.json'
+2025-03-14 22:45:43,398 - application.services.session_service - INFO - Skipping expired session 7c8ba81c-1329-46ac-b5fe-eb498a052cf1
+2025-03-14 22:45:43,398 - application.services.session_service - ERROR - Error loading session 7c8ba81c-1329-46ac-b5fe-eb498a052cf1: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\Udit Pradhan\\formai_excelllm\\InfoDeliver\\sessions\\7c8ba81c-1329-46ac-b5fe-eb498a052cf1.json'
+2025-03-14 22:45:43,402 - application.services.session_service - INFO - Skipping expired session c0edf2ac-da7a-4d7a-90cd-6e136696f28d
+2025-03-14 22:45:43,402 - application.services.session_service - ERROR - Error loading session c0edf2ac-da7a-4d7a-90cd-6e136696f28d: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\Udit Pradhan\\formai_excelllm\\InfoDeliver\\sessions\\c0edf2ac-da7a-4d7a-90cd-6e136696f28d.json'
+2025-03-14 22:45:43,403 - application.services.session_service - INFO - Skipping expired session cb67d8c8-b7ec-4e30-a7a9-bfa962dc6b95
+2025-03-14 22:45:43,405 - application.services.session_service - ERROR - Error loading session cb67d8c8-b7ec-4e30-a7a9-bfa962dc6b95: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\Udit Pradhan\\formai_excelllm\\InfoDeliver\\sessions\\cb67d8c8-b7ec-4e30-a7a9-bfa962dc6b95.json'
+2025-03-14 22:45:43,406 - application.services.session_service - INFO - Skipping expired session d5198628-1bd3-4b0a-b5c9-45827d28032c
+2025-03-14 22:45:43,406 - application.services.session_service - ERROR - Error loading session d5198628-1bd3-4b0a-b5c9-45827d28032c: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\Udit Pradhan\\formai_excelllm\\InfoDeliver\\sessions\\d5198628-1bd3-4b0a-b5c9-45827d28032c.json'
+2025-03-14 22:45:43,407 - application.services.session_service - INFO - Loaded 11 sessions from disk
+2025-03-14 22:45:43,407 - application.services.session_service - INFO - SessionService initialized with 11 sessions
+2025-03-14 22:45:43,407 - payroll_api - INFO - SessionService initialized successfully
+2025-03-14 22:45:43,603 - application.services.session_service - INFO - Cleaned up 0 old sessions
+2025-03-14 22:45:43,604 - payroll_api - INFO - Startup: cleaned up sessions older than 24 hours
+2025-03-14 22:45:43,605 - payroll_api - INFO - Startup: cleaned up temporary files
+2025-03-14 22:46:55,989 - payroll_api - INFO - Files list requested for session 3a5589e4-9a1a-45cb-93d3-39938cae4c5c
+2025-03-14 22:46:56,015 - payroll_api - INFO - Task list requested for session 3a5589e4-9a1a-45cb-93d3-39938cae4c5c
+2025-03-14 22:46:56,027 - payroll_api - INFO - Session history list requested for session 3a5589e4-9a1a-45cb-93d3-39938cae4c5c
+2025-03-14 22:46:56,042 - payroll_api - INFO - Files list requested for session 3a5589e4-9a1a-45cb-93d3-39938cae4c5c
+2025-03-14 22:46:56,088 - payroll_api - INFO - Task list requested for session 3a5589e4-9a1a-45cb-93d3-39938cae4c5c
+2025-03-14 22:46:56,103 - payroll_api - INFO - Session history list requested for session 3a5589e4-9a1a-45cb-93d3-39938cae4c5c
+2025-03-14 22:47:01,464 - payroll_api - INFO - Session reset requested for 3a5589e4-9a1a-45cb-93d3-39938cae4c5c
+2025-03-14 22:47:01,466 - application.modules.agent_collection - INFO - タスク 支給控除等一覧(データ更新) をリセットします。
+2025-03-14 22:47:01,467 - application.modules.agent_collection - INFO - タスク 支給控除等一覧(後処理) をリセットします。
+2025-03-14 22:47:01,467 - application.modules.agent_collection - INFO - タスク Yonosukeデータ作成(加算処理) をリセットします。
+2025-03-14 22:47:01,468 - application.modules.agent_collection - INFO - タスク Yonosukeデータ作成(データ除去) をリセットします。
+2025-03-14 22:47:01,468 - application.modules.agent_collection - INFO - 状態を変更: chat -> chat
+2025-03-14 22:47:04,855 - payroll_api - INFO - Task selection request for session 3a5589e4-9a1a-45cb-93d3-39938cae4c5c: 支給控除等一覧(データ更新)
+2025-03-14 22:47:04,856 - application.modules.agent_collection - INFO - 現在タスクを変更: 支給控除等一覧(データ更新)
+2025-03-14 22:47:04,857 - application.modules.agent_collection - INFO - 状態を変更: chat -> chat
+2025-03-14 22:47:05,519 - payroll_api - INFO - Task selection request for session 3a5589e4-9a1a-45cb-93d3-39938cae4c5c: 支給控除等一覧(後処理)
+2025-03-14 22:47:05,519 - application.modules.agent_collection - INFO - 現在タスクを変更: 支給控除等一覧(後処理)
+2025-03-14 22:47:05,520 - application.modules.agent_collection - INFO - 状態を変更: chat -> chat
+2025-03-14 22:47:12,474 - payroll_api - INFO - Task selection request for session 3a5589e4-9a1a-45cb-93d3-39938cae4c5c: 支給控除等一覧(データ更新)
+2025-03-14 22:47:12,475 - application.modules.agent_collection - INFO - 現在タスクを変更: 支給控除等一覧(データ更新)
+2025-03-14 22:47:12,475 - application.modules.agent_collection - INFO - 状態を変更: chat -> chat
+2025-03-14 22:47:15,993 - payroll_api - INFO - Conversation history requested for session session1
+2025-03-14 22:47:15,993 - payroll_api - ERROR - Error getting conversation history: Session session1 not found or has no history
+2025-03-14 22:47:20,998 - payroll_api - INFO - Task list requested for session 3a5589e4-9a1a-45cb-93d3-39938cae4c5c
+2025-03-14 22:47:21,008 - payroll_api - INFO - Task list requested for session 3a5589e4-9a1a-45cb-93d3-39938cae4c5c
+2025-03-14 22:47:21,012 - payroll_api - INFO - Files list requested for session 3a5589e4-9a1a-45cb-93d3-39938cae4c5c
+2025-03-14 22:47:21,024 - payroll_api - INFO - Session history list requested for session 3a5589e4-9a1a-45cb-93d3-39938cae4c5c
+2025-03-14 22:47:21,040 - payroll_api - INFO - Files list requested for session 3a5589e4-9a1a-45cb-93d3-39938cae4c5c
+2025-03-14 22:47:21,046 - payroll_api - INFO - Session history list requested for session 3a5589e4-9a1a-45cb-93d3-39938cae4c5c
+2025-03-14 22:47:22,309 - payroll_api - INFO - Conversation history requested for session 3a5589e4-9a1a-45cb-93d3-39938cae4c5c
+2025-03-14 22:47:23,184 - payroll_api - INFO - Conversation history requested for session 3a5589e4-9a1a-45cb-93d3-39938cae4c5c
+2025-03-14 22:47:24,763 - payroll_api - INFO - Conversation history requested for session session1
+2025-03-14 22:47:24,763 - payroll_api - ERROR - Error getting conversation history: Session session1 not found or has no history
+2025-03-14 22:48:11,335 - payroll_api - INFO - Processing chat message for session 3a5589e4-9a1a-45cb-93d3-39938cae4c5c
+2025-03-14 22:48:11,337 - application.services.payroll_service - INFO - Processing message: Hello
+2025-03-14 22:48:12,516 - httpx - INFO - HTTP Request: POST https://formaigpt.openai.azure.com/openai/deployments/gptest/chat/completions?api-version=2024-02-15-preview "HTTP/1.1 200 OK"
+2025-03-14 22:48:12,524 - payroll_api - INFO - Chat processed successfully for session 3a5589e4-9a1a-45cb-93d3-39938cae4c5c, state: chat
+2025-03-14 22:48:17,016 - payroll_api - INFO - File upload request for session 3a5589e4-9a1a-45cb-93d3-39938cae4c5c: sikyu_csv_sample.csv
+2025-03-14 22:48:17,128 - application.services.file_service - INFO - Created secure copy of C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\web_application\uploads\b9fe6c91-80b6-4086-bf66-857139534c21.csv at C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\temp\974b5fc8-fbb6-41e3-aefb-f7dcf873c87e.csv
+2025-03-14 22:48:17,128 - application.modules.file_agent - INFO - check_file_identity開始: file_path=C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\temp\974b5fc8-fbb6-41e3-aefb-f7dcf873c87e.csv
+2025-03-14 22:48:17,129 - application.modules.file_agent - ERROR - check_file_identity中にエラーが発生
+Traceback (most recent call last):
+  File "C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\application\modules\file_agent.py", line 253, in check_file_identity
+    for task_dict in self.task_configs.values():
+                     ^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'values'
+2025-03-14 22:48:17,132 - application.services.file_service - INFO - Successfully processed file: b9fe6c91-80b6-4086-bf66-857139534c21.csv
+2025-03-14 22:48:17,132 - application.services.payroll_service - INFO - Processing message: 選択されたファイル: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\web_application\uploads\b9fe6c91-80b6-4086-bf66-857139534c21.csv
+2025-03-14 22:48:17,816 - httpx - INFO - HTTP Request: POST https://formaigpt.openai.azure.com/openai/deployments/gptest/chat/completions?api-version=2024-02-15-preview "HTTP/1.1 200 OK"
+2025-03-14 22:48:17,818 - application.modules.file_agent - INFO - check_file_identity開始: file_path=C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\web_application\uploads\b9fe6c91-80b6-4086-bf66-857139534c21.csv
+2025-03-14 22:48:17,956 - payroll_api - INFO - File uploaded successfully: sikyu_csv_sample.csv
+2025-03-14 22:48:17,971 - payroll_api - INFO - Files list requested for session 3a5589e4-9a1a-45cb-93d3-39938cae4c5c
+2025-03-14 22:48:26,122 - payroll_api - INFO - Task list requested for session 3a5589e4-9a1a-45cb-93d3-39938cae4c5c
+2025-03-14 22:48:26,127 - payroll_api - INFO - Files list requested for session 3a5589e4-9a1a-45cb-93d3-39938cae4c5c
+2025-03-14 22:48:26,133 - payroll_api - INFO - Session history list requested for session 3a5589e4-9a1a-45cb-93d3-39938cae4c5c
+2025-03-14 22:48:26,145 - payroll_api - INFO - Task list requested for session 3a5589e4-9a1a-45cb-93d3-39938cae4c5c
+2025-03-14 22:48:26,150 - payroll_api - INFO - Files list requested for session 3a5589e4-9a1a-45cb-93d3-39938cae4c5c
+2025-03-14 22:48:26,160 - payroll_api - INFO - Session history list requested for session 3a5589e4-9a1a-45cb-93d3-39938cae4c5c
+2025-03-14 22:48:27,149 - payroll_api - INFO - Conversation history requested for session session1
+2025-03-14 22:48:27,149 - payroll_api - ERROR - Error getting conversation history: Session session1 not found or has no history
+2025-03-14 22:48:31,830 - payroll_api - INFO - Session reset requested for 3a5589e4-9a1a-45cb-93d3-39938cae4c5c
+2025-03-14 22:48:31,834 - application.modules.agent_collection - INFO - タスク 支給控除等一覧(データ更新) をリセットします。
+2025-03-14 22:48:31,835 - application.modules.agent_collection - INFO - タスク 支給控除等一覧(後処理) をリセットします。
+2025-03-14 22:48:31,836 - application.modules.agent_collection - INFO - タスク Yonosukeデータ作成(加算処理) をリセットします。
+2025-03-14 22:48:31,836 - application.modules.agent_collection - INFO - タスク Yonosukeデータ作成(データ除去) をリセットします。
+2025-03-14 22:48:31,837 - application.modules.agent_collection - INFO - 状態を変更: chat -> chat
+2025-03-14 22:48:34,176 - payroll_api - INFO - Task list requested for session 3a5589e4-9a1a-45cb-93d3-39938cae4c5c
+2025-03-14 22:48:34,181 - payroll_api - INFO - Files list requested for session 3a5589e4-9a1a-45cb-93d3-39938cae4c5c
+2025-03-14 22:48:34,189 - payroll_api - INFO - Session history list requested for session 3a5589e4-9a1a-45cb-93d3-39938cae4c5c
+2025-03-14 22:48:34,205 - payroll_api - INFO - Task list requested for session 3a5589e4-9a1a-45cb-93d3-39938cae4c5c
+2025-03-14 22:48:34,209 - payroll_api - INFO - Files list requested for session 3a5589e4-9a1a-45cb-93d3-39938cae4c5c
+2025-03-14 22:48:34,217 - payroll_api - INFO - Session history list requested for session 3a5589e4-9a1a-45cb-93d3-39938cae4c5c
+2025-03-14 22:48:36,442 - payroll_api - INFO - Session reset requested for 3a5589e4-9a1a-45cb-93d3-39938cae4c5c
+2025-03-14 22:48:36,444 - application.modules.agent_collection - INFO - タスク 支給控除等一覧(データ更新) をリセットします。
+2025-03-14 22:48:36,445 - application.modules.agent_collection - INFO - タスク 支給控除等一覧(後処理) をリセットします。
+2025-03-14 22:48:36,445 - application.modules.agent_collection - INFO - タスク Yonosukeデータ作成(加算処理) をリセットします。
+2025-03-14 22:48:36,446 - application.modules.agent_collection - INFO - タスク Yonosukeデータ作成(データ除去) をリセットします。
+2025-03-14 22:48:36,448 - application.modules.agent_collection - INFO - 状態を変更: chat -> chat
+2025-03-14 22:48:37,602 - payroll_api - INFO - Conversation history requested for session session1
+2025-03-14 22:48:37,602 - payroll_api - ERROR - Error getting conversation history: Session session1 not found or has no history
+2025-03-14 22:48:40,794 - payroll_api - INFO - Task list requested for session 3a5589e4-9a1a-45cb-93d3-39938cae4c5c
+2025-03-14 22:48:40,818 - payroll_api - INFO - Files list requested for session 3a5589e4-9a1a-45cb-93d3-39938cae4c5c
+2025-03-14 22:48:40,834 - payroll_api - INFO - Session history list requested for session 3a5589e4-9a1a-45cb-93d3-39938cae4c5c
+2025-03-14 22:48:40,846 - payroll_api - INFO - Task list requested for session 3a5589e4-9a1a-45cb-93d3-39938cae4c5c
+2025-03-14 22:48:40,858 - payroll_api - INFO - Files list requested for session 3a5589e4-9a1a-45cb-93d3-39938cae4c5c
+2025-03-14 22:48:40,905 - payroll_api - INFO - Session history list requested for session 3a5589e4-9a1a-45cb-93d3-39938cae4c5c
+2025-03-14 22:48:41,881 - payroll_api - INFO - Conversation history requested for session 3a5589e4-9a1a-45cb-93d3-39938cae4c5c
+2025-03-14 22:48:41,881 - payroll_api - ERROR - Error getting conversation history: Session 3a5589e4-9a1a-45cb-93d3-39938cae4c5c not found or has no history
+2025-03-15 00:25:24,582 - payroll_api - INFO - Task list requested for session 3a5589e4-9a1a-45cb-93d3-39938cae4c5c
+2025-03-15 00:25:24,590 - payroll_api - INFO - Files list requested for session 3a5589e4-9a1a-45cb-93d3-39938cae4c5c
+2025-03-15 00:25:24,622 - payroll_api - INFO - Session history list requested for session 3a5589e4-9a1a-45cb-93d3-39938cae4c5c
+2025-03-15 00:25:24,635 - payroll_api - INFO - Task list requested for session 3a5589e4-9a1a-45cb-93d3-39938cae4c5c
+2025-03-15 00:25:24,651 - payroll_api - INFO - Files list requested for session 3a5589e4-9a1a-45cb-93d3-39938cae4c5c
+2025-03-15 00:25:24,655 - payroll_api - INFO - Session history list requested for session 3a5589e4-9a1a-45cb-93d3-39938cae4c5c
+2025-03-15 00:25:28,357 - payroll_api - INFO - Session reset requested for 3a5589e4-9a1a-45cb-93d3-39938cae4c5c
+2025-03-15 00:25:28,361 - application.modules.agent_collection - INFO - タスク 支給控除等一覧(データ更新) をリセットします。
+2025-03-15 00:25:28,363 - application.modules.agent_collection - INFO - タスク 支給控除等一覧(後処理) をリセットします。
+2025-03-15 00:25:28,363 - application.modules.agent_collection - INFO - タスク Yonosukeデータ作成(加算処理) をリセットします。
+2025-03-15 00:25:28,363 - application.modules.agent_collection - INFO - タスク Yonosukeデータ作成(データ除去) をリセットします。
+2025-03-15 00:25:28,363 - application.modules.agent_collection - INFO - 状態を変更: chat -> chat
+2025-03-15 00:25:32,712 - payroll_api - INFO - Processing chat message for session 3a5589e4-9a1a-45cb-93d3-39938cae4c5c
+2025-03-15 00:25:32,712 - application.services.payroll_service - INFO - Processing message: Hello
+2025-03-15 00:25:34,301 - httpx - INFO - HTTP Request: POST https://formaigpt.openai.azure.com/openai/deployments/gptest/chat/completions?api-version=2024-02-15-preview "HTTP/1.1 200 OK"
+2025-03-15 00:25:34,315 - payroll_api - INFO - Chat processed successfully for session 3a5589e4-9a1a-45cb-93d3-39938cae4c5c, state: chat
