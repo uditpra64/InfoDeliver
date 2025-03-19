@@ -8,6 +8,7 @@ from typing import List, Dict, Optional, Tuple, Any, Union
 import pandas as pd
 from pathlib import Path
 from datetime import datetime
+from application.modules.file_agent import FileAgent
 
 # Add project root to path
 parent_dir = Path(__file__).resolve().parent.parent.parent
@@ -54,16 +55,37 @@ class FileService:
     # Maximum file size (10MB by default)
     MAX_FILE_SIZE_MB = int(os.environ.get("MAX_FILE_SIZE_MB", "10"))
     
+    
     def __init__(self, temp_dir=None):
         """
         Initialize the file service with a FileAgent instance.
-        
-        Args:
-            temp_dir: Optional directory for temporary file storage
         """
         self.logger = logging.getLogger(__name__)
         try:
             self.file_agent = FileAgent()
+            self.file_agent.ensure_database_ready()
+            
+            # Initialize task_configs with an empty dict if it's None
+            if self.file_agent.task_configs is None:
+                config_path = os.getenv("CONFIG_PATH", os.path.join(os.getenv("LLM_EXCEL_BASE_PATH", ""), "json", "config.json"))
+                self.logger.info(f"Loading config from {config_path} for FileAgent")
+                
+                try:
+                    if os.path.exists(config_path):
+                        with open(config_path, "r", encoding="utf-8") as f:
+                            config = json.load(f)
+                            task_configs = {}
+                            for task in config.get("タスク", []):
+                                task_configs[task["名称"]] = task
+                            self.file_agent.task_configs = task_configs
+                            self.logger.info(f"Loaded {len(task_configs)} tasks into FileAgent")
+                    else:
+                        self.file_agent.task_configs = {}
+                        self.logger.warning(f"Config file not found at {config_path}, using empty task_configs")
+                except Exception as config_error:
+                    self.file_agent.task_configs = {}
+                    self.logger.error(f"Error loading config: {str(config_error)}")
+            
             self.temp_dir = temp_dir or os.path.join(parent_dir, "temp")
             
             # Ensure temp directory exists
@@ -137,26 +159,30 @@ class FileService:
     def upload_file(self, file_path: str) -> Dict[str, Any]:
         """
         Upload and process a file.
-        
-        Args:
-            file_path: Path to the file to upload
-            
-        Returns:
-            A dictionary with upload status information
         """
         try:
+            self.logger.info(f"Starting to upload file: {file_path}")
+            
             # Validate the file
             is_valid, message = self.validate_file(file_path)
+            self.logger.debug(f"File validation result: valid={is_valid}, message={message}")
+            
             if not is_valid:
                 self.logger.error(message)
                 return {"success": False, "message": message}
             
             # Create a secure copy of the file
+            self.logger.debug(f"Creating secure copy of file: {file_path}")
             secure_file_path = self.create_file_copy(file_path)
-                
-            # Check file identity to determine what type of file this is
-            identity_result = self.file_agent.check_file_identity(secure_file_path)
             
+            # Check file identity
+            self.logger.debug(f"Checking file identity: {secure_file_path}")
+            identity_result = self.file_agent.check_file_identity(secure_file_path)
+            self.logger.info(f"File identity result: {identity_result}")
+            
+            # If needed, add more detailed analysis of the identity_result here
+            
+            # Refresh file list after upload
             self.logger.info(f"Successfully processed file: {os.path.basename(file_path)}")
             return {
                 "success": True,
@@ -167,6 +193,7 @@ class FileService:
             }
         except Exception as e:
             self.logger.error(f"Error uploading file: {str(e)}")
+            self.logger.exception("Detailed traceback:")
             return {"success": False, "message": f"Error: {str(e)}"}
     
     def read_file_as_dataframe(self, file_path: str) -> pd.DataFrame:
@@ -207,23 +234,43 @@ class FileService:
             A list of file information dictionaries
         """
         try:
+            self.logger.info("Getting list of all files")
             files = self.file_agent.get_all_files()
+            
+            # Enhanced logging
+            self.logger.debug(f"Raw files from file_agent.get_all_files(): {files}")
+            
             result = []
             
-            for file in files:
-                result.append({
-                    "id": file.id,
-                    "name": file.original_name,
-                    "definition": file.definition,
-                    "task_name": file.task_name,
-                    "upload_date": file.upload_date.strftime("%Y-%m-%d %H:%M:%S"),
-                    "row_count": file.row_count,
-                    "output": file.output
-                })
-                
+            # Handle different return types
+            if files:
+                for file in files:
+                    # Check if file is a DataFile object
+                    if hasattr(file, 'id'):
+                        result.append({
+                            "id": file.id,
+                            "name": file.original_name or "Unknown",
+                            "task_name": file.task_name or "Manual Upload",
+                            "upload_date": file.upload_date.strftime("%Y-%m-%d %H:%M:%S") if hasattr(file.upload_date, 'strftime') else str(file.upload_date),
+                            "row_count": file.row_count or 0,
+                            "output": file.output or False
+                        })
+                    # Handle dictionary format
+                    elif isinstance(file, dict):
+                        result.append({
+                            "id": file.get("id", 0),
+                            "name": file.get("name", "Unknown"),
+                            "task_name": file.get("task_name", "Manual Upload"),
+                            "upload_date": file.get("upload_date", datetime.now().strftime("%Y-%m-%d %H:%M:%S")),
+                            "row_count": file.get("row_count", 0),
+                            "output": file.get("output", False)
+                        })
+            
+            self.logger.debug(f"Processed file list: {result}")
             return result
         except Exception as e:
             self.logger.error(f"Error getting file list: {str(e)}")
+            self.logger.exception("Detailed traceback:")
             return []
     
     def get_file_by_id(self, file_id: int) -> Dict[str, Any]:

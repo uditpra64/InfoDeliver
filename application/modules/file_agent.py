@@ -65,6 +65,24 @@ class FileAgent:
     CSV/Excelファイルの読み込みや保存、DBへの登録などを行う。
     """
 
+    def ensure_database_ready(self):
+        """Ensure database is properly initialized"""
+        try:
+            # Test that tables exist by getting count of DataFile
+            count = self.session.query(DataFile).count()
+            logger.debug(f"Database check successful. File count: {count}")
+            return True
+        except Exception as e:
+            logger.error(f"Database not ready: {str(e)}")
+            # Try to re-create tables
+            try:
+                Base.metadata.create_all(self.engine)
+                logger.info("Database tables created")
+                return True
+            except Exception as re_e:
+                logger.error(f"Failed to re-create database tables: {str(re_e)}")
+                return False
+
     def __init__(self, connection_string=None):
         logger.info("FileAgent を初期化します。")
         if connection_string is None:
@@ -250,6 +268,10 @@ class FileAgent:
         logger.info(f"check_file_identity開始: file_path={file_path}")
         candidates = []
         try:
+            # Handle case when task_configs is None
+            if self.task_configs is None:
+                return "検索した結果、ファイルの識別ができません。task_configs が設定されていません。"
+                
             for task_dict in self.task_configs.values():
                 task_name = task_dict["名称"]
                 for file_dict in task_dict["必要なファイル"]:

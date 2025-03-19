@@ -27,16 +27,16 @@ class FrontendAdapter:
     @staticmethod
     def adapt_file_info(file_data: Dict[str, Any]) -> Dict[str, Any]:
         """Adapt file information to frontend expected format"""
-        # Ensure all required fields are present
+        # Ensure all required fields are present with default values
         return {
             "id": file_data.get("id", 0),
-            "name": file_data.get("name", ""),
-            "task_name": file_data.get("task_name", ""),
-            "upload_date": file_data.get("upload_date", datetime.now().isoformat()),
+            "name": file_data.get("name", file_data.get("original_name", "Unknown File")),
+            "task_name": file_data.get("task_name", "Unknown Task"),
+            "upload_date": file_data.get("upload_date", datetime.now().strftime("%Y-%m-%d %H:%M:%S")),
             "row_count": file_data.get("row_count", 0),
             "output": file_data.get("output", False)
         }
-    
+
     @staticmethod
     def adapt_task_list(tasks: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
         """Adapt task list to frontend expected format"""
