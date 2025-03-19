@@ -45,7 +45,7 @@ from application.services.frontend_adapter import frontend_adapter
 
 # Configure logging
 logging.basicConfig(
-    level=logging.INFO,
+    level=logging.DEBUG,
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
     handlers=[
         logging.FileHandler("api.log"),
@@ -309,6 +309,11 @@ def initialize_auth():
 # Startup events
 @app.on_event("startup")
 def startup_event():
+
+    user_db = get_user_db()
+    logger.info(f"User database path: {user_db.db_path}")
+    logger.info(f"Users in database: {list(user_db.users.keys())}")
+    logger.info(f"Admin password from env: {os.getenv('ADMIN_PASSWORD')}")
     # Clean up expired sessions
     try:
         expired_sessions = session_service.cleanup_old_sessions(max_age_seconds=session_expiry_hours * 3600)
@@ -443,8 +448,16 @@ async def save_upload_file(
 @limiter.limit("5/minute")
 async def login_for_access_token(request: Request, form_data: OAuth2PasswordRequestForm = Depends()):
     """Authenticate user and return JWT token"""
+
+    logger.debug(f"Login attempt: username={form_data.username}, password=***")
+    
+    # Verify the user database
+    logger.info(f"User database path: {get_user_db().db_path}")
+    logger.info(f"Users in database: {list(get_user_db().users.keys())}")
+    
     # Authenticate the user
     user = authenticate_user(form_data.username, form_data.password)
+    logger.debug(f"Authentication result: {user is not False}")
     
     if not user:
         raise HTTPException(
