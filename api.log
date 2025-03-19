@@ -1,0 +1,1524 @@
+2025-03-19 16:32:18,535 - payroll_api - INFO - Service modules imported successfully
+2025-03-19 16:32:18,558 - application.modules.file_agent - INFO - FileAgent を初期化します。
+2025-03-19 16:32:18,595 - application.modules.file_agent - INFO - FileAgent 初期化完了: sqlite:///C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\data\app.db
+2025-03-19 16:32:18,596 - application.services.file_service - INFO - FileService initialized with temp_dir: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\web_application\uploads
+2025-03-19 16:32:18,596 - payroll_api - INFO - FileService initialized successfully
+2025-03-19 16:32:18,596 - application.services.payroll_service - INFO - Initializing PayrollService with config: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\application\json\config.json
+2025-03-19 16:32:18,598 - application.modules.agent_collection - INFO - エージェントコレクションを初期化しています...
+2025-03-19 16:32:18,598 - application.modules.file_agent - INFO - FileAgent を初期化します。
+2025-03-19 16:32:18,598 - application.modules.file_agent - WARNING - Could not remove existing database file: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\data\app.db
+2025-03-19 16:32:18,599 - application.modules.file_agent - WARNING - Will try to reuse existing database.
+2025-03-19 16:32:18,604 - application.modules.file_agent - INFO - FileAgent 初期化完了: sqlite:///C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\data\app.db
+2025-03-19 16:32:18,604 - application.modules.agent_collection - INFO - ファイルエージェントを初期化しました。
+2025-03-19 16:32:21,248 - application.modules.agent_collection - INFO - 設定ファイルを正常に読み込みました: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\application\json\config.json
+2025-03-19 16:32:21,252 - application.modules.agent_collection - INFO - タスクを正常に作成。タスク数: 4
+2025-03-19 16:32:21,252 - application.modules.agent_collection - INFO - IntentAnalyzer を初期化
+2025-03-19 16:32:21,252 - application.modules.agent_collection - INFO - RAG_AGENT: 初期化開始
+2025-03-19 16:32:21,253 - application.modules.rag_agent - INFO - RAG_Agentを初期化します。
+2025-03-19 16:32:33,082 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-03-19 16:32:33,082 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-03-19 16:32:35,547 - application.modules.rag_agent - INFO - RAG用に複数ファイルからRetrieverを作成します。
+2025-03-19 16:32:35,568 - faiss.loader - INFO - Loading faiss with AVX2 support.
+2025-03-19 16:32:35,590 - faiss.loader - INFO - Successfully loaded faiss with AVX2 support.
+2025-03-19 16:32:35,597 - faiss - INFO - Failed to load GPU Faiss: name 'GpuIndexIVFFlat' is not defined. Will not load constructor refs for GPU indexes.
+2025-03-19 16:32:35,800 - application.modules.rag_agent - INFO - RAG_Agent初期化完了
+2025-03-19 16:32:35,800 - application.modules.agent_collection - INFO - RAG_AGENT: 初期化完了
+2025-03-19 16:32:35,800 - application.modules.agent_collection - INFO - workflow 作成
+2025-03-19 16:32:35,800 - application.services.payroll_service - INFO - AgentCollection initialized successfully
+2025-03-19 16:32:35,800 - payroll_api - INFO - PayrollService initialized successfully
+2025-03-19 16:32:35,800 - application.services.session_service - INFO - Session persistence enabled, using directory: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\web_application\sessions
+2025-03-19 16:32:35,800 - application.services.session_service - INFO - Loaded 0 sessions from disk
+2025-03-19 16:32:35,800 - application.services.session_service - INFO - SessionService initialized with 0 sessions
+2025-03-19 16:32:35,800 - payroll_api - INFO - SessionService initialized successfully
+2025-03-19 16:32:36,020 - application.services.session_service - INFO - Cleaned up 0 old sessions
+2025-03-19 16:32:36,020 - payroll_api - INFO - Startup: cleaned up 0 sessions older than 24 hours
+2025-03-19 16:32:36,020 - payroll_api - INFO - Deleted 0 old temporary files
+2025-03-19 16:32:36,020 - payroll_api - INFO - Startup: cleaned up temporary files
+2025-03-19 16:32:36,020 - payroll_api - INFO - Initializing authentication
+2025-03-19 16:32:36,020 - payroll_api - INFO - User authentication initialized with 2 users
+2025-03-19 16:32:36,020 - payroll_api - INFO - Authentication initialized successfully
+2025-03-19 16:32:51,259 - payroll_api - INFO - API shutting down
+2025-03-19 16:32:51,259 - payroll_api - INFO - Deleted 0 old temporary files
+2025-03-19 16:32:57,396 - payroll_api - INFO - Service modules imported successfully
+2025-03-19 16:32:57,417 - application.modules.file_agent - INFO - FileAgent を初期化します。
+2025-03-19 16:32:57,449 - application.modules.file_agent - INFO - FileAgent 初期化完了: sqlite:///C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\data\app.db
+2025-03-19 16:32:57,449 - application.services.file_service - INFO - FileService initialized with temp_dir: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\web_application\uploads
+2025-03-19 16:32:57,449 - payroll_api - INFO - FileService initialized successfully
+2025-03-19 16:32:57,450 - application.services.payroll_service - INFO - Initializing PayrollService with config: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\application\json\config.json
+2025-03-19 16:32:57,450 - application.modules.agent_collection - INFO - エージェントコレクションを初期化しています...
+2025-03-19 16:32:57,450 - application.modules.file_agent - INFO - FileAgent を初期化します。
+2025-03-19 16:32:57,450 - application.modules.file_agent - WARNING - Could not remove existing database file: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\data\app.db
+2025-03-19 16:32:57,450 - application.modules.file_agent - WARNING - Will try to reuse existing database.
+2025-03-19 16:32:57,452 - application.modules.file_agent - INFO - FileAgent 初期化完了: sqlite:///C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\data\app.db
+2025-03-19 16:32:57,452 - application.modules.agent_collection - INFO - ファイルエージェントを初期化しました。
+2025-03-19 16:32:59,736 - application.modules.agent_collection - INFO - 設定ファイルを正常に読み込みました: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\application\json\config.json
+2025-03-19 16:32:59,736 - application.modules.agent_collection - INFO - タスクを正常に作成。タスク数: 4
+2025-03-19 16:32:59,736 - application.modules.agent_collection - INFO - IntentAnalyzer を初期化
+2025-03-19 16:32:59,736 - application.modules.agent_collection - INFO - RAG_AGENT: 初期化開始
+2025-03-19 16:32:59,736 - application.modules.rag_agent - INFO - RAG_Agentを初期化します。
+2025-03-19 16:33:07,796 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-03-19 16:33:07,796 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-03-19 16:33:10,239 - application.modules.rag_agent - INFO - RAG用に複数ファイルからRetrieverを作成します。
+2025-03-19 16:33:10,261 - faiss.loader - INFO - Loading faiss with AVX2 support.
+2025-03-19 16:33:10,275 - faiss.loader - INFO - Successfully loaded faiss with AVX2 support.
+2025-03-19 16:33:10,291 - faiss - INFO - Failed to load GPU Faiss: name 'GpuIndexIVFFlat' is not defined. Will not load constructor refs for GPU indexes.
+2025-03-19 16:33:10,515 - application.modules.rag_agent - INFO - RAG_Agent初期化完了
+2025-03-19 16:33:10,515 - application.modules.agent_collection - INFO - RAG_AGENT: 初期化完了
+2025-03-19 16:33:10,530 - application.modules.agent_collection - INFO - workflow 作成
+2025-03-19 16:33:10,530 - application.services.payroll_service - INFO - AgentCollection initialized successfully
+2025-03-19 16:33:10,530 - payroll_api - INFO - PayrollService initialized successfully
+2025-03-19 16:33:10,531 - application.services.session_service - INFO - Session persistence enabled, using directory: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\web_application\sessions
+2025-03-19 16:33:10,531 - application.services.session_service - INFO - Loaded 0 sessions from disk
+2025-03-19 16:33:10,531 - application.services.session_service - INFO - SessionService initialized with 0 sessions
+2025-03-19 16:33:10,531 - payroll_api - INFO - SessionService initialized successfully
+2025-03-19 16:33:10,716 - application.services.session_service - INFO - Cleaned up 0 old sessions
+2025-03-19 16:33:10,716 - payroll_api - INFO - Startup: cleaned up 0 sessions older than 24 hours
+2025-03-19 16:33:10,716 - payroll_api - INFO - Deleted 0 old temporary files
+2025-03-19 16:33:10,716 - payroll_api - INFO - Startup: cleaned up temporary files
+2025-03-19 16:33:10,716 - payroll_api - INFO - Initializing authentication
+2025-03-19 16:33:10,716 - payroll_api - INFO - User authentication initialized with 2 users
+2025-03-19 16:33:10,716 - payroll_api - INFO - Authentication initialized successfully
+2025-03-19 16:33:54,960 - passlib.handlers.bcrypt - WARNING - (trapped) error reading bcrypt version
+Traceback (most recent call last):
+  File "C:\Users\Udit Pradhan\formai_excelllm\venv\Lib\site-packages\passlib\handlers\bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+              ^^^^^^^^^^^^^^^^^
+AttributeError: module 'bcrypt' has no attribute '__about__'
+2025-03-19 17:03:09,660 - payroll_api - INFO - API shutting down
+2025-03-19 17:03:09,662 - payroll_api - INFO - Deleted 0 old temporary files
+2025-03-19 17:03:21,314 - payroll_api - INFO - Service modules imported successfully
+2025-03-19 17:03:21,352 - application.modules.file_agent - INFO - FileAgent を初期化します。
+2025-03-19 17:03:21,398 - application.modules.file_agent - INFO - FileAgent 初期化完了: sqlite:///C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\data\app.db
+2025-03-19 17:03:21,408 - application.services.file_service - INFO - FileService initialized with temp_dir: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\web_application\uploads
+2025-03-19 17:03:21,408 - payroll_api - INFO - FileService initialized successfully
+2025-03-19 17:03:21,408 - application.services.payroll_service - INFO - Initializing PayrollService with config: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\application\json\config.json
+2025-03-19 17:03:21,409 - application.modules.agent_collection - INFO - エージェントコレクションを初期化しています...
+2025-03-19 17:03:21,409 - application.modules.file_agent - INFO - FileAgent を初期化します。
+2025-03-19 17:03:21,409 - application.modules.file_agent - WARNING - Could not remove existing database file: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\data\app.db
+2025-03-19 17:03:21,409 - application.modules.file_agent - WARNING - Will try to reuse existing database.
+2025-03-19 17:03:21,416 - application.modules.file_agent - INFO - FileAgent 初期化完了: sqlite:///C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\data\app.db
+2025-03-19 17:03:21,416 - application.modules.agent_collection - INFO - ファイルエージェントを初期化しました。
+2025-03-19 17:03:25,855 - application.modules.agent_collection - INFO - 設定ファイルを正常に読み込みました: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\application\json\config.json
+2025-03-19 17:03:25,857 - application.modules.agent_collection - INFO - タスクを正常に作成。タスク数: 4
+2025-03-19 17:03:25,857 - application.modules.agent_collection - INFO - IntentAnalyzer を初期化
+2025-03-19 17:03:25,857 - application.modules.agent_collection - INFO - RAG_AGENT: 初期化開始
+2025-03-19 17:03:25,857 - application.modules.rag_agent - INFO - RAG_Agentを初期化します。
+2025-03-19 17:03:42,789 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-03-19 17:03:42,789 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-03-19 17:03:45,251 - application.modules.rag_agent - INFO - RAG用に複数ファイルからRetrieverを作成します。
+2025-03-19 17:03:45,292 - faiss.loader - INFO - Loading faiss with AVX2 support.
+2025-03-19 17:03:45,317 - faiss.loader - INFO - Successfully loaded faiss with AVX2 support.
+2025-03-19 17:03:45,339 - faiss - INFO - Failed to load GPU Faiss: name 'GpuIndexIVFFlat' is not defined. Will not load constructor refs for GPU indexes.
+2025-03-19 17:03:45,585 - application.modules.rag_agent - INFO - RAG_Agent初期化完了
+2025-03-19 17:03:45,585 - application.modules.agent_collection - INFO - RAG_AGENT: 初期化完了
+2025-03-19 17:03:45,585 - application.modules.agent_collection - INFO - workflow 作成
+2025-03-19 17:03:45,588 - application.services.payroll_service - INFO - AgentCollection initialized successfully
+2025-03-19 17:03:45,588 - payroll_api - INFO - PayrollService initialized successfully
+2025-03-19 17:03:45,588 - application.services.session_service - INFO - Session persistence enabled, using directory: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\web_application\sessions
+2025-03-19 17:03:45,588 - application.services.session_service - INFO - Loaded 0 sessions from disk
+2025-03-19 17:03:45,588 - application.services.session_service - INFO - SessionService initialized with 0 sessions
+2025-03-19 17:03:45,588 - payroll_api - INFO - SessionService initialized successfully
+2025-03-19 17:03:45,808 - application.services.session_service - INFO - Cleaned up 0 old sessions
+2025-03-19 17:03:45,815 - payroll_api - INFO - Startup: cleaned up 0 sessions older than 24 hours
+2025-03-19 17:03:45,815 - payroll_api - INFO - Deleted 0 old temporary files
+2025-03-19 17:03:45,816 - payroll_api - INFO - Startup: cleaned up temporary files
+2025-03-19 17:03:45,816 - payroll_api - INFO - Initializing authentication
+2025-03-19 17:03:45,817 - payroll_api - INFO - User authentication initialized with 2 users
+2025-03-19 17:03:45,817 - payroll_api - INFO - Authentication initialized successfully
+2025-03-19 17:07:03,655 - payroll_api - INFO - API shutting down
+2025-03-19 17:07:03,656 - payroll_api - INFO - Deleted 0 old temporary files
+2025-03-19 17:07:13,825 - payroll_api - INFO - Service modules imported successfully
+2025-03-19 17:07:13,841 - application.modules.file_agent - INFO - FileAgent を初期化します。
+2025-03-19 17:07:13,873 - application.modules.file_agent - INFO - FileAgent 初期化完了: sqlite:///C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\data\app.db
+2025-03-19 17:07:13,874 - application.services.file_service - INFO - FileService initialized with temp_dir: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\web_application\uploads
+2025-03-19 17:07:13,874 - payroll_api - INFO - FileService initialized successfully
+2025-03-19 17:07:13,874 - application.services.payroll_service - INFO - Initializing PayrollService with config: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\application\json\config.json
+2025-03-19 17:07:13,874 - application.modules.agent_collection - INFO - エージェントコレクションを初期化しています...
+2025-03-19 17:07:13,875 - application.modules.file_agent - INFO - FileAgent を初期化します。
+2025-03-19 17:07:13,875 - application.modules.file_agent - WARNING - Could not remove existing database file: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\data\app.db
+2025-03-19 17:07:13,875 - application.modules.file_agent - WARNING - Will try to reuse existing database.
+2025-03-19 17:07:13,879 - application.modules.file_agent - INFO - FileAgent 初期化完了: sqlite:///C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\data\app.db
+2025-03-19 17:07:13,879 - application.modules.agent_collection - INFO - ファイルエージェントを初期化しました。
+2025-03-19 17:07:16,240 - application.modules.agent_collection - INFO - 設定ファイルを正常に読み込みました: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\application\json\config.json
+2025-03-19 17:07:16,249 - application.modules.agent_collection - INFO - タスクを正常に作成。タスク数: 4
+2025-03-19 17:07:16,249 - application.modules.agent_collection - INFO - IntentAnalyzer を初期化
+2025-03-19 17:07:16,249 - application.modules.agent_collection - INFO - RAG_AGENT: 初期化開始
+2025-03-19 17:07:16,249 - application.modules.rag_agent - INFO - RAG_Agentを初期化します。
+2025-03-19 17:07:24,520 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-03-19 17:07:24,520 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-03-19 17:07:26,968 - application.modules.rag_agent - INFO - RAG用に複数ファイルからRetrieverを作成します。
+2025-03-19 17:07:26,998 - faiss.loader - INFO - Loading faiss with AVX2 support.
+2025-03-19 17:07:27,020 - faiss.loader - INFO - Successfully loaded faiss with AVX2 support.
+2025-03-19 17:07:27,027 - faiss - INFO - Failed to load GPU Faiss: name 'GpuIndexIVFFlat' is not defined. Will not load constructor refs for GPU indexes.
+2025-03-19 17:07:27,236 - application.modules.rag_agent - INFO - RAG_Agent初期化完了
+2025-03-19 17:07:27,236 - application.modules.agent_collection - INFO - RAG_AGENT: 初期化完了
+2025-03-19 17:07:27,236 - application.modules.agent_collection - INFO - workflow 作成
+2025-03-19 17:07:27,250 - application.services.payroll_service - INFO - AgentCollection initialized successfully
+2025-03-19 17:07:27,250 - payroll_api - INFO - PayrollService initialized successfully
+2025-03-19 17:07:27,251 - application.services.session_service - INFO - Session persistence enabled, using directory: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\web_application\sessions
+2025-03-19 17:07:27,251 - application.services.session_service - INFO - Loaded 0 sessions from disk
+2025-03-19 17:07:27,251 - application.services.session_service - INFO - SessionService initialized with 0 sessions
+2025-03-19 17:07:27,251 - payroll_api - INFO - SessionService initialized successfully
+2025-03-19 17:07:27,469 - application.services.session_service - INFO - Cleaned up 0 old sessions
+2025-03-19 17:07:27,469 - payroll_api - INFO - Startup: cleaned up 0 sessions older than 24 hours
+2025-03-19 17:07:27,470 - payroll_api - INFO - Deleted 0 old temporary files
+2025-03-19 17:07:27,470 - payroll_api - INFO - Startup: cleaned up temporary files
+2025-03-19 17:07:27,470 - payroll_api - INFO - Initializing authentication
+2025-03-19 17:07:27,470 - payroll_api - INFO - User authentication initialized with 2 users
+2025-03-19 17:07:27,470 - payroll_api - INFO - Authentication initialized successfully
+2025-03-19 17:09:33,466 - payroll_api - INFO - API shutting down
+2025-03-19 17:09:33,468 - payroll_api - INFO - Deleted 0 old temporary files
+2025-03-19 17:11:20,041 - payroll_api - INFO - Service modules imported successfully
+2025-03-19 17:11:20,044 - application.modules.file_agent - INFO - FileAgent を初期化します。
+2025-03-19 17:11:20,090 - application.modules.file_agent - INFO - FileAgent 初期化完了: sqlite:///C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\data\app.db
+2025-03-19 17:11:20,090 - application.services.file_service - INFO - FileService initialized with temp_dir: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\web_application\uploads
+2025-03-19 17:11:20,091 - payroll_api - INFO - FileService initialized successfully
+2025-03-19 17:11:20,091 - application.services.payroll_service - INFO - Initializing PayrollService with config: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\application\json\config.json
+2025-03-19 17:11:20,091 - application.modules.agent_collection - INFO - エージェントコレクションを初期化しています...
+2025-03-19 17:11:20,091 - application.modules.file_agent - INFO - FileAgent を初期化します。
+2025-03-19 17:11:20,093 - application.modules.file_agent - WARNING - Could not remove existing database file: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\data\app.db
+2025-03-19 17:11:20,093 - application.modules.file_agent - WARNING - Will try to reuse existing database.
+2025-03-19 17:11:20,093 - application.modules.file_agent - INFO - FileAgent 初期化完了: sqlite:///C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\data\app.db
+2025-03-19 17:11:20,093 - application.modules.agent_collection - INFO - ファイルエージェントを初期化しました。
+2025-03-19 17:11:21,919 - application.modules.agent_collection - INFO - 設定ファイルを正常に読み込みました: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\application\json\config.json
+2025-03-19 17:11:21,920 - application.modules.agent_collection - INFO - タスクを正常に作成。タスク数: 4
+2025-03-19 17:11:21,920 - application.modules.agent_collection - INFO - IntentAnalyzer を初期化
+2025-03-19 17:11:21,920 - application.modules.agent_collection - INFO - RAG_AGENT: 初期化開始
+2025-03-19 17:11:21,920 - application.modules.rag_agent - INFO - RAG_Agentを初期化します。
+2025-03-19 17:11:28,526 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-03-19 17:11:28,526 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-03-19 17:11:31,080 - application.modules.rag_agent - INFO - RAG用に複数ファイルからRetrieverを作成します。
+2025-03-19 17:11:31,104 - faiss.loader - INFO - Loading faiss with AVX2 support.
+2025-03-19 17:11:31,133 - faiss.loader - INFO - Successfully loaded faiss with AVX2 support.
+2025-03-19 17:11:31,140 - faiss - INFO - Failed to load GPU Faiss: name 'GpuIndexIVFFlat' is not defined. Will not load constructor refs for GPU indexes.
+2025-03-19 17:11:31,341 - application.modules.rag_agent - INFO - RAG_Agent初期化完了
+2025-03-19 17:11:31,341 - application.modules.agent_collection - INFO - RAG_AGENT: 初期化完了
+2025-03-19 17:11:31,341 - application.modules.agent_collection - INFO - workflow 作成
+2025-03-19 17:11:31,341 - application.services.payroll_service - INFO - AgentCollection initialized successfully
+2025-03-19 17:11:31,341 - payroll_api - INFO - PayrollService initialized successfully
+2025-03-19 17:11:31,341 - application.services.session_service - INFO - Session persistence enabled, using directory: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\web_application\sessions
+2025-03-19 17:11:31,341 - application.services.session_service - INFO - Loaded 0 sessions from disk
+2025-03-19 17:11:31,341 - application.services.session_service - INFO - SessionService initialized with 0 sessions
+2025-03-19 17:11:31,341 - payroll_api - INFO - SessionService initialized successfully
+2025-03-19 17:11:31,540 - application.services.session_service - INFO - Cleaned up 0 old sessions
+2025-03-19 17:11:31,540 - payroll_api - INFO - Startup: cleaned up 0 sessions older than 24 hours
+2025-03-19 17:11:31,540 - payroll_api - INFO - Deleted 0 old temporary files
+2025-03-19 17:11:31,540 - payroll_api - INFO - Startup: cleaned up temporary files
+2025-03-19 17:11:31,540 - payroll_api - INFO - Initializing authentication
+2025-03-19 17:11:31,540 - payroll_api - INFO - User authentication initialized with 2 users
+2025-03-19 17:11:31,540 - payroll_api - INFO - Authentication initialized successfully
+2025-03-19 17:16:56,503 - payroll_api - INFO - API shutting down
+2025-03-19 17:16:56,503 - payroll_api - INFO - Deleted 0 old temporary files
+2025-03-19 17:17:03,223 - payroll_api - INFO - Service modules imported successfully
+2025-03-19 17:17:03,244 - application.modules.file_agent - INFO - FileAgent を初期化します。
+2025-03-19 17:17:03,281 - application.modules.file_agent - INFO - FileAgent 初期化完了: sqlite:///C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\data\app.db
+2025-03-19 17:17:03,282 - application.services.file_service - INFO - FileService initialized with temp_dir: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\web_application\uploads
+2025-03-19 17:17:03,282 - payroll_api - INFO - FileService initialized successfully
+2025-03-19 17:17:03,283 - application.services.payroll_service - INFO - Initializing PayrollService with config: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\application\json\config.json
+2025-03-19 17:17:03,283 - application.modules.agent_collection - INFO - エージェントコレクションを初期化しています...
+2025-03-19 17:17:03,283 - application.modules.file_agent - INFO - FileAgent を初期化します。
+2025-03-19 17:17:03,284 - application.modules.file_agent - WARNING - Could not remove existing database file: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\data\app.db
+2025-03-19 17:17:03,285 - application.modules.file_agent - WARNING - Will try to reuse existing database.
+2025-03-19 17:17:03,290 - application.modules.file_agent - INFO - FileAgent 初期化完了: sqlite:///C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\data\app.db
+2025-03-19 17:17:03,290 - application.modules.agent_collection - INFO - ファイルエージェントを初期化しました。
+2025-03-19 17:17:06,458 - application.modules.agent_collection - INFO - 設定ファイルを正常に読み込みました: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\application\json\config.json
+2025-03-19 17:17:06,462 - application.modules.agent_collection - INFO - タスクを正常に作成。タスク数: 4
+2025-03-19 17:17:06,463 - application.modules.agent_collection - INFO - IntentAnalyzer を初期化
+2025-03-19 17:17:06,463 - application.modules.agent_collection - INFO - RAG_AGENT: 初期化開始
+2025-03-19 17:17:06,463 - application.modules.rag_agent - INFO - RAG_Agentを初期化します。
+2025-03-19 17:17:17,020 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-03-19 17:17:17,020 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-03-19 17:17:19,725 - application.modules.rag_agent - INFO - RAG用に複数ファイルからRetrieverを作成します。
+2025-03-19 17:17:19,758 - faiss.loader - INFO - Loading faiss with AVX2 support.
+2025-03-19 17:17:19,793 - faiss.loader - INFO - Successfully loaded faiss with AVX2 support.
+2025-03-19 17:17:19,805 - faiss - INFO - Failed to load GPU Faiss: name 'GpuIndexIVFFlat' is not defined. Will not load constructor refs for GPU indexes.
+2025-03-19 17:17:20,036 - application.modules.rag_agent - INFO - RAG_Agent初期化完了
+2025-03-19 17:17:20,037 - application.modules.agent_collection - INFO - RAG_AGENT: 初期化完了
+2025-03-19 17:17:20,038 - application.modules.agent_collection - INFO - workflow 作成
+2025-03-19 17:17:20,039 - application.services.payroll_service - INFO - AgentCollection initialized successfully
+2025-03-19 17:17:20,039 - payroll_api - INFO - PayrollService initialized successfully
+2025-03-19 17:17:20,040 - application.services.session_service - INFO - Session persistence enabled, using directory: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\web_application\sessions
+2025-03-19 17:17:20,041 - application.services.session_service - INFO - Loaded 0 sessions from disk
+2025-03-19 17:17:20,042 - application.services.session_service - INFO - SessionService initialized with 0 sessions
+2025-03-19 17:17:20,042 - payroll_api - INFO - SessionService initialized successfully
+2025-03-19 17:17:20,317 - payroll_api - INFO - User database path: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\application\services\security\users.json
+2025-03-19 17:17:20,318 - payroll_api - INFO - Users in database: ['admin', 'user']
+2025-03-19 17:17:20,318 - payroll_api - INFO - Admin password from env: password
+2025-03-19 17:17:20,318 - application.services.session_service - INFO - Cleaned up 0 old sessions
+2025-03-19 17:17:20,318 - payroll_api - INFO - Startup: cleaned up 0 sessions older than 24 hours
+2025-03-19 17:17:20,318 - payroll_api - INFO - Deleted 0 old temporary files
+2025-03-19 17:17:20,320 - payroll_api - INFO - Startup: cleaned up temporary files
+2025-03-19 17:17:20,320 - payroll_api - INFO - Initializing authentication
+2025-03-19 17:17:20,320 - payroll_api - INFO - User authentication initialized with 2 users
+2025-03-19 17:17:20,320 - payroll_api - INFO - Authentication initialized successfully
+2025-03-19 17:18:20,482 - payroll_api - INFO - API shutting down
+2025-03-19 17:18:20,485 - payroll_api - INFO - Deleted 0 old temporary files
+2025-03-19 17:18:27,162 - payroll_api - INFO - Service modules imported successfully
+2025-03-19 17:18:27,184 - application.modules.file_agent - INFO - FileAgent を初期化します。
+2025-03-19 17:18:27,228 - application.modules.file_agent - INFO - FileAgent 初期化完了: sqlite:///C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\data\app.db
+2025-03-19 17:18:27,229 - application.services.file_service - INFO - FileService initialized with temp_dir: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\web_application\uploads
+2025-03-19 17:18:27,230 - payroll_api - INFO - FileService initialized successfully
+2025-03-19 17:18:27,230 - application.services.payroll_service - INFO - Initializing PayrollService with config: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\application\json\config.json
+2025-03-19 17:18:27,230 - application.modules.agent_collection - INFO - エージェントコレクションを初期化しています...
+2025-03-19 17:18:27,231 - application.modules.file_agent - INFO - FileAgent を初期化します。
+2025-03-19 17:18:27,231 - application.modules.file_agent - WARNING - Could not remove existing database file: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\data\app.db
+2025-03-19 17:18:27,231 - application.modules.file_agent - WARNING - Will try to reuse existing database.
+2025-03-19 17:18:27,231 - application.modules.file_agent - INFO - FileAgent 初期化完了: sqlite:///C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\data\app.db
+2025-03-19 17:18:27,231 - application.modules.agent_collection - INFO - ファイルエージェントを初期化しました。
+2025-03-19 17:18:29,662 - application.modules.agent_collection - INFO - 設定ファイルを正常に読み込みました: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\application\json\config.json
+2025-03-19 17:18:29,665 - application.modules.agent_collection - INFO - タスクを正常に作成。タスク数: 4
+2025-03-19 17:18:29,665 - application.modules.agent_collection - INFO - IntentAnalyzer を初期化
+2025-03-19 17:18:29,666 - application.modules.agent_collection - INFO - RAG_AGENT: 初期化開始
+2025-03-19 17:18:29,666 - application.modules.rag_agent - INFO - RAG_Agentを初期化します。
+2025-03-19 17:18:39,657 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-03-19 17:18:39,657 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-03-19 17:18:42,044 - application.modules.rag_agent - INFO - RAG用に複数ファイルからRetrieverを作成します。
+2025-03-19 17:18:42,076 - faiss.loader - INFO - Loading faiss with AVX2 support.
+2025-03-19 17:18:42,104 - faiss.loader - INFO - Successfully loaded faiss with AVX2 support.
+2025-03-19 17:18:42,116 - faiss - INFO - Failed to load GPU Faiss: name 'GpuIndexIVFFlat' is not defined. Will not load constructor refs for GPU indexes.
+2025-03-19 17:18:42,332 - application.modules.rag_agent - INFO - RAG_Agent初期化完了
+2025-03-19 17:18:42,332 - application.modules.agent_collection - INFO - RAG_AGENT: 初期化完了
+2025-03-19 17:18:42,333 - application.modules.agent_collection - INFO - workflow 作成
+2025-03-19 17:18:42,333 - application.services.payroll_service - INFO - AgentCollection initialized successfully
+2025-03-19 17:18:42,334 - payroll_api - INFO - PayrollService initialized successfully
+2025-03-19 17:18:42,334 - application.services.session_service - INFO - Session persistence enabled, using directory: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\web_application\sessions
+2025-03-19 17:18:42,335 - application.services.session_service - INFO - Loaded 0 sessions from disk
+2025-03-19 17:18:42,335 - application.services.session_service - INFO - SessionService initialized with 0 sessions
+2025-03-19 17:18:42,335 - payroll_api - INFO - SessionService initialized successfully
+2025-03-19 17:18:42,610 - payroll_api - INFO - User database path: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\application\services\security\users.json
+2025-03-19 17:18:42,611 - payroll_api - INFO - Users in database: ['admin', 'user']
+2025-03-19 17:18:42,611 - payroll_api - INFO - Admin password from env: password
+2025-03-19 17:18:42,612 - application.services.session_service - INFO - Cleaned up 0 old sessions
+2025-03-19 17:18:42,612 - payroll_api - INFO - Startup: cleaned up 0 sessions older than 24 hours
+2025-03-19 17:18:42,613 - payroll_api - INFO - Deleted 0 old temporary files
+2025-03-19 17:18:42,614 - payroll_api - INFO - Startup: cleaned up temporary files
+2025-03-19 17:18:42,614 - payroll_api - INFO - Initializing authentication
+2025-03-19 17:18:42,615 - payroll_api - INFO - User authentication initialized with 2 users
+2025-03-19 17:18:42,615 - payroll_api - INFO - Authentication initialized successfully
+2025-03-19 17:19:25,544 - payroll_api - INFO - API shutting down
+2025-03-19 17:19:25,545 - payroll_api - INFO - Deleted 0 old temporary files
+2025-03-19 17:19:32,024 - payroll_api - INFO - Service modules imported successfully
+2025-03-19 17:19:32,062 - application.modules.file_agent - INFO - FileAgent を初期化します。
+2025-03-19 17:19:32,111 - application.modules.file_agent - INFO - FileAgent 初期化完了: sqlite:///C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\data\app.db
+2025-03-19 17:19:32,111 - application.services.file_service - INFO - FileService initialized with temp_dir: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\web_application\uploads
+2025-03-19 17:19:32,114 - payroll_api - INFO - FileService initialized successfully
+2025-03-19 17:19:32,114 - application.services.payroll_service - INFO - Initializing PayrollService with config: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\application\json\config.json
+2025-03-19 17:19:32,114 - application.modules.agent_collection - INFO - エージェントコレクションを初期化しています...
+2025-03-19 17:19:32,115 - application.modules.file_agent - INFO - FileAgent を初期化します。
+2025-03-19 17:19:32,115 - application.modules.file_agent - WARNING - Could not remove existing database file: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\data\app.db
+2025-03-19 17:19:32,116 - application.modules.file_agent - WARNING - Will try to reuse existing database.
+2025-03-19 17:19:32,118 - application.modules.file_agent - INFO - FileAgent 初期化完了: sqlite:///C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\data\app.db
+2025-03-19 17:19:32,118 - application.modules.agent_collection - INFO - ファイルエージェントを初期化しました。
+2025-03-19 17:19:35,526 - application.modules.agent_collection - INFO - 設定ファイルを正常に読み込みました: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\application\json\config.json
+2025-03-19 17:19:35,530 - application.modules.agent_collection - INFO - タスクを正常に作成。タスク数: 4
+2025-03-19 17:19:35,530 - application.modules.agent_collection - INFO - IntentAnalyzer を初期化
+2025-03-19 17:19:35,530 - application.modules.agent_collection - INFO - RAG_AGENT: 初期化開始
+2025-03-19 17:19:35,531 - application.modules.rag_agent - INFO - RAG_Agentを初期化します。
+2025-03-19 17:19:45,042 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-03-19 17:19:45,042 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-03-19 17:19:45,051 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): huggingface.co:443
+2025-03-19 17:19:45,380 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/modules.json HTTP/1.1" 200 0
+2025-03-19 17:19:45,555 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/config_sentence_transformers.json HTTP/1.1" 200 0
+2025-03-19 17:19:45,721 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/README.md HTTP/1.1" 200 0
+2025-03-19 17:19:45,899 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/modules.json HTTP/1.1" 200 0
+2025-03-19 17:19:46,048 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/sentence_bert_config.json HTTP/1.1" 200 0
+2025-03-19 17:19:46,232 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/adapter_config.json HTTP/1.1" 404 0
+2025-03-19 17:19:46,407 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/config.json HTTP/1.1" 200 0
+2025-03-19 17:19:47,117 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/tokenizer_config.json HTTP/1.1" 200 0
+2025-03-19 17:19:47,404 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "GET /api/models/sentence-transformers/all-MiniLM-L6-v2/revision/main HTTP/1.1" 200 6729
+2025-03-19 17:19:47,587 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "GET /api/models/sentence-transformers/all-MiniLM-L6-v2 HTTP/1.1" 200 6729
+2025-03-19 17:19:47,587 - application.modules.rag_agent - DEBUG - HuggingFaceEmbeddings インスタンス生成OK
+2025-03-19 17:19:47,613 - application.modules.rag_agent - DEBUG - embed_query実行OK. 長さ=384
+2025-03-19 17:19:47,613 - application.modules.rag_agent - DEBUG - RAG用chainを作成します。
+2025-03-19 17:19:47,613 - application.modules.rag_agent - INFO - RAG用に複数ファイルからRetrieverを作成します。
+2025-03-19 17:19:47,618 - application.modules.rag_agent - DEBUG - ファイル C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\rule\test_rule.md は 1 個に分割
+2025-03-19 17:19:47,618 - application.modules.rag_agent - DEBUG - 合計 1 個の分割ドキュメントを作成します。
+2025-03-19 17:19:47,645 - faiss.loader - DEBUG - Environment variable FAISS_OPT_LEVEL is not set, so let's pick the instruction set according to the current CPU
+2025-03-19 17:19:47,645 - faiss.loader - INFO - Loading faiss with AVX2 support.
+2025-03-19 17:19:47,676 - faiss.loader - INFO - Successfully loaded faiss with AVX2 support.
+2025-03-19 17:19:47,686 - faiss - INFO - Failed to load GPU Faiss: name 'GpuIndexIVFFlat' is not defined. Will not load constructor refs for GPU indexes.
+2025-03-19 17:19:47,688 - application.modules.rag_agent - DEBUG - Vectorstore(Faiss)作成完了
+2025-03-19 17:19:47,694 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): api.smith.langchain.com:443
+2025-03-19 17:19:47,706 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (2): api.smith.langchain.com:443
+2025-03-19 17:19:47,885 - urllib3.connectionpool - DEBUG - https://api.smith.langchain.com:443 "GET /info HTTP/1.1" 200 672
+2025-03-19 17:19:47,888 - urllib3.connectionpool - DEBUG - https://api.smith.langchain.com:443 "GET /commits/rlm/rag-prompt/latest HTTP/1.1" 200 844
+2025-03-19 17:19:47,896 - application.modules.rag_agent - INFO - RAG_Agent初期化完了
+2025-03-19 17:19:47,897 - application.modules.agent_collection - INFO - RAG_AGENT: 初期化完了
+2025-03-19 17:19:47,897 - application.modules.agent_collection - INFO - workflow 作成
+2025-03-19 17:19:47,898 - application.services.payroll_service - INFO - AgentCollection initialized successfully
+2025-03-19 17:19:47,898 - payroll_api - INFO - PayrollService initialized successfully
+2025-03-19 17:19:47,899 - application.services.session_service - INFO - Session persistence enabled, using directory: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\web_application\sessions
+2025-03-19 17:19:47,899 - application.services.session_service - INFO - Loaded 0 sessions from disk
+2025-03-19 17:19:47,899 - application.services.session_service - INFO - SessionService initialized with 0 sessions
+2025-03-19 17:19:47,900 - payroll_api - INFO - SessionService initialized successfully
+2025-03-19 17:19:48,080 - payroll_api - INFO - User database path: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\application\services\security\users.json
+2025-03-19 17:19:48,080 - payroll_api - INFO - Users in database: ['admin', 'user']
+2025-03-19 17:19:48,080 - payroll_api - INFO - Admin password from env: password
+2025-03-19 17:19:48,080 - application.services.session_service - INFO - Cleaned up 0 old sessions
+2025-03-19 17:19:48,080 - payroll_api - INFO - Startup: cleaned up 0 sessions older than 24 hours
+2025-03-19 17:19:48,080 - payroll_api - INFO - Deleted 0 old temporary files
+2025-03-19 17:19:48,080 - payroll_api - INFO - Startup: cleaned up temporary files
+2025-03-19 17:19:48,096 - payroll_api - INFO - Initializing authentication
+2025-03-19 17:19:48,096 - payroll_api - INFO - User authentication initialized with 2 users
+2025-03-19 17:19:48,096 - payroll_api - INFO - Authentication initialized successfully
+2025-03-19 17:20:04,784 - python_multipart.multipart - DEBUG - Calling on_field_start with no data
+2025-03-19 17:20:04,784 - python_multipart.multipart - DEBUG - Calling on_field_name with data[0:10]
+2025-03-19 17:20:04,784 - python_multipart.multipart - DEBUG - Calling on_field_data with data[11:19]
+2025-03-19 17:20:04,785 - python_multipart.multipart - DEBUG - Calling on_field_end with no data
+2025-03-19 17:20:04,785 - python_multipart.multipart - DEBUG - Calling on_field_start with no data
+2025-03-19 17:20:04,786 - python_multipart.multipart - DEBUG - Calling on_field_name with data[20:28]
+2025-03-19 17:20:04,786 - python_multipart.multipart - DEBUG - Calling on_field_data with data[29:34]
+2025-03-19 17:20:04,786 - python_multipart.multipart - DEBUG - Calling on_field_end with no data
+2025-03-19 17:20:04,786 - python_multipart.multipart - DEBUG - Calling on_field_start with no data
+2025-03-19 17:20:04,786 - python_multipart.multipart - DEBUG - Calling on_field_name with data[35:43]
+2025-03-19 17:20:04,787 - python_multipart.multipart - DEBUG - Calling on_field_data with data[44:52]
+2025-03-19 17:20:04,787 - python_multipart.multipart - DEBUG - Calling on_field_end with no data
+2025-03-19 17:20:04,787 - python_multipart.multipart - DEBUG - Calling on_end with no data
+2025-03-19 17:20:04,789 - payroll_api - DEBUG - Login attempt: username=admin, password=***
+2025-03-19 17:20:04,790 - payroll_api - INFO - User database path: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\application\services\security\users.json
+2025-03-19 17:20:04,790 - payroll_api - INFO - Users in database: ['admin', 'user']
+2025-03-19 17:20:04,791 - passlib.handlers.bcrypt - DEBUG - detected 'bcrypt' backend, version '4.0.1'
+2025-03-19 17:20:04,791 - passlib.handlers.bcrypt - DEBUG - 'bcrypt' backend lacks $2$ support, enabling workaround
+2025-03-19 17:20:05,067 - payroll_api - DEBUG - Authentication result: False
+2025-03-19 17:28:01,950 - payroll_api - INFO - API shutting down
+2025-03-19 17:28:01,952 - payroll_api - INFO - Deleted 0 old temporary files
+2025-03-19 17:28:01,957 - langsmith.client - DEBUG - Closing Client.session
+2025-03-19 17:28:01,981 - langsmith.client - DEBUG - Closing Client.session
+2025-03-19 17:30:07,306 - payroll_api - INFO - Service modules imported successfully
+2025-03-19 17:30:07,326 - application.modules.file_agent - INFO - FileAgent を初期化します。
+2025-03-19 17:30:07,363 - application.modules.file_agent - INFO - FileAgent 初期化完了: sqlite:///C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\data\app.db
+2025-03-19 17:30:07,365 - application.services.file_service - INFO - FileService initialized with temp_dir: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\web_application\uploads
+2025-03-19 17:30:07,365 - payroll_api - INFO - FileService initialized successfully
+2025-03-19 17:30:07,366 - application.services.payroll_service - INFO - Initializing PayrollService with config: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\application\json\config.json
+2025-03-19 17:30:07,366 - application.modules.agent_collection - INFO - エージェントコレクションを初期化しています...
+2025-03-19 17:30:07,366 - application.modules.file_agent - INFO - FileAgent を初期化します。
+2025-03-19 17:30:07,367 - application.modules.file_agent - WARNING - Could not remove existing database file: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\data\app.db
+2025-03-19 17:30:07,367 - application.modules.file_agent - WARNING - Will try to reuse existing database.
+2025-03-19 17:30:07,372 - application.modules.file_agent - INFO - FileAgent 初期化完了: sqlite:///C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\data\app.db
+2025-03-19 17:30:07,372 - application.modules.agent_collection - INFO - ファイルエージェントを初期化しました。
+2025-03-19 17:30:09,609 - application.modules.agent_collection - INFO - 設定ファイルを正常に読み込みました: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\application\json\config.json
+2025-03-19 17:30:09,615 - application.modules.agent_collection - INFO - タスクを正常に作成。タスク数: 4
+2025-03-19 17:30:09,615 - application.modules.agent_collection - INFO - IntentAnalyzer を初期化
+2025-03-19 17:30:09,615 - application.modules.agent_collection - INFO - RAG_AGENT: 初期化開始
+2025-03-19 17:30:09,615 - application.modules.rag_agent - INFO - RAG_Agentを初期化します。
+2025-03-19 17:30:43,055 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-03-19 17:30:43,055 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-03-19 17:30:43,062 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): huggingface.co:443
+2025-03-19 17:30:43,287 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/modules.json HTTP/1.1" 200 0
+2025-03-19 17:30:43,461 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/config_sentence_transformers.json HTTP/1.1" 200 0
+2025-03-19 17:30:43,638 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/README.md HTTP/1.1" 200 0
+2025-03-19 17:30:43,816 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/modules.json HTTP/1.1" 200 0
+2025-03-19 17:30:44,007 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/sentence_bert_config.json HTTP/1.1" 200 0
+2025-03-19 17:30:45,867 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/adapter_config.json HTTP/1.1" 404 0
+2025-03-19 17:30:46,034 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/config.json HTTP/1.1" 200 0
+2025-03-19 17:30:46,719 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/tokenizer_config.json HTTP/1.1" 200 0
+2025-03-19 17:30:47,006 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "GET /api/models/sentence-transformers/all-MiniLM-L6-v2/revision/main HTTP/1.1" 200 6729
+2025-03-19 17:30:47,205 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "GET /api/models/sentence-transformers/all-MiniLM-L6-v2 HTTP/1.1" 200 6729
+2025-03-19 17:30:47,211 - application.modules.rag_agent - DEBUG - HuggingFaceEmbeddings インスタンス生成OK
+2025-03-19 17:30:47,245 - application.modules.rag_agent - DEBUG - embed_query実行OK. 長さ=384
+2025-03-19 17:30:47,246 - application.modules.rag_agent - DEBUG - RAG用chainを作成します。
+2025-03-19 17:30:47,246 - application.modules.rag_agent - INFO - RAG用に複数ファイルからRetrieverを作成します。
+2025-03-19 17:30:47,256 - application.modules.rag_agent - DEBUG - ファイル C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\rule\test_rule.md は 1 個に分割
+2025-03-19 17:30:47,256 - application.modules.rag_agent - DEBUG - 合計 1 個の分割ドキュメントを作成します。
+2025-03-19 17:30:47,285 - faiss.loader - DEBUG - Environment variable FAISS_OPT_LEVEL is not set, so let's pick the instruction set according to the current CPU
+2025-03-19 17:30:47,286 - faiss.loader - INFO - Loading faiss with AVX2 support.
+2025-03-19 17:30:47,612 - faiss.loader - INFO - Successfully loaded faiss with AVX2 support.
+2025-03-19 17:30:47,622 - faiss - INFO - Failed to load GPU Faiss: name 'GpuIndexIVFFlat' is not defined. Will not load constructor refs for GPU indexes.
+2025-03-19 17:30:47,623 - application.modules.rag_agent - DEBUG - Vectorstore(Faiss)作成完了
+2025-03-19 17:30:47,695 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): api.smith.langchain.com:443
+2025-03-19 17:30:47,714 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (2): api.smith.langchain.com:443
+2025-03-19 17:30:47,874 - urllib3.connectionpool - DEBUG - https://api.smith.langchain.com:443 "GET /info HTTP/1.1" 200 672
+2025-03-19 17:30:47,898 - urllib3.connectionpool - DEBUG - https://api.smith.langchain.com:443 "GET /commits/rlm/rag-prompt/latest HTTP/1.1" 200 844
+2025-03-19 17:30:47,900 - application.modules.rag_agent - INFO - RAG_Agent初期化完了
+2025-03-19 17:30:47,900 - application.modules.agent_collection - INFO - RAG_AGENT: 初期化完了
+2025-03-19 17:30:47,901 - application.modules.agent_collection - INFO - workflow 作成
+2025-03-19 17:30:47,902 - application.services.payroll_service - INFO - AgentCollection initialized successfully
+2025-03-19 17:30:47,903 - payroll_api - INFO - PayrollService initialized successfully
+2025-03-19 17:30:47,904 - application.services.session_service - INFO - Session persistence enabled, using directory: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\web_application\sessions
+2025-03-19 17:30:47,904 - application.services.session_service - INFO - Loaded 0 sessions from disk
+2025-03-19 17:30:47,905 - application.services.session_service - INFO - SessionService initialized with 0 sessions
+2025-03-19 17:30:47,905 - payroll_api - INFO - SessionService initialized successfully
+2025-03-19 17:30:48,185 - payroll_api - INFO - User database path: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\application\services\security\users.json
+2025-03-19 17:30:48,186 - payroll_api - INFO - Users in database: ['admin', 'user']
+2025-03-19 17:30:48,186 - payroll_api - INFO - Admin password from env: password
+2025-03-19 17:30:48,187 - application.services.session_service - INFO - Cleaned up 0 old sessions
+2025-03-19 17:30:48,187 - payroll_api - INFO - Startup: cleaned up 0 sessions older than 24 hours
+2025-03-19 17:30:48,188 - payroll_api - INFO - Deleted 0 old temporary files
+2025-03-19 17:30:48,188 - payroll_api - INFO - Startup: cleaned up temporary files
+2025-03-19 17:30:48,189 - payroll_api - INFO - Initializing authentication
+2025-03-19 17:30:48,189 - payroll_api - INFO - User authentication initialized with 2 users
+2025-03-19 17:30:48,190 - payroll_api - INFO - Authentication initialized successfully
+2025-03-19 17:31:20,902 - payroll_api - INFO - API shutting down
+2025-03-19 17:31:20,902 - payroll_api - INFO - Deleted 0 old temporary files
+2025-03-19 17:31:20,904 - langsmith.client - DEBUG - Closing Client.session
+2025-03-19 17:31:20,906 - langsmith.client - DEBUG - Closing Client.session
+2025-03-19 17:32:32,997 - payroll_api - INFO - Service modules imported successfully
+2025-03-19 17:32:33,024 - application.modules.file_agent - INFO - FileAgent を初期化します。
+2025-03-19 17:32:33,058 - application.modules.file_agent - INFO - FileAgent 初期化完了: sqlite:///C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\data\app.db
+2025-03-19 17:32:33,058 - application.services.file_service - INFO - FileService initialized with temp_dir: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\web_application\uploads
+2025-03-19 17:32:33,058 - payroll_api - INFO - FileService initialized successfully
+2025-03-19 17:32:33,058 - application.services.payroll_service - INFO - Initializing PayrollService with config: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\application\json\config.json
+2025-03-19 17:32:33,058 - application.modules.agent_collection - INFO - エージェントコレクションを初期化しています...
+2025-03-19 17:32:33,058 - application.modules.file_agent - INFO - FileAgent を初期化します。
+2025-03-19 17:32:33,062 - application.modules.file_agent - WARNING - Could not remove existing database file: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\data\app.db
+2025-03-19 17:32:33,062 - application.modules.file_agent - WARNING - Will try to reuse existing database.
+2025-03-19 17:32:33,065 - application.modules.file_agent - INFO - FileAgent 初期化完了: sqlite:///C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\data\app.db
+2025-03-19 17:32:33,065 - application.modules.agent_collection - INFO - ファイルエージェントを初期化しました。
+2025-03-19 17:32:35,797 - application.modules.agent_collection - INFO - 設定ファイルを正常に読み込みました: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\application\json\config.json
+2025-03-19 17:32:35,797 - application.modules.agent_collection - INFO - タスクを正常に作成。タスク数: 4
+2025-03-19 17:32:35,797 - application.modules.agent_collection - INFO - IntentAnalyzer を初期化
+2025-03-19 17:32:35,797 - application.modules.agent_collection - INFO - RAG_AGENT: 初期化開始
+2025-03-19 17:32:35,797 - application.modules.rag_agent - INFO - RAG_Agentを初期化します。
+2025-03-19 17:32:44,094 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-03-19 17:32:44,094 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-03-19 17:32:44,094 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): huggingface.co:443
+2025-03-19 17:32:44,366 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/modules.json HTTP/1.1" 200 0
+2025-03-19 17:32:44,576 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/config_sentence_transformers.json HTTP/1.1" 200 0
+2025-03-19 17:32:44,789 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/README.md HTTP/1.1" 200 0
+2025-03-19 17:32:44,987 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/modules.json HTTP/1.1" 200 0
+2025-03-19 17:32:45,185 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/sentence_bert_config.json HTTP/1.1" 200 0
+2025-03-19 17:32:45,392 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/adapter_config.json HTTP/1.1" 404 0
+2025-03-19 17:32:45,723 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/config.json HTTP/1.1" 200 0
+2025-03-19 17:32:46,355 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/tokenizer_config.json HTTP/1.1" 200 0
+2025-03-19 17:32:46,587 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "GET /api/models/sentence-transformers/all-MiniLM-L6-v2/revision/main HTTP/1.1" 200 6729
+2025-03-19 17:32:46,753 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "GET /api/models/sentence-transformers/all-MiniLM-L6-v2 HTTP/1.1" 200 6729
+2025-03-19 17:32:46,769 - application.modules.rag_agent - DEBUG - HuggingFaceEmbeddings インスタンス生成OK
+2025-03-19 17:32:46,796 - application.modules.rag_agent - DEBUG - embed_query実行OK. 長さ=384
+2025-03-19 17:32:46,797 - application.modules.rag_agent - DEBUG - RAG用chainを作成します。
+2025-03-19 17:32:46,797 - application.modules.rag_agent - INFO - RAG用に複数ファイルからRetrieverを作成します。
+2025-03-19 17:32:46,798 - application.modules.rag_agent - DEBUG - ファイル C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\rule\test_rule.md は 1 個に分割
+2025-03-19 17:32:46,800 - application.modules.rag_agent - DEBUG - 合計 1 個の分割ドキュメントを作成します。
+2025-03-19 17:32:46,819 - faiss.loader - DEBUG - Environment variable FAISS_OPT_LEVEL is not set, so let's pick the instruction set according to the current CPU
+2025-03-19 17:32:46,819 - faiss.loader - INFO - Loading faiss with AVX2 support.
+2025-03-19 17:32:46,847 - faiss.loader - INFO - Successfully loaded faiss with AVX2 support.
+2025-03-19 17:32:46,853 - faiss - INFO - Failed to load GPU Faiss: name 'GpuIndexIVFFlat' is not defined. Will not load constructor refs for GPU indexes.
+2025-03-19 17:32:46,858 - application.modules.rag_agent - DEBUG - Vectorstore(Faiss)作成完了
+2025-03-19 17:32:46,866 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): api.smith.langchain.com:443
+2025-03-19 17:32:46,893 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (2): api.smith.langchain.com:443
+2025-03-19 17:32:47,047 - urllib3.connectionpool - DEBUG - https://api.smith.langchain.com:443 "GET /info HTTP/1.1" 200 672
+2025-03-19 17:32:47,067 - urllib3.connectionpool - DEBUG - https://api.smith.langchain.com:443 "GET /commits/rlm/rag-prompt/latest HTTP/1.1" 200 844
+2025-03-19 17:32:47,067 - application.modules.rag_agent - INFO - RAG_Agent初期化完了
+2025-03-19 17:32:47,067 - application.modules.agent_collection - INFO - RAG_AGENT: 初期化完了
+2025-03-19 17:32:47,067 - application.modules.agent_collection - INFO - workflow 作成
+2025-03-19 17:32:47,067 - application.services.payroll_service - INFO - AgentCollection initialized successfully
+2025-03-19 17:32:47,073 - payroll_api - INFO - PayrollService initialized successfully
+2025-03-19 17:32:47,073 - application.services.session_service - INFO - Session persistence enabled, using directory: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\web_application\sessions
+2025-03-19 17:32:47,074 - application.services.session_service - INFO - Loaded 0 sessions from disk
+2025-03-19 17:32:47,074 - application.services.session_service - INFO - SessionService initialized with 0 sessions
+2025-03-19 17:32:47,075 - payroll_api - INFO - SessionService initialized successfully
+2025-03-19 17:32:47,269 - payroll_api - INFO - User database path: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\application\services\security\users.json
+2025-03-19 17:32:47,269 - payroll_api - INFO - Users in database: ['admin', 'user']
+2025-03-19 17:32:47,278 - payroll_api - INFO - Admin password from env: password
+2025-03-19 17:32:47,278 - application.services.session_service - INFO - Cleaned up 0 old sessions
+2025-03-19 17:32:47,278 - payroll_api - INFO - Startup: cleaned up 0 sessions older than 24 hours
+2025-03-19 17:32:47,279 - payroll_api - INFO - Deleted 0 old temporary files
+2025-03-19 17:32:47,279 - payroll_api - INFO - Startup: cleaned up temporary files
+2025-03-19 17:32:47,279 - payroll_api - INFO - Initializing authentication
+2025-03-19 17:32:47,279 - payroll_api - INFO - User authentication initialized with 2 users
+2025-03-19 17:32:47,280 - payroll_api - INFO - Authentication initialized successfully
+2025-03-19 17:33:22,478 - python_multipart.multipart - DEBUG - Calling on_field_start with no data
+2025-03-19 17:33:22,478 - python_multipart.multipart - DEBUG - Calling on_field_name with data[0:10]
+2025-03-19 17:33:22,479 - python_multipart.multipart - DEBUG - Calling on_field_data with data[11:19]
+2025-03-19 17:33:22,479 - python_multipart.multipart - DEBUG - Calling on_field_end with no data
+2025-03-19 17:33:22,479 - python_multipart.multipart - DEBUG - Calling on_field_start with no data
+2025-03-19 17:33:22,480 - python_multipart.multipart - DEBUG - Calling on_field_name with data[20:28]
+2025-03-19 17:33:22,481 - python_multipart.multipart - DEBUG - Calling on_field_data with data[29:34]
+2025-03-19 17:33:22,481 - python_multipart.multipart - DEBUG - Calling on_field_end with no data
+2025-03-19 17:33:22,482 - python_multipart.multipart - DEBUG - Calling on_field_start with no data
+2025-03-19 17:33:22,482 - python_multipart.multipart - DEBUG - Calling on_field_name with data[35:43]
+2025-03-19 17:33:22,482 - python_multipart.multipart - DEBUG - Calling on_field_data with data[44:52]
+2025-03-19 17:33:22,482 - python_multipart.multipart - DEBUG - Calling on_field_end with no data
+2025-03-19 17:33:22,483 - python_multipart.multipart - DEBUG - Calling on_end with no data
+2025-03-19 17:33:22,485 - payroll_api - DEBUG - Login attempt: username=admin, password=***
+2025-03-19 17:33:22,485 - payroll_api - INFO - User database path: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\application\services\security\users.json
+2025-03-19 17:33:22,485 - payroll_api - INFO - Users in database: ['admin', 'user']
+2025-03-19 17:42:47,982 - payroll_api - INFO - API shutting down
+2025-03-19 17:42:47,982 - payroll_api - INFO - Deleted 0 old temporary files
+2025-03-19 17:42:47,982 - langsmith.client - DEBUG - Closing Client.session
+2025-03-19 17:42:48,018 - langsmith.client - DEBUG - Closing Client.session
+2025-03-19 17:42:53,047 - payroll_api - INFO - Service modules imported successfully
+2025-03-19 17:42:53,049 - application.modules.file_agent - INFO - FileAgent を初期化します。
+2025-03-19 17:42:53,089 - application.modules.file_agent - INFO - FileAgent 初期化完了: sqlite:///C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\data\app.db
+2025-03-19 17:42:53,089 - application.services.file_service - INFO - FileService initialized with temp_dir: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\web_application\uploads
+2025-03-19 17:42:53,089 - payroll_api - INFO - FileService initialized successfully
+2025-03-19 17:42:53,090 - application.services.payroll_service - INFO - Initializing PayrollService with config: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\application\json\config.json
+2025-03-19 17:42:53,090 - application.modules.agent_collection - INFO - エージェントコレクションを初期化しています...
+2025-03-19 17:42:53,090 - application.modules.file_agent - INFO - FileAgent を初期化します。
+2025-03-19 17:42:53,090 - application.modules.file_agent - WARNING - Could not remove existing database file: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\data\app.db
+2025-03-19 17:42:53,090 - application.modules.file_agent - WARNING - Will try to reuse existing database.
+2025-03-19 17:42:53,090 - application.modules.file_agent - INFO - FileAgent 初期化完了: sqlite:///C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\data\app.db
+2025-03-19 17:42:53,090 - application.modules.agent_collection - INFO - ファイルエージェントを初期化しました。
+2025-03-19 17:42:54,980 - application.modules.agent_collection - INFO - 設定ファイルを正常に読み込みました: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\application\json\config.json
+2025-03-19 17:42:54,980 - application.modules.agent_collection - INFO - タスクを正常に作成。タスク数: 4
+2025-03-19 17:42:54,980 - application.modules.agent_collection - INFO - IntentAnalyzer を初期化
+2025-03-19 17:42:54,980 - application.modules.agent_collection - INFO - RAG_AGENT: 初期化開始
+2025-03-19 17:42:54,980 - application.modules.rag_agent - INFO - RAG_Agentを初期化します。
+2025-03-19 17:43:03,598 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-03-19 17:43:03,598 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-03-19 17:43:03,606 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): huggingface.co:443
+2025-03-19 17:43:03,828 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/modules.json HTTP/1.1" 200 0
+2025-03-19 17:43:04,013 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/config_sentence_transformers.json HTTP/1.1" 200 0
+2025-03-19 17:43:04,178 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/README.md HTTP/1.1" 200 0
+2025-03-19 17:43:04,344 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/modules.json HTTP/1.1" 200 0
+2025-03-19 17:43:04,527 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/sentence_bert_config.json HTTP/1.1" 200 0
+2025-03-19 17:43:04,713 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/adapter_config.json HTTP/1.1" 404 0
+2025-03-19 17:43:04,895 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/config.json HTTP/1.1" 200 0
+2025-03-19 17:43:06,353 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/tokenizer_config.json HTTP/1.1" 200 0
+2025-03-19 17:43:06,576 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "GET /api/models/sentence-transformers/all-MiniLM-L6-v2/revision/main HTTP/1.1" 200 6729
+2025-03-19 17:43:06,762 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "GET /api/models/sentence-transformers/all-MiniLM-L6-v2 HTTP/1.1" 200 6729
+2025-03-19 17:43:06,764 - application.modules.rag_agent - DEBUG - HuggingFaceEmbeddings インスタンス生成OK
+2025-03-19 17:43:06,785 - application.modules.rag_agent - DEBUG - embed_query実行OK. 長さ=384
+2025-03-19 17:43:06,785 - application.modules.rag_agent - DEBUG - RAG用chainを作成します。
+2025-03-19 17:43:06,785 - application.modules.rag_agent - INFO - RAG用に複数ファイルからRetrieverを作成します。
+2025-03-19 17:43:06,788 - application.modules.rag_agent - DEBUG - ファイル C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\rule\test_rule.md は 1 個に分割
+2025-03-19 17:43:06,788 - application.modules.rag_agent - DEBUG - 合計 1 個の分割ドキュメントを作成します。
+2025-03-19 17:43:06,801 - faiss.loader - DEBUG - Environment variable FAISS_OPT_LEVEL is not set, so let's pick the instruction set according to the current CPU
+2025-03-19 17:43:06,801 - faiss.loader - INFO - Loading faiss with AVX2 support.
+2025-03-19 17:43:06,826 - faiss.loader - INFO - Successfully loaded faiss with AVX2 support.
+2025-03-19 17:43:06,831 - faiss - INFO - Failed to load GPU Faiss: name 'GpuIndexIVFFlat' is not defined. Will not load constructor refs for GPU indexes.
+2025-03-19 17:43:06,831 - application.modules.rag_agent - DEBUG - Vectorstore(Faiss)作成完了
+2025-03-19 17:43:06,839 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): api.smith.langchain.com:443
+2025-03-19 17:43:06,858 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (2): api.smith.langchain.com:443
+2025-03-19 17:43:07,018 - urllib3.connectionpool - DEBUG - https://api.smith.langchain.com:443 "GET /info HTTP/1.1" 200 672
+2025-03-19 17:43:07,034 - urllib3.connectionpool - DEBUG - https://api.smith.langchain.com:443 "GET /commits/rlm/rag-prompt/latest HTTP/1.1" 200 844
+2025-03-19 17:43:07,041 - application.modules.rag_agent - INFO - RAG_Agent初期化完了
+2025-03-19 17:43:07,042 - application.modules.agent_collection - INFO - RAG_AGENT: 初期化完了
+2025-03-19 17:43:07,043 - application.modules.agent_collection - INFO - workflow 作成
+2025-03-19 17:43:07,045 - application.services.payroll_service - INFO - AgentCollection initialized successfully
+2025-03-19 17:43:07,046 - payroll_api - INFO - PayrollService initialized successfully
+2025-03-19 17:43:07,049 - application.services.session_service - INFO - Session persistence enabled, using directory: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\web_application\sessions
+2025-03-19 17:43:07,051 - application.services.session_service - INFO - Loaded 0 sessions from disk
+2025-03-19 17:43:07,052 - application.services.session_service - INFO - SessionService initialized with 0 sessions
+2025-03-19 17:43:07,052 - payroll_api - INFO - SessionService initialized successfully
+2025-03-19 17:43:07,281 - payroll_api - INFO - User database path: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\application\services\security\users.json
+2025-03-19 17:43:07,290 - payroll_api - INFO - Users in database: ['admin', 'user']
+2025-03-19 17:43:07,290 - payroll_api - INFO - Admin password from env: password
+2025-03-19 17:43:07,290 - application.services.session_service - INFO - Cleaned up 0 old sessions
+2025-03-19 17:43:07,290 - payroll_api - INFO - Startup: cleaned up 0 sessions older than 24 hours
+2025-03-19 17:43:07,291 - payroll_api - INFO - Deleted 0 old temporary files
+2025-03-19 17:43:07,291 - payroll_api - INFO - Startup: cleaned up temporary files
+2025-03-19 17:43:07,293 - payroll_api - INFO - Initializing authentication
+2025-03-19 17:43:07,293 - payroll_api - INFO - User authentication initialized with 2 users
+2025-03-19 17:43:07,293 - payroll_api - INFO - Authentication initialized successfully
+2025-03-19 17:43:07,294 - payroll_api - INFO - API shutting down
+2025-03-19 17:43:07,295 - payroll_api - INFO - Deleted 0 old temporary files
+2025-03-19 17:43:07,335 - langsmith.client - DEBUG - Closing Client.session
+2025-03-19 17:43:07,336 - langsmith.client - DEBUG - Closing Client.session
+2025-03-19 17:43:13,391 - payroll_api - INFO - Service modules imported successfully
+2025-03-19 17:43:13,412 - application.modules.file_agent - INFO - FileAgent を初期化します。
+2025-03-19 17:43:13,448 - application.modules.file_agent - INFO - FileAgent 初期化完了: sqlite:///C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\data\app.db
+2025-03-19 17:43:13,449 - application.services.file_service - INFO - FileService initialized with temp_dir: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\web_application\uploads
+2025-03-19 17:43:13,449 - payroll_api - INFO - FileService initialized successfully
+2025-03-19 17:43:13,449 - application.services.payroll_service - INFO - Initializing PayrollService with config: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\application\json\config.json
+2025-03-19 17:43:13,449 - application.modules.agent_collection - INFO - エージェントコレクションを初期化しています...
+2025-03-19 17:43:13,450 - application.modules.file_agent - INFO - FileAgent を初期化します。
+2025-03-19 17:43:13,450 - application.modules.file_agent - WARNING - Could not remove existing database file: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\data\app.db
+2025-03-19 17:43:13,450 - application.modules.file_agent - WARNING - Will try to reuse existing database.
+2025-03-19 17:43:13,452 - application.modules.file_agent - INFO - FileAgent 初期化完了: sqlite:///C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\data\app.db
+2025-03-19 17:43:13,452 - application.modules.agent_collection - INFO - ファイルエージェントを初期化しました。
+2025-03-19 17:43:16,224 - application.modules.agent_collection - INFO - 設定ファイルを正常に読み込みました: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\application\json\config.json
+2025-03-19 17:43:16,240 - application.modules.agent_collection - INFO - タスクを正常に作成。タスク数: 4
+2025-03-19 17:43:16,240 - application.modules.agent_collection - INFO - IntentAnalyzer を初期化
+2025-03-19 17:43:16,240 - application.modules.agent_collection - INFO - RAG_AGENT: 初期化開始
+2025-03-19 17:43:16,240 - application.modules.rag_agent - INFO - RAG_Agentを初期化します。
+2025-03-19 17:43:25,421 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-03-19 17:43:25,421 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-03-19 17:43:25,421 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): huggingface.co:443
+2025-03-19 17:43:25,637 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/modules.json HTTP/1.1" 200 0
+2025-03-19 17:43:25,808 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/config_sentence_transformers.json HTTP/1.1" 200 0
+2025-03-19 17:43:25,974 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/README.md HTTP/1.1" 200 0
+2025-03-19 17:43:26,140 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/modules.json HTTP/1.1" 200 0
+2025-03-19 17:43:26,319 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/sentence_bert_config.json HTTP/1.1" 200 0
+2025-03-19 17:43:26,489 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/adapter_config.json HTTP/1.1" 404 0
+2025-03-19 17:43:26,654 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/config.json HTTP/1.1" 200 0
+2025-03-19 17:43:27,187 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/tokenizer_config.json HTTP/1.1" 200 0
+2025-03-19 17:43:27,436 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "GET /api/models/sentence-transformers/all-MiniLM-L6-v2/revision/main HTTP/1.1" 200 6729
+2025-03-19 17:43:27,608 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "GET /api/models/sentence-transformers/all-MiniLM-L6-v2 HTTP/1.1" 200 6729
+2025-03-19 17:43:27,609 - application.modules.rag_agent - DEBUG - HuggingFaceEmbeddings インスタンス生成OK
+2025-03-19 17:43:27,642 - application.modules.rag_agent - DEBUG - embed_query実行OK. 長さ=384
+2025-03-19 17:43:27,643 - application.modules.rag_agent - DEBUG - RAG用chainを作成します。
+2025-03-19 17:43:27,643 - application.modules.rag_agent - INFO - RAG用に複数ファイルからRetrieverを作成します。
+2025-03-19 17:43:27,646 - application.modules.rag_agent - DEBUG - ファイル C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\rule\test_rule.md は 1 個に分割
+2025-03-19 17:43:27,646 - application.modules.rag_agent - DEBUG - 合計 1 個の分割ドキュメントを作成します。
+2025-03-19 17:43:27,673 - faiss.loader - DEBUG - Environment variable FAISS_OPT_LEVEL is not set, so let's pick the instruction set according to the current CPU
+2025-03-19 17:43:27,673 - faiss.loader - INFO - Loading faiss with AVX2 support.
+2025-03-19 17:43:27,694 - faiss.loader - INFO - Successfully loaded faiss with AVX2 support.
+2025-03-19 17:43:27,709 - faiss - INFO - Failed to load GPU Faiss: name 'GpuIndexIVFFlat' is not defined. Will not load constructor refs for GPU indexes.
+2025-03-19 17:43:27,711 - application.modules.rag_agent - DEBUG - Vectorstore(Faiss)作成完了
+2025-03-19 17:43:27,719 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): api.smith.langchain.com:443
+2025-03-19 17:43:27,745 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (2): api.smith.langchain.com:443
+2025-03-19 17:43:27,903 - urllib3.connectionpool - DEBUG - https://api.smith.langchain.com:443 "GET /info HTTP/1.1" 200 672
+2025-03-19 17:43:27,925 - urllib3.connectionpool - DEBUG - https://api.smith.langchain.com:443 "GET /commits/rlm/rag-prompt/latest HTTP/1.1" 200 844
+2025-03-19 17:43:27,928 - application.modules.rag_agent - INFO - RAG_Agent初期化完了
+2025-03-19 17:43:27,929 - application.modules.agent_collection - INFO - RAG_AGENT: 初期化完了
+2025-03-19 17:43:27,929 - application.modules.agent_collection - INFO - workflow 作成
+2025-03-19 17:43:27,930 - application.services.payroll_service - INFO - AgentCollection initialized successfully
+2025-03-19 17:43:27,930 - payroll_api - INFO - PayrollService initialized successfully
+2025-03-19 17:43:27,931 - application.services.session_service - INFO - Session persistence enabled, using directory: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\web_application\sessions
+2025-03-19 17:43:27,931 - application.services.session_service - INFO - Loaded 0 sessions from disk
+2025-03-19 17:43:27,931 - application.services.session_service - INFO - SessionService initialized with 0 sessions
+2025-03-19 17:43:27,932 - payroll_api - INFO - SessionService initialized successfully
+2025-03-19 17:43:28,120 - payroll_api - INFO - User database path: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\application\services\security\users.json
+2025-03-19 17:43:28,134 - payroll_api - INFO - Users in database: ['admin', 'user']
+2025-03-19 17:43:28,134 - payroll_api - INFO - Admin password from env: password
+2025-03-19 17:43:28,134 - application.services.session_service - INFO - Cleaned up 0 old sessions
+2025-03-19 17:43:28,135 - payroll_api - INFO - Startup: cleaned up 0 sessions older than 24 hours
+2025-03-19 17:43:28,135 - payroll_api - INFO - Deleted 0 old temporary files
+2025-03-19 17:43:28,135 - payroll_api - INFO - Startup: cleaned up temporary files
+2025-03-19 17:43:28,136 - payroll_api - INFO - Initializing authentication
+2025-03-19 17:43:28,137 - payroll_api - INFO - User authentication initialized with 2 users
+2025-03-19 17:43:28,137 - payroll_api - INFO - Authentication initialized successfully
+2025-03-19 17:44:19,870 - payroll_api - INFO - API shutting down
+2025-03-19 17:44:19,871 - payroll_api - INFO - Deleted 0 old temporary files
+2025-03-19 17:44:19,873 - langsmith.client - DEBUG - Closing Client.session
+2025-03-19 17:44:19,876 - langsmith.client - DEBUG - Closing Client.session
+2025-03-19 17:44:26,209 - payroll_api - INFO - Service modules imported successfully
+2025-03-19 17:44:26,227 - application.modules.file_agent - INFO - FileAgent を初期化します。
+2025-03-19 17:44:26,272 - application.modules.file_agent - INFO - FileAgent 初期化完了: sqlite:///C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\data\app.db
+2025-03-19 17:44:26,272 - application.services.file_service - INFO - FileService initialized with temp_dir: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\web_application\uploads
+2025-03-19 17:44:26,274 - payroll_api - INFO - FileService initialized successfully
+2025-03-19 17:44:26,274 - application.services.payroll_service - INFO - Initializing PayrollService with config: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\application\json\config.json
+2025-03-19 17:44:26,274 - application.modules.agent_collection - INFO - エージェントコレクションを初期化しています...
+2025-03-19 17:44:26,274 - application.modules.file_agent - INFO - FileAgent を初期化します。
+2025-03-19 17:44:26,274 - application.modules.file_agent - WARNING - Could not remove existing database file: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\data\app.db
+2025-03-19 17:44:26,274 - application.modules.file_agent - WARNING - Will try to reuse existing database.
+2025-03-19 17:44:26,274 - application.modules.file_agent - INFO - FileAgent 初期化完了: sqlite:///C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\data\app.db
+2025-03-19 17:44:26,274 - application.modules.agent_collection - INFO - ファイルエージェントを初期化しました。
+2025-03-19 17:44:28,437 - application.modules.agent_collection - INFO - 設定ファイルを正常に読み込みました: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\application\json\config.json
+2025-03-19 17:44:28,437 - application.modules.agent_collection - INFO - タスクを正常に作成。タスク数: 4
+2025-03-19 17:44:28,437 - application.modules.agent_collection - INFO - IntentAnalyzer を初期化
+2025-03-19 17:44:28,437 - application.modules.agent_collection - INFO - RAG_AGENT: 初期化開始
+2025-03-19 17:44:28,437 - application.modules.rag_agent - INFO - RAG_Agentを初期化します。
+2025-03-19 17:49:00,323 - payroll_api - INFO - Service modules imported successfully
+2025-03-19 17:49:00,342 - application.modules.file_agent - INFO - FileAgent を初期化します。
+2025-03-19 17:49:00,373 - application.modules.file_agent - INFO - FileAgent 初期化完了: sqlite:///C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\data\app.db
+2025-03-19 17:49:00,374 - application.services.file_service - INFO - FileService initialized with temp_dir: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\web_application\uploads
+2025-03-19 17:49:00,375 - payroll_api - INFO - FileService initialized successfully
+2025-03-19 17:49:00,375 - application.services.payroll_service - INFO - Initializing PayrollService with config: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\application\json\config.json
+2025-03-19 17:49:00,375 - application.modules.agent_collection - INFO - エージェントコレクションを初期化しています...
+2025-03-19 17:49:00,376 - application.modules.file_agent - INFO - FileAgent を初期化します。
+2025-03-19 17:49:00,378 - application.modules.file_agent - WARNING - Could not remove existing database file: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\data\app.db
+2025-03-19 17:49:00,378 - application.modules.file_agent - WARNING - Will try to reuse existing database.
+2025-03-19 17:49:00,381 - application.modules.file_agent - INFO - FileAgent 初期化完了: sqlite:///C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\data\app.db
+2025-03-19 17:49:00,382 - application.modules.agent_collection - INFO - ファイルエージェントを初期化しました。
+2025-03-19 17:49:02,139 - application.modules.agent_collection - INFO - 設定ファイルを正常に読み込みました: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\application\json\config.json
+2025-03-19 17:49:02,155 - application.modules.agent_collection - INFO - タスクを正常に作成。タスク数: 4
+2025-03-19 17:49:02,155 - application.modules.agent_collection - INFO - IntentAnalyzer を初期化
+2025-03-19 17:49:02,155 - application.modules.agent_collection - INFO - RAG_AGENT: 初期化開始
+2025-03-19 17:49:02,155 - application.modules.rag_agent - INFO - RAG_Agentを初期化します。
+2025-03-19 17:49:08,623 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-03-19 17:49:08,623 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-03-19 17:49:08,634 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): huggingface.co:443
+2025-03-19 17:49:08,855 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/modules.json HTTP/1.1" 200 0
+2025-03-19 17:49:09,022 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/config_sentence_transformers.json HTTP/1.1" 200 0
+2025-03-19 17:49:09,189 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/README.md HTTP/1.1" 200 0
+2025-03-19 17:49:09,355 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/modules.json HTTP/1.1" 200 0
+2025-03-19 17:49:09,522 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/sentence_bert_config.json HTTP/1.1" 200 0
+2025-03-19 17:49:09,687 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/adapter_config.json HTTP/1.1" 404 0
+2025-03-19 17:49:09,855 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/config.json HTTP/1.1" 200 0
+2025-03-19 17:49:10,371 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/tokenizer_config.json HTTP/1.1" 200 0
+2025-03-19 17:49:10,588 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "GET /api/models/sentence-transformers/all-MiniLM-L6-v2/revision/main HTTP/1.1" 200 6729
+2025-03-19 17:49:10,785 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "GET /api/models/sentence-transformers/all-MiniLM-L6-v2 HTTP/1.1" 200 6729
+2025-03-19 17:49:10,788 - application.modules.rag_agent - DEBUG - HuggingFaceEmbeddings インスタンス生成OK
+2025-03-19 17:49:10,811 - application.modules.rag_agent - DEBUG - embed_query実行OK. 長さ=384
+2025-03-19 17:49:10,811 - application.modules.rag_agent - DEBUG - RAG用chainを作成します。
+2025-03-19 17:49:10,811 - application.modules.rag_agent - INFO - RAG用に複数ファイルからRetrieverを作成します。
+2025-03-19 17:49:10,814 - application.modules.rag_agent - DEBUG - ファイル C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\rule\test_rule.md は 1 個に分割
+2025-03-19 17:49:10,815 - application.modules.rag_agent - DEBUG - 合計 1 個の分割ドキュメントを作成します。
+2025-03-19 17:49:10,834 - faiss.loader - DEBUG - Environment variable FAISS_OPT_LEVEL is not set, so let's pick the instruction set according to the current CPU
+2025-03-19 17:49:10,834 - faiss.loader - INFO - Loading faiss with AVX2 support.
+2025-03-19 17:49:10,853 - faiss.loader - INFO - Successfully loaded faiss with AVX2 support.
+2025-03-19 17:49:10,860 - faiss - INFO - Failed to load GPU Faiss: name 'GpuIndexIVFFlat' is not defined. Will not load constructor refs for GPU indexes.
+2025-03-19 17:49:10,861 - application.modules.rag_agent - DEBUG - Vectorstore(Faiss)作成完了
+2025-03-19 17:49:10,866 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): api.smith.langchain.com:443
+2025-03-19 17:49:10,883 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (2): api.smith.langchain.com:443
+2025-03-19 17:49:11,038 - urllib3.connectionpool - DEBUG - https://api.smith.langchain.com:443 "GET /info HTTP/1.1" 200 672
+2025-03-19 17:49:11,068 - urllib3.connectionpool - DEBUG - https://api.smith.langchain.com:443 "GET /commits/rlm/rag-prompt/latest HTTP/1.1" 200 844
+2025-03-19 17:49:11,071 - application.modules.rag_agent - INFO - RAG_Agent初期化完了
+2025-03-19 17:49:11,071 - application.modules.agent_collection - INFO - RAG_AGENT: 初期化完了
+2025-03-19 17:49:11,071 - application.modules.agent_collection - INFO - workflow 作成
+2025-03-19 17:49:11,072 - application.services.payroll_service - INFO - AgentCollection initialized successfully
+2025-03-19 17:49:11,072 - payroll_api - INFO - PayrollService initialized successfully
+2025-03-19 17:49:11,073 - application.services.session_service - INFO - Session persistence enabled, using directory: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\web_application\sessions
+2025-03-19 17:49:11,073 - application.services.session_service - INFO - Loaded 0 sessions from disk
+2025-03-19 17:49:11,073 - application.services.session_service - INFO - SessionService initialized with 0 sessions
+2025-03-19 17:49:11,073 - payroll_api - INFO - SessionService initialized successfully
+2025-03-19 17:49:11,255 - payroll_api - INFO - User database path: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\application\services\security\users.json
+2025-03-19 17:49:11,255 - payroll_api - INFO - Users in database: ['admin', 'user']
+2025-03-19 17:49:11,255 - payroll_api - INFO - Admin password from env: password
+2025-03-19 17:49:11,255 - application.services.session_service - INFO - Cleaned up 0 old sessions
+2025-03-19 17:49:11,255 - payroll_api - INFO - Startup: cleaned up 0 sessions older than 24 hours
+2025-03-19 17:49:11,255 - payroll_api - INFO - Deleted 0 old temporary files
+2025-03-19 17:49:11,255 - payroll_api - INFO - Startup: cleaned up temporary files
+2025-03-19 17:49:11,255 - payroll_api - INFO - Initializing authentication
+2025-03-19 17:49:11,255 - payroll_api - INFO - User authentication initialized with 2 users
+2025-03-19 17:49:11,255 - payroll_api - INFO - Authentication initialized successfully
+2025-03-19 17:49:27,647 - python_multipart.multipart - DEBUG - Calling on_field_start with no data
+2025-03-19 17:49:27,647 - python_multipart.multipart - DEBUG - Calling on_field_name with data[0:10]
+2025-03-19 17:49:27,647 - python_multipart.multipart - DEBUG - Calling on_field_data with data[11:19]
+2025-03-19 17:49:27,648 - python_multipart.multipart - DEBUG - Calling on_field_end with no data
+2025-03-19 17:49:27,648 - python_multipart.multipart - DEBUG - Calling on_field_start with no data
+2025-03-19 17:49:27,649 - python_multipart.multipart - DEBUG - Calling on_field_name with data[20:28]
+2025-03-19 17:49:27,649 - python_multipart.multipart - DEBUG - Calling on_field_data with data[29:34]
+2025-03-19 17:49:27,649 - python_multipart.multipart - DEBUG - Calling on_field_end with no data
+2025-03-19 17:49:27,649 - python_multipart.multipart - DEBUG - Calling on_field_start with no data
+2025-03-19 17:49:27,649 - python_multipart.multipart - DEBUG - Calling on_field_name with data[35:43]
+2025-03-19 17:49:27,650 - python_multipart.multipart - DEBUG - Calling on_field_data with data[44:52]
+2025-03-19 17:49:27,650 - python_multipart.multipart - DEBUG - Calling on_field_end with no data
+2025-03-19 17:49:27,650 - python_multipart.multipart - DEBUG - Calling on_end with no data
+2025-03-19 17:49:27,652 - payroll_api - DEBUG - Login attempt: username=admin, password=***
+2025-03-19 17:49:27,652 - payroll_api - INFO - User database path: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\application\services\security\users.json
+2025-03-19 17:49:27,653 - payroll_api - INFO - Users in database: ['admin', 'user']
+2025-03-19 17:52:52,607 - payroll_api - INFO - API shutting down
+2025-03-19 17:52:52,608 - payroll_api - INFO - Deleted 0 old temporary files
+2025-03-19 17:52:52,609 - langsmith.client - DEBUG - Closing Client.session
+2025-03-19 17:52:52,618 - langsmith.client - DEBUG - Closing Client.session
+2025-03-19 17:52:57,672 - payroll_api - INFO - Service modules imported successfully
+2025-03-19 17:52:57,697 - application.modules.file_agent - INFO - FileAgent を初期化します。
+2025-03-19 17:52:57,723 - application.modules.file_agent - INFO - FileAgent 初期化完了: sqlite:///C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\data\app.db
+2025-03-19 17:52:57,723 - application.services.file_service - INFO - FileService initialized with temp_dir: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\web_application\uploads
+2025-03-19 17:52:57,723 - payroll_api - INFO - FileService initialized successfully
+2025-03-19 17:52:57,723 - application.services.payroll_service - INFO - Initializing PayrollService with config: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\application\json\config.json
+2025-03-19 17:52:57,723 - application.modules.agent_collection - INFO - エージェントコレクションを初期化しています...
+2025-03-19 17:52:57,723 - application.modules.file_agent - INFO - FileAgent を初期化します。
+2025-03-19 17:52:57,729 - application.modules.file_agent - WARNING - Could not remove existing database file: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\data\app.db
+2025-03-19 17:52:57,729 - application.modules.file_agent - WARNING - Will try to reuse existing database.
+2025-03-19 17:52:57,731 - application.modules.file_agent - INFO - FileAgent 初期化完了: sqlite:///C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\data\app.db
+2025-03-19 17:52:57,731 - application.modules.agent_collection - INFO - ファイルエージェントを初期化しました。
+2025-03-19 17:52:59,569 - application.modules.agent_collection - INFO - 設定ファイルを正常に読み込みました: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\application\json\config.json
+2025-03-19 17:52:59,586 - application.modules.agent_collection - INFO - タスクを正常に作成。タスク数: 4
+2025-03-19 17:52:59,586 - application.modules.agent_collection - INFO - IntentAnalyzer を初期化
+2025-03-19 17:52:59,586 - application.modules.agent_collection - INFO - RAG_AGENT: 初期化開始
+2025-03-19 17:52:59,586 - application.modules.rag_agent - INFO - RAG_Agentを初期化します。
+2025-03-19 17:53:07,475 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-03-19 17:53:07,475 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-03-19 17:53:07,485 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): huggingface.co:443
+2025-03-19 17:53:07,736 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/modules.json HTTP/1.1" 200 0
+2025-03-19 17:53:07,917 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/config_sentence_transformers.json HTTP/1.1" 200 0
+2025-03-19 17:53:08,083 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/README.md HTTP/1.1" 200 0
+2025-03-19 17:53:08,250 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/modules.json HTTP/1.1" 200 0
+2025-03-19 17:53:08,417 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/sentence_bert_config.json HTTP/1.1" 200 0
+2025-03-19 17:53:08,595 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/adapter_config.json HTTP/1.1" 404 0
+2025-03-19 17:53:08,750 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/config.json HTTP/1.1" 200 0
+2025-03-19 17:53:09,300 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/tokenizer_config.json HTTP/1.1" 200 0
+2025-03-19 17:53:09,737 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "GET /api/models/sentence-transformers/all-MiniLM-L6-v2/revision/main HTTP/1.1" 200 6729
+2025-03-19 17:53:09,916 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "GET /api/models/sentence-transformers/all-MiniLM-L6-v2 HTTP/1.1" 200 6729
+2025-03-19 17:53:09,918 - application.modules.rag_agent - DEBUG - HuggingFaceEmbeddings インスタンス生成OK
+2025-03-19 17:53:09,947 - application.modules.rag_agent - DEBUG - embed_query実行OK. 長さ=384
+2025-03-19 17:53:09,947 - application.modules.rag_agent - DEBUG - RAG用chainを作成します。
+2025-03-19 17:53:09,947 - application.modules.rag_agent - INFO - RAG用に複数ファイルからRetrieverを作成します。
+2025-03-19 17:53:09,951 - application.modules.rag_agent - DEBUG - ファイル C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\rule\test_rule.md は 1 個に分割
+2025-03-19 17:53:09,951 - application.modules.rag_agent - DEBUG - 合計 1 個の分割ドキュメントを作成します。
+2025-03-19 17:53:09,970 - faiss.loader - DEBUG - Environment variable FAISS_OPT_LEVEL is not set, so let's pick the instruction set according to the current CPU
+2025-03-19 17:53:09,971 - faiss.loader - INFO - Loading faiss with AVX2 support.
+2025-03-19 17:53:09,994 - faiss.loader - INFO - Successfully loaded faiss with AVX2 support.
+2025-03-19 17:53:10,003 - faiss - INFO - Failed to load GPU Faiss: name 'GpuIndexIVFFlat' is not defined. Will not load constructor refs for GPU indexes.
+2025-03-19 17:53:10,003 - application.modules.rag_agent - DEBUG - Vectorstore(Faiss)作成完了
+2025-03-19 17:53:10,014 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): api.smith.langchain.com:443
+2025-03-19 17:53:10,021 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (2): api.smith.langchain.com:443
+2025-03-19 17:53:10,200 - urllib3.connectionpool - DEBUG - https://api.smith.langchain.com:443 "GET /info HTTP/1.1" 200 672
+2025-03-19 17:53:10,215 - urllib3.connectionpool - DEBUG - https://api.smith.langchain.com:443 "GET /commits/rlm/rag-prompt/latest HTTP/1.1" 200 844
+2025-03-19 17:53:10,218 - application.modules.rag_agent - INFO - RAG_Agent初期化完了
+2025-03-19 17:53:10,218 - application.modules.agent_collection - INFO - RAG_AGENT: 初期化完了
+2025-03-19 17:53:10,218 - application.modules.agent_collection - INFO - workflow 作成
+2025-03-19 17:53:10,219 - application.services.payroll_service - INFO - AgentCollection initialized successfully
+2025-03-19 17:53:10,219 - payroll_api - INFO - PayrollService initialized successfully
+2025-03-19 17:53:10,219 - application.services.session_service - INFO - Session persistence enabled, using directory: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\web_application\sessions
+2025-03-19 17:53:10,220 - application.services.session_service - INFO - Loaded 0 sessions from disk
+2025-03-19 17:53:10,220 - application.services.session_service - INFO - SessionService initialized with 0 sessions
+2025-03-19 17:53:10,220 - payroll_api - INFO - SessionService initialized successfully
+2025-03-19 17:53:10,402 - payroll_api - INFO - User database path: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\application\services\security\users.json
+2025-03-19 17:53:10,402 - payroll_api - INFO - Users in database: ['admin', 'user']
+2025-03-19 17:53:10,402 - payroll_api - INFO - Admin password from env: password
+2025-03-19 17:53:10,402 - application.services.session_service - INFO - Cleaned up 0 old sessions
+2025-03-19 17:53:10,402 - payroll_api - INFO - Startup: cleaned up 0 sessions older than 24 hours
+2025-03-19 17:53:10,402 - payroll_api - INFO - Deleted 0 old temporary files
+2025-03-19 17:53:10,402 - payroll_api - INFO - Startup: cleaned up temporary files
+2025-03-19 17:53:10,402 - payroll_api - INFO - Initializing authentication
+2025-03-19 17:53:10,402 - payroll_api - INFO - User authentication initialized with 2 users
+2025-03-19 17:53:10,402 - payroll_api - INFO - Authentication initialized successfully
+2025-03-19 17:53:34,424 - python_multipart.multipart - DEBUG - Calling on_field_start with no data
+2025-03-19 17:53:34,424 - python_multipart.multipart - DEBUG - Calling on_field_name with data[0:10]
+2025-03-19 17:53:34,425 - python_multipart.multipart - DEBUG - Calling on_field_data with data[11:19]
+2025-03-19 17:53:34,425 - python_multipart.multipart - DEBUG - Calling on_field_end with no data
+2025-03-19 17:53:34,425 - python_multipart.multipart - DEBUG - Calling on_field_start with no data
+2025-03-19 17:53:34,425 - python_multipart.multipart - DEBUG - Calling on_field_name with data[20:28]
+2025-03-19 17:53:34,425 - python_multipart.multipart - DEBUG - Calling on_field_data with data[29:34]
+2025-03-19 17:53:34,425 - python_multipart.multipart - DEBUG - Calling on_field_end with no data
+2025-03-19 17:53:34,425 - python_multipart.multipart - DEBUG - Calling on_field_start with no data
+2025-03-19 17:53:34,426 - python_multipart.multipart - DEBUG - Calling on_field_name with data[35:43]
+2025-03-19 17:53:34,426 - python_multipart.multipart - DEBUG - Calling on_field_data with data[44:52]
+2025-03-19 17:53:34,426 - python_multipart.multipart - DEBUG - Calling on_field_end with no data
+2025-03-19 17:53:34,426 - python_multipart.multipart - DEBUG - Calling on_end with no data
+2025-03-19 17:53:34,429 - payroll_api - DEBUG - Login attempt: username=admin, password=***
+2025-03-19 17:53:34,429 - payroll_api - INFO - User database path: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\application\services\security\users.json
+2025-03-19 17:53:34,429 - payroll_api - INFO - Users in database: ['admin', 'user']
+2025-03-19 17:57:01,489 - payroll_api - INFO - API shutting down
+2025-03-19 17:57:01,491 - payroll_api - INFO - Deleted 0 old temporary files
+2025-03-19 17:57:01,493 - langsmith.client - DEBUG - Closing Client.session
+2025-03-19 17:57:01,508 - langsmith.client - DEBUG - Closing Client.session
+2025-03-19 17:57:07,956 - payroll_api - INFO - Service modules imported successfully
+2025-03-19 17:57:07,986 - application.modules.file_agent - INFO - FileAgent を初期化します。
+2025-03-19 17:57:08,022 - application.modules.file_agent - INFO - FileAgent 初期化完了: sqlite:///C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\data\app.db
+2025-03-19 17:57:08,022 - application.services.file_service - INFO - FileService initialized with temp_dir: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\web_application\uploads
+2025-03-19 17:57:08,024 - payroll_api - INFO - FileService initialized successfully
+2025-03-19 17:57:08,024 - application.services.payroll_service - INFO - Initializing PayrollService with config: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\application\json\config.json
+2025-03-19 17:57:08,024 - application.modules.agent_collection - INFO - エージェントコレクションを初期化しています...
+2025-03-19 17:57:08,024 - application.modules.file_agent - INFO - FileAgent を初期化します。
+2025-03-19 17:57:08,025 - application.modules.file_agent - WARNING - Could not remove existing database file: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\data\app.db
+2025-03-19 17:57:08,026 - application.modules.file_agent - WARNING - Will try to reuse existing database.
+2025-03-19 17:57:08,027 - application.modules.file_agent - INFO - FileAgent 初期化完了: sqlite:///C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\data\app.db
+2025-03-19 17:57:08,027 - application.modules.agent_collection - INFO - ファイルエージェントを初期化しました。
+2025-03-19 17:57:10,205 - application.modules.agent_collection - INFO - 設定ファイルを正常に読み込みました: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\application\json\config.json
+2025-03-19 17:57:10,205 - application.modules.agent_collection - INFO - タスクを正常に作成。タスク数: 4
+2025-03-19 17:57:10,205 - application.modules.agent_collection - INFO - IntentAnalyzer を初期化
+2025-03-19 17:57:10,205 - application.modules.agent_collection - INFO - RAG_AGENT: 初期化開始
+2025-03-19 17:57:10,205 - application.modules.rag_agent - INFO - RAG_Agentを初期化します。
+2025-03-19 17:57:17,436 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-03-19 17:57:17,438 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-03-19 17:57:17,440 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): huggingface.co:443
+2025-03-19 17:57:17,775 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/modules.json HTTP/1.1" 200 0
+2025-03-19 17:57:17,968 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/config_sentence_transformers.json HTTP/1.1" 200 0
+2025-03-19 17:57:18,143 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/README.md HTTP/1.1" 200 0
+2025-03-19 17:57:18,320 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/modules.json HTTP/1.1" 200 0
+2025-03-19 17:57:18,486 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/sentence_bert_config.json HTTP/1.1" 200 0
+2025-03-19 17:57:18,651 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/adapter_config.json HTTP/1.1" 404 0
+2025-03-19 17:57:18,836 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/config.json HTTP/1.1" 200 0
+2025-03-19 17:57:19,338 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/tokenizer_config.json HTTP/1.1" 200 0
+2025-03-19 17:57:19,583 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "GET /api/models/sentence-transformers/all-MiniLM-L6-v2/revision/main HTTP/1.1" 200 6729
+2025-03-19 17:57:19,761 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "GET /api/models/sentence-transformers/all-MiniLM-L6-v2 HTTP/1.1" 200 6729
+2025-03-19 17:57:19,764 - application.modules.rag_agent - DEBUG - HuggingFaceEmbeddings インスタンス生成OK
+2025-03-19 17:57:19,787 - application.modules.rag_agent - DEBUG - embed_query実行OK. 長さ=384
+2025-03-19 17:57:19,787 - application.modules.rag_agent - DEBUG - RAG用chainを作成します。
+2025-03-19 17:57:19,788 - application.modules.rag_agent - INFO - RAG用に複数ファイルからRetrieverを作成します。
+2025-03-19 17:57:19,790 - application.modules.rag_agent - DEBUG - ファイル C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\rule\test_rule.md は 1 個に分割
+2025-03-19 17:57:19,790 - application.modules.rag_agent - DEBUG - 合計 1 個の分割ドキュメントを作成します。
+2025-03-19 17:57:19,809 - faiss.loader - DEBUG - Environment variable FAISS_OPT_LEVEL is not set, so let's pick the instruction set according to the current CPU
+2025-03-19 17:57:19,809 - faiss.loader - INFO - Loading faiss with AVX2 support.
+2025-03-19 17:57:19,830 - faiss.loader - INFO - Successfully loaded faiss with AVX2 support.
+2025-03-19 17:57:19,837 - faiss - INFO - Failed to load GPU Faiss: name 'GpuIndexIVFFlat' is not defined. Will not load constructor refs for GPU indexes.
+2025-03-19 17:57:19,837 - application.modules.rag_agent - DEBUG - Vectorstore(Faiss)作成完了
+2025-03-19 17:57:19,844 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): api.smith.langchain.com:443
+2025-03-19 17:57:19,865 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (2): api.smith.langchain.com:443
+2025-03-19 17:57:20,022 - urllib3.connectionpool - DEBUG - https://api.smith.langchain.com:443 "GET /info HTTP/1.1" 200 672
+2025-03-19 17:57:20,058 - urllib3.connectionpool - DEBUG - https://api.smith.langchain.com:443 "GET /commits/rlm/rag-prompt/latest HTTP/1.1" 200 844
+2025-03-19 17:57:20,062 - application.modules.rag_agent - INFO - RAG_Agent初期化完了
+2025-03-19 17:57:20,064 - application.modules.agent_collection - INFO - RAG_AGENT: 初期化完了
+2025-03-19 17:57:20,064 - application.modules.agent_collection - INFO - workflow 作成
+2025-03-19 17:57:20,069 - application.services.payroll_service - INFO - AgentCollection initialized successfully
+2025-03-19 17:57:20,070 - payroll_api - INFO - PayrollService initialized successfully
+2025-03-19 17:57:20,073 - application.services.session_service - INFO - Session persistence enabled, using directory: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\web_application\sessions
+2025-03-19 17:57:20,075 - application.services.session_service - INFO - Loaded 0 sessions from disk
+2025-03-19 17:57:20,076 - application.services.session_service - INFO - SessionService initialized with 0 sessions
+2025-03-19 17:57:20,077 - payroll_api - INFO - SessionService initialized successfully
+2025-03-19 17:57:20,335 - payroll_api - INFO - User database path: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\application\services\security\users.json
+2025-03-19 17:57:20,335 - payroll_api - INFO - Users in database: ['admin', 'user']
+2025-03-19 17:57:20,335 - payroll_api - INFO - Admin password from env: password
+2025-03-19 17:57:20,335 - application.services.session_service - INFO - Cleaned up 0 old sessions
+2025-03-19 17:57:20,335 - payroll_api - INFO - Startup: cleaned up 0 sessions older than 24 hours
+2025-03-19 17:57:20,340 - payroll_api - INFO - Deleted 0 old temporary files
+2025-03-19 17:57:20,340 - payroll_api - INFO - Startup: cleaned up temporary files
+2025-03-19 17:57:20,340 - payroll_api - INFO - Initializing authentication
+2025-03-19 17:57:20,341 - payroll_api - INFO - User authentication initialized with 2 users
+2025-03-19 17:57:20,341 - payroll_api - INFO - Authentication initialized successfully
+2025-03-19 17:57:20,343 - payroll_api - INFO - API shutting down
+2025-03-19 17:57:20,343 - payroll_api - INFO - Deleted 0 old temporary files
+2025-03-19 17:57:20,386 - langsmith.client - DEBUG - Closing Client.session
+2025-03-19 17:57:20,389 - langsmith.client - DEBUG - Closing Client.session
+2025-03-19 17:57:25,984 - payroll_api - INFO - Service modules imported successfully
+2025-03-19 17:57:26,004 - application.modules.file_agent - INFO - FileAgent を初期化します。
+2025-03-19 17:57:26,040 - application.modules.file_agent - INFO - FileAgent 初期化完了: sqlite:///C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\data\app.db
+2025-03-19 17:57:26,040 - application.services.file_service - INFO - FileService initialized with temp_dir: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\web_application\uploads
+2025-03-19 17:57:26,040 - payroll_api - INFO - FileService initialized successfully
+2025-03-19 17:57:26,040 - application.services.payroll_service - INFO - Initializing PayrollService with config: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\application\json\config.json
+2025-03-19 17:57:26,040 - application.modules.agent_collection - INFO - エージェントコレクションを初期化しています...
+2025-03-19 17:57:26,040 - application.modules.file_agent - INFO - FileAgent を初期化します。
+2025-03-19 17:57:26,040 - application.modules.file_agent - WARNING - Could not remove existing database file: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\data\app.db
+2025-03-19 17:57:26,040 - application.modules.file_agent - WARNING - Will try to reuse existing database.
+2025-03-19 17:57:26,048 - application.modules.file_agent - INFO - FileAgent 初期化完了: sqlite:///C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\data\app.db
+2025-03-19 17:57:26,048 - application.modules.agent_collection - INFO - ファイルエージェントを初期化しました。
+2025-03-19 17:57:28,583 - application.modules.agent_collection - INFO - 設定ファイルを正常に読み込みました: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\application\json\config.json
+2025-03-19 17:57:28,583 - application.modules.agent_collection - INFO - タスクを正常に作成。タスク数: 4
+2025-03-19 17:57:28,596 - application.modules.agent_collection - INFO - IntentAnalyzer を初期化
+2025-03-19 17:57:28,596 - application.modules.agent_collection - INFO - RAG_AGENT: 初期化開始
+2025-03-19 17:57:28,597 - application.modules.rag_agent - INFO - RAG_Agentを初期化します。
+2025-03-19 17:57:36,963 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-03-19 17:57:36,963 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-03-19 17:57:36,978 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): huggingface.co:443
+2025-03-19 17:57:37,163 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/modules.json HTTP/1.1" 200 0
+2025-03-19 17:57:37,563 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/config_sentence_transformers.json HTTP/1.1" 200 0
+2025-03-19 17:57:37,729 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/README.md HTTP/1.1" 200 0
+2025-03-19 17:57:37,897 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/modules.json HTTP/1.1" 200 0
+2025-03-19 17:57:38,077 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/sentence_bert_config.json HTTP/1.1" 200 0
+2025-03-19 17:57:38,244 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/adapter_config.json HTTP/1.1" 404 0
+2025-03-19 17:57:38,414 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/config.json HTTP/1.1" 200 0
+2025-03-19 17:57:38,980 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/tokenizer_config.json HTTP/1.1" 200 0
+2025-03-19 17:57:39,196 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "GET /api/models/sentence-transformers/all-MiniLM-L6-v2/revision/main HTTP/1.1" 200 6729
+2025-03-19 17:57:39,380 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "GET /api/models/sentence-transformers/all-MiniLM-L6-v2 HTTP/1.1" 200 6729
+2025-03-19 17:57:39,380 - application.modules.rag_agent - DEBUG - HuggingFaceEmbeddings インスタンス生成OK
+2025-03-19 17:57:39,400 - application.modules.rag_agent - DEBUG - embed_query実行OK. 長さ=384
+2025-03-19 17:57:39,400 - application.modules.rag_agent - DEBUG - RAG用chainを作成します。
+2025-03-19 17:57:39,400 - application.modules.rag_agent - INFO - RAG用に複数ファイルからRetrieverを作成します。
+2025-03-19 17:57:39,411 - application.modules.rag_agent - DEBUG - ファイル C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\rule\test_rule.md は 1 個に分割
+2025-03-19 17:57:39,412 - application.modules.rag_agent - DEBUG - 合計 1 個の分割ドキュメントを作成します。
+2025-03-19 17:57:39,433 - faiss.loader - DEBUG - Environment variable FAISS_OPT_LEVEL is not set, so let's pick the instruction set according to the current CPU
+2025-03-19 17:57:39,435 - faiss.loader - INFO - Loading faiss with AVX2 support.
+2025-03-19 17:57:39,458 - faiss.loader - INFO - Successfully loaded faiss with AVX2 support.
+2025-03-19 17:57:39,468 - faiss - INFO - Failed to load GPU Faiss: name 'GpuIndexIVFFlat' is not defined. Will not load constructor refs for GPU indexes.
+2025-03-19 17:57:39,470 - application.modules.rag_agent - DEBUG - Vectorstore(Faiss)作成完了
+2025-03-19 17:57:39,479 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): api.smith.langchain.com:443
+2025-03-19 17:57:39,499 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (2): api.smith.langchain.com:443
+2025-03-19 17:57:39,660 - urllib3.connectionpool - DEBUG - https://api.smith.langchain.com:443 "GET /info HTTP/1.1" 200 672
+2025-03-19 17:57:39,683 - urllib3.connectionpool - DEBUG - https://api.smith.langchain.com:443 "GET /commits/rlm/rag-prompt/latest HTTP/1.1" 200 844
+2025-03-19 17:57:39,691 - application.modules.rag_agent - INFO - RAG_Agent初期化完了
+2025-03-19 17:57:39,692 - application.modules.agent_collection - INFO - RAG_AGENT: 初期化完了
+2025-03-19 17:57:39,692 - application.modules.agent_collection - INFO - workflow 作成
+2025-03-19 17:57:39,692 - application.services.payroll_service - INFO - AgentCollection initialized successfully
+2025-03-19 17:57:39,692 - payroll_api - INFO - PayrollService initialized successfully
+2025-03-19 17:57:39,693 - application.services.session_service - INFO - Session persistence enabled, using directory: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\web_application\sessions
+2025-03-19 17:57:39,694 - application.services.session_service - INFO - Loaded 0 sessions from disk
+2025-03-19 17:57:39,694 - application.services.session_service - INFO - SessionService initialized with 0 sessions
+2025-03-19 17:57:39,694 - payroll_api - INFO - SessionService initialized successfully
+2025-03-19 17:57:39,879 - payroll_api - INFO - User database path: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\application\services\security\users.json
+2025-03-19 17:57:39,893 - payroll_api - INFO - Users in database: ['admin', 'user']
+2025-03-19 17:57:39,893 - payroll_api - INFO - Admin password from env: password
+2025-03-19 17:57:39,894 - application.services.session_service - INFO - Cleaned up 0 old sessions
+2025-03-19 17:57:39,894 - payroll_api - INFO - Startup: cleaned up 0 sessions older than 24 hours
+2025-03-19 17:57:39,894 - payroll_api - INFO - Deleted 0 old temporary files
+2025-03-19 17:57:39,894 - payroll_api - INFO - Startup: cleaned up temporary files
+2025-03-19 17:57:39,894 - payroll_api - INFO - Initializing authentication
+2025-03-19 17:57:39,895 - payroll_api - INFO - User authentication initialized with 2 users
+2025-03-19 17:57:39,895 - payroll_api - INFO - Authentication initialized successfully
+2025-03-19 17:57:55,605 - python_multipart.multipart - DEBUG - Calling on_field_start with no data
+2025-03-19 17:57:55,606 - python_multipart.multipart - DEBUG - Calling on_field_name with data[0:10]
+2025-03-19 17:57:55,606 - python_multipart.multipart - DEBUG - Calling on_field_data with data[11:19]
+2025-03-19 17:57:55,606 - python_multipart.multipart - DEBUG - Calling on_field_end with no data
+2025-03-19 17:57:55,606 - python_multipart.multipart - DEBUG - Calling on_field_start with no data
+2025-03-19 17:57:55,606 - python_multipart.multipart - DEBUG - Calling on_field_name with data[20:28]
+2025-03-19 17:57:55,607 - python_multipart.multipart - DEBUG - Calling on_field_data with data[29:34]
+2025-03-19 17:57:55,607 - python_multipart.multipart - DEBUG - Calling on_field_end with no data
+2025-03-19 17:57:55,608 - python_multipart.multipart - DEBUG - Calling on_field_start with no data
+2025-03-19 17:57:55,608 - python_multipart.multipart - DEBUG - Calling on_field_name with data[35:43]
+2025-03-19 17:57:55,608 - python_multipart.multipart - DEBUG - Calling on_field_data with data[44:52]
+2025-03-19 17:57:55,608 - python_multipart.multipart - DEBUG - Calling on_field_end with no data
+2025-03-19 17:57:55,609 - python_multipart.multipart - DEBUG - Calling on_end with no data
+2025-03-19 17:57:55,611 - payroll_api - DEBUG - Login attempt: username=admin, password=***
+2025-03-19 17:57:55,611 - payroll_api - INFO - User database path: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\application\services\security\users.json
+2025-03-19 17:57:55,612 - payroll_api - INFO - Users in database: ['admin', 'user']
+2025-03-19 17:57:55,612 - passlib.handlers.bcrypt - DEBUG - detected 'bcrypt' backend, version '4.0.1'
+2025-03-19 17:57:55,613 - passlib.handlers.bcrypt - DEBUG - 'bcrypt' backend lacks $2$ support, enabling workaround
+2025-03-19 17:57:55,898 - payroll_api - DEBUG - Authentication result: False
+2025-03-19 17:58:54,605 - payroll_api - INFO - API shutting down
+2025-03-19 17:58:54,606 - payroll_api - INFO - Deleted 0 old temporary files
+2025-03-19 17:58:54,608 - langsmith.client - DEBUG - Closing Client.session
+2025-03-19 17:58:54,612 - langsmith.client - DEBUG - Closing Client.session
+2025-03-19 17:59:06,786 - payroll_api - INFO - Service modules imported successfully
+2025-03-19 17:59:06,821 - application.modules.file_agent - INFO - FileAgent を初期化します。
+2025-03-19 17:59:06,855 - application.modules.file_agent - INFO - FileAgent 初期化完了: sqlite:///C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\data\app.db
+2025-03-19 17:59:06,856 - application.services.file_service - INFO - FileService initialized with temp_dir: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\web_application\uploads
+2025-03-19 17:59:06,856 - payroll_api - INFO - FileService initialized successfully
+2025-03-19 17:59:06,857 - application.services.payroll_service - INFO - Initializing PayrollService with config: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\application\json\config.json
+2025-03-19 17:59:06,857 - application.modules.agent_collection - INFO - エージェントコレクションを初期化しています...
+2025-03-19 17:59:06,857 - application.modules.file_agent - INFO - FileAgent を初期化します。
+2025-03-19 17:59:06,859 - application.modules.file_agent - WARNING - Could not remove existing database file: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\data\app.db
+2025-03-19 17:59:06,859 - application.modules.file_agent - WARNING - Will try to reuse existing database.
+2025-03-19 17:59:06,861 - application.modules.file_agent - INFO - FileAgent 初期化完了: sqlite:///C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\data\app.db
+2025-03-19 17:59:06,861 - application.modules.agent_collection - INFO - ファイルエージェントを初期化しました。
+2025-03-19 17:59:09,437 - application.modules.agent_collection - INFO - 設定ファイルを正常に読み込みました: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\application\json\config.json
+2025-03-19 17:59:09,448 - application.modules.agent_collection - INFO - タスクを正常に作成。タスク数: 4
+2025-03-19 17:59:09,448 - application.modules.agent_collection - INFO - IntentAnalyzer を初期化
+2025-03-19 17:59:09,448 - application.modules.agent_collection - INFO - RAG_AGENT: 初期化開始
+2025-03-19 17:59:09,448 - application.modules.rag_agent - INFO - RAG_Agentを初期化します。
+2025-03-19 17:59:20,472 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-03-19 17:59:20,472 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-03-19 17:59:20,477 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): huggingface.co:443
+2025-03-19 17:59:20,798 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/modules.json HTTP/1.1" 200 0
+2025-03-19 17:59:20,973 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/config_sentence_transformers.json HTTP/1.1" 200 0
+2025-03-19 17:59:21,147 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/README.md HTTP/1.1" 200 0
+2025-03-19 17:59:21,322 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/modules.json HTTP/1.1" 200 0
+2025-03-19 17:59:21,502 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/sentence_bert_config.json HTTP/1.1" 200 0
+2025-03-19 17:59:21,669 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/adapter_config.json HTTP/1.1" 404 0
+2025-03-19 17:59:21,845 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/config.json HTTP/1.1" 200 0
+2025-03-19 17:59:22,461 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/tokenizer_config.json HTTP/1.1" 200 0
+2025-03-19 17:59:22,714 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "GET /api/models/sentence-transformers/all-MiniLM-L6-v2/revision/main HTTP/1.1" 200 6729
+2025-03-19 17:59:22,889 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "GET /api/models/sentence-transformers/all-MiniLM-L6-v2 HTTP/1.1" 200 6729
+2025-03-19 17:59:22,892 - application.modules.rag_agent - DEBUG - HuggingFaceEmbeddings インスタンス生成OK
+2025-03-19 17:59:22,920 - application.modules.rag_agent - DEBUG - embed_query実行OK. 長さ=384
+2025-03-19 17:59:22,920 - application.modules.rag_agent - DEBUG - RAG用chainを作成します。
+2025-03-19 17:59:22,920 - application.modules.rag_agent - INFO - RAG用に複数ファイルからRetrieverを作成します。
+2025-03-19 17:59:22,920 - application.modules.rag_agent - DEBUG - ファイル C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\rule\test_rule.md は 1 個に分割
+2025-03-19 17:59:22,920 - application.modules.rag_agent - DEBUG - 合計 1 個の分割ドキュメントを作成します。
+2025-03-19 17:59:22,957 - faiss.loader - DEBUG - Environment variable FAISS_OPT_LEVEL is not set, so let's pick the instruction set according to the current CPU
+2025-03-19 17:59:22,957 - faiss.loader - INFO - Loading faiss with AVX2 support.
+2025-03-19 17:59:22,985 - faiss.loader - INFO - Successfully loaded faiss with AVX2 support.
+2025-03-19 17:59:22,989 - faiss - INFO - Failed to load GPU Faiss: name 'GpuIndexIVFFlat' is not defined. Will not load constructor refs for GPU indexes.
+2025-03-19 17:59:22,989 - application.modules.rag_agent - DEBUG - Vectorstore(Faiss)作成完了
+2025-03-19 17:59:23,005 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): api.smith.langchain.com:443
+2025-03-19 17:59:23,033 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (2): api.smith.langchain.com:443
+2025-03-19 17:59:23,190 - urllib3.connectionpool - DEBUG - https://api.smith.langchain.com:443 "GET /info HTTP/1.1" 200 672
+2025-03-19 17:59:23,380 - urllib3.connectionpool - DEBUG - https://api.smith.langchain.com:443 "GET /commits/rlm/rag-prompt/latest HTTP/1.1" 200 844
+2025-03-19 17:59:23,388 - application.modules.rag_agent - INFO - RAG_Agent初期化完了
+2025-03-19 17:59:23,388 - application.modules.agent_collection - INFO - RAG_AGENT: 初期化完了
+2025-03-19 17:59:23,388 - application.modules.agent_collection - INFO - workflow 作成
+2025-03-19 17:59:23,388 - application.services.payroll_service - INFO - AgentCollection initialized successfully
+2025-03-19 17:59:23,388 - payroll_api - INFO - PayrollService initialized successfully
+2025-03-19 17:59:23,388 - application.services.session_service - INFO - Session persistence enabled, using directory: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\web_application\sessions
+2025-03-19 17:59:23,388 - application.services.session_service - INFO - Loaded 0 sessions from disk
+2025-03-19 17:59:23,388 - application.services.session_service - INFO - SessionService initialized with 0 sessions
+2025-03-19 17:59:23,388 - payroll_api - INFO - SessionService initialized successfully
+2025-03-19 17:59:23,674 - payroll_api - INFO - User database path: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\application\services\security\users.json
+2025-03-19 17:59:23,674 - payroll_api - INFO - Users in database: ['admin', 'user']
+2025-03-19 17:59:23,675 - payroll_api - INFO - Admin password from env: password
+2025-03-19 17:59:23,675 - application.services.session_service - INFO - Cleaned up 0 old sessions
+2025-03-19 17:59:23,676 - payroll_api - INFO - Startup: cleaned up 0 sessions older than 24 hours
+2025-03-19 17:59:23,676 - payroll_api - INFO - Deleted 0 old temporary files
+2025-03-19 17:59:23,677 - payroll_api - INFO - Startup: cleaned up temporary files
+2025-03-19 17:59:23,677 - payroll_api - INFO - Initializing authentication
+2025-03-19 17:59:23,679 - payroll_api - INFO - User authentication initialized with 2 users
+2025-03-19 17:59:23,679 - payroll_api - INFO - Authentication initialized successfully
+2025-03-19 18:00:00,248 - python_multipart.multipart - DEBUG - Calling on_field_start with no data
+2025-03-19 18:00:00,249 - python_multipart.multipart - DEBUG - Calling on_field_name with data[0:10]
+2025-03-19 18:00:00,249 - python_multipart.multipart - DEBUG - Calling on_field_data with data[11:19]
+2025-03-19 18:00:00,249 - python_multipart.multipart - DEBUG - Calling on_field_end with no data
+2025-03-19 18:00:00,250 - python_multipart.multipart - DEBUG - Calling on_field_start with no data
+2025-03-19 18:00:00,250 - python_multipart.multipart - DEBUG - Calling on_field_name with data[20:28]
+2025-03-19 18:00:00,250 - python_multipart.multipart - DEBUG - Calling on_field_data with data[29:34]
+2025-03-19 18:00:00,250 - python_multipart.multipart - DEBUG - Calling on_field_end with no data
+2025-03-19 18:00:00,251 - python_multipart.multipart - DEBUG - Calling on_field_start with no data
+2025-03-19 18:00:00,251 - python_multipart.multipart - DEBUG - Calling on_field_name with data[35:43]
+2025-03-19 18:00:00,251 - python_multipart.multipart - DEBUG - Calling on_field_data with data[44:52]
+2025-03-19 18:00:00,251 - python_multipart.multipart - DEBUG - Calling on_field_end with no data
+2025-03-19 18:00:00,252 - python_multipart.multipart - DEBUG - Calling on_end with no data
+2025-03-19 18:00:00,255 - payroll_api - DEBUG - Login attempt: username=admin, password=***
+2025-03-19 18:00:00,255 - payroll_api - INFO - User database path: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\application\services\security\users.json
+2025-03-19 18:00:00,256 - payroll_api - INFO - Users in database: ['admin', 'user']
+2025-03-19 18:00:00,256 - passlib.handlers.bcrypt - DEBUG - detected 'bcrypt' backend, version '4.0.1'
+2025-03-19 18:00:00,257 - passlib.handlers.bcrypt - DEBUG - 'bcrypt' backend lacks $2$ support, enabling workaround
+2025-03-19 18:00:00,537 - payroll_api - DEBUG - Authentication result: False
+2025-03-19 18:02:31,878 - python_multipart.multipart - DEBUG - Calling on_field_start with no data
+2025-03-19 18:02:31,878 - python_multipart.multipart - DEBUG - Calling on_field_name with data[0:10]
+2025-03-19 18:02:31,878 - python_multipart.multipart - DEBUG - Calling on_field_data with data[11:19]
+2025-03-19 18:02:31,878 - python_multipart.multipart - DEBUG - Calling on_field_end with no data
+2025-03-19 18:02:31,878 - python_multipart.multipart - DEBUG - Calling on_field_start with no data
+2025-03-19 18:02:31,879 - python_multipart.multipart - DEBUG - Calling on_field_name with data[20:28]
+2025-03-19 18:02:31,879 - python_multipart.multipart - DEBUG - Calling on_field_data with data[29:33]
+2025-03-19 18:02:31,879 - python_multipart.multipart - DEBUG - Calling on_field_end with no data
+2025-03-19 18:02:31,879 - python_multipart.multipart - DEBUG - Calling on_field_start with no data
+2025-03-19 18:02:31,880 - python_multipart.multipart - DEBUG - Calling on_field_name with data[34:42]
+2025-03-19 18:02:31,881 - python_multipart.multipart - DEBUG - Calling on_field_data with data[43:51]
+2025-03-19 18:02:31,881 - python_multipart.multipart - DEBUG - Calling on_field_end with no data
+2025-03-19 18:02:31,881 - python_multipart.multipart - DEBUG - Calling on_end with no data
+2025-03-19 18:02:31,883 - payroll_api - DEBUG - Login attempt: username=user, password=***
+2025-03-19 18:02:31,883 - payroll_api - INFO - User database path: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\application\services\security\users.json
+2025-03-19 18:02:31,883 - payroll_api - INFO - Users in database: ['admin', 'user']
+2025-03-19 18:02:32,237 - payroll_api - DEBUG - Authentication result: True
+2025-03-19 18:02:55,858 - python_multipart.multipart - DEBUG - Calling on_field_start with no data
+2025-03-19 18:02:55,859 - python_multipart.multipart - DEBUG - Calling on_field_name with data[0:10]
+2025-03-19 18:02:55,859 - python_multipart.multipart - DEBUG - Calling on_field_data with data[11:19]
+2025-03-19 18:02:55,860 - python_multipart.multipart - DEBUG - Calling on_field_end with no data
+2025-03-19 18:02:55,860 - python_multipart.multipart - DEBUG - Calling on_field_start with no data
+2025-03-19 18:02:55,860 - python_multipart.multipart - DEBUG - Calling on_field_name with data[20:28]
+2025-03-19 18:02:55,861 - python_multipart.multipart - DEBUG - Calling on_field_data with data[29:33]
+2025-03-19 18:02:55,861 - python_multipart.multipart - DEBUG - Calling on_field_end with no data
+2025-03-19 18:02:55,861 - python_multipart.multipart - DEBUG - Calling on_field_start with no data
+2025-03-19 18:02:55,861 - python_multipart.multipart - DEBUG - Calling on_field_name with data[34:42]
+2025-03-19 18:02:55,862 - python_multipart.multipart - DEBUG - Calling on_field_data with data[43:51]
+2025-03-19 18:02:55,862 - python_multipart.multipart - DEBUG - Calling on_field_end with no data
+2025-03-19 18:02:55,862 - python_multipart.multipart - DEBUG - Calling on_field_start with no data
+2025-03-19 18:02:55,863 - python_multipart.multipart - DEBUG - Calling on_field_name with data[52:57]
+2025-03-19 18:02:55,863 - python_multipart.multipart - DEBUG - Calling on_field_end with no data
+2025-03-19 18:02:55,864 - python_multipart.multipart - DEBUG - Calling on_field_start with no data
+2025-03-19 18:02:55,864 - python_multipart.multipart - DEBUG - Calling on_field_name with data[59:68]
+2025-03-19 18:02:55,864 - python_multipart.multipart - DEBUG - Calling on_field_data with data[69:75]
+2025-03-19 18:02:55,865 - python_multipart.multipart - DEBUG - Calling on_field_end with no data
+2025-03-19 18:02:55,865 - python_multipart.multipart - DEBUG - Calling on_field_start with no data
+2025-03-19 18:02:55,865 - python_multipart.multipart - DEBUG - Calling on_field_name with data[76:89]
+2025-03-19 18:02:55,866 - python_multipart.multipart - DEBUG - Calling on_field_data with data[90:96]
+2025-03-19 18:02:55,866 - python_multipart.multipart - DEBUG - Calling on_field_end with no data
+2025-03-19 18:02:55,867 - python_multipart.multipart - DEBUG - Calling on_end with no data
+2025-03-19 18:02:55,881 - payroll_api - DEBUG - Login attempt: username=user, password=***
+2025-03-19 18:02:55,883 - payroll_api - INFO - User database path: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\application\services\security\users.json
+2025-03-19 18:02:55,883 - payroll_api - INFO - Users in database: ['admin', 'user']
+2025-03-19 18:02:56,223 - payroll_api - DEBUG - Authentication result: True
+2025-03-19 18:04:09,096 - python_multipart.multipart - DEBUG - Calling on_field_start with no data
+2025-03-19 18:04:09,096 - python_multipart.multipart - DEBUG - Calling on_field_name with data[0:10]
+2025-03-19 18:04:09,096 - python_multipart.multipart - DEBUG - Calling on_field_data with data[11:19]
+2025-03-19 18:04:09,096 - python_multipart.multipart - DEBUG - Calling on_field_end with no data
+2025-03-19 18:04:09,096 - python_multipart.multipart - DEBUG - Calling on_field_start with no data
+2025-03-19 18:04:09,096 - python_multipart.multipart - DEBUG - Calling on_field_name with data[20:28]
+2025-03-19 18:04:09,096 - python_multipart.multipart - DEBUG - Calling on_field_data with data[29:34]
+2025-03-19 18:04:09,096 - python_multipart.multipart - DEBUG - Calling on_field_end with no data
+2025-03-19 18:04:09,096 - python_multipart.multipart - DEBUG - Calling on_field_start with no data
+2025-03-19 18:04:09,096 - python_multipart.multipart - DEBUG - Calling on_field_name with data[35:43]
+2025-03-19 18:04:09,096 - python_multipart.multipart - DEBUG - Calling on_field_data with data[44:52]
+2025-03-19 18:04:09,096 - python_multipart.multipart - DEBUG - Calling on_field_end with no data
+2025-03-19 18:04:09,096 - python_multipart.multipart - DEBUG - Calling on_end with no data
+2025-03-19 18:04:09,096 - payroll_api - DEBUG - Login attempt: username=admin, password=***
+2025-03-19 18:04:09,096 - payroll_api - INFO - User database path: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\application\services\security\users.json
+2025-03-19 18:04:09,096 - payroll_api - INFO - Users in database: ['admin', 'user']
+2025-03-19 18:04:09,362 - payroll_api - DEBUG - Authentication result: False
+2025-03-19 18:04:36,037 - python_multipart.multipart - DEBUG - Calling on_field_start with no data
+2025-03-19 18:04:36,037 - python_multipart.multipart - DEBUG - Calling on_field_name with data[0:10]
+2025-03-19 18:04:36,037 - python_multipart.multipart - DEBUG - Calling on_field_data with data[11:19]
+2025-03-19 18:04:36,037 - python_multipart.multipart - DEBUG - Calling on_field_end with no data
+2025-03-19 18:04:36,037 - python_multipart.multipart - DEBUG - Calling on_field_start with no data
+2025-03-19 18:04:36,037 - python_multipart.multipart - DEBUG - Calling on_field_name with data[20:28]
+2025-03-19 18:04:36,037 - python_multipart.multipart - DEBUG - Calling on_field_data with data[29:33]
+2025-03-19 18:04:36,037 - python_multipart.multipart - DEBUG - Calling on_field_end with no data
+2025-03-19 18:04:36,037 - python_multipart.multipart - DEBUG - Calling on_field_start with no data
+2025-03-19 18:04:36,037 - python_multipart.multipart - DEBUG - Calling on_field_name with data[34:42]
+2025-03-19 18:04:36,037 - python_multipart.multipart - DEBUG - Calling on_field_data with data[43:51]
+2025-03-19 18:04:36,037 - python_multipart.multipart - DEBUG - Calling on_field_end with no data
+2025-03-19 18:04:36,037 - python_multipart.multipart - DEBUG - Calling on_end with no data
+2025-03-19 18:04:36,037 - payroll_api - DEBUG - Login attempt: username=user, password=***
+2025-03-19 18:04:36,037 - payroll_api - INFO - User database path: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\application\services\security\users.json
+2025-03-19 18:04:36,037 - payroll_api - INFO - Users in database: ['admin', 'user']
+2025-03-19 18:04:36,265 - payroll_api - DEBUG - Authentication result: True
+2025-03-19 18:05:08,644 - python_multipart.multipart - DEBUG - Calling on_field_start with no data
+2025-03-19 18:05:08,644 - python_multipart.multipart - DEBUG - Calling on_field_name with data[0:10]
+2025-03-19 18:05:08,644 - python_multipart.multipart - DEBUG - Calling on_field_data with data[11:19]
+2025-03-19 18:05:08,644 - python_multipart.multipart - DEBUG - Calling on_field_end with no data
+2025-03-19 18:05:08,644 - python_multipart.multipart - DEBUG - Calling on_field_start with no data
+2025-03-19 18:05:08,644 - python_multipart.multipart - DEBUG - Calling on_field_name with data[20:28]
+2025-03-19 18:05:08,644 - python_multipart.multipart - DEBUG - Calling on_field_data with data[29:34]
+2025-03-19 18:05:08,644 - python_multipart.multipart - DEBUG - Calling on_field_end with no data
+2025-03-19 18:05:08,644 - python_multipart.multipart - DEBUG - Calling on_field_start with no data
+2025-03-19 18:05:08,644 - python_multipart.multipart - DEBUG - Calling on_field_name with data[35:43]
+2025-03-19 18:05:08,644 - python_multipart.multipart - DEBUG - Calling on_field_data with data[44:52]
+2025-03-19 18:05:08,644 - python_multipart.multipart - DEBUG - Calling on_field_end with no data
+2025-03-19 18:05:08,644 - python_multipart.multipart - DEBUG - Calling on_field_start with no data
+2025-03-19 18:05:08,644 - python_multipart.multipart - DEBUG - Calling on_field_name with data[53:58]
+2025-03-19 18:05:08,644 - python_multipart.multipart - DEBUG - Calling on_field_data with data[59:64]
+2025-03-19 18:05:08,644 - python_multipart.multipart - DEBUG - Calling on_field_end with no data
+2025-03-19 18:05:08,644 - python_multipart.multipart - DEBUG - Calling on_field_start with no data
+2025-03-19 18:05:08,644 - python_multipart.multipart - DEBUG - Calling on_field_name with data[65:74]
+2025-03-19 18:05:08,644 - python_multipart.multipart - DEBUG - Calling on_field_data with data[75:81]
+2025-03-19 18:05:08,644 - python_multipart.multipart - DEBUG - Calling on_field_end with no data
+2025-03-19 18:05:08,644 - python_multipart.multipart - DEBUG - Calling on_field_start with no data
+2025-03-19 18:05:08,644 - python_multipart.multipart - DEBUG - Calling on_field_name with data[82:95]
+2025-03-19 18:05:08,644 - python_multipart.multipart - DEBUG - Calling on_field_data with data[96:102]
+2025-03-19 18:05:08,644 - python_multipart.multipart - DEBUG - Calling on_field_end with no data
+2025-03-19 18:05:08,644 - python_multipart.multipart - DEBUG - Calling on_end with no data
+2025-03-19 18:05:08,644 - payroll_api - DEBUG - Login attempt: username=admin, password=***
+2025-03-19 18:05:08,644 - payroll_api - INFO - User database path: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\application\services\security\users.json
+2025-03-19 18:05:08,644 - payroll_api - INFO - Users in database: ['admin', 'user']
+2025-03-19 18:05:08,925 - payroll_api - DEBUG - Authentication result: False
+2025-03-19 18:13:59,167 - payroll_api - INFO - API shutting down
+2025-03-19 18:13:59,167 - payroll_api - INFO - Deleted 0 old temporary files
+2025-03-19 18:13:59,169 - langsmith.client - DEBUG - Closing Client.session
+2025-03-19 18:13:59,185 - langsmith.client - DEBUG - Closing Client.session
+2025-03-19 18:14:06,265 - payroll_api - INFO - Service modules imported successfully
+2025-03-19 18:14:06,288 - application.modules.file_agent - INFO - FileAgent を初期化します。
+2025-03-19 18:14:06,334 - application.modules.file_agent - INFO - FileAgent 初期化完了: sqlite:///C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\data\app.db
+2025-03-19 18:14:06,334 - application.services.file_service - INFO - FileService initialized with temp_dir: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\web_application\uploads
+2025-03-19 18:14:06,334 - payroll_api - INFO - FileService initialized successfully
+2025-03-19 18:14:06,335 - application.services.payroll_service - INFO - Initializing PayrollService with config: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\application\json\config.json
+2025-03-19 18:14:06,335 - application.modules.agent_collection - INFO - エージェントコレクションを初期化しています...
+2025-03-19 18:14:06,335 - application.modules.file_agent - INFO - FileAgent を初期化します。
+2025-03-19 18:14:06,336 - application.modules.file_agent - WARNING - Could not remove existing database file: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\data\app.db
+2025-03-19 18:14:06,336 - application.modules.file_agent - WARNING - Will try to reuse existing database.
+2025-03-19 18:14:06,340 - application.modules.file_agent - INFO - FileAgent 初期化完了: sqlite:///C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\data\app.db
+2025-03-19 18:14:06,340 - application.modules.agent_collection - INFO - ファイルエージェントを初期化しました。
+2025-03-19 18:14:08,650 - application.modules.agent_collection - INFO - 設定ファイルを正常に読み込みました: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\application\json\config.json
+2025-03-19 18:14:08,655 - application.modules.agent_collection - INFO - タスクを正常に作成。タスク数: 4
+2025-03-19 18:14:08,655 - application.modules.agent_collection - INFO - IntentAnalyzer を初期化
+2025-03-19 18:14:08,655 - application.modules.agent_collection - INFO - RAG_AGENT: 初期化開始
+2025-03-19 18:14:08,656 - application.modules.rag_agent - INFO - RAG_Agentを初期化します。
+2025-03-19 18:14:17,372 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-03-19 18:14:17,373 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-03-19 18:14:17,378 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): huggingface.co:443
+2025-03-19 18:14:17,591 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/modules.json HTTP/1.1" 200 0
+2025-03-19 18:14:17,761 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/config_sentence_transformers.json HTTP/1.1" 200 0
+2025-03-19 18:14:17,955 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/README.md HTTP/1.1" 200 0
+2025-03-19 18:14:18,120 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/modules.json HTTP/1.1" 200 0
+2025-03-19 18:14:18,290 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/sentence_bert_config.json HTTP/1.1" 200 0
+2025-03-19 18:14:18,455 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/adapter_config.json HTTP/1.1" 404 0
+2025-03-19 18:14:18,625 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/config.json HTTP/1.1" 200 0
+2025-03-19 18:14:19,250 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/tokenizer_config.json HTTP/1.1" 200 0
+2025-03-19 18:14:19,468 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "GET /api/models/sentence-transformers/all-MiniLM-L6-v2/revision/main HTTP/1.1" 200 6729
+2025-03-19 18:14:19,646 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "GET /api/models/sentence-transformers/all-MiniLM-L6-v2 HTTP/1.1" 200 6729
+2025-03-19 18:14:19,649 - application.modules.rag_agent - DEBUG - HuggingFaceEmbeddings インスタンス生成OK
+2025-03-19 18:14:19,676 - application.modules.rag_agent - DEBUG - embed_query実行OK. 長さ=384
+2025-03-19 18:14:19,677 - application.modules.rag_agent - DEBUG - RAG用chainを作成します。
+2025-03-19 18:14:19,677 - application.modules.rag_agent - INFO - RAG用に複数ファイルからRetrieverを作成します。
+2025-03-19 18:14:19,679 - application.modules.rag_agent - DEBUG - ファイル C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\rule\test_rule.md は 1 個に分割
+2025-03-19 18:14:19,680 - application.modules.rag_agent - DEBUG - 合計 1 個の分割ドキュメントを作成します。
+2025-03-19 18:14:19,702 - faiss.loader - DEBUG - Environment variable FAISS_OPT_LEVEL is not set, so let's pick the instruction set according to the current CPU
+2025-03-19 18:14:19,702 - faiss.loader - INFO - Loading faiss with AVX2 support.
+2025-03-19 18:14:19,723 - faiss.loader - INFO - Successfully loaded faiss with AVX2 support.
+2025-03-19 18:14:19,730 - faiss - INFO - Failed to load GPU Faiss: name 'GpuIndexIVFFlat' is not defined. Will not load constructor refs for GPU indexes.
+2025-03-19 18:14:19,731 - application.modules.rag_agent - DEBUG - Vectorstore(Faiss)作成完了
+2025-03-19 18:14:19,738 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): api.smith.langchain.com:443
+2025-03-19 18:14:19,763 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (2): api.smith.langchain.com:443
+2025-03-19 18:14:19,923 - urllib3.connectionpool - DEBUG - https://api.smith.langchain.com:443 "GET /info HTTP/1.1" 200 672
+2025-03-19 18:14:19,938 - urllib3.connectionpool - DEBUG - https://api.smith.langchain.com:443 "GET /commits/rlm/rag-prompt/latest HTTP/1.1" 200 844
+2025-03-19 18:14:19,939 - application.modules.rag_agent - INFO - RAG_Agent初期化完了
+2025-03-19 18:14:19,940 - application.modules.agent_collection - INFO - RAG_AGENT: 初期化完了
+2025-03-19 18:14:19,940 - application.modules.agent_collection - INFO - workflow 作成
+2025-03-19 18:14:19,941 - application.services.payroll_service - INFO - AgentCollection initialized successfully
+2025-03-19 18:14:19,941 - payroll_api - INFO - PayrollService initialized successfully
+2025-03-19 18:14:19,942 - application.services.session_service - INFO - Session persistence enabled, using directory: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\web_application\sessions
+2025-03-19 18:14:19,942 - application.services.session_service - INFO - Loaded 0 sessions from disk
+2025-03-19 18:14:19,942 - application.services.session_service - INFO - SessionService initialized with 0 sessions
+2025-03-19 18:14:19,943 - payroll_api - INFO - SessionService initialized successfully
+2025-03-19 18:14:20,191 - payroll_api - INFO - User database path: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\application\services\security\users.json
+2025-03-19 18:14:20,191 - payroll_api - INFO - Users in database: ['admin', 'user']
+2025-03-19 18:14:20,192 - payroll_api - INFO - Admin password from env: password
+2025-03-19 18:14:20,192 - application.services.session_service - INFO - Cleaned up 0 old sessions
+2025-03-19 18:14:20,192 - payroll_api - INFO - Startup: cleaned up 0 sessions older than 24 hours
+2025-03-19 18:14:20,194 - payroll_api - INFO - Deleted 0 old temporary files
+2025-03-19 18:14:20,194 - payroll_api - INFO - Startup: cleaned up temporary files
+2025-03-19 18:14:20,194 - payroll_api - INFO - Initializing authentication
+2025-03-19 18:14:20,195 - payroll_api - INFO - User authentication initialized with 2 users
+2025-03-19 18:14:20,195 - payroll_api - INFO - Authentication initialized successfully
+2025-03-19 18:15:22,739 - python_multipart.multipart - DEBUG - Calling on_field_start with no data
+2025-03-19 18:15:22,739 - python_multipart.multipart - DEBUG - Calling on_field_name with data[0:10]
+2025-03-19 18:15:22,740 - python_multipart.multipart - DEBUG - Calling on_field_data with data[11:19]
+2025-03-19 18:15:22,740 - python_multipart.multipart - DEBUG - Calling on_field_end with no data
+2025-03-19 18:15:22,740 - python_multipart.multipart - DEBUG - Calling on_field_start with no data
+2025-03-19 18:15:22,740 - python_multipart.multipart - DEBUG - Calling on_field_name with data[20:28]
+2025-03-19 18:15:22,740 - python_multipart.multipart - DEBUG - Calling on_field_data with data[29:34]
+2025-03-19 18:15:22,740 - python_multipart.multipart - DEBUG - Calling on_field_end with no data
+2025-03-19 18:15:22,741 - python_multipart.multipart - DEBUG - Calling on_field_start with no data
+2025-03-19 18:15:22,741 - python_multipart.multipart - DEBUG - Calling on_field_name with data[35:43]
+2025-03-19 18:15:22,741 - python_multipart.multipart - DEBUG - Calling on_field_data with data[44:52]
+2025-03-19 18:15:22,741 - python_multipart.multipart - DEBUG - Calling on_field_end with no data
+2025-03-19 18:15:22,741 - python_multipart.multipart - DEBUG - Calling on_end with no data
+2025-03-19 18:15:22,743 - payroll_api - DEBUG - Login attempt: username=admin, password=***
+2025-03-19 18:15:22,744 - payroll_api - INFO - User database path: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\application\services\security\users.json
+2025-03-19 18:15:22,744 - payroll_api - INFO - Users in database: ['admin', 'user']
+2025-03-19 18:15:22,744 - passlib.handlers.bcrypt - DEBUG - detected 'bcrypt' backend, version '4.0.1'
+2025-03-19 18:15:22,745 - passlib.handlers.bcrypt - DEBUG - 'bcrypt' backend lacks $2$ support, enabling workaround
+2025-03-19 18:15:23,025 - payroll_api - DEBUG - Authentication result: False
+2025-03-19 18:16:47,084 - payroll_api - INFO - API shutting down
+2025-03-19 18:16:47,085 - payroll_api - INFO - Deleted 0 old temporary files
+2025-03-19 18:16:47,086 - langsmith.client - DEBUG - Closing Client.session
+2025-03-19 18:16:47,093 - langsmith.client - DEBUG - Closing Client.session
+2025-03-19 18:16:53,895 - payroll_api - INFO - Service modules imported successfully
+2025-03-19 18:16:53,925 - application.modules.file_agent - INFO - FileAgent を初期化します。
+2025-03-19 18:16:53,971 - application.modules.file_agent - INFO - FileAgent 初期化完了: sqlite:///C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\data\app.db
+2025-03-19 18:16:53,973 - application.services.file_service - INFO - FileService initialized with temp_dir: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\web_application\uploads
+2025-03-19 18:16:53,973 - payroll_api - INFO - FileService initialized successfully
+2025-03-19 18:16:53,973 - application.services.payroll_service - INFO - Initializing PayrollService with config: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\application\json\config.json
+2025-03-19 18:16:53,973 - application.modules.agent_collection - INFO - エージェントコレクションを初期化しています...
+2025-03-19 18:16:53,973 - application.modules.file_agent - INFO - FileAgent を初期化します。
+2025-03-19 18:16:53,976 - application.modules.file_agent - WARNING - Could not remove existing database file: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\data\app.db
+2025-03-19 18:16:53,976 - application.modules.file_agent - WARNING - Will try to reuse existing database.
+2025-03-19 18:16:53,981 - application.modules.file_agent - INFO - FileAgent 初期化完了: sqlite:///C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\data\app.db
+2025-03-19 18:16:53,981 - application.modules.agent_collection - INFO - ファイルエージェントを初期化しました。
+2025-03-19 18:16:56,616 - application.modules.agent_collection - INFO - 設定ファイルを正常に読み込みました: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\application\json\config.json
+2025-03-19 18:16:56,618 - application.modules.agent_collection - INFO - タスクを正常に作成。タスク数: 4
+2025-03-19 18:16:56,618 - application.modules.agent_collection - INFO - IntentAnalyzer を初期化
+2025-03-19 18:16:56,618 - application.modules.agent_collection - INFO - RAG_AGENT: 初期化開始
+2025-03-19 18:16:56,618 - application.modules.rag_agent - INFO - RAG_Agentを初期化します。
+2025-03-19 18:17:06,283 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-03-19 18:17:06,283 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-03-19 18:17:06,288 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): huggingface.co:443
+2025-03-19 18:17:06,850 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/modules.json HTTP/1.1" 200 0
+2025-03-19 18:17:07,027 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/config_sentence_transformers.json HTTP/1.1" 200 0
+2025-03-19 18:17:07,194 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/README.md HTTP/1.1" 200 0
+2025-03-19 18:17:07,368 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/modules.json HTTP/1.1" 200 0
+2025-03-19 18:17:07,529 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/sentence_bert_config.json HTTP/1.1" 200 0
+2025-03-19 18:17:07,694 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/adapter_config.json HTTP/1.1" 404 0
+2025-03-19 18:17:07,924 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/config.json HTTP/1.1" 200 0
+2025-03-19 18:17:09,097 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/tokenizer_config.json HTTP/1.1" 200 0
+2025-03-19 18:17:09,712 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "GET /api/models/sentence-transformers/all-MiniLM-L6-v2/revision/main HTTP/1.1" 200 6729
+2025-03-19 18:17:09,884 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "GET /api/models/sentence-transformers/all-MiniLM-L6-v2 HTTP/1.1" 200 6729
+2025-03-19 18:17:09,884 - application.modules.rag_agent - DEBUG - HuggingFaceEmbeddings インスタンス生成OK
+2025-03-19 18:17:09,931 - application.modules.rag_agent - DEBUG - embed_query実行OK. 長さ=384
+2025-03-19 18:17:09,931 - application.modules.rag_agent - DEBUG - RAG用chainを作成します。
+2025-03-19 18:17:09,931 - application.modules.rag_agent - INFO - RAG用に複数ファイルからRetrieverを作成します。
+2025-03-19 18:17:09,939 - application.modules.rag_agent - DEBUG - ファイル C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\rule\test_rule.md は 1 個に分割
+2025-03-19 18:17:09,939 - application.modules.rag_agent - DEBUG - 合計 1 個の分割ドキュメントを作成します。
+2025-03-19 18:17:09,970 - faiss.loader - DEBUG - Environment variable FAISS_OPT_LEVEL is not set, so let's pick the instruction set according to the current CPU
+2025-03-19 18:17:09,971 - faiss.loader - INFO - Loading faiss with AVX2 support.
+2025-03-19 18:17:09,995 - faiss.loader - INFO - Successfully loaded faiss with AVX2 support.
+2025-03-19 18:17:10,010 - faiss - INFO - Failed to load GPU Faiss: name 'GpuIndexIVFFlat' is not defined. Will not load constructor refs for GPU indexes.
+2025-03-19 18:17:10,010 - application.modules.rag_agent - DEBUG - Vectorstore(Faiss)作成完了
+2025-03-19 18:17:10,022 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): api.smith.langchain.com:443
+2025-03-19 18:17:10,053 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (2): api.smith.langchain.com:443
+2025-03-19 18:17:10,200 - urllib3.connectionpool - DEBUG - https://api.smith.langchain.com:443 "GET /info HTTP/1.1" 200 672
+2025-03-19 18:17:10,233 - urllib3.connectionpool - DEBUG - https://api.smith.langchain.com:443 "GET /commits/rlm/rag-prompt/latest HTTP/1.1" 200 844
+2025-03-19 18:17:10,236 - application.modules.rag_agent - INFO - RAG_Agent初期化完了
+2025-03-19 18:17:10,236 - application.modules.agent_collection - INFO - RAG_AGENT: 初期化完了
+2025-03-19 18:17:10,236 - application.modules.agent_collection - INFO - workflow 作成
+2025-03-19 18:17:10,236 - application.services.payroll_service - INFO - AgentCollection initialized successfully
+2025-03-19 18:17:10,240 - payroll_api - INFO - PayrollService initialized successfully
+2025-03-19 18:17:10,240 - application.services.session_service - INFO - Session persistence enabled, using directory: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\web_application\sessions
+2025-03-19 18:17:10,240 - application.services.session_service - INFO - Loaded 0 sessions from disk
+2025-03-19 18:17:10,240 - application.services.session_service - INFO - SessionService initialized with 0 sessions
+2025-03-19 18:17:10,240 - payroll_api - INFO - SessionService initialized successfully
+2025-03-19 18:17:10,484 - payroll_api - INFO - User database path: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\application\services\security\users.json
+2025-03-19 18:17:10,484 - payroll_api - INFO - Users in database: ['admin', 'user']
+2025-03-19 18:17:10,500 - payroll_api - INFO - Admin password from env: password
+2025-03-19 18:17:10,500 - application.services.session_service - INFO - Cleaned up 0 old sessions
+2025-03-19 18:17:10,500 - payroll_api - INFO - Startup: cleaned up 0 sessions older than 24 hours
+2025-03-19 18:17:10,500 - payroll_api - INFO - Deleted 0 old temporary files
+2025-03-19 18:17:10,500 - payroll_api - INFO - Startup: cleaned up temporary files
+2025-03-19 18:17:10,500 - payroll_api - INFO - Initializing authentication
+2025-03-19 18:17:10,500 - payroll_api - INFO - User authentication initialized with 2 users
+2025-03-19 18:17:10,500 - payroll_api - INFO - Authentication initialized successfully
+2025-03-19 18:17:25,090 - python_multipart.multipart - DEBUG - Calling on_field_start with no data
+2025-03-19 18:17:25,091 - python_multipart.multipart - DEBUG - Calling on_field_name with data[0:10]
+2025-03-19 18:17:25,091 - python_multipart.multipart - DEBUG - Calling on_field_data with data[11:19]
+2025-03-19 18:17:25,091 - python_multipart.multipart - DEBUG - Calling on_field_end with no data
+2025-03-19 18:17:25,091 - python_multipart.multipart - DEBUG - Calling on_field_start with no data
+2025-03-19 18:17:25,092 - python_multipart.multipart - DEBUG - Calling on_field_name with data[20:28]
+2025-03-19 18:17:25,092 - python_multipart.multipart - DEBUG - Calling on_field_data with data[29:34]
+2025-03-19 18:17:25,092 - python_multipart.multipart - DEBUG - Calling on_field_end with no data
+2025-03-19 18:17:25,092 - python_multipart.multipart - DEBUG - Calling on_field_start with no data
+2025-03-19 18:17:25,093 - python_multipart.multipart - DEBUG - Calling on_field_name with data[35:43]
+2025-03-19 18:17:25,093 - python_multipart.multipart - DEBUG - Calling on_field_data with data[44:52]
+2025-03-19 18:17:25,093 - python_multipart.multipart - DEBUG - Calling on_field_end with no data
+2025-03-19 18:17:25,093 - python_multipart.multipart - DEBUG - Calling on_end with no data
+2025-03-19 18:17:25,096 - payroll_api - DEBUG - Login attempt: username=admin, password=***
+2025-03-19 18:17:25,096 - payroll_api - INFO - User database path: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\application\services\security\users.json
+2025-03-19 18:17:25,097 - payroll_api - INFO - Users in database: ['admin', 'user']
+2025-03-19 18:17:25,097 - passlib.handlers.bcrypt - DEBUG - detected 'bcrypt' backend, version '4.0.1'
+2025-03-19 18:17:25,098 - passlib.handlers.bcrypt - DEBUG - 'bcrypt' backend lacks $2$ support, enabling workaround
+2025-03-19 18:17:25,381 - payroll_api - DEBUG - Authentication result: False
+2025-03-19 18:20:57,698 - payroll_api - INFO - API shutting down
+2025-03-19 18:20:57,698 - payroll_api - INFO - Deleted 0 old temporary files
+2025-03-19 18:20:57,698 - langsmith.client - DEBUG - Closing Client.session
+2025-03-19 18:20:57,733 - langsmith.client - DEBUG - Closing Client.session
+2025-03-19 18:21:09,406 - payroll_api - INFO - Service modules imported successfully
+2025-03-19 18:21:09,427 - application.modules.file_agent - INFO - FileAgent を初期化します。
+2025-03-19 18:21:09,471 - application.modules.file_agent - INFO - FileAgent 初期化完了: sqlite:///C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\data\app.db
+2025-03-19 18:21:09,472 - application.services.file_service - INFO - FileService initialized with temp_dir: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\web_application\uploads
+2025-03-19 18:21:09,472 - payroll_api - INFO - FileService initialized successfully
+2025-03-19 18:21:09,473 - application.services.payroll_service - INFO - Initializing PayrollService with config: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\application\json\config.json
+2025-03-19 18:21:09,473 - application.modules.agent_collection - INFO - エージェントコレクションを初期化しています...
+2025-03-19 18:21:09,473 - application.modules.file_agent - INFO - FileAgent を初期化します。
+2025-03-19 18:21:09,474 - application.modules.file_agent - WARNING - Could not remove existing database file: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\data\app.db
+2025-03-19 18:21:09,475 - application.modules.file_agent - WARNING - Will try to reuse existing database.
+2025-03-19 18:21:09,479 - application.modules.file_agent - INFO - FileAgent 初期化完了: sqlite:///C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\data\app.db
+2025-03-19 18:21:09,479 - application.modules.agent_collection - INFO - ファイルエージェントを初期化しました。
+2025-03-19 18:21:11,720 - application.modules.agent_collection - INFO - 設定ファイルを正常に読み込みました: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\application\json\config.json
+2025-03-19 18:21:11,722 - application.modules.agent_collection - INFO - タスクを正常に作成。タスク数: 4
+2025-03-19 18:21:11,722 - application.modules.agent_collection - INFO - IntentAnalyzer を初期化
+2025-03-19 18:21:11,722 - application.modules.agent_collection - INFO - RAG_AGENT: 初期化開始
+2025-03-19 18:21:11,722 - application.modules.rag_agent - INFO - RAG_Agentを初期化します。
+2025-03-19 18:21:19,818 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-03-19 18:21:19,818 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-03-19 18:21:19,826 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): huggingface.co:443
+2025-03-19 18:21:20,101 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/modules.json HTTP/1.1" 200 0
+2025-03-19 18:21:20,486 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/config_sentence_transformers.json HTTP/1.1" 200 0
+2025-03-19 18:21:20,953 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/README.md HTTP/1.1" 200 0
+2025-03-19 18:21:21,119 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/modules.json HTTP/1.1" 200 0
+2025-03-19 18:21:21,303 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/sentence_bert_config.json HTTP/1.1" 200 0
+2025-03-19 18:21:21,469 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/adapter_config.json HTTP/1.1" 404 0
+2025-03-19 18:21:21,636 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/config.json HTTP/1.1" 200 0
+2025-03-19 18:21:22,200 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/tokenizer_config.json HTTP/1.1" 200 0
+2025-03-19 18:21:22,453 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "GET /api/models/sentence-transformers/all-MiniLM-L6-v2/revision/main HTTP/1.1" 200 6729
+2025-03-19 18:21:22,637 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "GET /api/models/sentence-transformers/all-MiniLM-L6-v2 HTTP/1.1" 200 6729
+2025-03-19 18:21:22,637 - application.modules.rag_agent - DEBUG - HuggingFaceEmbeddings インスタンス生成OK
+2025-03-19 18:21:22,668 - application.modules.rag_agent - DEBUG - embed_query実行OK. 長さ=384
+2025-03-19 18:21:22,669 - application.modules.rag_agent - DEBUG - RAG用chainを作成します。
+2025-03-19 18:21:22,669 - application.modules.rag_agent - INFO - RAG用に複数ファイルからRetrieverを作成します。
+2025-03-19 18:21:22,670 - application.modules.rag_agent - DEBUG - ファイル C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\rule\test_rule.md は 1 個に分割
+2025-03-19 18:21:22,670 - application.modules.rag_agent - DEBUG - 合計 1 個の分割ドキュメントを作成します。
+2025-03-19 18:21:22,690 - faiss.loader - DEBUG - Environment variable FAISS_OPT_LEVEL is not set, so let's pick the instruction set according to the current CPU
+2025-03-19 18:21:22,691 - faiss.loader - INFO - Loading faiss with AVX2 support.
+2025-03-19 18:21:22,714 - faiss.loader - INFO - Successfully loaded faiss with AVX2 support.
+2025-03-19 18:21:22,725 - faiss - INFO - Failed to load GPU Faiss: name 'GpuIndexIVFFlat' is not defined. Will not load constructor refs for GPU indexes.
+2025-03-19 18:21:22,726 - application.modules.rag_agent - DEBUG - Vectorstore(Faiss)作成完了
+2025-03-19 18:21:22,734 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): api.smith.langchain.com:443
+2025-03-19 18:21:22,757 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (2): api.smith.langchain.com:443
+2025-03-19 18:21:22,901 - urllib3.connectionpool - DEBUG - https://api.smith.langchain.com:443 "GET /info HTTP/1.1" 200 672
+2025-03-19 18:21:22,934 - urllib3.connectionpool - DEBUG - https://api.smith.langchain.com:443 "GET /commits/rlm/rag-prompt/latest HTTP/1.1" 200 844
+2025-03-19 18:21:22,936 - application.modules.rag_agent - INFO - RAG_Agent初期化完了
+2025-03-19 18:21:22,937 - application.modules.agent_collection - INFO - RAG_AGENT: 初期化完了
+2025-03-19 18:21:22,937 - application.modules.agent_collection - INFO - workflow 作成
+2025-03-19 18:21:22,937 - application.services.payroll_service - INFO - AgentCollection initialized successfully
+2025-03-19 18:21:22,938 - payroll_api - INFO - PayrollService initialized successfully
+2025-03-19 18:21:22,939 - application.services.session_service - INFO - Session persistence enabled, using directory: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\web_application\sessions
+2025-03-19 18:21:22,939 - application.services.session_service - INFO - Loaded 0 sessions from disk
+2025-03-19 18:21:22,939 - application.services.session_service - INFO - SessionService initialized with 0 sessions
+2025-03-19 18:21:22,940 - payroll_api - INFO - SessionService initialized successfully
+2025-03-19 18:21:23,157 - payroll_api - INFO - User database path: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\application\services\security\users.json
+2025-03-19 18:21:23,164 - payroll_api - INFO - Users in database: ['admin', 'user']
+2025-03-19 18:21:23,164 - payroll_api - INFO - Admin password from env: password
+2025-03-19 18:21:23,166 - application.services.session_service - INFO - Cleaned up 0 old sessions
+2025-03-19 18:21:23,166 - payroll_api - INFO - Startup: cleaned up 0 sessions older than 24 hours
+2025-03-19 18:21:23,167 - payroll_api - INFO - Deleted 0 old temporary files
+2025-03-19 18:21:23,167 - payroll_api - INFO - Startup: cleaned up temporary files
+2025-03-19 18:21:23,167 - payroll_api - INFO - Initializing authentication
+2025-03-19 18:21:23,167 - payroll_api - INFO - User authentication initialized with 2 users
+2025-03-19 18:21:23,169 - payroll_api - INFO - Authentication initialized successfully
+2025-03-19 18:24:06,945 - python_multipart.multipart - DEBUG - Calling on_field_start with no data
+2025-03-19 18:24:06,946 - python_multipart.multipart - DEBUG - Calling on_field_name with data[0:10]
+2025-03-19 18:24:06,946 - python_multipart.multipart - DEBUG - Calling on_field_data with data[11:19]
+2025-03-19 18:24:06,946 - python_multipart.multipart - DEBUG - Calling on_field_end with no data
+2025-03-19 18:24:06,947 - python_multipart.multipart - DEBUG - Calling on_field_start with no data
+2025-03-19 18:24:06,947 - python_multipart.multipart - DEBUG - Calling on_field_name with data[20:28]
+2025-03-19 18:24:06,947 - python_multipart.multipart - DEBUG - Calling on_field_data with data[29:34]
+2025-03-19 18:24:06,947 - python_multipart.multipart - DEBUG - Calling on_field_end with no data
+2025-03-19 18:24:06,948 - python_multipart.multipart - DEBUG - Calling on_field_start with no data
+2025-03-19 18:24:06,948 - python_multipart.multipart - DEBUG - Calling on_field_name with data[35:43]
+2025-03-19 18:24:06,948 - python_multipart.multipart - DEBUG - Calling on_field_data with data[44:52]
+2025-03-19 18:24:06,948 - python_multipart.multipart - DEBUG - Calling on_field_end with no data
+2025-03-19 18:24:06,948 - python_multipart.multipart - DEBUG - Calling on_end with no data
+2025-03-19 18:24:06,951 - payroll_api - DEBUG - Login attempt: username=admin, password=***
+2025-03-19 18:24:06,951 - payroll_api - INFO - User database path: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\application\services\security\users.json
+2025-03-19 18:24:06,951 - payroll_api - INFO - Users in database: ['admin', 'user']
+2025-03-19 18:24:07,238 - payroll_api - DEBUG - Authentication result: True
+2025-03-19 18:24:31,941 - payroll_api - INFO - Admin requested all sessions: admin
+2025-03-19 18:24:36,641 - payroll_api - INFO - Admin requested all sessions: admin
+2025-03-19 18:25:02,776 - python_multipart.multipart - DEBUG - Calling on_field_start with no data
+2025-03-19 18:25:02,776 - python_multipart.multipart - DEBUG - Calling on_field_name with data[0:10]
+2025-03-19 18:25:02,777 - python_multipart.multipart - DEBUG - Calling on_field_data with data[11:19]
+2025-03-19 18:25:02,777 - python_multipart.multipart - DEBUG - Calling on_field_end with no data
+2025-03-19 18:25:02,777 - python_multipart.multipart - DEBUG - Calling on_field_start with no data
+2025-03-19 18:25:02,777 - python_multipart.multipart - DEBUG - Calling on_field_name with data[20:28]
+2025-03-19 18:25:02,778 - python_multipart.multipart - DEBUG - Calling on_field_data with data[29:34]
+2025-03-19 18:25:02,778 - python_multipart.multipart - DEBUG - Calling on_field_end with no data
+2025-03-19 18:25:02,778 - python_multipart.multipart - DEBUG - Calling on_field_start with no data
+2025-03-19 18:25:02,779 - python_multipart.multipart - DEBUG - Calling on_field_name with data[35:43]
+2025-03-19 18:25:02,779 - python_multipart.multipart - DEBUG - Calling on_field_data with data[44:52]
+2025-03-19 18:25:02,779 - python_multipart.multipart - DEBUG - Calling on_field_end with no data
+2025-03-19 18:25:02,780 - python_multipart.multipart - DEBUG - Calling on_field_start with no data
+2025-03-19 18:25:02,780 - python_multipart.multipart - DEBUG - Calling on_field_name with data[53:58]
+2025-03-19 18:25:02,780 - python_multipart.multipart - DEBUG - Calling on_field_data with data[59:64]
+2025-03-19 18:25:02,781 - python_multipart.multipart - DEBUG - Calling on_field_end with no data
+2025-03-19 18:25:02,781 - python_multipart.multipart - DEBUG - Calling on_field_start with no data
+2025-03-19 18:25:02,781 - python_multipart.multipart - DEBUG - Calling on_field_name with data[65:74]
+2025-03-19 18:25:02,782 - python_multipart.multipart - DEBUG - Calling on_field_data with data[75:81]
+2025-03-19 18:25:02,782 - python_multipart.multipart - DEBUG - Calling on_field_end with no data
+2025-03-19 18:25:02,782 - python_multipart.multipart - DEBUG - Calling on_field_start with no data
+2025-03-19 18:25:02,782 - python_multipart.multipart - DEBUG - Calling on_field_name with data[82:95]
+2025-03-19 18:25:02,784 - python_multipart.multipart - DEBUG - Calling on_field_data with data[96:102]
+2025-03-19 18:25:02,784 - python_multipart.multipart - DEBUG - Calling on_field_end with no data
+2025-03-19 18:25:02,785 - python_multipart.multipart - DEBUG - Calling on_end with no data
+2025-03-19 18:25:02,788 - payroll_api - DEBUG - Login attempt: username=admin, password=***
+2025-03-19 18:25:02,788 - payroll_api - INFO - User database path: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\application\services\security\users.json
+2025-03-19 18:25:02,789 - payroll_api - INFO - Users in database: ['admin', 'user']
+2025-03-19 18:25:03,122 - payroll_api - DEBUG - Authentication result: True
+2025-03-19 18:25:04,457 - python_multipart.multipart - DEBUG - Calling on_field_start with no data
+2025-03-19 18:25:04,457 - python_multipart.multipart - DEBUG - Calling on_field_name with data[0:10]
+2025-03-19 18:25:04,458 - python_multipart.multipart - DEBUG - Calling on_field_data with data[11:19]
+2025-03-19 18:25:04,458 - python_multipart.multipart - DEBUG - Calling on_field_end with no data
+2025-03-19 18:25:04,458 - python_multipart.multipart - DEBUG - Calling on_field_start with no data
+2025-03-19 18:25:04,458 - python_multipart.multipart - DEBUG - Calling on_field_name with data[20:28]
+2025-03-19 18:25:04,460 - python_multipart.multipart - DEBUG - Calling on_field_data with data[29:34]
+2025-03-19 18:25:04,460 - python_multipart.multipart - DEBUG - Calling on_field_end with no data
+2025-03-19 18:25:04,460 - python_multipart.multipart - DEBUG - Calling on_field_start with no data
+2025-03-19 18:25:04,460 - python_multipart.multipart - DEBUG - Calling on_field_name with data[35:43]
+2025-03-19 18:25:04,460 - python_multipart.multipart - DEBUG - Calling on_field_data with data[44:52]
+2025-03-19 18:25:04,461 - python_multipart.multipart - DEBUG - Calling on_field_end with no data
+2025-03-19 18:25:04,461 - python_multipart.multipart - DEBUG - Calling on_field_start with no data
+2025-03-19 18:25:04,461 - python_multipart.multipart - DEBUG - Calling on_field_name with data[53:58]
+2025-03-19 18:25:04,462 - python_multipart.multipart - DEBUG - Calling on_field_data with data[59:64]
+2025-03-19 18:25:04,462 - python_multipart.multipart - DEBUG - Calling on_field_end with no data
+2025-03-19 18:25:04,462 - python_multipart.multipart - DEBUG - Calling on_field_start with no data
+2025-03-19 18:25:04,463 - python_multipart.multipart - DEBUG - Calling on_field_name with data[65:74]
+2025-03-19 18:25:04,463 - python_multipart.multipart - DEBUG - Calling on_field_data with data[75:81]
+2025-03-19 18:25:04,464 - python_multipart.multipart - DEBUG - Calling on_field_end with no data
+2025-03-19 18:25:04,464 - python_multipart.multipart - DEBUG - Calling on_field_start with no data
+2025-03-19 18:25:04,465 - python_multipart.multipart - DEBUG - Calling on_field_name with data[82:95]
+2025-03-19 18:25:04,465 - python_multipart.multipart - DEBUG - Calling on_field_data with data[96:102]
+2025-03-19 18:25:04,466 - python_multipart.multipart - DEBUG - Calling on_field_end with no data
+2025-03-19 18:25:04,466 - python_multipart.multipart - DEBUG - Calling on_end with no data
+2025-03-19 18:25:04,479 - payroll_api - DEBUG - Login attempt: username=admin, password=***
+2025-03-19 18:25:04,479 - payroll_api - INFO - User database path: C:\Users\Udit Pradhan\formai_excelllm\InfoDeliver\application\services\security\users.json
+2025-03-19 18:25:04,479 - payroll_api - INFO - Users in database: ['admin', 'user']
+2025-03-19 18:25:04,787 - payroll_api - DEBUG - Authentication result: True

@@ -1,0 +1,25 @@
+{
+  "id": "a0f5786d-4479-4363-a47e-ca89e44f5b7e",
+  "created_at": 1742291749.9224274,
+  "last_activity": 1742291751.9229834,
+  "conversation_history": [
+    {
+      "role": "user",
+      "message": "\u7d66\u4e0e\u8a08\u7b97\u306b\u3064\u3044\u3066\u6559\u3048\u3066\u304f\u3060\u3055\u3044",
+      "timestamp": 1742291749.9261003,
+      "formatted_time": "2025-03-18 18:55:49"
+    },
+    {
+      "role": "assistant",
+      "message": "\u51e6\u7406\u4e2d\u306b\u30a8\u30e9\u30fc\u304c\u767a\u751f\u3057\u307e\u3057\u305f: 'tuple' object has no attribute 'get'",
+      "timestamp": 1742291751.921724,
+      "formatted_time": "2025-03-18 18:55:51"
+    }
+  ],
+  "metadata": {},
+  "current_task": null,
+  "current_state": "chat",
+  "expiry_seconds": 86399.9989991188,
+  "created_time": "2025-03-18 18:55:49",
+  "last_activity_time": "2025-03-18 18:55:51"
+}

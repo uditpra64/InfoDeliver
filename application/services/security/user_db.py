@@ -62,7 +62,7 @@ class UserDB:
             "username": "admin",
             "full_name": "Administrator",
             "email": "admin@example.com",
-            "hashed_password": pwd_context.hash(os.getenv("ADMIN_PASSWORD", "admin")),
+            "hashed_password": pwd_context.hash(os.getenv("ADMIN_PASSWORD", "password")),
             "disabled": False,
             "scopes": ["admin", "read", "write"]
         }

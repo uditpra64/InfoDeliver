@@ -1,0 +1,25 @@
+{
+  "id": "a19d8025-01e2-4dc1-a9c8-e2f7da8ab436",
+  "created_at": 1742300985.6304502,
+  "last_activity": 1742300990.613017,
+  "conversation_history": [
+    {
+      "role": "user",
+      "message": "\u7d66\u4e0e\u8a08\u7b97\u306b\u3064\u3044\u3066\u6559\u3048\u3066\u304f\u3060\u3055\u3044",
+      "timestamp": 1742300985.639171,
+      "formatted_time": "2025-03-18 21:29:45"
+    },
+    {
+      "role": "assistant",
+      "message": "\u51e6\u7406\u4e2d\u306b\u30a8\u30e9\u30fc\u304c\u767a\u751f\u3057\u307e\u3057\u305f: 1 validation error for Generation\ntext\n  Input should be a valid string [type=string_type, input_value=<application.modules.azur...t at 0x00000286D1F46350>, input_type=AzureOpenAIWrapper.invoke.<locals>.Result]\n    For further information visit https://errors.pydantic.dev/2.10/v/string_type",
+      "timestamp": 1742300990.6120174,
+      "formatted_time": "2025-03-18 21:29:50"
+    }
+  ],
+  "metadata": {},
+  "current_task": null,
+  "current_state": "chat",
+  "expiry_seconds": 86399.99874043465,
+  "created_time": "2025-03-18 21:29:45",
+  "last_activity_time": "2025-03-18 21:29:50"
+}
