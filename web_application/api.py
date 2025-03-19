@@ -5,6 +5,7 @@ import logging
 import shutil
 import time
 import uuid
+import secrets
 from datetime import datetime, timedelta
 from enum import Enum
 from typing import Optional, List, Dict, Any, Generic, TypeVar
@@ -13,7 +14,7 @@ from pathlib import Path
 from fastapi import FastAPI, HTTPException, UploadFile, File, Form, Depends, Header, Request, BackgroundTasks, status
 from fastapi.responses import JSONResponse
 from fastapi.exception_handlers import http_exception_handler
-from fastapi.middleware.cors import CORSMiddleware
+from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from pydantic import BaseModel, validator, Field
 from pydantic.generics import GenericModel
 from starlette.exceptions import HTTPException as StarletteHTTPException
@@ -22,39 +23,49 @@ from slowapi import Limiter
 from slowapi.util import get_remote_address
 from slowapi.errors import RateLimitExceeded
 from slowapi.middleware import SlowAPIMiddleware
-import logging
-logger = logging.getLogger(__name__)
+from dotenv import load_dotenv
 
-# Import security components
+# Import auth components
 from application.services.security.auth import (
     setup_api_security, 
     get_current_active_user, 
-    check_scopes
+    check_scopes,
+    authenticate_user,
+    create_access_token,
+    User,
+    Token,
+    TokenData
 )
 
-# Get the parent directory to import setup_paths
-current_dir = Path(__file__).resolve().parent
-parent_dir = current_dir.parent
-sys.path.insert(0, str(parent_dir))
+# Import from user_db for cleaner authentication
+from application.services.security.user_db import get_user_db
 
-# Import setup_paths to configure everything
-import setup_paths
-
-# Define app_dir AFTER importing setup_paths
-app_dir = os.path.join(parent_dir, "application")
+# Import frontend adapter for consistent responses
+from application.services.frontend_adapter import frontend_adapter
 
 # Configure logging
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
     handlers=[
-        logging.FileHandler(os.path.join(current_dir, "api.log")),
+        logging.FileHandler("api.log"),
         logging.StreamHandler()
     ]
 )
 logger = logging.getLogger("payroll_api")
 
-# Now import service classes with better error handling
+# Get the parent directory to import setup_paths
+current_dir = Path(__file__).resolve().parent
+parent_dir = current_dir.parent
+sys.path.insert(0, str(parent_dir))
+
+# Import setup_paths to configure everything correctly
+import setup_paths
+
+# Define app_dir AFTER importing setup_paths
+app_dir = os.path.join(parent_dir, "application")
+
+# Now import service classes with error handling
 try:
     from application.services.payroll_service import PayrollService
     from application.services.file_service import FileService
@@ -63,6 +74,9 @@ try:
 except ImportError as e:
     logger.critical(f"Failed to import service modules: {e}")
     raise
+
+# Load environment variables
+load_dotenv()
 
 # Define a type variable for generic response data
 T = TypeVar('T')
@@ -114,11 +128,6 @@ class ChatRequest(BaseModel):
     message: str
     session_id: Optional[str] = None
 
-class TokenRequest(BaseModel):
-    username: str
-    password: str
-    scope: Optional[str] = None
-
 class TokenResponse(BaseModel):
     access_token: str
     token_type: str
@@ -133,6 +142,7 @@ class ChatResponse(BaseModel):
     session_id: str
     state: SessionState
     timestamp: str = Field(default_factory=lambda: datetime.now().isoformat())
+    is_html: bool = False
     
     class Config:
         use_enum_values = True
@@ -174,41 +184,13 @@ class ErrorResponse(BaseModel):
     detail: Optional[str] = None
     timestamp: str = Field(default_factory=lambda: datetime.now().isoformat())
 
+# JWT Configuration from environment variables
+JWT_SECRET_KEY = os.getenv("JWT_SECRET_KEY", secrets.token_hex(32))
+JWT_ALGORITHM = os.getenv("JWT_ALGORITHM", "HS256")
+JWT_ACCESS_TOKEN_EXPIRE_MINUTES = int(os.getenv("JWT_ACCESS_TOKEN_EXPIRE_MINUTES", "30"))
+
 # Initialize rate limiter
 limiter = Limiter(key_func=get_remote_address)
-
-def log_object_details(obj, depth=0, max_depth=3):
-    """Recursively log the type and details of an object to aid debugging"""
-    indent = "  " * depth
-    if depth > max_depth:
-        return f"{indent}... (max depth reached)"
-    
-    if obj is None:
-        return f"{indent}None"
-    
-    obj_type = type(obj).__name__
-    
-    if isinstance(obj, (str, int, float, bool)):
-        return f"{indent}{obj_type}: {obj}"
-    
-    if isinstance(obj, (list, tuple)):
-        result = f"{indent}{obj_type} with {len(obj)} items:"
-        for i, item in enumerate(obj[:5]):  # Limit to first 5 items
-            result += f"\n{indent}- [{i}] {log_object_details(item, depth+1, max_depth)}"
-        if len(obj) > 5:
-            result += f"\n{indent}... ({len(obj)-5} more items)"
-        return result
-    
-    if isinstance(obj, dict):
-        result = f"{indent}{obj_type} with {len(obj)} keys:"
-        for k, v in list(obj.items())[:5]:  # Limit to first 5 items
-            result += f"\n{indent}- {k}: {log_object_details(v, depth+1, max_depth)}"
-        if len(obj) > 5:
-            result += f"\n{indent}... ({len(obj)-5} more keys)"
-        return result
-    
-    return f"{indent}{obj_type}"
-
 
 # Initialize FastAPI app
 app = FastAPI(
@@ -217,7 +199,15 @@ app = FastAPI(
     version="1.0.0",
 )
 
-allowed_origins = ["http://localhost:3000"]  # Make sure React app origin is included
+# Setup API security with CORS
+allowed_origins = [
+    "http://localhost:3000",  # React app on local dev
+    "http://127.0.0.1:3000",  # Alternative local address
+    os.getenv("FRONTEND_URL", "")  # Production frontend URL from env
+]
+# Remove empty strings from allowed_origins
+allowed_origins = [origin for origin in allowed_origins if origin]
+# Apply security configuration
 setup_api_security(app, allowed_origins=allowed_origins)
 
 # Add rate limiting middleware
@@ -227,12 +217,17 @@ app.add_middleware(SlowAPIMiddleware)
 # Handle rate limit exceptions
 @app.exception_handler(RateLimitExceeded)
 async def rate_limit_handler(request: Request, exc: RateLimitExceeded):
+    error_response = frontend_adapter.adapt_error_response(
+        error_message="Rate limit exceeded",
+        status_code=HTTP_429_TOO_MANY_REQUESTS
+    )
+    
     return JSONResponse(
         status_code=HTTP_429_TOO_MANY_REQUESTS,
         content=StandardResponse(
             code=HTTP_429_TOO_MANY_REQUESTS,
             success=False,
-            message="Rate limit exceeded",
+            message=error_response["message"],
             data={"detail": "Too many requests"}
         ).dict(),
     )
@@ -240,12 +235,17 @@ async def rate_limit_handler(request: Request, exc: RateLimitExceeded):
 # Custom exception handler for PayrollAPIException
 @app.exception_handler(PayrollAPIException)
 async def payroll_exception_handler(request: Request, exc: PayrollAPIException):
+    error_response = frontend_adapter.adapt_error_response(
+        error_message=exc.message,
+        status_code=exc.status_code
+    )
+    
     return JSONResponse(
         status_code=exc.status_code,
         content=StandardResponse(
             code=exc.status_code,
             success=False,
-            message=exc.message,
+            message=error_response["message"],
             data=None
         ).dict(),
     )
@@ -253,12 +253,17 @@ async def payroll_exception_handler(request: Request, exc: PayrollAPIException):
 # Handle other HTTP exceptions
 @app.exception_handler(StarletteHTTPException)
 async def custom_http_exception_handler(request: Request, exc: StarletteHTTPException):
+    error_response = frontend_adapter.adapt_error_response(
+        error_message=str(exc.detail),
+        status_code=exc.status_code
+    )
+    
     return JSONResponse(
         status_code=exc.status_code,
         content=StandardResponse(
             code=exc.status_code,
             success=False,
-            message=str(exc.detail),
+            message=error_response["message"],
             data=None
         ).dict(),
     )
@@ -274,34 +279,62 @@ os.makedirs(upload_folder, exist_ok=True)
 
 # Initialize services with error handling
 try:
-    file_service = FileService()
+    file_service = FileService(temp_dir=upload_folder)
     logger.info("FileService initialized successfully")
     
     payroll_service = PayrollService(config_path=config_path)
     logger.info("PayrollService initialized successfully")
     
-    session_service = SessionService()
+    session_dir = os.getenv("SESSION_DIR", os.path.join(current_dir, "sessions"))
+    session_service = SessionService(session_dir=session_dir, max_lifetime_hours=session_expiry_hours)
     logger.info("SessionService initialized successfully")
-    
-    # Clean up expired sessions periodically
-    @app.on_event("startup")
-    def startup_event():
-        # Clean up expired sessions
-        session_service.cleanup_old_sessions(max_age_seconds=session_expiry_hours * 3600)
-        logger.info(f"Startup: cleaned up sessions older than {session_expiry_hours} hours")
-        
-        # Clean up temporary files
-        cleanup_temp_files()
-        logger.info("Startup: cleaned up temporary files")
-    
-    # Cleanup on shutdown
-    @app.on_event("shutdown")
-    def shutdown_event():
-        logger.info("API shutting down")
-        cleanup_temp_files()
 except Exception as e:
     logger.critical(f"Error initializing services: {e}")
     raise
+
+# Initialize authentication
+def initialize_auth():
+    """Initialize authentication components"""
+    logger.info("Initializing authentication")
+    # Verify JWT secret key is properly set
+    if JWT_SECRET_KEY == secrets.token_hex(32):
+        logger.warning("Using a randomly generated JWT secret key. This will change on restart!")
+    
+    # In a production environment, you'd verify connection to your user database here
+    user_db = get_user_db()
+    logger.info(f"User authentication initialized with {len(user_db.users)} users")
+    
+    return True
+
+# Startup events
+@app.on_event("startup")
+def startup_event():
+    # Clean up expired sessions
+    try:
+        expired_sessions = session_service.cleanup_old_sessions(max_age_seconds=session_expiry_hours * 3600)
+        logger.info(f"Startup: cleaned up {expired_sessions} sessions older than {session_expiry_hours} hours")
+    except Exception as e:
+        logger.error(f"Error cleaning up expired sessions: {e}")
+    
+    # Clean up temporary files
+    try:
+        cleanup_temp_files()
+        logger.info("Startup: cleaned up temporary files")
+    except Exception as e:
+        logger.error(f"Error cleaning up temporary files: {e}")
+    
+    # Initialize authentication
+    try:
+        initialize_auth()
+        logger.info("Authentication initialized successfully")
+    except Exception as e:
+        logger.error(f"Error initializing authentication: {e}")
+
+# Shutdown events
+@app.on_event("shutdown")
+def shutdown_event():
+    logger.info("API shutting down")
+    cleanup_temp_files()
 
 # Helper function to clean up temporary files
 def cleanup_temp_files():
@@ -309,18 +342,27 @@ def cleanup_temp_files():
     try:
         temp_dir = upload_folder
         current_time = time.time()
+        file_count = 0
+        
         for filename in os.listdir(temp_dir):
             file_path = os.path.join(temp_dir, filename)
             if os.path.isfile(file_path):
                 # If file is older than 24 hours, delete it
                 if current_time - os.path.getmtime(file_path) > 86400:  # 24 hours in seconds
-                    os.remove(file_path)
-                    logger.info(f"Deleted old temporary file: {file_path}")
+                    try:
+                        os.remove(file_path)
+                        file_count += 1
+                    except PermissionError:
+                        logger.warning(f"Cannot remove file {file_path} - permission denied")
+                    except Exception as e:
+                        logger.warning(f"Error removing file {file_path}: {e}")
+        
+        logger.info(f"Deleted {file_count} old temporary files")
     except Exception as e:
         logger.error(f"Error cleaning up temp files: {e}")
 
 # Helper function to get or create session
-async def get_session(x_session_id: Optional[str] = Header(None)):
+async def get_session(x_session_id: Optional[str] = Header(None)) -> str:
     """Get or create a session"""
     if not x_session_id:
         # Create new session if none provided
@@ -383,49 +425,65 @@ async def save_upload_file(
     with open(file_path, "wb") as f:
         f.write(file_content)
     
-    # Schedule cleanup
-    background_tasks.add_task(lambda: os.unlink(file_path) if os.path.exists(file_path) else None)
+    # Schedule cleanup after 24 hours
+    def cleanup_file():
+        try:
+            if os.path.exists(file_path):
+                os.unlink(file_path)
+                logger.debug(f"Cleaned up temporary file: {file_path}")
+        except Exception as e:
+            logger.error(f"Error cleaning up file {file_path}: {e}")
+    
+    background_tasks.add_task(cleanup_file)
     
     return file_path
 
-# Authentication endpoints
+# Authentication endpoint
 @app.post("/token", response_model=TokenResponse)
 @limiter.limit("5/minute")
-async def login_for_access_token(request: Request, form_data: TokenRequest):
-    """Get authentication token"""
-    # For development/demo purposes, implement simple auth:
-    valid_users = {
-        "admin": {"password": "password", "scopes": ["admin", "read", "write"]},
-        "user": {"password": "password", "scopes": ["read"]}
-    }
+async def login_for_access_token(request: Request, form_data: OAuth2PasswordRequestForm = Depends()):
+    """Authenticate user and return JWT token"""
+    # Authenticate the user
+    user = authenticate_user(form_data.username, form_data.password)
     
-    if form_data.username not in valid_users or form_data.password != valid_users[form_data.username]["password"]:
+    if not user:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Incorrect username or password",
             headers={"WWW-Authenticate": "Bearer"},
         )
     
-    scopes = valid_users[form_data.username]["scopes"]
-    if form_data.scope and form_data.scope not in scopes:
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail=f"The scope {form_data.scope} is not available for this user"
-        )
+    # Check requested scopes against user's available scopes
+    token_scopes = []
+    for scope in form_data.scopes or []:
+        if scope in user.scopes:
+            token_scopes.append(scope)
+        else:
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail=f"The scope {scope} is not available for this user",
+            )
     
-    # Create a token valid for 30 minutes
-    expires_at = datetime.utcnow() + timedelta(minutes=30)
+    # Default to all user scopes if none requested
+    if not token_scopes:
+        token_scopes = user.scopes
     
-    # In a real app, you'd use JWT or similar
-    access_token = str(uuid.uuid4())
+    # Create token with expiration time
+    access_token_expires = timedelta(minutes=JWT_ACCESS_TOKEN_EXPIRE_MINUTES)
+    expires_at = datetime.utcnow() + access_token_expires
+    
+    access_token = create_access_token(
+        data={"sub": user.username, "scopes": token_scopes},
+        expires_delta=access_token_expires
+    )
     
     return TokenResponse(
-        access_token=access_token,
+        access_token=access_token, 
         token_type="bearer",
         expires_at=expires_at
     )
 
-# Routes
+# Health check endpoint (public)
 @app.get("/health")
 async def health_check():
     """Health check endpoint"""
@@ -436,79 +494,64 @@ async def health_check():
         data={"status": "ok", "timestamp": datetime.now().isoformat()}
     )
 
+# API endpoints with authentication
 @app.post("/chat", response_model=StandardResponse[ChatResponse])
 @limiter.limit("30/minute")
 async def chat_endpoint(
     request: Request,
     chat_request: ChatRequest, 
+    current_user: User = Depends(get_current_active_user),
     session_id: str = Depends(get_session)
 ):
     """Process a chat message and return a response"""
-    logger.info(f"Processing chat message for session {session_id}: {chat_request.message}")
+    logger.info(f"Processing chat message for user {current_user.username}, session {session_id}: {chat_request.message}")
     
     try:
         # Add message to conversation history
         session_service.add_to_conversation(session_id, "user", chat_request.message)
-        logger.debug(f"Added user message to conversation history for session {session_id}")
         
-        # Process the message - logging the raw result for debugging
-        logger.debug(f"Calling payroll_service.process_message with: {chat_request.message}")
+        # Process the message
         result = payroll_service.process_message(chat_request.message)
-        logger.debug(f"Raw result from process_message: {result}, type: {type(result)}")
-        
-        # If you implemented the log_object_details function, use it here
-        logger.debug(f"Detailed result structure: {log_object_details(result)}")
         
         # Handle different return types from process_message
         response_text = ""
         extra_info = ""
         
-        if isinstance(result, tuple):
-            logger.debug(f"Result is tuple with length {len(result)}")
-            if len(result) >= 1:
-                response_text = result[0]
-                logger.debug(f"Extracted response_text: {type(response_text)}")
+        if isinstance(result, tuple) and len(result) >= 1:
+            response_text = result[0]
             if len(result) >= 2:
                 extra_info = result[1]
-                logger.debug(f"Extracted extra_info: {extra_info}")
         else:
-            logger.debug(f"Result is not a tuple, treating entire result as response_text")
             response_text = result
         
-        # Convert result to string if it's a list
+        # Convert list responses to string
         if isinstance(response_text, list):
-            logger.debug(f"response_text is a list with {len(response_text)} items, joining to string")
             response_text = "\n".join(map(str, response_text))
-        
-        logger.debug(f"Final response_text: {response_text[:100]}...")  # Log first 100 chars to avoid huge logs
         
         # Add assistant response to conversation
         session_service.add_to_conversation(session_id, "assistant", response_text)
         
         # Update session state
         current_state = payroll_service.get_current_state()
-        logger.debug(f"Current state from payroll_service: {current_state}")
         session_service.update_session(session_id, {"current_state": current_state})
         
         # Map state to enum
         try:
             state_enum = SessionState(current_state)
-            logger.debug(f"Mapped state to enum: {state_enum}")
         except ValueError:
-            logger.debug(f"Could not map state {current_state} to enum, defaulting to CHAT")
             state_enum = SessionState.CHAT  # Default to CHAT if unknown state
         
-        logger.info(f"Chat processed successfully for session {session_id}, state: {current_state}")
+        # Detect if response contains HTML
+        is_html = 'class="dataframe">' in response_text
         
         # Create response object
         chat_response = ChatResponse(
             response=response_text,
             session_id=session_id,
             state=state_enum,
-            timestamp=datetime.now().isoformat()
+            timestamp=datetime.now().isoformat(),
+            is_html=is_html
         )
-        
-        logger.debug(f"Created ChatResponse object, returning StandardResponse")
         
         return StandardResponse(
             code=200,
@@ -518,9 +561,14 @@ async def chat_endpoint(
         )
     except Exception as e:
         logger.error(f"Error in chat endpoint: {str(e)}")
-        logger.exception("Detailed traceback:")  # This logs the full traceback
+        logger.exception("Detailed traceback:")
+        
+        if isinstance(e, HTTPException):
+            raise
+            
         if isinstance(e, PayrollAPIException):
             raise
+            
         raise PayrollAPIException(f"Chat processing error: {str(e)}")
 
 @app.post("/upload", response_model=StandardResponse[FileUploadResponse])
@@ -531,10 +579,11 @@ async def upload_file_endpoint(
     file: UploadFile = File(...),
     file_type: FileType = Form(...),
     task_name: Optional[str] = Form(None),
+    current_user: User = Depends(get_current_active_user),
     session_id: str = Depends(get_session)
 ):
     """Upload a file for processing"""
-    logger.info(f"File upload request for session {session_id}: {file.filename}")
+    logger.info(f"File upload request from user {current_user.username}, session {session_id}: {file.filename}")
     try:
         # Validate and save file
         file_path = await save_upload_file(file, background_tasks, file_type.value)
@@ -566,15 +615,19 @@ async def upload_file_endpoint(
         
         logger.info(f"File uploaded successfully: {file.filename}")
         
+        # Format response using the adapter
+        file_details = frontend_adapter.adapt_file_info({
+            "original_name": file.filename,
+            "file_type": file_type.value,
+            "identity_result": upload_result.get("identity_result", ""),
+            "file_id": upload_result.get("file_id")
+        })
+        
         upload_response = FileUploadResponse(
             success=True,
             file_id=upload_result.get("file_id"),
             message="File uploaded successfully",
-            file_details={
-                "original_name": file.filename,
-                "file_type": file_type.value,
-                "identity_result": upload_result.get("identity_result", "")
-            },
+            file_details=file_details,
             session_id=session_id,
             state=state_enum
         )
@@ -595,18 +648,22 @@ async def upload_file_endpoint(
 @limiter.limit("60/minute")
 async def get_files(
     request: Request,
+    current_user: User = Depends(get_current_active_user),
     session_id: str = Depends(get_session)
 ):
     """Get list of uploaded files"""
-    logger.info(f"Files list requested for session {session_id}")
+    logger.info(f"Files list requested by user {current_user.username} for session {session_id}")
     try:
         files = file_service.get_file_list()
+        
+        # Adapt the file information for frontend
+        adapted_files = [frontend_adapter.adapt_file_info(file) for file in files]
         
         return StandardResponse(
             code=200,
             success=True,
             message="Files retrieved successfully",
-            data=files
+            data=adapted_files
         )
     except Exception as e:
         logger.error(f"Error getting files: {str(e)}")
@@ -618,18 +675,19 @@ async def get_files(
 @limiter.limit("60/minute")
 async def get_tasks(
     request: Request,
+    current_user: User = Depends(get_current_active_user),
     session_id: str = Depends(get_session)
 ):
     """Get a list of available tasks"""
-    logger.info(f"Task list requested for session {session_id}")
+    logger.info(f"Task list requested by user {current_user.username} for session {session_id}")
     try:
         tasks = payroll_service.get_task_list()
         result = []
         
         for task_name in tasks:
             description = payroll_service.get_task_description(task_name)
-            # This is a placeholder - you would need to modify PayrollService to return required files
-            required_files = []  # payroll_service.get_task_files(task_name)
+            # Get required files (empty list for now, needs implementation in PayrollService)
+            required_files = []  
             
             result.append(TaskResponse(
                 task_id=task_name,
@@ -639,11 +697,14 @@ async def get_tasks(
                 status="available"
             ))
         
+        # Adapt tasks for frontend
+        adapted_tasks = frontend_adapter.adapt_task_list(result)
+        
         return StandardResponse(
             code=200,
             success=True,
             message="Tasks retrieved successfully",
-            data=result
+            data=adapted_tasks
         )
     except Exception as e:
         logger.error(f"Error getting tasks: {str(e)}")
@@ -656,10 +717,11 @@ async def get_tasks(
 async def select_task(
     request: Request,
     task_id: str,
+    current_user: User = Depends(get_current_active_user),
     session_id: str = Depends(get_session)
 ):
     """Select a task for processing"""
-    logger.info(f"Task selection request for session {session_id}: {task_id}")
+    logger.info(f"Task selection request from user {current_user.username} for session {session_id}: {task_id}")
     try:
         # Select the task
         success = payroll_service.select_task(task_id)
@@ -668,7 +730,7 @@ async def select_task(
             raise ResourceNotFoundError(f"Task {task_id} not found")
         
         # Update session state
-        session_service.update_session(session_id, {"current_state": "file"})
+        session_service.update_session(session_id, {"current_state": "file", "current_task": task_id})
         
         # Add message to conversation
         session_service.add_to_conversation(
@@ -677,11 +739,30 @@ async def select_task(
             f"Task selected: {task_id}"
         )
         
+        # Process files (get needed files for the task)
+        files_response, extra_info = payroll_service.process_files()
+        
+        # Add assistant response to conversation
+        if isinstance(files_response, list):
+            for msg in files_response:
+                session_service.add_to_conversation(session_id, "assistant", msg)
+            
+            # Only the last message will be returned in the response
+            files_message = files_response[-1] if files_response else ""
+        else:
+            files_message = files_response
+            session_service.add_to_conversation(session_id, "assistant", files_message)
+        
         return StandardResponse(
             code=200,
             success=True,
             message=f"Task {task_id} selected successfully",
-            data={"task_id": task_id, "session_id": session_id}
+            data={
+                "task_id": task_id, 
+                "session_id": session_id,
+                "state": "file",
+                "files_message": files_message
+            }
         )
     except Exception as e:
         logger.error(f"Error selecting task: {str(e)}")
@@ -693,25 +774,24 @@ async def select_task(
 @limiter.limit("20/minute")
 async def get_session_history(
     request: Request,
+    current_user: User = Depends(get_current_active_user),
     session_id: str = Depends(get_session)
 ):
     """Get list of session history"""
-    logger.info(f"Session history list requested for session {session_id}")
+    logger.info(f"Session history list requested by user {current_user.username} for session {session_id}")
     try:
-        # In a real app, you'd fetch this from database
-        # For demo purposes, return sample data
+        # Get all session IDs for this user (implementation needed)
+        # For demo purposes, return sample data including current session
         history = [
             {
-                "id": "session1",
-                "title": "Previous Chat 1",
-                "lastUpdate": datetime.now().isoformat()
-            },
-            {
                 "id": session_id,
-                "title": "Current Chat",
+                "title": "Current Session",
                 "lastUpdate": datetime.now().isoformat()
             }
         ]
+        
+        # Add previous sessions
+        # In a real implementation, you would get this from database
         
         return StandardResponse(
             code=200,
@@ -725,41 +805,37 @@ async def get_session_history(
             raise
         raise PayrollAPIException(f"Error retrieving session history: {str(e)}")
 
-@app.get("/session/{session_id}/history", response_model=StandardResponse[SessionHistoryResponse])
+@app.get("/session/{history_session_id}/history", response_model=StandardResponse[SessionHistoryResponse])
 @limiter.limit("20/minute")
 async def get_conversation_history(
     request: Request,
-    session_id: str
+    history_session_id: str,
+    current_user: User = Depends(get_current_active_user)
 ):
     """Get conversation history for a session"""
-    logger.info(f"Conversation history requested for session {session_id}")
+    logger.info(f"Conversation history requested by user {current_user.username} for session {history_session_id}")
     try:
         # Get conversation history
-        history = session_service.get_conversation_history(session_id)
+        history = session_service.get_conversation_history(history_session_id)
         
         if not history:
-            raise ResourceNotFoundError(f"Session {session_id} not found or has no history")
+            raise ResourceNotFoundError(f"Session {history_session_id} not found or has no history")
         
-        # Convert Unix timestamps to ISO string format if needed
+        # Adapt history for frontend
+        adapted_history = frontend_adapter.adapt_session_history(history)
+        
         history_items = []
-        for msg in history:
-            # Check if timestamp is a float and convert it
-            timestamp = msg.get("timestamp", "")
-            if isinstance(timestamp, float):
-                timestamp = datetime.fromtimestamp(timestamp).isoformat()
-            elif isinstance(timestamp, int):
-                timestamp = datetime.fromtimestamp(timestamp).isoformat()
-            
+        for msg in adapted_history:
             history_items.append(
                 SessionHistoryItem(
                     role=msg["role"],
-                    content=msg["message"],
-                    timestamp=timestamp
+                    content=msg["content"],
+                    timestamp=msg["timestamp"]
                 )
             )
         
         response = SessionHistoryResponse(
-            session_id=session_id,
+            session_id=history_session_id,
             history=history_items
         )
         
@@ -779,10 +855,11 @@ async def get_conversation_history(
 @limiter.limit("10/minute")
 async def reset_session(
     request: Request,
+    current_user: User = Depends(get_current_active_user),
     session_id: str = Depends(get_session)
 ):
     """Reset a session"""
-    logger.info(f"Session reset requested for {session_id}")
+    logger.info(f"Session reset requested by user {current_user.username} for session {session_id}")
     try:
         # Clear conversation history
         success = session_service.clear_conversation(session_id)
@@ -793,11 +870,21 @@ async def reset_session(
         # Reset payroll service state
         payroll_service.reset()
         
+        # Reset session state
+        session_service.update_session(session_id, {"current_state": "chat", "current_task": None})
+        
+        # Add welcome message
+        welcome_message = "ようこそ！\n私は給与計算タスク管理エージェントです！すべてのタスクを紹介し、それぞれのタスクとその処理ルールを詳しく説明することができます。その後、どのタスクに取り組むかを選択するお手伝いをします。"
+        session_service.add_to_conversation(session_id, "assistant", welcome_message)
+        
         return StandardResponse(
             code=200,
             success=True,
             message="Session reset successfully",
-            data={"session_id": session_id}
+            data={
+                "session_id": session_id,
+                "welcome_message": welcome_message
+            }
         )
     except Exception as e:
         logger.error(f"Error resetting session: {str(e)}")
@@ -805,22 +892,146 @@ async def reset_session(
             raise
         raise PayrollAPIException(f"Error resetting session: {str(e)}")
 
-# Admin routes
+# User information endpoint
+@app.get("/user", response_model=StandardResponse[UserResponse])
+@limiter.limit("10/minute")
+async def get_current_user_info(
+    request: Request,
+    current_user: User = Depends(get_current_active_user)
+):
+    """Get current user information"""
+    logger.info(f"User info requested: {current_user.username}")
+    try:
+        # Adapt user info for frontend
+        user_info = frontend_adapter.adapt_user_info({
+            "username": current_user.username,
+            "full_name": current_user.full_name,
+            "email": current_user.email,
+            "scopes": current_user.scopes
+        })
+        
+        return StandardResponse(
+            code=200,
+            success=True,
+            message="User information retrieved successfully",
+            data=UserResponse(
+                username=user_info["username"],
+                scopes=user_info["scopes"]
+            )
+        )
+    except Exception as e:
+        logger.error(f"Error getting user info: {str(e)}")
+        if isinstance(e, PayrollAPIException):
+            raise
+        raise PayrollAPIException(f"Error retrieving user information: {str(e)}")
+
+# Admin routes - requires admin scope
 @app.get("/admin/sessions")
 @limiter.limit("10/minute")
-async def get_all_sessions(request: Request):  # Added request parameter
+async def get_all_sessions(
+    request: Request,
+    current_user: User = Depends(check_scopes(["admin"]))
+):
     """Get all active sessions (admin only)"""
+    logger.info(f"Admin requested all sessions: {current_user.username}")
     try:
         session_ids = session_service.get_all_session_ids()
+        sessions_info = []
+        
+        for session_id in session_ids:
+            session = session_service.get_session(session_id)
+            if session:
+                sessions_info.append({
+                    "id": session_id,
+                    "created_at": session.get("created_time", ""),
+                    "last_activity": session.get("last_activity_time", ""),
+                    "state": session.get("current_state", ""),
+                    "current_task": session.get("current_task", "")
+                })
+        
         return StandardResponse(
             code=200,
             success=True,
             message="Sessions retrieved successfully",
             data={
-                "session_count": len(session_ids),
-                "session_ids": session_ids
+                "session_count": len(sessions_info),
+                "sessions": sessions_info
             }
         )
     except Exception as e:
         logger.error(f"Error getting all sessions: {str(e)}")
         raise PayrollAPIException(f"Error retrieving sessions: {str(e)}")
+
+@app.delete("/admin/sessions/{admin_session_id}")
+@limiter.limit("10/minute")
+async def delete_session(
+    request: Request,
+    admin_session_id: str,
+    current_user: User = Depends(check_scopes(["admin"]))
+):
+    """Delete a session (admin only)"""
+    logger.info(f"Admin requested to delete session {admin_session_id}: {current_user.username}")
+    try:
+        success = session_service.delete_session(admin_session_id)
+        
+        if not success:
+            raise ResourceNotFoundError(f"Session {admin_session_id} not found")
+        
+        return StandardResponse(
+            code=200,
+            success=True,
+            message=f"Session {admin_session_id} deleted successfully",
+            data=None
+        )
+    except Exception as e:
+        logger.error(f"Error deleting session: {str(e)}")
+        if isinstance(e, PayrollAPIException):
+            raise
+        raise PayrollAPIException(f"Error deleting session: {str(e)}")
+
+@app.get("/admin/users")
+@limiter.limit("10/minute")
+async def get_all_users(
+    request: Request,
+    current_user: User = Depends(check_scopes(["admin"]))
+):
+    """Get all users (admin only)"""
+    logger.info(f"Admin requested all users: {current_user.username}")
+    try:
+        user_db = get_user_db()
+        users_info = []
+        
+        for username, user_data in user_db.users.items():
+            users_info.append({
+                "username": username,
+                "email": user_data.get("email", ""),
+                "full_name": user_data.get("full_name", ""),
+                "disabled": user_data.get("disabled", False),
+                "scopes": user_data.get("scopes", [])
+            })
+        
+        return StandardResponse(
+            code=200,
+            success=True,
+            message="Users retrieved successfully",
+            data={
+                "user_count": len(users_info),
+                "users": users_info
+            }
+        )
+    except Exception as e:
+        logger.error(f"Error getting all users: {str(e)}")
+        raise PayrollAPIException(f"Error retrieving users: {str(e)}")
+
+if __name__ == "__main__":
+    import uvicorn
+    port = int(os.getenv("PORT", 8000))
+    host = os.getenv("HOST", "127.0.0.1")
+    
+    uvicorn.run(
+        "api:app", 
+        host=host, 
+        port=port, 
+        reload=os.getenv("DEBUG", "false").lower() == "true",
+        log_level="info"
+    )
