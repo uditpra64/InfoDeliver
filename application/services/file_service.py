@@ -235,44 +235,60 @@ class FileService:
         """
         try:
             self.logger.info("Getting list of all files")
-            files = self.file_agent.get_all_files()
             
-            # Enhanced logging
-            self.logger.debug(f"Raw files from file_agent.get_all_files(): {files}")
+            # Get all files with detailed error handling
+            try:
+                files = self.file_agent.get_all_files()
+                self.logger.info(f"Retrieved {len(files)} files from database")
+            except Exception as query_error:
+                self.logger.error(f"Error querying database: {str(query_error)}")
+                self.logger.exception("Detailed traceback:")
+                return []
+                
+            # Enhanced debug logging
+            self.logger.debug(f"Raw files from database: {files}")
             
             result = []
             
-            # Handle different return types
+            # Handle different return types with better validation
             if files:
                 for file in files:
-                    # Check if file is a DataFile object
                     if hasattr(file, 'id'):
-                        result.append({
+                        # Process DataFile object
+                        file_info = {
                             "id": file.id,
                             "name": file.original_name or "Unknown",
                             "task_name": file.task_name or "Manual Upload",
                             "upload_date": file.upload_date.strftime("%Y-%m-%d %H:%M:%S") if hasattr(file.upload_date, 'strftime') else str(file.upload_date),
                             "row_count": file.row_count or 0,
                             "output": file.output or False
-                        })
-                    # Handle dictionary format
+                        }
+                        self.logger.debug(f"Processed file: {file_info}")
+                        result.append(file_info)
                     elif isinstance(file, dict):
-                        result.append({
+                        # Process dictionary file info
+                        file_info = {
                             "id": file.get("id", 0),
                             "name": file.get("name", "Unknown"),
                             "task_name": file.get("task_name", "Manual Upload"),
                             "upload_date": file.get("upload_date", datetime.now().strftime("%Y-%m-%d %H:%M:%S")),
                             "row_count": file.get("row_count", 0),
                             "output": file.get("output", False)
-                        })
+                        }
+                        self.logger.debug(f"Processed dictionary file: {file_info}")
+                        result.append(file_info)
+                    else:
+                        self.logger.warning(f"Skipping unknown file type: {type(file)}")
+            else:
+                self.logger.warning("No files found in database")
             
-            self.logger.debug(f"Processed file list: {result}")
+            self.logger.info(f"Returning {len(result)} processed files")
             return result
         except Exception as e:
             self.logger.error(f"Error getting file list: {str(e)}")
             self.logger.exception("Detailed traceback:")
             return []
-    
+
     def get_file_by_id(self, file_id: int) -> Dict[str, Any]:
         """
         Get information about a specific file.

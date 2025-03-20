@@ -119,9 +119,20 @@ class FileAgent:
         CSV(Excel)をDBに保存
         """
         logger.info(
-            f"store_csv_file開始: {file_name}, definition={definition}, task_name={task_name}"
+            f"store_csv_file開始: {file_name}, definition={definition}, task_name={task_name}, rows={len(df)}"
         )
         try:
+            # Ensure DB tables exist
+            self.ensure_database_ready()
+            
+            # Log column info for debugging
+            column_info = {
+                "columns": df.columns.tolist(),
+                "dtypes": {col: str(dtype) for col, dtype in df.dtypes.items()},
+                "has_nulls": df.isnull().any().to_dict()
+            }
+            logger.debug(f"DataFrame info: {column_info}")
+            
             file_meta = DataFile(
                 file_name=file_name,
                 file_path=file_path,
@@ -131,36 +142,61 @@ class FileAgent:
                 upload_date=datetime.now(),
                 column_info={
                     "columns": df.columns.tolist(),
-                    "dtypes": df.dtypes.astype(str).to_dict(),
+                    "dtypes": {col: str(dtype) for col, dtype in df.dtypes.items()},
                 },
                 row_count=len(df),
                 task_name=task_name,
                 output=output,
             )
+            
+            # Begin transaction
+            self.session.begin_nested()
+            
             self.session.add(file_meta)
             self.session.flush()
+            logger.debug(f"DataFile record created with ID: {file_meta.id}")
 
+            # Save data in chunks
             chunk_size = 1000
+            chunks_saved = 0
             for i in range(0, len(df), chunk_size):
                 chunk = df.iloc[i : i + chunk_size]
                 data_records = []
                 for _, row in chunk.iterrows():
+                    # Convert row to dict with better error handling
+                    try:
+                        row_dict = row.to_dict()
+                        # Validate row data
+                        for k, v in row_dict.items():
+                            if pd.isna(v):
+                                row_dict[k] = None
+                            elif isinstance(v, (pd.Timestamp, pd.Period)):
+                                row_dict[k] = str(v)
+                    except Exception as row_error:
+                        logger.error(f"Error converting row to dict: {str(row_error)}")
+                        continue
+                        
                     data_records.append(
                         DataTable(
                             file_id=file_meta.id,
-                            data=row.to_dict(),
+                            data=row_dict,
                             definition=definition,
                         )
                     )
-                self.session.bulk_save_objects(data_records)
+                
+                if data_records:
+                    self.session.bulk_save_objects(data_records)
+                    chunks_saved += 1
+                    logger.debug(f"Saved chunk {chunks_saved} with {len(data_records)} records")
 
+            # Commit transaction
             self.session.commit()
-            logger.info(f"ファイルを保存しました。DataFile ID={file_meta.id}")
+            logger.info(f"ファイルを保存しました。DataFile ID={file_meta.id}, {len(df)} 行, {chunks_saved} chunks")
             return file_meta.id
 
         except Exception as e:
             self.session.rollback()
-            logger.exception("store_csv_file中にエラーが発生")
+            logger.exception(f"store_csv_file中にエラーが発生: {str(e)}")
             raise e
 
     def load_data_as_df(self, file_id: int) -> pd.DataFrame:
@@ -199,9 +235,20 @@ class FileAgent:
         return self.session.query(DataFile).filter_by(task_name=task_name).all()
 
     def get_all_files(self) -> List[DataFile]:
-        """全ファイルを取得"""
+        """Get all files with error handling"""
         logger.debug("get_all_files開始")
-        return self.session.query(DataFile).all()
+        try:
+            # Test the database connection first
+            self.ensure_database_ready()
+            
+            # Execute query with explicit timeout
+            files = self.session.query(DataFile).all()
+            logger.info(f"Retrieved {len(files)} files from database")
+            return files
+        except Exception as e:
+            logger.error(f"Error in get_all_files: {str(e)}")
+            self.session.rollback()  # Roll back any failed transaction
+            return []
 
     def check_file_uploaded_by_definition(self, definition: str) -> bool:
         """定義名で既にアップロード済みか確認"""

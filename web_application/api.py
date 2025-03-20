@@ -10,7 +10,7 @@ from datetime import datetime, timedelta
 from enum import Enum
 from typing import Optional, List, Dict, Any, Generic, TypeVar
 from pathlib import Path
-
+import pandas as pd
 from fastapi import FastAPI, HTTPException, UploadFile, File, Form, Depends, Header, Request, BackgroundTasks, status
 from fastapi.responses import JSONResponse
 from fastapi.exception_handlers import http_exception_handler
@@ -451,7 +451,7 @@ async def save_upload_file(
     background_tasks.add_task(cleanup_file)
     
     return file_path
-    
+
 # Authentication endpoint
 @app.post("/token", response_model=TokenResponse)
 @limiter.limit("5/minute")
@@ -624,18 +624,7 @@ async def upload_file_endpoint(
             logger.error(f"Error saving file: {str(e)}")
             raise ValidationError(f"Could not save uploaded file: {str(e)}")
             
-        # Process the file with better error handling
-        try:
-            upload_result = file_service.upload_file(file_path)
-            if not upload_result["success"]:
-                raise ValidationError(upload_result["message"])
-            logger.debug(f"File processed by file_service: {upload_result}")
-        except Exception as e:
-            logger.error(f"Error processing file with file_service: {str(e)}")
-            logger.exception("Detailed traceback:")
-            raise ValidationError(f"Error processing file: {str(e)}")
-            
-        # Explicitly store the file in the database
+        # Enhanced file processing - ensure proper database storage
         try:
             # Read the file as a DataFrame
             df = None
@@ -646,24 +635,41 @@ async def upload_file_endpoint(
             else:
                 raise ValidationError("Unsupported file format")
                 
-            # Store the DataFrame in the database
-            if df is not None:
-                file_id = file_service.file_agent.store_csv_file(
-                    df=df,
-                    file_name=f"uploaded_{uuid.uuid4()}",
-                    file_path=file_path,
-                    original_name=file.filename,
-                    definition=upload_result.get("identity_result", "Unknown Definition"),
-                    task_name=task_name or "Manual Upload",
-                    output=False
-                )
-                logger.info(f"File stored in database with ID: {file_id}")
-                upload_result["file_id"] = file_id
+            # Check if DataFrame was loaded correctly
+            if df is None or df.empty:
+                raise ValidationError("Failed to read file data or file is empty")
+                
+            logger.info(f"Successfully read file with {len(df)} rows")
+                
+            # Store file directly in database
+            file_id = file_service.file_agent.store_csv_file(
+                df=df,
+                file_name=f"uploaded_{uuid.uuid4()}",
+                file_path=file_path,
+                original_name=file.filename,
+                definition=f"Uploaded {file_type.upper()} file",
+                task_name=task_name or "Manual Upload",
+                output=False
+            )
+            
+            if not file_id:
+                raise ValidationError("File was processed but could not be stored in database")
+                
+            logger.info(f"File successfully stored in database with ID: {file_id}")
+            
+            # Create response with file details
+            upload_result = {
+                "success": True,
+                "file_id": file_id,
+                "message": "File uploaded and stored successfully",
+                "identity_result": f"Uploaded {file_type.upper()} file"
+            }
+            
         except Exception as db_error:
             logger.error(f"Error storing file in database: {str(db_error)}")
             logger.exception("Detailed traceback:")
-            # Continue processing even if database storage fails
-        
+            raise PayrollAPIException(f"Error storing file in database: {str(db_error)}")
+            
         # Construct message for payroll service
         message = f"選択されたファイル: {file_path}"
         
@@ -673,7 +679,9 @@ async def upload_file_endpoint(
         except Exception as e:
             logger.error(f"Error in payroll service: {str(e)}")
             logger.exception("Detailed traceback:")
-            raise PayrollAPIException(f"File was uploaded but processing failed: {str(e)}")
+            # Continue even if payroll service has an issue, since we've already stored the file
+            result = "File was uploaded and stored, but could not be processed by the payroll service."
+            extra_info = ""
             
         # Update session state
         current_state = payroll_service.get_current_state()
@@ -686,14 +694,14 @@ async def upload_file_endpoint(
             state_enum = SessionState.FILE  # Default to FILE if unknown state
             
         # Add system message to conversation
-        response_text = result if isinstance(result, str) else "\n".join(result)
+        response_text = result if isinstance(result, str) else "\n".join(result) if isinstance(result, list) else str(result)
         session_service.add_to_conversation(session_id, "system", f"File uploaded: {file.filename}")
         session_service.add_to_conversation(session_id, "assistant", response_text)
         
-        logger.info(f"File uploaded successfully: {file.filename}")
+        logger.info(f"File uploaded successfully: {file.filename} with {len(df)} rows")
         
         # Format response using the adapter
-        file_details = frontend_adapter.adapt_file_info({
+        file_details = {
             "id": upload_result.get("file_id", 0),
             "name": file.filename,
             "file_type": file_type,
@@ -702,13 +710,15 @@ async def upload_file_endpoint(
             "row_count": len(df) if df is not None else 0,
             "output": False,
             "identity_result": upload_result.get("identity_result", "")
-        })
+        }
+        
+        adapted_file_details = frontend_adapter.adapt_file_info(file_details)
         
         upload_response = FileUploadResponse(
             success=True,
             file_id=upload_result.get("file_id"),
-            message="File uploaded successfully",
-            file_details=file_details,
+            message=f"File uploaded successfully with {len(df)} rows",
+            file_details=adapted_file_details,
             session_id=session_id,
             state=state_enum
         )
@@ -719,6 +729,7 @@ async def upload_file_endpoint(
             message="File uploaded successfully",
             data=upload_response
         )
+        
     except ValidationError as e:
         logger.error(f"Validation error in file upload: {str(e)}")
         raise
@@ -729,7 +740,7 @@ async def upload_file_endpoint(
         logger.error(f"Unexpected error in file upload: {str(e)}")
         logger.exception("Detailed traceback:")
         raise PayrollAPIException(f"File upload error: {str(e)}")
-
+        
 @app.get("/files", response_model=StandardResponse[List[FileInfo]])
 @limiter.limit("60/minute")
 async def get_files(
