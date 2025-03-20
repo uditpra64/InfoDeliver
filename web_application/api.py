@@ -25,7 +25,6 @@ from slowapi.errors import RateLimitExceeded
 from slowapi.middleware import SlowAPIMiddleware
 from dotenv import load_dotenv
 
-# Import auth components
 from application.services.security.auth import (
     setup_api_security, 
     get_current_active_user, 
@@ -810,6 +809,7 @@ async def get_tasks(
                 required_files=required_files,
                 status="available"
             ))
+            result.append(task_response.dict())
         
         # Adapt tasks for frontend
         adapted_tasks = frontend_adapter.adapt_task_list(result)
@@ -932,11 +932,8 @@ async def get_conversation_history(
         # Get conversation history
         history = session_service.get_conversation_history(history_session_id)
         
-        if not history:
-            raise ResourceNotFoundError(f"Session {history_session_id} not found or has no history")
-        
         # Adapt history for frontend
-        adapted_history = frontend_adapter.adapt_session_history(history)
+        adapted_history = frontend_adapter.adapt_session_history(history or [])
         
         history_items = []
         for msg in adapted_history:

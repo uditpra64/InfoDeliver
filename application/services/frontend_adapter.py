@@ -41,7 +41,9 @@ class FrontendAdapter:
     def adapt_task_list(tasks: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
         """Adapt task list to frontend expected format"""
         adapted_tasks = []
-        
+        if hasattr(task, 'dict') and callable(getattr(task, 'dict')):
+            task = task.dict()
+              
         for task in tasks:
             # Ensure task has the format expected by frontend
             adapted_task = {
