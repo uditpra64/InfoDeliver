@@ -40,24 +40,24 @@ export const fetchAllFiles = createAsyncThunk(
   }
 );
 
+
 export const uploadFile = createAsyncThunk(
   'files/uploadFile',
-  // Change the parameter type to accept browser File object
   async ({ file, sessionId }: { file: File, sessionId?: string }, { rejectWithValue, dispatch }) => {
     try {
       const formData = new FormData();
       formData.append('file', file);
-      formData.append('file_type', file.name.endsWith('.csv') ? 'csv' : 'excel');
+      
+      // Auto-detect file type from extension
+      const fileType = file.name.endsWith('.csv') ? 'csv' : 'excel';
+      formData.append('file_type', fileType);
       
       if (sessionId) {
         formData.append('session_id', sessionId);
       }
       
-      const response = await api.post('/upload', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      });
+      // Make sure Content-Type is NOT set manually for file uploads
+      const response = await api.post('/upload', formData);
       
       // Refresh file list after upload
       dispatch(fetchAllFiles());

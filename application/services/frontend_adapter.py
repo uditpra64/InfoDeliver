@@ -41,22 +41,25 @@ class FrontendAdapter:
     def adapt_task_list(tasks: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
         """Adapt task list to frontend expected format"""
         adapted_tasks = []
-        if hasattr(task, 'dict') and callable(getattr(task, 'dict')):
-            task = task.dict()
-              
+        
         for task in tasks:
-            # Ensure task has the format expected by frontend
+            # Convert Pydantic model to dictionary if needed
+            task_dict = task.dict() if hasattr(task, 'dict') else task
+            
+            # Now use dictionary methods on the converted object
             adapted_task = {
-                "task_id": task.get("task_id", task.get("name", "")),
-                "name": task.get("name", ""),
-                "description": task.get("description", ""),
-                "required_files": task.get("required_files", []),
-                "status": task.get("status", "available")
+                "task_id": task_dict.get("task_id", task_dict.get("name", "")),
+                "name": task_dict.get("name", ""),
+                "description": task_dict.get("description", ""),
+                "required_files": task_dict.get("required_files", []),
+                "status": task_dict.get("status", "available")
             }
             adapted_tasks.append(adapted_task)
             
         return adapted_tasks
-    
+                
+        return adapted_tasks
+        
     @staticmethod
     def adapt_session_history(history: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
         """Adapt session history to frontend expected format"""

@@ -125,14 +125,23 @@ def setup_api_security(app, allowed_origins: List[str]):
     from fastapi.middleware.cors import CORSMiddleware
     from starlette.responses import JSONResponse
     
-    # Setup CORS
+    # Setup CORS with enhanced configuration
     app.add_middleware(
         CORSMiddleware,
         allow_origins=allowed_origins,
         allow_credentials=True,
-        allow_methods=["GET", "POST", "PUT", "DELETE"],
-        allow_headers=["X-Session-ID", "Content-Type", "Authorization"],
+        allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],  # Added OPTIONS
+        allow_headers=[
+            "X-Session-ID", 
+            "Content-Type", 
+            "Authorization",
+            "Access-Control-Allow-Headers",
+            "Access-Control-Allow-Origin",
+            "X-Requested-With",
+            "X-CSRF-Token"
+        ],  # Enhanced headers
         expose_headers=["X-Total-Count"],
+        max_age=600,  # Cache preflight requests for 10 minutes
     )
     
     # Ensure OpenAPI docs are accessible
@@ -144,6 +153,11 @@ def setup_api_security(app, allowed_origins: List[str]):
         # Allow documentation endpoints without security checks
         if request.url.path in ["/docs", "/redoc", "/openapi.json", "/token"]:
             return await call_next(request)
+        
+        # For OPTIONS requests, allow without additional processing
+        if request.method == "OPTIONS":
+            response = await call_next(request)
+            return response
             
         # Add security headers for other endpoints
         response = await call_next(request)
