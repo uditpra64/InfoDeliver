@@ -379,35 +379,9 @@ class SessionService:
             
         return True
     
-    def delete_session(self, session_id: str) -> bool:
-        """
-        Delete a session
-        
-        Args:
-            session_id: The session ID
-            
-        Returns:
-            True if successful, False if session not found
-        """
-        if session_id not in self.sessions:
-            return False
-        
-        del self.sessions[session_id]
-        
-        if self.persistence_enabled:
-            session_file = os.path.join(self.session_dir, f"{session_id}.json")
-            if os.path.exists(session_file):
-                try:
-                    os.remove(session_file)
-                    self.logger.info(f"Deleted session file: {session_file}")
-                except Exception as e:
-                    self.logger.error(f"Error deleting session file {session_file}: {e}")
-        
-        return True
-    
     def cleanup_old_sessions(self, max_age_seconds: int = 86400) -> int:
         """
-        Remove sessions older than the specified age
+        Remove sessions older than the specified age with better file handling
         
         Args:
             max_age_seconds: Maximum session age in seconds (default: 24 hours)
@@ -418,15 +392,47 @@ class SessionService:
         to_delete = []
         current_time = time.time()
         
+        # First identify sessions to delete
         for session_id, session in self.sessions.items():
             if current_time - session.last_activity > max_age_seconds:
                 to_delete.append(session_id)
         
+        deleted_count = 0
         for session_id in to_delete:
-            self.delete_session(session_id)
+            try:
+                # Try to delete the session
+                self._delete_session_file(session_id)
+                # Remove from memory even if file deletion fails
+                if session_id in self.sessions:
+                    del self.sessions[session_id]
+                deleted_count += 1
+            except Exception as e:
+                self.logger.warning(f"Could not fully remove session {session_id}: {e}")
         
-        self.logger.info(f"Cleaned up {len(to_delete)} old sessions")
-        return len(to_delete)
+        self.logger.info(f"Cleaned up {deleted_count} old sessions")
+        return deleted_count
+
+    def _delete_session_file(self, session_id: str) -> None:
+        """
+        Delete a session file with improved error handling
+        
+        Args:
+            session_id: ID of the session whose file should be deleted
+        """
+        if not self.persistence_enabled:
+            return
+            
+        session_file = os.path.join(self.session_dir, f"{session_id}.json")
+        if os.path.exists(session_file):
+            try:
+                os.remove(session_file)
+                self.logger.info(f"Deleted session file: {session_file}")
+            except PermissionError:
+                self.logger.warning(f"Cannot delete session file {session_file} - permission denied")
+            except OSError as e:
+                self.logger.warning(f"Error deleting session file {session_file}: {e}")
+        
+
     
     def get_session_count(self) -> int:
         """
@@ -479,18 +485,20 @@ class SessionService:
     
     def _load_sessions(self) -> None:
         """
-        Load all sessions from disk (internal method)
+        Load all sessions from disk with improved error handling for file locking
         """
         if not self.persistence_enabled:
             return
             
         try:
+            loaded_count = 0
             for filename in os.listdir(self.session_dir):
                 if filename.endswith('.json'):
                     session_id = filename[:-5]  # Remove .json
                     session_file = os.path.join(self.session_dir, filename)
                     
                     try:
+                        # Use a try-except block for each individual file
                         with open(session_file, 'r') as f:
                             session_data = json.load(f)
                             
@@ -500,14 +508,27 @@ class SessionService:
                             # Skip expired sessions
                             if session.is_expired():
                                 self.logger.info(f"Skipping expired session {session_id}")
-                                os.remove(session_file)
+                                try:
+                                    os.remove(session_file)
+                                except (PermissionError, OSError) as e:
+                                    # Don't fail if we can't delete the file - just log it
+                                    self.logger.info(f"Could not remove expired session file: {e}")
                                 continue
                                 
                             self.sessions[session_id] = session
+                            loaded_count += 1
+                    except (PermissionError, OSError) as e:
+                        # Handle file locking errors gracefully
+                        self.logger.info(f"Could not access session file {session_id}: {e}")
+                        continue
+                    except json.JSONDecodeError as e:
+                        self.logger.error(f"Malformed session file {session_id}: {e}")
+                        continue
                     except Exception as e:
                         self.logger.error(f"Error loading session {session_id}: {e}")
-                        
-            self.logger.info(f"Loaded {len(self.sessions)} sessions from disk")
+                        continue
+            
+            self.logger.info(f"Loaded {loaded_count} sessions from disk")
         except Exception as e:
             self.logger.error(f"Error loading sessions: {e}")
 

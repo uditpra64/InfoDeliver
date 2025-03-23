@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
 import { CircularProgress, Box } from '@mui/material';
 import { useAppSelector, useAppDispatch } from '../../store/hooks/reduxHooks';
@@ -13,20 +13,27 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
   children, 
   requiredScopes = [] 
 }) => {
-  const { isAuthenticated, user, loading } = useAppSelector(state => state.auth);
-  const { currentSessionId, loading: sessionLoading } = useAppSelector(state => state.session);
+  const { isAuthenticated, user, loading: authLoading } = useAppSelector(state => state.auth);
+  const { 
+    currentSessionId, 
+    loading: sessionLoading, 
+    sessionCreationInProgress 
+  } = useAppSelector(state => state.session);
   const location = useLocation();
   const dispatch = useAppDispatch();
+  const [sessionInitialized, setSessionInitialized] = useState(false);
 
   useEffect(() => {
-    // If authenticated but no session, create one
-    if (isAuthenticated && !currentSessionId && !sessionLoading) {
+    // Only try to create a session once if authenticated and no session exists
+    if (isAuthenticated && !currentSessionId && !sessionCreationInProgress && !sessionInitialized) {
+      console.log('Creating new session for authenticated user');
+      setSessionInitialized(true);
       dispatch(createSession());
     }
-  }, [isAuthenticated, currentSessionId, sessionLoading, dispatch]);
+  }, [isAuthenticated, currentSessionId, sessionCreationInProgress, sessionInitialized, dispatch]);
 
   // Show loading while authentication is in progress
-  if (loading || (isAuthenticated && !currentSessionId && sessionLoading)) {
+  if (authLoading || (isAuthenticated && !currentSessionId && sessionLoading)) {
     return (
       <Box
         sx={{
@@ -53,7 +60,7 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
     );
 
     if (!hasRequiredScopes) {
-      // Redirect to unauthorized page or home
+      // Redirect to unauthorized page
       return <Navigate to="/unauthorized" replace />;
     }
   }

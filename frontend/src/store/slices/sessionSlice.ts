@@ -3,12 +3,12 @@ import api from '../../services/api';
 import { addMessage } from './chatSlice';
 import { Message } from '../../types';
 
-
 interface SessionState {
   currentSessionId: string | null;
   state: string;
   loading: boolean;
   error: string | null;
+  sessionCreationInProgress: boolean; // Added flag to prevent multiple creations
 }
 
 const SESSION_ID_KEY = 'payroll_session_id';
@@ -19,12 +19,21 @@ const getInitialState = (): SessionState => {
     state: 'chat',
     loading: false,
     error: null,
+    sessionCreationInProgress: false,
   };
 };
 
 export const createSession = createAsyncThunk(
   'session/createSession',
-  async (_, { dispatch, rejectWithValue }) => {
+  async (_, { dispatch, getState, rejectWithValue }) => {
+    // Get current state to check if creation is already in progress
+    const state = getState() as { session: SessionState };
+    
+    // If we already have a session ID or creation is in progress, don't create another
+    if (state.session.currentSessionId || state.session.sessionCreationInProgress) {
+      return { session_id: state.session.currentSessionId };
+    }
+    
     try {
       // Call API to create session
       const response = await api.post('/chat', {
@@ -41,7 +50,7 @@ export const createSession = createAsyncThunk(
           content: sessionData.response,
           timestamp: new Date().toISOString(),
           is_html: sessionData.is_html || false
-        }as Message));
+        } as Message));
       }
       
       return sessionData;
@@ -104,16 +113,19 @@ const sessionSlice = createSlice({
       .addCase(createSession.pending, (state) => {
         state.loading = true;
         state.error = null;
+        state.sessionCreationInProgress = true; // Set flag when starting creation
       })
       .addCase(createSession.fulfilled, (state, action) => {
         state.loading = false;
         state.currentSessionId = action.payload.session_id;
         state.state = action.payload.state;
+        state.sessionCreationInProgress = false; // Reset flag
         localStorage.setItem(SESSION_ID_KEY, action.payload.session_id);
       })
       .addCase(createSession.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload as string;
+        state.sessionCreationInProgress = false; // Reset flag even on error
       });
   },
 });
