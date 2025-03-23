@@ -1,6 +1,8 @@
-// src/store/slices/sessionSlice.ts
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import api from '../../services/api';
+import { addMessage } from './chatSlice';
+import { Message } from '../../types';
+
 
 interface SessionState {
   currentSessionId: string | null;
@@ -22,16 +24,61 @@ const getInitialState = (): SessionState => {
 
 export const createSession = createAsyncThunk(
   'session/createSession',
-  async (_, { rejectWithValue }) => {
+  async (_, { dispatch, rejectWithValue }) => {
     try {
-      // First message will automatically create a session
+      // Call API to create session
       const response = await api.post('/chat', {
-        message: 'Hello',
+        message: 'Hello' // Initial message to trigger session creation
       });
       
-      return response.data.data;
-    } catch (error: any) {
-      return rejectWithValue(error.response?.data?.message || 'Failed to create session');
+      // Extract session data
+      const sessionData = response.data.data;
+      
+      // If there's a response message, add it to chat
+      if (sessionData.response) {
+        dispatch(addMessage({
+          role: 'assistant',
+          content: sessionData.response,
+          timestamp: new Date().toISOString(),
+          is_html: sessionData.is_html || false
+        }as Message));
+      }
+      
+      return sessionData;
+    } catch (error: unknown) {
+      const errorResponse = error as { response?: { data?: { message?: string } } };
+      return rejectWithValue(errorResponse.response?.data?.message || 'Failed to create session');
+    }
+  }
+);
+
+export const resetSession = createAsyncThunk(
+  'session/resetSession',
+  async (_, { dispatch, getState, rejectWithValue }) => {
+    try {
+      const state = getState() as { session: { currentSessionId: string } };
+      const currentSessionId = state.session.currentSessionId;
+      
+      if (!currentSessionId) {
+        return rejectWithValue('No active session to reset');
+      }
+      
+      const response = await api.post('/session/reset');
+      
+      // If there's a welcome message in the response, add it to chat
+      if (response.data?.data?.welcome_message) {
+        dispatch(addMessage({
+          role: 'assistant',
+          content: response.data.data.welcome_message,
+          timestamp: new Date().toISOString(),
+          is_html: false
+        } as Message));
+      }
+      
+      return response.data;
+    } catch (error: unknown) {
+      const errorResponse = error as { response?: { data?: { message?: string } } };
+      return rejectWithValue(errorResponse.response?.data?.message || 'Failed to reset session');
     }
   }
 );

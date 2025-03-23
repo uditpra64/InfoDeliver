@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { 
   Typography, 
   Paper, 
@@ -15,13 +15,14 @@ import { fetchAllTasks, selectTask } from '../../store/slices/taskSlice';
 
 const TaskTable: React.FC = () => {
   const dispatch = useAppDispatch();
-  const { tasks, loading, error } = useAppSelector(state => state.tasks);
+  const { tasks, loading, error, selectedTaskId } = useAppSelector(state => state.tasks);
 
   useEffect(() => {
     dispatch(fetchAllTasks());
   }, [dispatch]);
 
   const handleTaskClick = (taskId: string) => {
+    console.log(`Selecting task: ${taskId}`);
     dispatch(selectTask(taskId));
   };
 
@@ -52,15 +53,24 @@ const TaskTable: React.FC = () => {
                 key={task.task_id}
                 onClick={() => handleTaskClick(task.task_id)}
                 hover
+                selected={task.task_id === selectedTaskId}
                 sx={{ 
                   cursor: 'pointer',
-                  '&:hover': { backgroundColor: 'rgba(0, 0, 0, 0.04)' }
+                  '&:hover': { backgroundColor: 'rgba(0, 0, 0, 0.04)' },
+                  backgroundColor: task.task_id === selectedTaskId ? 'rgba(25, 118, 210, 0.12)' : 'inherit'
                 }}
               >
                 <TableCell>{task.name}</TableCell>
                 <TableCell>{task.description}</TableCell>
               </TableRow>
             ))}
+            {tasks.length === 0 && (
+              <TableRow>
+                <TableCell colSpan={2} align="center">
+                  タスクがありません
+                </TableCell>
+              </TableRow>
+            )}
           </TableBody>
         </Table>
       </TableContainer>

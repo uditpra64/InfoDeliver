@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { Box, TextField, IconButton } from '@mui/material';
+import { Box, TextField, IconButton, CircularProgress } from '@mui/material';
 import SendIcon from '@mui/icons-material/Send';
 import AttachFileIcon from '@mui/icons-material/AttachFile';
 import { useAppDispatch, useAppSelector } from '../../store/hooks/reduxHooks';
@@ -8,13 +8,16 @@ import { uploadFile } from '../../store/slices/fileSlice';
 
 const ChatInput: React.FC = () => {
   const [message, setMessage] = useState('');
+  const [uploading, setUploading] = useState(false);
   const dispatch = useAppDispatch();
   const { loading } = useAppSelector(state => state.chat);
+  const { uploadLoading } = useAppSelector(state => state.files);
   const { currentSessionId } = useAppSelector(state => state.session);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleSend = () => {
     if (message.trim() && !loading) {
+      console.log(`Sending message: ${message}`);
       dispatch(sendMessage({ 
         message, 
         sessionId: currentSessionId || undefined 
@@ -37,10 +40,27 @@ const ChatInput: React.FC = () => {
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
+      console.log(`File selected: ${file.name}`);
+      setUploading(true);
+      
       dispatch(uploadFile({ 
         file, 
         sessionId: currentSessionId || undefined 
-      }));
+      }))
+        .unwrap()
+        .then(() => {
+          console.log('File upload completed successfully');
+        })
+        .catch((error) => {
+          console.error('File upload failed:', error);
+        })
+        .finally(() => {
+          setUploading(false);
+          // Reset file input
+          if (fileInputRef.current) {
+            fileInputRef.current.value = '';
+          }
+        });
     }
   };
 
@@ -51,8 +71,9 @@ const ChatInput: React.FC = () => {
         aria-label="upload file" 
         component="span"
         onClick={handleFileClick}
+        disabled={loading || uploading || uploadLoading}
       >
-        <AttachFileIcon />
+        {uploadLoading || uploading ? <CircularProgress size={24} /> : <AttachFileIcon />}
       </IconButton>
       <input
         ref={fileInputRef}
@@ -60,6 +81,7 @@ const ChatInput: React.FC = () => {
         accept=".csv,.xlsx,.xls"
         style={{ display: 'none' }}
         onChange={handleFileChange}
+        disabled={loading || uploading || uploadLoading}
       />
       
       <TextField
@@ -68,7 +90,7 @@ const ChatInput: React.FC = () => {
         value={message}
         onChange={(e) => setMessage(e.target.value)}
         onKeyPress={handleKeyPress}
-        disabled={loading}
+        disabled={loading || uploading || uploadLoading}
         variant="outlined"
         size="small"
         sx={{ mx: 1 }}
@@ -77,9 +99,9 @@ const ChatInput: React.FC = () => {
       <IconButton 
         color="primary" 
         onClick={handleSend} 
-        disabled={!message.trim() || loading}
+        disabled={!message.trim() || loading || uploading || uploadLoading}
       >
-        <SendIcon />
+        {loading ? <CircularProgress size={24} /> : <SendIcon />}
       </IconButton>
     </Box>
   );

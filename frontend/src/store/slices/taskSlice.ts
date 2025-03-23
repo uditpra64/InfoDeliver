@@ -1,7 +1,8 @@
-// src/store/slices/taskSlice.ts
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import api from '../../services/api';
-
+import { addMessage } from './chatSlice';
+import { setState } from './sessionSlice';
+import { Message } from '../../types';
 interface RequiredFile {
   name: string;
   description: string;
@@ -45,13 +46,51 @@ export const fetchAllTasks = createAsyncThunk(
 
 export const selectTask = createAsyncThunk(
   'tasks/selectTask',
-  async (taskId: string, { rejectWithValue }) => {
+  async (taskId: string, { dispatch, rejectWithValue }) => {
     try {
-      // Notify backend about task selection
+      console.log(`Calling API to select task: ${taskId}`);
       const response = await api.post(`/tasks/${taskId}/select`);
-      return { taskId, ...response.data.data };
-    } catch (error: any) {
-      return rejectWithValue(error.response?.data?.message || 'Failed to select task');
+      
+      console.log('Task selection response:', response.data);
+      
+      // Extract response data
+      const responseData = response.data.data;
+      
+      // Update session state if available
+      if (responseData.state) {
+        dispatch(setState(responseData.state));
+      }
+      
+      // Add files message to chat if available
+      if (responseData.files_message) {
+        dispatch(addMessage({
+          role: 'assistant',
+          content: responseData.files_message,
+          timestamp: new Date().toISOString(),
+          is_html: false
+        } as Message));
+      }
+      
+      
+      return { 
+        taskId, 
+        sessionId: responseData.session_id, 
+        state: responseData.state 
+      };
+    } catch (error: unknown) {
+      console.error('Task selection error:', error);
+      
+      const errorResponse = error as { response?: { data?: { message?: string } } };
+      const errorMessage = errorResponse.response?.data?.message || 'Unknown error';
+      
+      dispatch(addMessage({
+        role: 'system',
+        content: `タスク選択中にエラーが発生しました: ${errorMessage}`,
+        timestamp: new Date().toISOString(),
+        is_html: false
+      } as Message));
+      
+      return rejectWithValue(errorMessage);
     }
   }
 );

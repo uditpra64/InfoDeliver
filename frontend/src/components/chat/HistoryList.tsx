@@ -1,4 +1,3 @@
-// src/components/chat/HistoryList.tsx
 import React, { useEffect } from 'react';
 import { 
   Typography, 
@@ -16,10 +15,12 @@ const HistoryList: React.FC = () => {
   const { history, loading, error, selectedChatIndex } = useAppSelector(state => state.chatHistory);
 
   useEffect(() => {
+    console.log('Initializing history list, fetching chat history');
     dispatch(fetchChatHistory());
   }, [dispatch]);
 
   const handleChatSelect = (index: number) => {
+    console.log(`Selecting chat at index: ${index}`);
     dispatch(selectChat(index));
   };
 
@@ -38,7 +39,7 @@ const HistoryList: React.FC = () => {
       </Typography>
       <List sx={{ width: '100%', bgcolor: 'background.paper' }}>
         {history.map((chat, index) => (
-          <ListItem key={`chat-${index}`} disablePadding>
+          <ListItem key={`chat-${index}-${chat.id}`} disablePadding>
             <ListItemButton
               selected={index === selectedChatIndex}
               onClick={() => handleChatSelect(index)}
@@ -55,13 +56,14 @@ const HistoryList: React.FC = () => {
             <ListItemText primary="履歴がありません" />
           </ListItem>
         )}
-        {selectedChatIndex === -1 && history.length > 0 && (
-          <ListItem>
-            <ListItemButton selected>
-              <ListItemText primary="現在のチャット" />
-            </ListItemButton>
-          </ListItem>
-        )}
+        <ListItem>
+          <ListItemButton 
+            selected={selectedChatIndex === -1}
+            onClick={() => handleChatSelect(-1)}
+          >
+            <ListItemText primary="現在のチャット" />
+          </ListItemButton>
+        </ListItem>
       </List>
     </>
   );

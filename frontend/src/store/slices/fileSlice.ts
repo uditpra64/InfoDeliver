@@ -1,6 +1,8 @@
-// src/store/slices/fileSlice.ts
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import api from '../../services/api';
+import { addMessage } from './chatSlice';
+import { setState } from './sessionSlice';
+import { Message } from '../../types';
 
 // Rename this to FileInfo to avoid conflict with browser's File type
 interface FileInfo {
@@ -43,8 +45,11 @@ export const fetchAllFiles = createAsyncThunk(
 
 export const uploadFile = createAsyncThunk(
   'files/uploadFile',
-  async ({ file, sessionId }: { file: File, sessionId?: string }, { rejectWithValue, dispatch }) => {
+  async ({ file, sessionId }: { file: File, sessionId?: string }, { dispatch, rejectWithValue }) => {
     try {
+      console.log(`Uploading file: ${file.name}, sessionId: ${sessionId}`);
+      
+      // Create form data
       const formData = new FormData();
       formData.append('file', file);
       
@@ -56,15 +61,54 @@ export const uploadFile = createAsyncThunk(
         formData.append('session_id', sessionId);
       }
       
-      // Make sure Content-Type is NOT set manually for file uploads
+      // Upload the file
       const response = await api.post('/upload', formData);
+      console.log('File upload response:', response.data);
+      
+      // Extract response data
+      const responseData = response.data.data;
+      
+      // Update session state if provided
+      if (responseData.state) {
+        dispatch(setState(responseData.state));
+      }
+      
+      // Add file uploaded message to chat
+      dispatch(addMessage({
+        role: 'system',
+        content: `ファイル「${file.name}」をアップロードしました。`,
+        timestamp: new Date().toISOString(),
+        is_html: false
+      } as Message));
+      
+      // Add response message to chat if available
+      if (responseData.message) {
+        dispatch(addMessage({
+          role: 'assistant',
+          content: responseData.message,
+          timestamp: new Date().toISOString(),
+          is_html: false
+        } as Message));
+      }
       
       // Refresh file list after upload
       dispatch(fetchAllFiles());
       
-      return response.data.data;
-    } catch (error: any) {
-      return rejectWithValue(error.response?.data?.message || 'Failed to upload file');
+      return responseData;
+    } catch (error: unknown) {
+      console.error('File upload error:', error);
+      
+      const errorResponse = error as { response?: { data?: { message?: string } } };
+      const errorMessage = errorResponse.response?.data?.message || 'Unknown error';
+      
+      dispatch(addMessage({
+        role: 'system',
+        content: `ファイルのアップロードに失敗しました: ${errorMessage}`,
+        timestamp: new Date().toISOString(),
+        is_html: false
+      } as Message));
+      
+      return rejectWithValue(errorMessage);
     }
   }
 );

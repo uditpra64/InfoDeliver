@@ -1,6 +1,7 @@
-// src/store/slices/chatHistorySlice.ts
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import api from '../../services/api';
+import { setMessages } from './chatSlice';
+import { Message } from '../../types';
 
 interface ChatSummary {
   id: string;
@@ -28,20 +29,23 @@ export const fetchChatHistory = createAsyncThunk(
     try {
       const response = await api.get('/session/history');
       return response.data.data;
-    } catch (error: any) {
-      return rejectWithValue(error.response?.data?.message || 'Failed to fetch chat history');
+    } catch (error: unknown) {
+      console.error('Error fetching chat history:', error);
+      const errorResponse = error as { response?: { data?: { message?: string } } };
+      return rejectWithValue(errorResponse.response?.data?.message || 'Failed to fetch chat history');
     }
   }
 );
 
 export const selectChat = createAsyncThunk(
   'chatHistory/selectChat',
-  async (index: number, { rejectWithValue, getState }) => {
+  async (index: number, { dispatch, getState, rejectWithValue }) => {
     try {
-      const state = getState() as { chatHistory: ChatHistoryState };
+      const state = getState() as { chatHistory: { history: Array<{ id: string }> } };
       
       if (index === -1) {
-        // Current chat
+        // Current chat - clear selected chat
+        console.log('Selecting current chat');
         return { index };
       }
       
@@ -50,13 +54,34 @@ export const selectChat = createAsyncThunk(
       }
       
       const chatId = state.chatHistory.history[index].id;
+      console.log(`Fetching history for chat: ${chatId}`);
       
       // Load chat messages
       const response = await api.get(`/session/${chatId}/history`);
+      console.log('Chat messages response:', response.data);
       
-      return { index, history: response.data.data.history };
-    } catch (error: any) {
-      return rejectWithValue(error.response?.data?.message || 'Failed to select chat');
+      const historyMessages = response.data.data.history;
+      
+      // Format messages for chat display
+      const formattedMessages = historyMessages.map((msg: {
+        role: string;
+        content: string;
+        timestamp: string;
+      }) => ({
+        role: msg.role as 'user' | 'assistant' | 'system',
+        content: msg.content,
+        timestamp: msg.timestamp,
+        is_html: msg.content.includes('class="dataframe">')
+      }));
+      
+      // Update chat messages in store
+      dispatch(setMessages(formattedMessages));
+      
+      return { index, history: historyMessages };
+    } catch (error: unknown) {
+      console.error('Error selecting chat history:', error);
+      const errorResponse = error as { response?: { data?: { message?: string } } };
+      return rejectWithValue(errorResponse.response?.data?.message || 'Failed to select chat');
     }
   }
 );
