@@ -319,32 +319,83 @@ class AgentCollection:
             return f"エラー: {str(e)}", ""
 
     def process_files(self) -> Tuple[Optional[List[str]], Optional[str]]:
+        """Collect and process files needed for the current task"""
         current_state = self.get_current_state()
         if current_state != "file":
             self.set_state("file")
         self._collect_all_needed_files()
+
+        # Check if needed_file_list is empty before accessing elements
+        if not self.needed_file_list:
+            return ["このタスクには必要なファイルがありません。設定を確認してください。"], "no_files"
+
+        # Ensure cur_file_idx is valid
+        if self.cur_file_idx >= len(self.needed_file_list):
+            self.cur_file_idx = 0
+
+        # Make sure needed_file_list[self.cur_file_idx] has the required key
+        if len(self.needed_file_list) > 0 and '定義' not in self.needed_file_list[self.cur_file_idx]:
+            return ["ファイル定義の設定に問題があります。管理者に連絡してください。"], "file_definition_error"
 
         response_1 = "今から必要なファイルをアップロードしましょう。"
         response_2 = f"ファイル「{self.needed_file_list[self.cur_file_idx]['定義']}」をアップロードしてください。"
         return [response_1, response_2], ""
 
     def _collect_all_needed_files(self) -> None:
+        """Collect all files needed for tasks in the workflow"""
         self.needed_file_list = []
         self.reused_output_file_set = set()
 
-        for task_name in list(self.workflow):
-            task_agent = self.task_agents[task_name]
-            for file in task_agent.files:
-                file["名称"] = task_agent.name
-                self.needed_file_list.append(file)
-            for file in task_agent.files_optional:
-                file["名称"] = task_agent.name
-                self.needed_file_list.append(file)
-            self.reused_output_file_set.add(
-                task_agent.next_task_replaced_file_definition
-            )
+        # Debug log the workflow and task agents
+        self.logger.info(f"Collecting files for workflow: {list(self.workflow)}")
+        self.logger.info(f"Available task agents: {list(self.task_agents.keys())}")
 
+        for task_name in list(self.workflow):
+            # Make sure task_name is in task_agents
+            if task_name not in self.task_agents:
+                self.logger.warning(f"Task {task_name} not found in task_agents")
+                continue
+                
+            task_agent = self.task_agents[task_name]
+            
+            # Check if task has files defined
+            if not hasattr(task_agent, 'files') or not task_agent.files:
+                self.logger.warning(f"Task {task_name} has no files defined")
+                
+            # Add required files
+            for file in getattr(task_agent, 'files', []):
+                # Make sure file is a dict and has the required keys
+                if not isinstance(file, dict):
+                    self.logger.warning(f"File in task {task_name} is not a dict: {file}")
+                    continue
+                    
+                if '名称' not in file:
+                    file["名称"] = task_agent.name
+                self.needed_file_list.append(file)
+                
+            # Add optional files
+            for file in getattr(task_agent, 'files_optional', []):
+                if not isinstance(file, dict):
+                    continue
+                    
+                if '名称' not in file:
+                    file["名称"] = task_agent.name
+                self.needed_file_list.append(file)
+                
+            # Handle next task replaced file
+            next_def = getattr(task_agent, 'next_task_replaced_file_definition', None)
+            if next_def:
+                self.reused_output_file_set.add(next_def)
+
+        # Report the results
+        self.logger.info(f"Collected {len(self.needed_file_list)} needed files and {len(self.reused_output_file_set)} reused files")
+        
+        # Reset file index
         self.cur_file_idx = 0
+        
+        # If we have no needed files, add a message
+        if not self.needed_file_list:
+            self.logger.warning("No needed files found for the current workflow")
 
     def get_task_list(self) -> List[str]:
         return list(self.task_agents.keys())

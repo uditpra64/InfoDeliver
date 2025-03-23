@@ -23,6 +23,15 @@ const getInitialState = (): SessionState => {
   };
 };
 
+export const setSessionId = createAsyncThunk(
+  'session/setSessionId',
+  async (sessionId: string, { dispatch }) => {
+    localStorage.setItem(SESSION_ID_KEY, sessionId);
+    console.log(`Session ID set in localStorage: ${sessionId}`);
+    return sessionId;
+  }
+);
+
 export const createSession = createAsyncThunk(
   'session/createSession',
   async (_, { dispatch, getState, rejectWithValue }) => {
@@ -130,5 +139,5 @@ const sessionSlice = createSlice({
   },
 });
 
-export const { setSessionId, setState, clearSession } = sessionSlice.actions;
+export const {setState, clearSession } = sessionSlice.actions;
 export default sessionSlice.reducer;

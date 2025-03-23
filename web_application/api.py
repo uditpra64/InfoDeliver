@@ -417,6 +417,8 @@ async def save_upload_file(
     file_type: Optional[str] = None
 ) -> str:
     """Validate and save an uploaded file, returning the file path"""
+    logger.debug(f"Starting save_upload_file for {upload_file.filename}, type: {file_type}")
+    
     # Generate secure filename to prevent path traversal
     filename = upload_file.filename
     if not filename:
@@ -432,12 +434,26 @@ async def save_upload_file(
     
     if file_type and file_type in valid_extensions:
         if file_ext not in valid_extensions[file_type]:
+            logger.warning(f"Extension mismatch: Expected {file_type} file but got {file_ext}")
             raise ValidationError(f"Expected {file_type} file but got {file_ext}")
     elif file_ext not in ['.csv', '.xlsx', '.xls']:
+        logger.warning(f"Unsupported file extension: {file_ext}")
         raise ValidationError("Only CSV and Excel files are supported")
     
     secure_filename = f"{uuid.uuid4()}{file_ext}"
     file_path = os.path.join(upload_folder, secure_filename)
+    
+    # Verify that upload folder exists and is writable
+    if not os.path.exists(upload_folder):
+        try:
+            os.makedirs(upload_folder, exist_ok=True)
+        except Exception as e:
+            logger.error(f"Cannot create upload folder {upload_folder}: {str(e)}")
+            raise ValidationError(f"Server configuration error: cannot create upload folder")
+    
+    if not os.access(upload_folder, os.W_OK):
+        logger.error(f"Upload folder {upload_folder} is not writable")
+        raise ValidationError("Server configuration error: upload folder is not writable")
     
     # Stream file to disk efficiently
     try:
@@ -445,37 +461,30 @@ async def save_upload_file(
             # Read and write in chunks to handle large files
             chunk_size = 1024 * 1024  # 1MB chunks
             total_size = 0
-            while True:
-                chunk = await upload_file.read(chunk_size)
-                if not chunk:
-                    break
-                total_size += len(chunk)
-                
-                # Check file size limit
-                if total_size > max_upload_size_mb * 1024 * 1024:
-                    # Remove partial file
-                    os.unlink(file_path)
-                    raise ValidationError(f"File too large (max {max_upload_size_mb}MB)")
-                    
-                buffer.write(chunk)
+            
+            # Read the entire content at once for small files
+            content = await upload_file.read()
+            buffer.write(content)
+            total_size = len(content)
+            
+            # Check file size limit
+            if total_size > max_upload_size_mb * 1024 * 1024:
+                # Remove partial file
+                os.unlink(file_path)
+                raise ValidationError(f"File too large (max {max_upload_size_mb}MB)")
+        
+        logger.info(f"Successfully saved file to {file_path}, size: {total_size} bytes")
+        return file_path
+        
     except Exception as e:
         # Ensure file is cleaned up if something goes wrong
         if os.path.exists(file_path):
-            os.unlink(file_path)
-        raise ValidationError(f"Error saving file: {str(e)}")
-    
-    # Schedule cleanup after 24 hours
-    def cleanup_file():
-        try:
-            if os.path.exists(file_path):
+            try:
                 os.unlink(file_path)
-                logger.debug(f"Cleaned up temporary file: {file_path}")
-        except Exception as e:
-            logger.error(f"Error cleaning up file {file_path}: {str(e)}")
-    
-    background_tasks.add_task(cleanup_file)
-    
-    return file_path
+            except:
+                pass
+        logger.error(f"Error in save_upload_file: {str(e)}")
+        raise ValidationError(f"Error saving file: {str(e)}")
 
 # Authentication endpoint
 @app.post("/token", response_model=TokenResponse)
@@ -618,24 +627,34 @@ async def chat_endpoint(
         raise PayrollAPIException(f"Chat processing error: {str(e)}")
 
 @app.post("/upload", response_model=StandardResponse[FileUploadResponse])
-@limiter.limit("10/minute")
 async def upload_file_endpoint(
     request: Request,
     background_tasks: BackgroundTasks,
     file: UploadFile = File(...),
-    file_type: Optional[str] = Form(None),  # Make file_type optional
+    file_type: Optional[str] = Form(None),
     task_name: Optional[str] = Form(None),
-    current_user: User = Depends(get_current_active_user),
-    session_id: str = Depends(get_session)
+    x_session_id: Optional[str] = Header(None)
 ):
     """Upload a file for processing"""
-    logger.info(f"File upload request from user {current_user.username}, session {session_id}: {file.filename}")
+    # Verify we have a session ID - this is critical
+    if not x_session_id:
+        raise ValidationError("No session ID provided. Please ensure you have an active session.")
+    
+    logger.info(f"File upload request for session {x_session_id}: {file.filename}")
+    
+    # Check if session exists
+    session = session_service.get_session(x_session_id)
+    if not session:
+        raise ResourceNotFoundError(f"Session {x_session_id} not found or expired")
+    
+    logger.info(f"File upload request: {file.filename}, type: {file_type}, task: {task_name}, session: {session_id}")
     logger.debug(f"Content-Type: {request.headers.get('content-type')}")
     logger.debug(f"Form data: file_type={file_type}, task_name={task_name}")
 
     if not file or not file.filename:
         raise ValidationError("No file provided or filename is missing")
-    # Determine file type from file extension if not provided
+    
+    # Auto-detect file type from file extension if not provided
     if not file_type:
         ext = os.path.splitext(file.filename)[1].lower()
         file_type = "csv" if ext == ".csv" else "excel" if ext in [".xlsx", ".xls"] else None
@@ -658,11 +677,11 @@ async def upload_file_endpoint(
             # Read the file as a DataFrame
             df = None
             if file_path.lower().endswith('.csv'):
-                df = pd.read_csv(file_path)
+                df = pd.read_csv(file_path, encoding='utf-8-sig')
             elif file_path.lower().endswith(('.xlsx', '.xls')):
                 df = pd.read_excel(file_path)
             else:
-                raise ValidationError("Unsupported file format")
+                raise ValidationError(f"Unsupported file format: {file_path}")
                 
             # Check if DataFrame was loaded correctly
             if df is None or df.empty:
@@ -686,7 +705,7 @@ async def upload_file_endpoint(
                 
             logger.info(f"File successfully stored in database with ID: {file_id}")
             
-            # Create response with file details (without using adapter)
+            # Create response with file details
             upload_result = {
                 "success": True,
                 "file_id": file_id,
@@ -729,7 +748,7 @@ async def upload_file_endpoint(
         
         logger.info(f"File uploaded successfully: {file.filename} with {len(df)} rows")
         
-        # Create file_details dict directly (without adapter)
+        # Create file_details dict
         file_details = {
             "id": upload_result.get("file_id", 0),
             "name": file.filename,
@@ -767,7 +786,13 @@ async def upload_file_endpoint(
         logger.error(f"Unexpected error in file upload: {str(e)}")
         logger.exception("Detailed traceback:")
         raise PayrollAPIException(f"File upload error: {str(e)}")
-        
+        return StandardResponse(
+            code=500,
+            success=False,
+            message=f"File upload error: {str(e)}",
+            data=None
+        )
+
 @app.get("/files", response_model=StandardResponse[List[Dict[str, Any]]])
 @limiter.limit("60/minute")
 async def get_files(
@@ -870,26 +895,27 @@ async def select_task(
         # Update session state
         session_service.update_session(session_id, {"current_state": "file", "current_task": task_id})
         
+        files_message = ""
         # Add proper error handling for process_files
         try:
             # Process files (get needed files for the task)
             files_response, extra_info = payroll_service.process_files()
             
             # Add assistant response to conversation
-            if isinstance(files_response, list):
+            if isinstance(files_response, list) and files_response:
                 files_message = files_response[-1] if files_response else ""
                 for msg in files_response:
                     session_service.add_to_conversation(session_id, "assistant", msg)
             else:
-                files_message = files_response
+                files_message = files_response if isinstance(files_response, str) else "ファイル処理中にエラーが発生しました。"
                 session_service.add_to_conversation(session_id, "assistant", files_message)
         except IndexError as e:
             logger.error(f"Index error in process_files: {str(e)}")
-            files_message = "No required files were found for this task. Please check the task configuration."
+            files_message = "このタスクのファイル設定に問題があります。必要なファイル情報を確認してください。"
             session_service.add_to_conversation(session_id, "assistant", files_message)
         except Exception as e:
             logger.error(f"Error in process_files: {str(e)}")
-            files_message = f"An error occurred while processing files: {str(e)}"
+            files_message = f"ファイル処理中にエラーが発生しました: {str(e)}"
             session_service.add_to_conversation(session_id, "assistant", files_message)
         
         return StandardResponse(

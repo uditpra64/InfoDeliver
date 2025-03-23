@@ -42,7 +42,6 @@ export const fetchAllFiles = createAsyncThunk(
   }
 );
 
-
 export const uploadFile = createAsyncThunk(
   'files/uploadFile',
   async ({ file, sessionId }: { file: File, sessionId?: string }, { dispatch, rejectWithValue }) => {
@@ -57,12 +56,15 @@ export const uploadFile = createAsyncThunk(
       const fileType = file.name.endsWith('.csv') ? 'csv' : 'excel';
       formData.append('file_type', fileType);
       
-      if (sessionId) {
-        formData.append('session_id', sessionId);
-      }
+      // Session ID will be automatically included in headers by the api interceptor
+      // No need to explicitly add it here
       
-      // Upload the file
-      const response = await api.post('/upload', formData);
+      const response = await api.post('/upload', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        }
+      });
+      
       console.log('File upload response:', response.data);
       
       // Extract response data
@@ -74,41 +76,48 @@ export const uploadFile = createAsyncThunk(
       }
       
       // Add file uploaded message to chat
-      dispatch(addMessage({
+      const systemMessage: Message = {
         role: 'system',
         content: `ファイル「${file.name}」をアップロードしました。`,
-        timestamp: new Date().toISOString(),
-        is_html: false
-      } as Message));
+        timestamp: new Date().toISOString()
+      };
+      dispatch(addMessage(systemMessage));
       
       // Add response message to chat if available
       if (responseData.message) {
-        dispatch(addMessage({
+        const responseMessage: Message = {
           role: 'assistant',
           content: responseData.message,
-          timestamp: new Date().toISOString(),
-          is_html: false
-        } as Message));
+          timestamp: new Date().toISOString()
+        };
+        dispatch(addMessage(responseMessage));
       }
       
       // Refresh file list after upload
       dispatch(fetchAllFiles());
       
       return responseData;
-    } catch (error: unknown) {
+    } catch (error: any) {
       console.error('File upload error:', error);
       
-      const errorResponse = error as { response?: { data?: { message?: string } } };
-      const errorMessage = errorResponse.response?.data?.message || 'Unknown error';
+      let errorMessage = 'Unknown error';
       
-      dispatch(addMessage({
+      if (error.response) {
+        errorMessage = error.response.data?.message || error.response.statusText;
+      } else if (error.request) {
+        errorMessage = 'No response from server';
+      } else {
+        errorMessage = error.message;
+      }
+      
+      const errorNotificationMessage: Message = {
         role: 'system',
         content: `ファイルのアップロードに失敗しました: ${errorMessage}`,
-        timestamp: new Date().toISOString(),
-        is_html: false
-      } as Message));
+        timestamp: new Date().toISOString()
+      };
+      dispatch(addMessage(errorNotificationMessage));
       
-      return rejectWithValue(errorMessage);
+      return rejectWithValue({ message: errorMessage });
     }
   }
 );
