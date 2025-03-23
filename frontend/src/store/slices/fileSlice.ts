@@ -56,8 +56,13 @@ export const uploadFile = createAsyncThunk(
       const fileType = file.name.endsWith('.csv') ? 'csv' : 'excel';
       formData.append('file_type', fileType);
       
-      // Session ID will be automatically included in headers by the api interceptor
-      // No need to explicitly add it here
+      const headers: Record<string, string> = {
+        'Content-Type': 'multipart/form-data',
+      };
+      
+      if (sessionId) {
+        headers['x-session-id'] = sessionId;
+      }
       
       const response = await api.post('/upload', formData, {
         headers: {

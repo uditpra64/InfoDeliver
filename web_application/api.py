@@ -307,6 +307,36 @@ except Exception as e:
     logger.critical(f"Error initializing services: {e}")
     raise
 
+def manage_state_transition(session_id: str, current_state: str, new_state: str, task_id: Optional[str] = None):
+    """
+    Manages state transitions with proper logging and validation
+    """
+    logger.info(f"State transition requested: {current_state} -> {new_state} for session {session_id}")
+    
+    # Update payroll service state first
+    if hasattr(payroll_service, 'set_state') and callable(payroll_service.set_state):
+        try:
+            payroll_service.set_state(new_state)
+            logger.info(f"Updated payroll service state to {new_state}")
+        except Exception as e:
+            logger.error(f"Error updating payroll service state: {str(e)}")
+    
+    # Then update session state
+    try:
+        update_data = {"current_state": new_state}
+        if task_id:
+            update_data["current_task"] = task_id
+        
+        success = session_service.update_session(session_id, update_data)
+        if success:
+            logger.info(f"Successfully updated session state to {new_state}")
+        else:
+            logger.warning(f"Failed to update session state for {session_id}")
+    except Exception as e:
+        logger.error(f"Error updating session state: {str(e)}")
+    
+    return new_state
+
 # Initialize authentication
 def initialize_auth():
     """Initialize authentication components"""
@@ -349,6 +379,29 @@ def startup_event():
         logger.info("Authentication initialized successfully")
     except Exception as e:
         logger.error(f"Error initializing authentication: {e}")
+
+    try:
+        logger.info("Validating task configurations...")
+        if payroll_service and hasattr(payroll_service, '_verify_task_configurations'):
+            payroll_service._verify_task_configurations()
+        else:
+            logger.warning("PayrollService has no _verify_task_configurations method")
+            
+        # Log all task names and their file requirements for debugging
+        if payroll_service and hasattr(payroll_service, 'get_task_list'):
+            task_list = payroll_service.get_task_list()
+            logger.info(f"Available tasks ({len(task_list)}): {task_list}")
+            
+            for task_name in task_list:
+                task = payroll_service.agent_collection.get_task(task_name)
+                if task:
+                    files_info = f"{len(task.files)} required, {len(task.files_optional) if hasattr(task, 'files_optional') else 0} optional"
+                    logger.info(f"Task '{task_name}': {files_info} files")
+                else:
+                    logger.warning(f"Could not get task '{task_name}' details")
+    except Exception as e:
+        logger.error(f"Error validating configurations: {str(e)}")
+        logger.exception("Detailed traceback:")
 
 # Shutdown events
 @app.on_event("shutdown")
@@ -637,17 +690,21 @@ async def upload_file_endpoint(
 ):
     """Upload a file for processing"""
     # Verify we have a session ID - this is critical
-    if not x_session_id:
-        raise ValidationError("No session ID provided. Please ensure you have an active session.")
+    logger.info(f"File upload request received: {file.filename}, session ID: {x_session_id}")
     
-    logger.info(f"File upload request for session {x_session_id}: {file.filename}")
+    if not x_session_id:
+        x_session_id = session_service.create_session()
+        logger.info(f"No session ID provided, created new session: {x_session_id}")
     
     # Check if session exists
     session = session_service.get_session(x_session_id)
     if not session:
-        raise ResourceNotFoundError(f"Session {x_session_id} not found or expired")
+        # Create a new session if the provided ID is invalid
+        x_session_id = session_service.create_session()
+        logger.info(f"Invalid session ID provided, created new session: {x_session_id}")
+        session = session_service.get_session(x_session_id)
     
-    logger.info(f"File upload request: {file.filename}, type: {file_type}, task: {task_name}, session: {session_id}")
+    logger.info(f"File upload request: {file.filename}, type: {file_type}, task: {task_name}, session: {x_session_id}")
     logger.debug(f"Content-Type: {request.headers.get('content-type')}")
     logger.debug(f"Form data: file_type={file_type}, task_name={task_name}")
 
@@ -733,7 +790,7 @@ async def upload_file_endpoint(
             
         # Update session state
         current_state = payroll_service.get_current_state()
-        session_service.update_session(session_id, {"current_state": current_state})
+        session_service.update_session(x_session_id, {"current_state": current_state})
         
         # Map state to enum
         try:
@@ -743,8 +800,8 @@ async def upload_file_endpoint(
             
         # Add system message to conversation
         response_text = result if isinstance(result, str) else "\n".join(result) if isinstance(result, list) else str(result)
-        session_service.add_to_conversation(session_id, "system", f"File uploaded: {file.filename}")
-        session_service.add_to_conversation(session_id, "assistant", response_text)
+        session_service.add_to_conversation(x_session_id, "system", f"File uploaded: {file.filename}")
+        session_service.add_to_conversation(x_session_id, "assistant", response_text)
         
         logger.info(f"File uploaded successfully: {file.filename} with {len(df)} rows")
         
@@ -765,7 +822,7 @@ async def upload_file_endpoint(
             file_id=upload_result.get("file_id"),
             message=f"File uploaded successfully with {len(df)} rows",
             file_details=file_details,
-            session_id=session_id,
+            session_id=x_session_id,
             state=state_enum
         )
         
@@ -886,35 +943,64 @@ async def select_task(
     """Select a task for processing"""
     logger.info(f"Task selection request from user {current_user.username} for session {session_id}: {task_id}")
     try:
-        # Select the task
+        # Add more detailed logging
+        logger.debug(f"Current workflow before adding task: {payroll_service.agent_collection.workflow}")
+        
+        # IMPORTANT: Add the task to the workflow collection before selecting it
+        # This mimics the desktop app behavior
+        if hasattr(payroll_service.agent_collection, 'workflow'):
+            # Clear existing workflow first to avoid stacking tasks
+            payroll_service.agent_collection.workflow.clear()
+            # Add the current task to the workflow
+            payroll_service.agent_collection.workflow.append(task_id)
+            logger.info(f"Added task '{task_id}' to workflow")
+            
+            # Check if this task belongs to a group and add all related tasks
+            grouped_tasks = payroll_service.get_grouped_tasks()
+            for group_name, tasks in grouped_tasks.items():
+                if any(task.name == task_id for task in tasks) and len(tasks) > 1:
+                    logger.info(f"Task '{task_id}' belongs to group '{group_name}' with {len(tasks)} tasks")
+                    # Add all tasks in the group in order (except the one already added)
+                    for task in tasks:
+                        if task.name != task_id:
+                            payroll_service.agent_collection.workflow.append(task.name)
+                            logger.info(f"Added related task '{task.name}' to workflow")
+                    break
+        else:
+            logger.warning("PayrollService agent_collection has no workflow attribute")
+            
+        # Check workflow after changes
+        logger.debug(f"Current workflow after adding task: {payroll_service.agent_collection.workflow}")
+        
+        # Now select the task
         success = payroll_service.select_task(task_id)
         
         if not success:
             raise ResourceNotFoundError(f"Task {task_id} not found")
         
-        # Update session state
-        session_service.update_session(session_id, {"current_state": "file", "current_task": task_id})
+        # Update session state with explicit transitions
+        session_service.update_session(session_id, {
+            "current_state": "file",  # Start in file state for uploads
+            "current_task": task_id
+        })
         
+        # Process files with better error handling
         files_message = ""
-        # Add proper error handling for process_files
         try:
             # Process files (get needed files for the task)
             files_response, extra_info = payroll_service.process_files()
             
             # Add assistant response to conversation
             if isinstance(files_response, list) and files_response:
-                files_message = files_response[-1] if files_response else ""
+                files_message = "\n".join(files_response)
                 for msg in files_response:
                     session_service.add_to_conversation(session_id, "assistant", msg)
             else:
-                files_message = files_response if isinstance(files_response, str) else "ファイル処理中にエラーが発生しました。"
+                files_message = files_response if isinstance(files_response, str) else "No files needed for this task."
                 session_service.add_to_conversation(session_id, "assistant", files_message)
-        except IndexError as e:
-            logger.error(f"Index error in process_files: {str(e)}")
-            files_message = "このタスクのファイル設定に問題があります。必要なファイル情報を確認してください。"
-            session_service.add_to_conversation(session_id, "assistant", files_message)
         except Exception as e:
             logger.error(f"Error in process_files: {str(e)}")
+            logger.exception("Detailed traceback:")
             files_message = f"ファイル処理中にエラーが発生しました: {str(e)}"
             session_service.add_to_conversation(session_id, "assistant", files_message)
         
@@ -931,6 +1017,7 @@ async def select_task(
         )
     except Exception as e:
         logger.error(f"Error selecting task: {str(e)}")
+        logger.exception("Detailed traceback:")
         if isinstance(e, PayrollAPIException):
             raise
         raise PayrollAPIException(f"Error selecting task: {str(e)}")
