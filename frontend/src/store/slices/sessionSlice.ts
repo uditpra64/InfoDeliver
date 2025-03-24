@@ -40,32 +40,57 @@ export const createSession = createAsyncThunk(
     
     // If we already have a session ID or creation is in progress, don't create another
     if (state.session.currentSessionId || state.session.sessionCreationInProgress) {
+      console.log(`Using existing session: ${state.session.currentSessionId}`);
       return { session_id: state.session.currentSessionId };
     }
     
     try {
-      // Call API to create session
-      const response = await api.post('/chat', {
-        message: 'Hello' // Initial message to trigger session creation
-      });
+      // Use a dedicated session creation endpoint if available
+      const response = await api.post('/session/reset');
+      
+      // Alternatively, if you must use the chat endpoint, be explicit about it
+      // const response = await api.post('/chat', {
+      //   message: '_SESSION_INIT_', // Use a special message that backend can identify
+      //   is_system_message: true // Add a flag to indicate this is not a user message
+      // });
       
       // Extract session data
       const sessionData = response.data.data;
       
-      // If there's a response message, add it to chat
-      if (sessionData.response) {
+      // Store session ID in localStorage for persistence across refreshes
+      if (sessionData.session_id) {
+        localStorage.setItem(SESSION_ID_KEY, sessionData.session_id);
+        console.log(`Session created and stored: ${sessionData.session_id}`);
+      }
+      
+      // If there's a welcome message but you don't want to show it yet,
+      // you can choose not to dispatch it to chat
+      if (sessionData.welcome_message) {
         dispatch(addMessage({
           role: 'assistant',
-          content: sessionData.response,
+          content: sessionData.welcome_message,
           timestamp: new Date().toISOString(),
-          is_html: sessionData.is_html || false
-        } as Message));
+          is_html: false
+        }as Message));
       }
       
       return sessionData;
-    } catch (error: unknown) {
+    } catch (error) {
+      console.error('Session creation failed:', error);
+      
+      // Extract error message with proper type handling
       const errorResponse = error as { response?: { data?: { message?: string } } };
-      return rejectWithValue(errorResponse.response?.data?.message || 'Failed to create session');
+      const errorMessage = errorResponse.response?.data?.message || 'Failed to create session';
+      
+      // Notify user about the error
+      dispatch(addMessage({
+        role: 'system',
+        content: `セッション作成エラー: ${errorMessage}`,
+        timestamp: new Date().toISOString(),
+        is_html: false
+      }as Message));
+      
+      return rejectWithValue(errorMessage);
     }
   }
 );

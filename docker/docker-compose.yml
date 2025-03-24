@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: docker/backend/Dockerfile
+      platforms:
+        - linux/amd64
+        - linux/arm64
+    container_name: payroll-api
+    volumes:
+      - ./data:/app/data
+      - ./rule:/app/rule
+      - ./json:/app/json
+      - ./logs:/app/log
+      - ./output:/app/output
+      - ./uploads:/app/uploads
+      - ./sessions:/app/sessions
+    environment:
+      - CONFIG_PATH=/app/json/config.json
+      - ADMIN_PASSWORD=password
+      - USER_PASSWORD=password
+      - JWT_SECRET_KEY=your_secret_key_here
+      - DEBUG=false
+    ports:
+      - "8000:8000"
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: .
+      dockerfile: docker/frontend/Dockerfile
+      platforms:
+        - linux/amd64
+        - linux/arm64
+    container_name: payroll-frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+    restart: unless-stopped
