@@ -3,6 +3,7 @@ import api from '../../services/api';
 import { addMessage } from './chatSlice';
 import { setState } from './sessionSlice';
 import { Message } from '../../types';
+import { clearMessages } from './chatSlice';
 interface RequiredFile {
   name: string;
   description: string;
@@ -48,6 +49,16 @@ export const selectTask = createAsyncThunk(
   'tasks/selectTask',
   async (taskId: string, { dispatch, rejectWithValue }) => {
     try {
+      // First, clear existing messages
+      dispatch(clearMessages());
+      
+      // Add loading message
+      dispatch(addMessage({
+        role: 'system',
+        content: 'タスクを選択中...',
+        timestamp: new Date().toISOString()
+      } as Message));
+      
       console.log(`Calling API to select task: ${taskId}`);
       const response = await api.post(`/tasks/${taskId}/select`);
       
@@ -61,17 +72,38 @@ export const selectTask = createAsyncThunk(
         dispatch(setState(responseData.state));
       }
       
-      // Add files message to chat if available
+      // Handle files_message properly - can be string or array
       if (responseData.files_message) {
-        dispatch(addMessage({
-          role: 'assistant',
-          content: responseData.files_message,
-          timestamp: new Date().toISOString(),
-          is_html: false
-        } as Message));
+        // Check if it's an array
+        if (Array.isArray(responseData.files_message)) {
+          // Add each message separately
+          responseData.files_message.forEach((message: string) => {
+            dispatch(addMessage({
+              role: 'assistant',
+              content: message,
+              timestamp: new Date().toISOString(),
+              is_html: message.includes('class="dataframe">')
+            } as Message));
+          });
+        } else {
+          // It's a single message string
+          dispatch(addMessage({
+            role: 'assistant',
+            content: responseData.files_message,
+            timestamp: new Date().toISOString(),
+            is_html: responseData.files_message.includes('class="dataframe">')
+          } as Message));
+        }
       }
       
-      
+      // Add task selection confirmation message
+      dispatch(addMessage({
+        role: 'assistant',
+        content: `「${taskId}」が選択されました。指示に従ってファイルをアップロードしてください。`,
+        timestamp: new Date().toISOString(),
+        is_html: false
+      } as Message));
+
       return { 
         taskId, 
         sessionId: responseData.session_id, 
@@ -83,6 +115,10 @@ export const selectTask = createAsyncThunk(
       const errorResponse = error as { response?: { data?: { message?: string } } };
       const errorMessage = errorResponse.response?.data?.message || 'Unknown error';
       
+      // Remove loading message
+      dispatch(clearMessages());
+      
+      // Add error message
       dispatch(addMessage({
         role: 'system',
         content: `タスク選択中にエラーが発生しました: ${errorMessage}`,
