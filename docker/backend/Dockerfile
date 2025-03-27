@@ -13,9 +13,12 @@ RUN apt-get update && apt-get install -y \
 COPY application/requirements.txt .
 
 # Install Python dependencies
-RUN pip install --no-cache-dir --default-timeout=600 -r requirements.txt
+RUN pip install --no-cache-dir --default-timeout=800 -r requirements.txt
 # Explicitly install uvicorn
-RUN pip install --no-cache-dir uvicorn
+RUN pip install --no-cache-dir uvicorn 
+RUN pip install --no-cache-dir torch
+RUN pip install --no-cache-dir sentence-transformers
+
 
 # Start a new stage for the final image
 FROM --platform=$TARGETPLATFORM python:3.10-slim
