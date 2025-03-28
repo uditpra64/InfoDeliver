@@ -9,7 +9,7 @@ services:
         - linux/amd64
         - linux/arm64
     container_name: payroll-api
-    user: "1000:1000"
+    # Removed the user: "1000:1000" line
     volumes:
       - ./data:/app/data
       - ./rule:/app/rule
@@ -23,9 +23,10 @@ services:
 
     command: >
       bash -c "
-        chmod 777 /app/data /app/uploads /app/output &&
+        mkdir -p /app/data /app/uploads /app/output &&
+        chmod -f 777 /app/data /app/uploads /app/output || true &&
         touch /app/data/app.db &&
-        chmod 666 /app/data/app.db &&
+        chmod -f 666 /app/data/app.db || true &&
         python -m uvicorn api:app --host 0.0.0.0 --port 8000
       "
     environment:
